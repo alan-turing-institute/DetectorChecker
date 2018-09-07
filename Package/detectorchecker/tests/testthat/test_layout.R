@@ -8,8 +8,7 @@ test_that("Initialization of layout objects", {
   # Excalibur layout unit test
   excalibur.layout <- Layout.Excalibur()
   expect_equal(excalibur.layout$name, "Excalibur")
-  # TODO: Fix the inconsistency issue
-  # Layout.consistancyCheck(excalibur.layout)
+  Layout.consistancyCheck(excalibur.layout)
 
   # Perkinelmer layout unit test
   perkinelmerfull.layout <- Layout.PerkinElmerFull()
