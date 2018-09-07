@@ -2,16 +2,16 @@ context("Layout object creation")
 
 test_that("Initialization of layout objects", {
 
-  default.layout <- Layout.Default()
-  expect_equal(default.layout$name, "Default")
+  default_layout <- Default_Layout()
+  expect_equal(default_layout$name, "Default")
 
   # Excalibur layout unit test
-  excalibur.layout <- Layout.Excalibur()
-  expect_equal(excalibur.layout$name, "Excalibur")
-  Layout.consistancyCheck(excalibur.layout)
+  excalibur_layout <- Excalibur_Layout()
+  expect_equal(excalibur_layout$name, "Excalibur")
+  Layout.consistancyCheck(excalibur_layout)
 
   # Perkinelmer layout unit test
-  perkinelmerfull.layout <- Layout.PerkinElmerFull()
-  expect_equal(perkinelmerfull.layout$name, "PerkinElmerFull")
-  Layout.consistancyCheck(perkinelmerfull.layout)
+  perkinelmerfull_layout <- PerkinElmerFull_Layout()
+  expect_equal(perkinelmerfull_layout$name, "PerkinElmerFull")
+  Layout.consistancyCheck(perkinelmerfull_layout)
 })
