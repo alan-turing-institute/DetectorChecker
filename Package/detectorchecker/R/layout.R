@@ -159,3 +159,53 @@ PerkinElmerFull_Layout <- function() {
 
   return(layout)
 }
+
+#' A S3 class to represent the PerkinElmerCropped1600 detector layout.
+#'
+PerkinElmerCropped1600_Layout <- function() {
+
+  name <- "PerkinElmerCropped1600"
+
+  layout <- Default_Layout(name = name,
+                           detector_width = 2000,
+                           detector_height = 1600,
+                           module_col_n = 16,
+                           module_row_n = 2,
+                           module_col_sizes = c(104, rep(128, 14), 104),
+                           module_row_sizes = rep(800, 2),
+                           gap_col_sizes = rep(0, 15),
+                           gap_row_sizes = c(0),
+                           module_edges_col = NA,
+                           module_edges_row = NA,
+                           detector_inconsistency = 0)
+
+  # Set the name for the class
+  class(layout) <- append(class(layout), name)
+
+  return(layout)
+}
+
+#' A S3 class to represent the PerkinElmerCropped1600 detector layout.
+#'
+PerkinElmerRefurbished_Layout <- function() {
+
+  name <- "PerkinElmerRefurbished"
+
+  layout <- Default_Layout(name = name,
+                           detector_width = 2000,
+                           detector_height = 2000,
+                           module_col_n = 16,
+                           module_row_n = 2,
+                           module_col_sizes = c(rep(128, 15), 80),
+                           module_row_sizes = c(1004, 996),
+                           gap_col_sizes = rep(0, 15),
+                           gap_row_sizes = c(0),
+                           module_edges_col = NA,
+                           module_edges_row = NA,
+                           detector_inconsistency = 0)
+
+  # Set the name for the class
+  class(layout) <- append(class(layout), name)
+
+  return(layout)
+}
