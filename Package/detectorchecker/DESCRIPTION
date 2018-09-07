@@ -1,0 +1,15 @@
+Package: detectorchecker
+Type: Package
+Title: What The Package Does (one line, title case required)
+Version: 0.1.0
+Authors@R: person("First", "Last", email = "first.last@example.com",
+                  role = c("aut", "cre"))
+Description: The description of a package is usually long,
+    spanning multiple lines. The second and subsequent lines
+    should be indented, usually with four spaces.
+Depends: R (>= X.X.0)
+Imports:
+Suggests:
+License: What license is it under?
+Encoding: UTF-8
+LazyData: true
