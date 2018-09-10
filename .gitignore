@@ -1,3 +1,6 @@
+# Manual files
+Package/detectorchecker/man/
+
 # History files
 .Rhistory
 .Rapp.history
@@ -13,6 +16,7 @@
 
 # Output files from R CMD check
 /*.Rcheck/
+/Package/*.Rcheck/
 
 # RStudio files
 .Rproj.user/
