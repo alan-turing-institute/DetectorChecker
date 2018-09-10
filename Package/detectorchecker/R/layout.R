@@ -1,7 +1,6 @@
 #library(sp)
 #library(maptools)
-#library(spatstat)
-
+library(spatstat)
 
 #' A S3 class to represent a detector layout.
 #'
@@ -216,7 +215,6 @@ layout_consist_check <- function(layout = NA) {
   }
 }
 
-
 #TODO: improve the definition of the function
 #' Defines the coordinates of layout's edges using module and gap sizes
 #'
@@ -269,4 +267,86 @@ derive_layout <- function(layout){
   layout$module_edges_row <- module_edges_row
 
   return(layout)
+}
+
+#' Deriving additional layout elements
+#'
+#' @param layout Layout object
+plot_layout <- function(layout, format="pdf") {
+
+  vedges <- as.vector(layout$module_edges_col)
+  ytmp <- rep(1:layout$detector_height, length(vedges))
+  xtmp <- rep(vedges, rep(layout$detector_height, length(vedges)))
+
+  ppp_edges_col <- ppp(xtmp, ytmp, c(1, layout$detector_width),
+                       c(1, layout$detector_height))
+
+  vedges <- as.vector(layout$module_edges_row)
+  xtmp <- rep(1:layout$detector_width, length(vedges))
+  ytmp <- rep(vedges, rep(layout$detector_width, length(vedges)))
+
+  ppp_edges_row <-ppp(xtmp, ytmp, c(1, layout$detector_width),
+                      c(1, layout$detector_height))
+
+  ### Define point patterns (spatstat) capturing gaps
+  if (sum(layout$gap_col_sizes) != 0) {
+    vgaps <- c()
+
+    for (i in 1:(layout$module_col_n-1)) {
+      vgaps <- c(vgaps, ((layout$module_edges_col[2, i] + 1):
+                         (layout$module_edges_col[1, i+1] - 1)))
+    }
+
+    ytmp <- rep(1:layout$detector_height, length(vgaps))
+    xtmp <- rep(vgaps, rep(layout$detector_height, length(vgaps)))
+
+    ppp_gaps_col <- ppp(xtmp, ytmp, c(1, layout$detector.width),
+                        c(1, layout$detector_height))
+  }
+
+  if (sum(layout$gap_row_sizes) != 0) {
+    vgaps <- c()
+
+    for (i in 1:(layout$module_row_n - 1)) {
+      vgaps <- c(vgaps, ((layout$module.edges.row[2, i] + 1):
+                         (layout$module.edges.row[1, i+1] - 1)))
+    }
+
+    xtmp <- rep(1:layout$detector_width, length(vgaps))
+    ytmp <- rep(vgaps, rep(layout$detector_width, length(vgaps)))
+
+    ppp_gaps_row <-ppp(xtmp, ytmp, c(1, layout$detector_width),
+                       c(1, layout$detector_height))
+  }
+
+  output_file <- file.path(".", paste("layout_", layout$name, ".", format, sep=""))
+  print(paste("Graphical outout to ", output_file))
+  print(getwd())
+
+  pdf (output_file)
+  if (sum(layout$gap_col_sizes) + sum(layout$gap_row_sizes) == 0) {
+
+    # vertical lines in x-positions given by xlines
+    plot(ppp_edges_col, pch=".", cex.main=0.7,
+         main=paste(layout$name, "layout\n (black=module edges)"), res = 10)
+
+    # horizontal lines in y-positions given by ylines
+    points(ppp_edges_row, pch=".")
+    # dev.off()
+
+  } else {
+    # vertical lines in x-positions given by xlines
+    plot(ppp_edges_col, pch=".", cex.main=0.7,
+         main=paste(layout$name, "layout\n (black=module edges, grey=gaps)"),
+         res = 10)
+
+    points(ppp_edges_row, pch=".") # horizontal lines in y-positions given by ylines
+
+    # cols without pixels (gaps)
+    points(ppp.gaps.col, pch=".", col="grey")
+
+    # rows without pixels (gaps)
+    points(ppp_gaps_row, pch=".", col="grey")
+    # dev.off()
+  }
 }

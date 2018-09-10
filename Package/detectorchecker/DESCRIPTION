@@ -8,7 +8,8 @@ Description: The description of a package is usually long,
     spanning multiple lines. The second and subsequent lines
     should be indented, usually with four spaces.
 Depends: R (>= 3.5.0)
-Imports: 
+Imports:
+    spatstat
 Suggests:
     testthat
 License: What license is it under?

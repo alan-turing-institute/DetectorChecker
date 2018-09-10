@@ -1,6 +1,9 @@
 # Manual files
 Package/detectorchecker/man/
 
+# Test pdf files
+Package/detectorchecker/tests/testthat/*.pdf
+
 # History files
 .Rhistory
 .Rapp.history
