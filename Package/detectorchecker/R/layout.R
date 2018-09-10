@@ -1,3 +1,8 @@
+#library(sp)
+#library(maptools)
+#library(spatstat)
+
+
 #' A S3 class to represent a detector layout.
 #'
 #' @slot name detector's name
@@ -7,14 +12,17 @@
 #' @slot modulerow.n number of rows in the grid of modules
 #' @slot module_col_sizes vector with widths of the modules
 #' @slot module_row_sizes vector with heights of the modules
-#' @slot module_edges_col
-#' @slot module_edges_row
+#' @slot module_edges_col !
+#' @slot module_edges_row !
 #' @slot gap_col_sizes vector with widths of the gaps
 #' @slot gap_row_sizes vector with heights of the gaps
 #' @slot detector_inconsistency counts inconsistencies found in parameters entered
-Default_Layout <- function(name = "Default", detector_width = NA, detector_height = NA,
-                           module_col_n = NA, module_row_n = NA, module_col_sizes = NA, module_row_sizes = NA,
-                           gap_col_sizes = NA, gap_row_sizes = NA,module_edges_col = NA, module_edges_row = NA,
+Default_Layout <- function(name = "Default",
+                           detector_width = NA, detector_height = NA,
+                           module_col_n = NA, module_row_n = NA,
+                           module_col_sizes = NA, module_row_sizes = NA,
+                           gap_col_sizes = NA, gap_row_sizes = NA,
+                           module_edges_col = NA, module_edges_row = NA,
                            detector_inconsistency = NA) {
 
   layout <- list(
@@ -36,80 +44,12 @@ Default_Layout <- function(name = "Default", detector_width = NA, detector_heigh
     detector_inconsistency = detector_inconsistency
   )
 
-  # Set the name for the class
-  class(layout) <- append(class(layout), "DefaultLayout")
+  layout <- derive_layout(layout)
 
   return(layout)
 }
 
-#' Layout consistency checks
-#'
-#' Basic checks if parameters entered (slightly redundant on purpose) add up
-#' @param layout Layout object
-Layout.consistancyCheck <- function(layout = NA) {
-  if (is.list(layout)) {
-
-    error <- ""
-
-    detector_inconsistency <- 0   # counts inconsistencies found
-
-    # Total size of detector
-    check_value <- sum(layout$module_col_sizes) + sum(layout$gap_col_sizes)
-    if (layout$detector_width != check_value) {
-
-      # This is not need for the first check, but just in case more tests will be added before it
-      if (detector_inconsistency != 0) error <- c(error, "\n")
-
-      error <- c(error, "Dectector width is not the sum or the widths of the modules and the gaps between them.
-          Please check if you entered the correct sizes. ", layout$detector_width, " /= ", check_value)
-
-      detector_inconsistency <- detector_inconsistency + 1
-    }
-
-    check_value <- sum(layout$module_row_sizes) + sum(layout$gap_row_sizes)
-    if (layout$detector_height != check_value) {
-
-      if (detector_inconsistency != 0) error <- c(error, "\n")
-
-      error <- c(error, "Dectector height is not the sum or the heights of the modules and the gaps between them.
-          Please check if you entered the correct sizes. ", layout$detector_height, " /= ", check_value)
-
-      detector_inconsistency <- detector_inconsistency + 1
-    }
-
-    # Module numbers and size vectors
-    check_value <- length(layout$module_col_sizes)
-    if (layout$module_col_n != check_value) {
-
-      if (detector_inconsistency != 0) error <- c(error, "\n")
-
-      error <- c(error, "Number of modules per row does not match the length of the vector of their widths. ",
-                 layout$module_col_n, " /= ", check_value)
-
-      detector_inconsistency <- detector_inconsistency + 1
-    }
-
-    check_value <- length(layout$module_row_sizes)
-    if (layout$module_row_n != check_value) {
-
-      if (detector_inconsistency != 0) error <- c(error, "\n")
-
-      error <- c(error, "Number of modules per column does not match the length of the vector of their heights. ",
-                 layout$module_row_n, " /= ", check_value)
-
-      detector_inconsistency <- detector_inconsistency + 1
-    }
-
-    # If inconsistencies were detected, stop
-    if (detector_inconsistency > 0) {
-      layout$detector_inconsistency <- detector_inconsistency
-      stop(error)
-    }
-
-  } else {
-    stop("Detector layout object has not been initialized.")
-  }
-}
+# Available layouts ------------------------------------------------------------
 
 #' A S3 class to represent the Excalibur detector layout.
 #'
@@ -128,9 +68,6 @@ Excalibur_Layout <- function() {
                            module_edges_col = NA,
                            module_edges_row = NA,
                            detector_inconsistency = 0)
-
-  # Set the name for the class
-  class(layout) <- append(class(layout), name)
 
   return(layout)
 }
@@ -154,9 +91,6 @@ PerkinElmerFull_Layout <- function() {
                            module_edges_row = NA,
                            detector_inconsistency = 0)
 
-  # Set the name for the class
-  class(layout) <- append(class(layout), name)
-
   return(layout)
 }
 
@@ -179,13 +113,10 @@ PerkinElmerCropped1600_Layout <- function() {
                            module_edges_row = NA,
                            detector_inconsistency = 0)
 
-  # Set the name for the class
-  class(layout) <- append(class(layout), name)
-
   return(layout)
 }
 
-#' A S3 class to represent the PerkinElmerCropped1600 detector layout.
+#' A S3 class to represent the PerkinElmerRefurbished detector layout.
 #'
 PerkinElmerRefurbished_Layout <- function() {
 
@@ -204,8 +135,138 @@ PerkinElmerRefurbished_Layout <- function() {
                            module_edges_row = NA,
                            detector_inconsistency = 0)
 
-  # Set the name for the class
-  class(layout) <- append(class(layout), name)
+  return(layout)
+}
+
+# Layout functions -------------------------------------------------------------
+
+#' Layout consistency checks
+#'
+#' Basic checks if parameters entered (slightly redundant on purpose) add up
+#' @param layout Layout object
+layout_consist_check <- function(layout = NA) {
+  if (is.list(layout)) {
+
+    error <- ""
+
+    detector_inconsistency <- 0   # counts inconsistencies found
+
+    # Total size of detector
+    check_value <- sum(layout$module_col_sizes) + sum(layout$gap_col_sizes)
+    if (layout$detector_width != check_value) {
+
+      # This is not need for the first check, but just in case more tests will
+      #   be added before it
+      if (detector_inconsistency != 0) error <- c(error, "\n")
+
+      error <- c(error, "Dectector width is not the sum or the widths of the
+                 modules and the gaps between them. Please check if you entered
+                 the correct sizes. ", layout$detector_width, " /= ",
+                 check_value)
+
+      detector_inconsistency <- detector_inconsistency + 1
+    }
+
+    check_value <- sum(layout$module_row_sizes) + sum(layout$gap_row_sizes)
+    if (layout$detector_height != check_value) {
+
+      if (detector_inconsistency != 0) error <- c(error, "\n")
+
+      error <- c(error, "Dectector height is not the sum or the heights of the
+                 modules and the gaps between them. Please check if you entered
+                 the correct sizes. ", layout$detector_height, " /= ",
+                 check_value)
+
+      detector_inconsistency <- detector_inconsistency + 1
+    }
+
+    # Module numbers and size vectors
+    check_value <- length(layout$module_col_sizes)
+    if (layout$module_col_n != check_value) {
+
+      if (detector_inconsistency != 0) error <- c(error, "\n")
+
+      error <- c(error, "Number of modules per row does not match the length of
+                 the vector of their widths. ", layout$module_col_n, " /= ",
+                 check_value)
+
+      detector_inconsistency <- detector_inconsistency + 1
+    }
+
+    check_value <- length(layout$module_row_sizes)
+    if (layout$module_row_n != check_value) {
+
+      if (detector_inconsistency != 0) error <- c(error, "\n")
+
+      error <- c(error, "Number of modules per column does not match the length
+                 of the vector of their heights. ", layout$module_row_n, " /= ",
+                 check_value)
+
+      detector_inconsistency <- detector_inconsistency + 1
+    }
+
+    # If inconsistencies were detected, stop
+    if (detector_inconsistency > 0) {
+      layout$detector_inconsistency <- detector_inconsistency
+      stop(error)
+    }
+
+  } else {
+    stop("Detector layout object has not been initialized.")
+  }
+}
+
+
+#TODO: improve the definition of the function
+#' Defines the coordinates of layout's edges using module and gap sizes
+#'
+#' Function is in 1d context to be applied to rows and cols separately.
+#' Edges are inside the modules (first/last row/col of module).
+#' @param m vector of module sizes
+#' @param g vectors of gap sizes
+#' @return layout_edges a matrix with the information about the edges
+layout_edges <- function(m, g) {
+
+  if (length(m) - 1 != length(g)) {
+    # This should be picked by the consistency check too
+    stop("The number of modules or gaps is incorrect.")
+
+  } else {
+    layout_edges <- matrix(nrow = 2, ncol = length(m))
+
+    layout_edges[1, 1] <- 1
+    layout_edges[2, 1] <- m[1]
+
+    for (i in 2:length(m)) {
+      layout_edges[1, i] <- layout_edges[2, i-1] + g[i-1] + 1
+      layout_edges[2, i] <- layout_edges[1, i] - 1 + m[i]
+    }
+  }
+
+  return(layout_edges)
+}
+
+#TODO: improve the definition of the function
+#' Deriving additional layout elements
+#'
+#' Conditions additional elements of Layout object that are frequently used later
+#' They are calculated from parameters defined in examples
+#' Matrices that contains xy coordiantes of edges of modules
+#' By definition, edges are part of modules (not part of gaps)
+#' i.e. for each module two pairs: first/last col and first/last row.
+#' @param layout Layout object
+#' @return layout Layout object
+derive_layout <- function(layout){
+
+  module_edges_col <- layout_edges(layout$module_col_sizes, layout$gap_col_sizes)
+  dimnames(module_edges_col)[[1]] <- c("left", "right")
+
+  # displayed in transposed (rows are listed in columns)
+  module_edges_row <- layout_edges(layout$module_row_sizes, layout$gap_row_sizes)
+  dimnames(module_edges_row)[[1]] <- c("top", "bottom")
+
+  layout$module_edges_col <- module_edges_col
+  layout$module_edges_row <- module_edges_row
 
   return(layout)
 }
