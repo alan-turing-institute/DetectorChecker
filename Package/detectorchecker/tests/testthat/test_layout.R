@@ -60,9 +60,21 @@ context("Plotting layout")
 
 test_that("plot layout", {
 
+  test_out_name <- "unittest_layout"
+  test_out_fmt <- "pdf"
+  test_out_dir <- getwd()
+  test_out_path <- file.path(test_out_dir, paste(test_out_name, test_out_fmt, sep="."))
+
   # PerkinElmerFull layout unit test
   layout <- PerkinElmerFull_Layout()
 
   # Plotting layout in the cwd
-  plot_layout(layout)
+  plot_layout(layout, file=test_out_path)
+
+  # Check whether the file was created
+  expect_that(file.exists(test_out_path), is_true())
+
+  # Removing the test output file
+  if (file.exists(test_out_path)) file.remove(test_out_path)
+
 })

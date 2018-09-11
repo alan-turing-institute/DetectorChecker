@@ -16,6 +16,7 @@ library(spatstat)
 #' @slot gap_col_sizes vector with widths of the gaps
 #' @slot gap_row_sizes vector with heights of the gaps
 #' @slot detector_inconsistency counts inconsistencies found in parameters entered
+#' @return layout Layout object
 Default_Layout <- function(name = "Default",
                            detector_width = NA, detector_height = NA,
                            module_col_n = NA, module_row_n = NA,
@@ -272,7 +273,14 @@ derive_layout <- function(layout){
 #' Deriving additional layout elements
 #'
 #' @param layout Layout object
-plot_layout <- function(layout, format="pdf") {
+plot_layout <- function(layout, file = NA, format = "pdf") {
+
+  # Setting the output path
+  if (!is.na(file)) {
+    output_path <- file
+  } else {
+    output_path <- paste(paste("layout_", layout$name, sep=""), format, sep=".")
+  }
 
   vedges <- as.vector(layout$module_edges_col)
   ytmp <- rep(1:layout$detector_height, length(vedges))
@@ -319,11 +327,9 @@ plot_layout <- function(layout, format="pdf") {
                        c(1, layout$detector_height))
   }
 
-  output_file <- file.path(".", paste("layout_", layout$name, ".", format, sep=""))
-  print(paste("Graphical outout to ", output_file))
-  print(getwd())
+  # TODO: choose the correct output format
+  pdf(output_path)
 
-  pdf (output_file)
   if (sum(layout$gap_col_sizes) + sum(layout$gap_row_sizes) == 0) {
 
     # vertical lines in x-positions given by xlines
@@ -332,7 +338,6 @@ plot_layout <- function(layout, format="pdf") {
 
     # horizontal lines in y-positions given by ylines
     points(ppp_edges_row, pch=".")
-    # dev.off()
 
   } else {
     # vertical lines in x-positions given by xlines
@@ -347,6 +352,8 @@ plot_layout <- function(layout, format="pdf") {
 
     # rows without pixels (gaps)
     points(ppp_gaps_row, pch=".", col="grey")
-    # dev.off()
   }
+
+  # shuts down the specified (by default the current) device
+  dev.off()
 }
