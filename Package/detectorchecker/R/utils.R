@@ -1,7 +1,7 @@
 #' Calculates the trace value of a square matrix
 #'
 #' @param m A square matrix
-#' @return tr the trace value
+#' @return tr The trace value
 tr <- function (m) {
   tr <- NA
 

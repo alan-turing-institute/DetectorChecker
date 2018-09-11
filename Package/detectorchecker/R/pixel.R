@@ -73,12 +73,13 @@ pixel_dist_ctr_linf <- function(layout) {
   yy <- matrix(abs(1:layout$detector_height - layout$detector_height / 2),
                nrow = layout$detector_height, ncol = layout$detector_width)
 
-  dist <- sqrt(xx, yy, na.rm = TRUE)
+  dist <- pmax(xx, yy, na.rm = TRUE)
 
   return(dist)
 }
 
-#' A function to calculate euclidean distance from the centre
+# TODO: modify the description.
+#'
 #'
 #' @slot x something
 #' @slot size something else
@@ -87,7 +88,6 @@ dist_closest_edge <- function(x, size) {
   # Why x-1? Because pixel locations start in 1, but we want both edges inside detector for symmetry
   return(min(x - 1, size - x))
 }
-
 
 #' A function to calculate pixel distances from corners
 #'
