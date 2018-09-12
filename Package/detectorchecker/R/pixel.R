@@ -1,39 +1,3 @@
-
-#' #TODO: better param description
-#' #' A S3 class to represent pixel specific layout information
-#' #'
-#' #'
-#' #' @slot matrix_col describe what it is
-#' #' @slot matrix_row describe what it is
-#' #' @slot dist_matrix_centre_eucl describe what it is
-#' #' @slot dist_matrix_centre_linf describe what it is
-#' #' @slot dist_matrix_corner describe what it is
-#' #' @slot dist_matrix_col describe what it is
-#' #' @slot dist_matrix_row describe what it is
-#' #' @slot dist_matrix_minb describe what it is
-#' #' @return pixel_layout Pixel object
-#' Pixel_Layout <- function(matrix_col = NA, matrix_row = NA,
-#'                          dist_matrix_centre_eucl = NA,
-#'                          dist_matrix_centre_linf = NA,
-#'                          dist_matrix_corner = NA, dist_matrix_col = NA,
-#'                          dist_matrix_row = NA, dist_matrix_min = NA) {
-#'
-#'   pixel_layout <- list(
-#'     matrix_col =  matrix_col,
-#'     matrix_row = matrix_row,
-#'     dist_matrix_centre_eucl = dist_matrix_centre_eucl,
-#'     dist_matrix_centre_linf = dist_matrix_centre_linf,
-#'     dist_matrix_corner = dist_matrix_corner,
-#'     dist_matrix_col = dist_matrix_col,
-#'     dist_matrix_row = dist_matrix_row,
-#'     dist_matrix_min = dist_matrix_minb
-#'   )
-#'
-#'   return(pixel_layout)
-#' }
-
-# TODO: check whether all the pixels are within the detector
-
 # Pixel analysis functions -----------------------------------------------------
 
 #' A function to calculate euclidean distance from the centre
@@ -79,21 +43,22 @@ pixel_dist_ctr_linf <- function(layout) {
 }
 
 # TODO: modify the description.
-#'
+#' A function to calclutate closest distance to an edge
 #'
 #' @slot x something
 #' @slot size something else
-#' @return
+#' @return what does this mean?
 dist_closest_edge <- function(x, size) {
   # Why x-1? Because pixel locations start in 1, but we want both edges inside detector for symmetry
   return(min(x - 1, size - x))
 }
 
+# TODO: modify the description.
 #' A function to calculate pixel distances from corners
 #'
 #' @slot layout Layout object
 #' @return dist Matrix containing parallel maxima from the centre for each pixel
-pixel_dist_corner <- function(layout) {
+dist_corner <- function(layout) {
 
   #dist <- matrix(NA, nrow = layout$detector_height, ncol = layout$detector_width)
 
@@ -111,4 +76,62 @@ pixel_dist_corner <- function(layout) {
 
   return(dist)
 }
+
+# TODO: modify the description.
+#' A function to calculate pixel distances from edges by column
+#'
+#' @slot layout Layout object
+#' @return dist ?
+dist_edge_col <- function(layout) {
+
+  dist <- matrix(NA, nrow = layout$detector_height, ncol = layout$detector_width)
+
+  for (x in 1:layout$detector_width) {
+    dist[1, x] <- dist_edge(x, layout$module_edges_col)
+  }
+
+  # TODO: Address this issue?
+  # Mystery: should work but does not! dist.matrix.col[2:detector.height, ] <- dist.matrix.col[1, ]    # all rows are like first row
+  # Replace by pedestrain version:
+  # dist[2:layout$detector_height, ] <- dist[1, ]
+  for (y in 2:layout$detector_height){
+    dist[y, ] <- dist[1, ] # all rows are like first row
+  }
+
+  return(dist)
+}
+
+# TODO: modify the description.
+#' A function to calculate pixel distances from edges by row
+#'
+#' @slot layout Layout object
+#' @return dist ?
+dist_edge_row <- function(layout) {
+
+  dist <- matrix(NA, nrow = layout$detector_height, ncol = layout$detector_width)
+
+  for (y in 1:layout$detector_height) {
+    dist[y, 1] <- dist_edge(y, layout$module_edges_row)
+  }
+
+  dist[ , 2:layout$detector_width] <- dist[ , 1] # all cols are like first col
+
+  return(dist)
+}
+
+# TODO: modify the description.
+#' A function to calculate pixel distances from edges
+#'
+#' @slot layout Layout object
+#' @return dist ?
+dist_edge_min <- function(layout) {
+
+  dist_col <- dist_edge_col(layout)
+  dist_row <- dist_edge_row(layout)
+
+  dist <- pmin(dist_col, dist_row)
+
+  return(dist)
+}
+
 
