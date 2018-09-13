@@ -3,6 +3,7 @@ Package/detectorchecker/man/
 
 # Test pdf files
 Package/detectorchecker/tests/testthat/*.pdf
+Package/detectorchecker/tests/testthat/*.png
 
 # History files
 .Rhistory
