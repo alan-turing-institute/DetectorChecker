@@ -11,7 +11,7 @@ Depends: R (>= 3.5.0)
 Imports:
     spatstat
 Suggests:
-    testthat
+    testthat, tiff, hdf5r
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true

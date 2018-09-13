@@ -26,6 +26,11 @@ test_that("Initialization of layout objects", {
   layout <- PerkinElmerRefurbished_Layout()
   expect_equal(layout$name, "PerkinElmerRefurbished")
   layout_consist_check(layout)
+
+  # Pilatus layout unit test
+  layout <- Pilatus_Layout()
+  expect_equal(layout$name, "Pilatus")
+  layout_consist_check(layout)
 })
 
 context("Deriving additional layout elements")

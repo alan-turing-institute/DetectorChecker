@@ -61,10 +61,10 @@ Excalibur_Layout <- function() {
                            detector_height = 1536,
                            module_col_n = 8,
                            module_row_n = 6,
-                           module_col_sizes = rep(0, 7),
-                           module_row_sizes = rep(0, 5),
-                           gap_col_sizes = rep(256, 8),
-                           gap_row_sizes = rep(256, 6),
+                           module_col_sizes = rep(0, 8),
+                           module_row_sizes = rep(0, 6),
+                           gap_col_sizes = rep(256, 7),
+                           gap_row_sizes = rep(256, 5),
                            module_edges_col = NA,
                            module_edges_row = NA,
                            detector_inconsistency = 0)
@@ -131,6 +131,28 @@ PerkinElmerRefurbished_Layout <- function() {
                            module_row_sizes = c(1004, 996),
                            gap_col_sizes = rep(0, 15),
                            gap_row_sizes = c(0),
+                           module_edges_col = NA,
+                           module_edges_row = NA,
+                           detector_inconsistency = 0)
+
+  return(layout)
+}
+
+#' A S3 class to represent the PerkinElmerRefurbished detector layout.
+#'
+Pilatus_Layout <- function() {
+
+  name <- "Pilatus"
+
+  layout <- Default_Layout(name = name,
+                           detector_width = 2527,
+                           detector_height = 2463,
+                           module_col_n = 12,
+                           module_row_n = 5,
+                           module_col_sizes = rep(195, 12),
+                           module_row_sizes = rep(487, 5),
+                           gap_col_sizes = rep(17, 11),
+                           gap_row_sizes = rep(7, 4),
                            module_edges_col = NA,
                            module_edges_row = NA,
                            detector_inconsistency = 0)
