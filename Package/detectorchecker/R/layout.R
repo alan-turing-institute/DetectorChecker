@@ -270,6 +270,7 @@ derive_layout <- function(layout){
   return(layout)
 }
 
+#' TODO: Select different output format
 #' Deriving additional layout elements
 #'
 #' @param layout Layout object
