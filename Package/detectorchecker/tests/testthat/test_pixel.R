@@ -151,39 +151,3 @@ test_that("Plotting pixel analysis", {
   # if (file.exists(test_out_path)) file.remove(test_out_path)
 
 })
-
-context("Reading in dead pixels")
-
-test_that("TIFF", {
-
-  test_dir <- getwd()
-
-  # Pilatus layout unit test
-  layout <- Pilatus_Layout()
-
-  # TIFF file
-  test_path <- file.path(test_dir, "dead_pix", "Pilatus", "badpixel_mask.tif")
-
-  dead <- read_dead_pix_from_tiff(file = test_path, layout = layout)
-
-  expect_equal(dim(dead)[1], 1161)
-  expect_equal(dim(dead)[2], 2)
-})
-
-test_that("HDF", {
-
-  test_dir <- getwd()
-
-  # Pilatus layout unit test
-  layout <- Excalibur_Layout()
-
-  # TIFF format
-  test_path <- file.path(test_dir, "dead_pix", "Excalibur", "pixelmask.fem1.hdf")
-
-  dead <- read_dead_pix_from_hdf(file = test_path, layout = layout)
-
-  #expect_equal(dim(dead)[1], 1161)
-  #expect_equal(dim(dead)[2], 2)
-
-  expect_equal(TRUE, TRUE)
-})

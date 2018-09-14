@@ -1,3 +1,9 @@
+context("Plotting layout")
+
+test_that("Availability", {
+  expect_equal(check_layout_avail("Pilatus"), TRUE)
+})
+
 context("Layout object creation")
 
 test_that("Initialization of layout objects", {

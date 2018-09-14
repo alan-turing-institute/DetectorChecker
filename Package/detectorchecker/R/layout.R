@@ -51,10 +51,21 @@ Default_Layout <- function(name = "Default",
 
 # Available layouts ------------------------------------------------------------
 
+Excalibur_name <- "Excalibur"
+PerkinElmerFull_name <- "PerkinElmerFull"
+PerkinElmerCropped1600_name <- "PerkinElmerCropped1600"
+PerkinElmerRefurbished_name <- "PerkinElmerRefurbished"
+Pilatus_name <- "Pilatus"
+
+available_layouts <- c(Excalibur_name, PerkinElmerFull_name,
+                       PerkinElmerCropped1600_name, PerkinElmerRefurbished_name,
+                       Pilatus_name)
+# ------------------------------------------------------------------------------
+
 #' A S3 class to represent the Excalibur detector layout.
 #'
 Excalibur_Layout <- function() {
-  name <- "Excalibur"
+  name <- Excalibur_name
 
   layout <- Default_Layout(name = name,
                            detector_width = 2048,
@@ -76,7 +87,7 @@ Excalibur_Layout <- function() {
 #'
 PerkinElmerFull_Layout <- function() {
 
-  name <- "PerkinElmerFull"
+  name <- PerkinElmerFull_name
 
   layout <- Default_Layout(name = name,
                            detector_width = 2000,
@@ -98,7 +109,7 @@ PerkinElmerFull_Layout <- function() {
 #'
 PerkinElmerCropped1600_Layout <- function() {
 
-  name <- "PerkinElmerCropped1600"
+  name <- PerkinElmerCropped1600_name
 
   layout <- Default_Layout(name = name,
                            detector_width = 2000,
@@ -120,7 +131,7 @@ PerkinElmerCropped1600_Layout <- function() {
 #'
 PerkinElmerRefurbished_Layout <- function() {
 
-  name <- "PerkinElmerRefurbished"
+  name <- PerkinElmerRefurbished_name
 
   layout <- Default_Layout(name = name,
                            detector_width = 2000,
@@ -142,7 +153,7 @@ PerkinElmerRefurbished_Layout <- function() {
 #'
 Pilatus_Layout <- function() {
 
-  name <- "Pilatus"
+  name <- Pilatus_name
 
   layout <- Default_Layout(name = name,
                            detector_width = 2527,
@@ -158,6 +169,37 @@ Pilatus_Layout <- function() {
                            detector_inconsistency = 0)
 
   return(layout)
+}
+
+# Layout selection -------------------------------------------------------------
+
+#' Checks whether layout is available
+#'
+#' @slot layout_name The name of the layout
+check_layout_avail <- function(layout_name) {
+
+  avail <- layout_name %in% available_layouts
+
+  if (!avail) {
+
+    cnt <- 0
+    for (available_layout in available_layouts) {
+
+      if (cnt == 0) {
+        available_layouts_list <- available_layout
+      } else {
+        available_layouts_list <- paste(available_layouts_list,
+                                        available_layout, sep=", ")
+      }
+
+      cnt <- cnt + 1
+    }
+
+    stop(c("Layout [", layout_name, "] is not available.\n",
+           "Available layouts: ", available_layouts_list))
+  }
+
+  return(avail)
 }
 
 # Layout functions -------------------------------------------------------------

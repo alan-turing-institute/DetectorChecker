@@ -1,7 +1,3 @@
-library(tiff)
-library(hdf5r)
-
-
 # Pixel analysis functions -----------------------------------------------------
 
 #' A function to calculate euclidean distance from the centre
@@ -251,54 +247,4 @@ plot_pixel_dist_edge <- function(layout, file = "pixel_dist_edge.png", format = 
 
   plot_pixel(dist, width = layout$detector_width, height = layout$detector_height,
              file = file, format = format)
-}
-
-#' Reads in dead pixels from a tiff file and checks against the layout
-#'
-#' @slot file Path to the tiff file
-#' @slot layout Layout object
-read_dead_pix_from_tiff <- function(file = NA, layout = NA) {
-
-  # reading in the data
-  tiff_data <- readTIFF(file, as.is = TRUE)
-
-  # first consistency check: Detector dimensions okay?
-  if (layout$detector_height != dim(tiff_data)[2]) {
-    stop("Error: Number of rows in row data file (tif) incorrect.
-         Please check the file and check if your Layout parameters match your damaged pixel data.")
-  }
-
-  if (layout$detector_width != dim(tiff_data)[1]) {
-    stop("Error: Number of columns in row data file (tif) incorrect.
-         Please check the file and check if your Layout parameters match your damaged pixel data.")
-  }
-
-  # Check range of T.
-  # Assumption: max values in T are dead pixels, others are fine (only two categories).
-  # If not binary, transform into a binary matrix Tbin.
-  table(as.vector(tiff_data))
-  bins <- round(tiff_data / max(tiff_data))
-  table(as.vector(bins))
-
-  # Matrix of damaged pixels coordinates
-  dead <- which(bins == 1, arr.ind = tiff_data)
-
-  # The first col of dead (dead[ , 1]) corresponds to the detector width dimension (col in Layout).
-  # The second col of dead (dead[ , 2]) corresponds to the detector height dimension (row in Layout)
-
-  colnames(dead) <- c("col", "row")
-
-  return(dead)
-}
-
-#' Reads in dead pixels from a hdf file and checks against the layout
-#'
-#' @slot file Path to the tiff file
-#' @slot layout Layout object
-read_dead_pix_from_hdf <- function(file = NA, layout = NA) {
-
-  # reading in the data
-  tiff_data <- H5Fopen(file)
-
-  print(tiff_data)
 }
