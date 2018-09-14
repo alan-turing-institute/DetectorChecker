@@ -202,6 +202,41 @@ check_layout_avail <- function(layout_name) {
   return(avail)
 }
 
+#' Checks whether layout is available
+#'
+#' @slot layout_name The name of the layout
+#' @return layout Layout object
+create_module <- function(layout_name) {
+
+  layout <- NA
+
+  # Check if we know about layout_name
+  if (check_layout_avail(layout_name)) {
+
+    if (layout_name == Excalibur_name) {
+      layout <- Excalibur_Layout()
+
+    } else if (layout_name == PerkinElmerFull_name) {
+      layout <- PerkinElmerFull_Layout()
+
+    } else if (layout_name == PerkinElmerCropped1600_name) {
+      layout <- PerkinElmerCropped1600_Layout()
+
+    } else if (layout_name == PerkinElmerRefurbished_name) {
+      layout <- PerkinElmerRefurbished_Layout()
+
+    } else if (layout_name == Pilatus_name) {
+      layout <- Pilatus_Layout()
+
+    } else {
+      stop(c("Layout [", layout_name, "] is available but has not been properly
+             implemented."))
+    }
+  }
+
+  return(layout)
+}
+
 # Layout functions -------------------------------------------------------------
 
 #' Layout consistency checks

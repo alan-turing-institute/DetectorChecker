@@ -29,14 +29,27 @@ test_that("HDF", {
 
   test_list <- c(test_path1, test_path2, test_path3, test_path4, test_path5, test_path6)
 
-  data <- read_hdf(file_list=test_list)
+  data <- read_hdf(file_list = test_list)
 
   # Expect 6 files to be read
   expect_equal(length(data), 6)
 
-  data <- read_hdf(file_list=test_path1)
+  data <- read_hdf(file_list = test_path1)
 
   # Expect 1 file to be read
   expect_equal(length(data), 1)
+})
+
+test_that("XML", {
+
+  test_dir <- getwd()
+
+  test_path <- file.path(test_dir, "dead_pix", "PerkinElmer",
+                         "BadPixelMap_0.bpm",
+                         "BadPixelMap.bpm.xml")
+
+  data <- read_xml(file_path = test_path)
+
+  expect_equal(length(data), 18902)
 })
 

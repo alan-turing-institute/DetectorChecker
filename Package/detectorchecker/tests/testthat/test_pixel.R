@@ -150,4 +150,5 @@ test_that("Plotting pixel analysis", {
   # # Removing the test output file
   # if (file.exists(test_out_path)) file.remove(test_out_path)
 
+  expect_equal(TRUE, TRUE)
 })

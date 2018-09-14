@@ -248,3 +248,52 @@ plot_pixel_dist_edge <- function(layout, file = "pixel_dist_edge.png", format = 
   plot_pixel(dist, width = layout$detector_width, height = layout$detector_height,
              file = file, format = format)
 }
+
+#' Counts damaged pixel locations (dead_data) outside detector (layout)
+#'   and in gaps between modules and give warnings
+#'
+#' @slot dead_data Dead pixel locations
+#' @slot layout Layout object
+inconsist_dead_layout <- function(dead_data, layout) {
+
+  error <- ""
+
+  outleft <- sum(dead_data[ , 1] < 1)
+  outright <- sum(dead_data[ , 1] > layout$detector_width)
+
+  outtop <- sum(dead_data[ , 2] < 1)
+  outbottom <- sum(dead_data[ , 2] > layout$detector_height)
+
+  colgaps <- c()
+  if (sum(layout$gap_col_sizes) != 0) {
+    for (i in 1:(layout$module_col_n - 1)) {
+      colgaps <- c(colgaps, (layout$module_edges_col[2, i] + 1):(layout$module_edges_col[1, i + 1] - 1) )
+    }
+  }
+
+  rowgaps <- c()
+  if (sum(layout$gap_row_sizes) != 0) {
+    for (i in 1:(layout$module_row_n - 1)) {
+      rowgaps <- c(rowgaps, (layout$module_edges_row[2, i] + 1):(layout$module_edges_row[1, i + 1] - 1) )
+    }
+  }
+
+  in.gaps.dead <- c()
+
+  in.gaps <- function(i,coo){
+    return((coo[i,1] %in% colgaps) | (coo[i,2] %in% rowgaps))
+  }
+  in.gaps.dead <- vector(length=dim(dead_data)[1])
+  for (i in 1:length(in.gaps.dead)){
+    in.gaps.dead[i] <- in.gaps(i,dead_data)
+  }
+
+  if (sum(in.gaps.dead) != 0){
+    cat(paste("Warning: ", sum(in.gaps.dead.),
+              " of the coordinates of damaged pixels correspond to locations in gaps between modules of the detector.\n", sep=""))
+  }
+
+  inconsistency <- list(outleft, outtop, outright, outbottom, sum(in.gaps.dead))
+  names(inconsistency) <- c("left", "top","right","bottom","gaps")
+  return(inconsistency)
+}

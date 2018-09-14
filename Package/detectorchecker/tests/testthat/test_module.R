@@ -8,4 +8,6 @@ test_that("Module analysis functions", {
   # which_module
   # which_module_idx
   # dist_edge (test for columns and rows)
+
+  expect_equal(TRUE, TRUE)
 })
