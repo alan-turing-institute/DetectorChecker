@@ -87,7 +87,15 @@ plot_layout_damaged <- function(layout = NA, dead_data = NA, file = NA) {
     points(ppp_gaps_row, pch=".", col="grey")
   }
 
+  # Question:
+  # Instead of pch=22 (empty square) would like dead pixels
+  # in full but opaque squares (pch=15)like below (works!)
+  # plot(ppp.dead, pch=15,  cex=0.7, transparent=TRUE)
+  # Tried using par transparent and alpha also in points(), but but there is does not work
+  # Changing order of plot() and points() above is not a way out,
+  # because of the titles and because they layout should be printed under the
+  # damaged pixels rather than cover them up.
+
   points(ppp_dead, pch = 22, col = "brown", cex = 0.7)
   dev.off()
-
 }

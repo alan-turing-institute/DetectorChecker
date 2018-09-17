@@ -83,9 +83,14 @@ read_xml <- function(file_path = NA, layout = NA) {
                      ncol = 6, byrow = TRUE)
 
   # Applying data treatment
-
   # But(!), warning is just because of end of file, hence just remove last two lines and it works.
-  xml_data_modi <- xml_data[1:(nrow(xml_data) - 2), c(2, 3)]
+  nrows <- nrow(xml_data) - 2
+
+  xml_data_modi <- xml_data[1:nrows, ncol = c(2, 3)]
+
+  print("!!")
+  print(nrow(xml_data_modi))
+  print("??")
 
   # these are coordinates of dead pixels, with
   # xml_data_modi[, 1] for detector cols (width) and xml_data_modi[, 2] for detector rows (height)

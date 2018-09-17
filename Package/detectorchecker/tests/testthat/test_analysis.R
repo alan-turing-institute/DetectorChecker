@@ -6,13 +6,12 @@ test_that("Pilatus", {
 
   layout_name <- "Pilatus"
 
-  # This shoudl be a successful tif upload
+  pilatus_layout <- create_module(layout_name)
+
+  # getting the dead (damaged) pixel data
   dead_path <- file.path(test_dir, "dead_pix", "Pilatus",
                          "badpixel_mask.tif")
 
-  pilatus_layout <- create_module(layout_name)
-
-  # geeting the dead (damaged) pixel data
   dead_data <- load_module(layout = layout_name, file = dead_path)
 
   # output file
@@ -26,6 +25,21 @@ test_that("Pilatus", {
   expect_that(file.exists(test_out_path), is_true())
 
   # Removing the test output file
-  # if (file.exists(test_out_path)) file.remove(test_out_path)
+  if (file.exists(test_out_path)) file.remove(test_out_path)
+})
 
+test_that("Perkin Elmer", {
+  test_dir <- getwd()
+
+  layout_name <- "PerkinElmerFull"
+
+  perkinelmerfull_layout <- create_module(layout_name)
+
+  # getting the dead (damaged) pixel data
+  dead_path <- file.path(test_dir, "dead_pix", "PerkinElmer",
+                         "BadPixelMap_0.bpm", "BadPixelMap.bpm.xml")
+
+  dead_data <- load_module(layout = layout_name, file = dead_path)
+
+  expect_that(TRUE, is_true())
 })
