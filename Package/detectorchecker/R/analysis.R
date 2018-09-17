@@ -38,5 +38,56 @@ load_module <- function(layout_name = NA, file = NA) {
     dead_data <- read_hdf(file_list = file)
   }
 
+  return(dead_data)
+}
+
+#' A function to plot layout with damaged pixels
+#'
+#' @slot layout Layout object
+#' @slot dead_data Matrix of damaged pixels coordinates
+#' @slot file Output file path
+plot_layout_damaged <- function(layout = NA, dead_data = NA, file = NA) {
+
+  dirOut <- getwd()
+
+  ppp_dead <- ppp(dead_data[ , 1], dead_data[ , 2],
+                  c(1, layout$detector_width), c(1, layout$detector_height))
+
+  pdf(file)
+
+  ppp_edges_col <- create_ppp_edges_col(layout)
+  ppp_edges_row <- create_ppp_edges_row(layout)
+
+  if (sum(layout$gap_col_sizes) + sum(layout$gap_row_sizes) == 0) {
+
+    # vertical lines in x-positions given by xlines
+    plot(ppp_edges_col, pch = ".", cex.main = 0.7,
+         main = paste(layout$name, "with damaged pixels\n (black=module edges)"))
+
+    # horizontal lines in y-positions given by ylines
+    points(ppp_edges_row, pch = ".")
+
+  } else {
+
+    # Define point patterns (spatstat) capturing gaps
+    ppp_gaps_col <- create_ppp_gaps_col(layout)
+    ppp_gaps_row <- create_ppp_gaps_row(layout)
+
+    # vertical lines in x-positions given by xlines
+    plot(ppp_edges_col, pch = ".", cex.main = 0.7,
+         main = paste(layout$name, "with damaged pixels\n (black=module edges, grey=gaps)"))
+
+    # horizontal lines in y-positions given by ylines
+    points(ppp_edges_row, pch=".")
+
+    # cols without pixels (gaps)
+    points(ppp_gaps_col, pch=".", col="grey")
+
+    # rows without pixels (gaps)
+    points(ppp_gaps_row, pch=".", col="grey")
+  }
+
+  points(ppp_dead, pch = 22, col = "brown", cex = 0.7)
+  dev.off()
 
 }
