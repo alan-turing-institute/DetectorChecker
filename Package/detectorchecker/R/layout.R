@@ -72,10 +72,10 @@ Excalibur_Layout <- function() {
                            detector_height = 1536,
                            module_col_n = 8,
                            module_row_n = 6,
-                           module_col_sizes = rep(0, 8),
-                           module_row_sizes = rep(0, 6),
-                           gap_col_sizes = rep(256, 7),
-                           gap_row_sizes = rep(256, 5),
+                           module_col_sizes = rep(256, 8),
+                           module_row_sizes = rep(256, 6),
+                           gap_col_sizes = rep(0, 7),
+                           gap_row_sizes = rep(0, 5),
                            module_edges_col = NA,
                            module_edges_row = NA,
                            detector_inconsistency = 0)
@@ -463,6 +463,12 @@ plot_layout <- function(layout, file = NA, format = "pdf") {
 
   # TODO: choose the correct output format
   pdf(output_path)
+
+  print("11")
+  print(sum(layout$gap_col_sizes))
+  print("22")
+  print(sum(layout$gap_row_sizes))
+
 
   if (sum(layout$gap_col_sizes) + sum(layout$gap_row_sizes) == 0) {
 

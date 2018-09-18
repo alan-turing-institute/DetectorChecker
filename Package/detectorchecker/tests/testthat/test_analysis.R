@@ -57,3 +57,47 @@ test_that("Perkin Elmer", {
   if (file.exists(test_out_path)) file.remove(test_out_path)
 })
 
+context("Testing reading in the dead pixel data and visualizing the layout: Excalibur")
+
+test_that("Excalibur - mutiple files", {
+  test_dir <- getwd()
+
+  layout_name <- "Excalibur"
+
+  excalibur_layout <- create_module(layout_name)
+
+  # getting the dead (damaged) pixel data
+
+  dead_paths <- file.path(test_dir, "dead_pix", "Excalibur",
+                          "pixelmask.fem1.hdf")
+
+  dead_paths <- c(dead_paths, file.path(test_dir, "dead_pix", "Excalibur",
+                                        "pixelmask.fem2.hdf"))
+
+  dead_paths <- c(dead_paths, file.path(test_dir, "dead_pix", "Excalibur",
+                                        "pixelmask.fem3.hdf"))
+
+  dead_paths <- c(dead_paths, file.path(test_dir, "dead_pix", "Excalibur",
+                                        "pixelmask.fem4.hdf"))
+
+  dead_paths <- c(dead_paths, file.path(test_dir, "dead_pix", "Excalibur",
+                                        "pixelmask.fem5.hdf"))
+
+  dead_paths <- c(dead_paths, file.path(test_dir, "dead_pix", "Excalibur",
+                                        "pixelmask.fem6.hdf"))
+
+  dead_data <- load_module(layout_name = layout_name, file = dead_paths)
+
+  # output file
+  test_out_path <- "Excalibur_damaged.pdf"
+
+  # Plotting layout with damaged pixels
+  plot_layout_damaged(layout = excalibur_layout, dead_data = dead_data,
+                     file = test_out_path)
+
+  # Check whether the file was created
+  expect_that(file.exists(test_out_path), is_true())
+
+  # Removing the test output file
+  if (file.exists(test_out_path)) file.remove(test_out_path)
+})

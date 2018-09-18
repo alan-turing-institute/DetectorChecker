@@ -9,9 +9,9 @@ load_module <- function(layout_name = NA, file = NA) {
     stop("Layout has not been specified.")
   }
 
-  if (is.na(file)) {
-    stop("File(s) regarding dead pixels have(s) not been specified.")
-  }
+  # if (is.na(file)) {
+  #   stop("File(s) regarding dead pixels have(s) not been specified.")
+  # }
 
   # create the named layout
   layout <- create_module(layout_name)
@@ -23,19 +23,22 @@ load_module <- function(layout_name = NA, file = NA) {
     file_extansion <- file_ext(file)
 
     if (file_extansion == "tif") {
-      dead_data <- read_tiff(file = file, layout = layout)
+      dead_data <- read_tiff(file_path = file, layout = layout)
 
     } else if (file_extansion == "xml") {
-      dead_data <- read_xml(file = file, layout = layout)
+      dead_data <- read_xml(file_path = file, layout = layout)
+
+    } else if (file_extansion == "hdf") {
+      dead_data <- read_hdf(file_path = file, layout = layout)
 
     } else {
       stop(c("Undefined file extension: ", file_extansion, " [", file, "]"))
+
     }
-
   } else {
-    # loading
-
-    dead_data <- read_hdf(file_list = file)
+    # if we have a list of files, at the moment we assume that  they are in the
+    #   hdf format.
+    dead_data <- read_hdf(file_path = file, layout = layout)
   }
 
   return(dead_data)
@@ -78,13 +81,13 @@ plot_layout_damaged <- function(layout = NA, dead_data = NA, file = NA) {
          main = paste(layout$name, "with damaged pixels\n (black=module edges, grey=gaps)"))
 
     # horizontal lines in y-positions given by ylines
-    points(ppp_edges_row, pch=".")
+    points(ppp_edges_row, pch = ".")
 
     # cols without pixels (gaps)
-    points(ppp_gaps_col, pch=".", col="grey")
+    points(ppp_gaps_col, pch = ".", col = "grey")
 
     # rows without pixels (gaps)
-    points(ppp_gaps_row, pch=".", col="grey")
+    points(ppp_gaps_row, pch = ".", col = "grey")
   }
 
   # Question:

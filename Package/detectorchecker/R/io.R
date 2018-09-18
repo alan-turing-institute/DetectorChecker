@@ -4,7 +4,7 @@ library(tools)
 
 #' Reads in dead pixels from a tiff file and checks against the layout
 #'
-#' @slot file Path to the tiff file
+#' @slot file_path Path to the tiff file
 #' @slot layout Layout object
 read_tiff <- function(file_path = NA, layout = NA) {
 
@@ -42,39 +42,57 @@ read_tiff <- function(file_path = NA, layout = NA) {
 
 #' Reads in multiple hdf files
 #'
-#' @slot files A list of paths to hdf files. Must be in the correct order.
+#' @slot file_path A list of paths to hdf files. Must be in the correct order.
 #' @return data combined dataset
-read_hdf <- function(file_list = NA) {
+read_hdf <- function(file_path = NA, layout = NA) {
   data <- NA
 
   # Reading in multiple hdf files at the same time
-  if (is.vector(file_list)) {
+  if (is.vector(file_path)) {
 
     file_cnt <- 0
-    for(file in file_list) {
+    for(file in file_path) {
 
-      data_file <- h5file(file, mode = 'a')
+      data_file <- h5file(file, mode = 'r')
 
-      if (file_cnt >= 1) {
-        data <- c(data, data_file)
+      hdf_data_file <- readDataSet(data_file[list.datasets(data_file)])
+
+      if (file_cnt > 0) {
+        # The data is combined by rows!
+        hdf_data <- rbind(hdf_data, hdf_data_file)
+
       } else {
-        data <- data_file
+        hdf_data <- hdf_data_file
       }
+
+      h5close(data_file)
 
       file_cnt <- file_cnt + 1
     }
-
-  # Reading single hdf file at the same time
-  } else if (!is.na(file_list)) {
-    data <- h5file(file, mode = 'a')
   }
 
-  return(data)
+  # transposing the matrix
+  hdf_data_t <- t(hdf_data)
+
+  # first consistency check: Detector dimensions okay?
+  if (layout$detector_height != dim(hdf_data_t)[2]) {
+    stop("Error: Number of rows in row data file (tif) incorrect.
+         Please check the file and check if your Layout parameters match your damaged pixel data.")
+  }
+
+  if (layout$detector_width != dim(hdf_data_t)[1]) {
+    stop("Error: Number of columns in row data file (tif) incorrect.
+         Please check the file and check if your Layout parameters match your damaged pixel data.")
+  }
+
+  dead <- which(hdf_data_t == 1, arr.ind = TRUE)
+
+  return(dead)
 }
 
 #' Reads in dead pixels from an xml file and checks against the layout
 #'
-#' @slot file Path to the xml file
+#' @slot file_path Path to the xml file
 #' @slot layout Layout object
 read_xml <- function(file_path = NA, layout = NA) {
 
