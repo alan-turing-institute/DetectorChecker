@@ -454,8 +454,11 @@ plot_layout <- function(layout, file = NA, format = "pdf") {
   # Setting the output path
   if (!is.na(file)) {
     output_path <- file
+
   } else {
-    output_path <- paste(paste("layout_", layout$name, sep=""), format, sep=".")
+    output_path <- paste(paste("layout_", layout$name, sep = ""),
+                         format, sep = ".")
+
   }
 
   ppp_edges_col <- create_ppp_edges_col(layout)
@@ -464,12 +467,6 @@ plot_layout <- function(layout, file = NA, format = "pdf") {
   # TODO: choose the correct output format
   pdf(output_path)
 
-  print("11")
-  print(sum(layout$gap_col_sizes))
-  print("22")
-  print(sum(layout$gap_row_sizes))
-
-
   if (sum(layout$gap_col_sizes) + sum(layout$gap_row_sizes) == 0) {
 
     # Define point patterns (spatstat) capturing gaps
@@ -477,24 +474,24 @@ plot_layout <- function(layout, file = NA, format = "pdf") {
     ppp_gaps_row <- create_ppp_gaps_row(layout)
 
     # vertical lines in x-positions given by xlines
-    plot(ppp_edges_col, pch=".", cex.main = 0.7,
-         main=paste(layout$name, "layout\n (black=module edges)"), res = 10)
+    plot(ppp_edges_col, pch = ".", cex.main = 0.7,
+         main = paste(layout$name, "layout\n (black=module edges)"), res = 10)
 
     # horizontal lines in y-positions given by ylines
-    points(ppp_edges_row, pch=".")
+    points(ppp_edges_row, pch = ".")
 
   } else {
     # vertical lines in x-positions given by xlines
-    plot(ppp_edges_col, pch=".", cex.main = 0.7,
-         main=paste(layout$name, "layout\n (black=module edges, grey=gaps)"))
+    plot(ppp_edges_col, pch = ".", cex.main = 0.7,
+         main = paste(layout$name, "layout\n (black=module edges, grey=gaps)"))
 
-    points(ppp_edges_row, pch=".") # horizontal lines in y-positions given by ylines
+    points(ppp_edges_row, pch = ".") # horizontal lines in y-positions given by ylines
 
     # cols without pixels (gaps)
-    points(ppp_gaps_col, pch=".", col="grey")
+    points(ppp_gaps_col, pch = ".", col = "grey")
 
     # rows without pixels (gaps)
-    points(ppp_gaps_row, pch=".", col="grey")
+    points(ppp_gaps_row, pch = ".", col = "grey")
   }
 
   # shuts down the specified (by default the current) device
