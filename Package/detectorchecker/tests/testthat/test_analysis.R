@@ -1,4 +1,4 @@
-context("Testing reading in the dead pixel data and visualizing the layout")
+context("Testing reading in the dead pixel data and visualizing the layout: Pilatus")
 
 test_that("Pilatus", {
 
@@ -28,6 +28,8 @@ test_that("Pilatus", {
   if (file.exists(test_out_path)) file.remove(test_out_path)
 })
 
+context("Testing reading in the dead pixel data and visualizing the layout: Perkin Elmer")
+
 test_that("Perkin Elmer", {
   test_dir <- getwd()
 
@@ -41,5 +43,17 @@ test_that("Perkin Elmer", {
 
   dead_data <- load_module(layout = layout_name, file = dead_path)
 
-  expect_that(TRUE, is_true())
+  # output file
+  test_out_path <- "perkinelmerfull_damaged.pdf"
+
+  # Plotting layout with damaged pixels
+  plot_layout_damaged(layout = perkinelmerfull_layout, dead_data = dead_data,
+                      file = test_out_path)
+
+  # Check whether the file was created
+  expect_that(file.exists(test_out_path), is_true())
+
+  # Removing the test output file
+  if (file.exists(test_out_path)) file.remove(test_out_path)
 })
+
