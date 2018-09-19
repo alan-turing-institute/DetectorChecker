@@ -1,3 +1,5 @@
+# These tests are duplicates. The functionality is tested in test_analysis.R too.
+
 context("I/O functions")
 
 test_that("TIFF", {
@@ -27,7 +29,7 @@ test_that("HDF", {
 
   test_dir <- getwd()
 
-  # Pilatus layout unit test
+  # Excalibur layout unit test
   layout <- Excalibur_Layout()
 
   test_path1 <- file.path(test_dir, "dead_pix", "Excalibur", "pixelmask.fem1.hdf")
@@ -39,30 +41,31 @@ test_that("HDF", {
 
   test_list <- c(test_path1, test_path2, test_path3, test_path4, test_path5, test_path6)
 
-  pix_matrix <- read_hdf(layout, file_path = test_list)
+  pix_matrix <- matrix_from_hdf(layout = layout, file_path = test_list)
 
   # width
   expect_equal(dim(pix_matrix)[1], 2048)
 
   # height
   expect_equal(dim(pix_matrix)[2], 1536)
-
-  # pix_matrix <- read_hdf(layout, file_path = test_path1)
-  #
-  # # Expect 1 file to be read
-  # expect_equal(length(pix_matrix), 1)
 })
 
-# test_that("XML", {
-#
-#   test_dir <- getwd()
-#
-#   test_path <- file.path(test_dir, "dead_pix", "PerkinElmer",
-#                          "BadPixelMap_0.bpm",
-#                          "BadPixelMap.bpm.xml")
-#
-#   data <- read_xml(file_path = test_path)
-#
-#   expect_equal(length(data), 18902)
-# })
-#
+test_that("XML", {
+  # Pilatus layout unit test
+  layout <- PerkinElmerFull_Layout()
+
+  test_dir <- getwd()
+
+  test_path <- file.path(test_dir, "dead_pix", "PerkinElmer",
+                         "BadPixelMap_0.bpm",
+                         "BadPixelMap.bpm.xml")
+
+  pix_matrix <- matrix_from_xml(layout = layout, file_path = test_path)
+
+  # width
+  expect_equal(dim(pix_matrix)[1], 2000)
+
+  # height
+  expect_equal(dim(pix_matrix)[2], 2000)
+})
+
