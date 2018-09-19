@@ -449,17 +449,9 @@ create_ppp_gaps_row <- function(layout) {
 #' Deriving additional layout elements
 #'
 #' @param layout Layout object
-plot_layout <- function(layout, file = NA, format = "pdf") {
+plot_layout <- function(layout, file) {
 
-  # Setting the output path
-  if (!is.na(file)) {
-    output_path <- file
-
-  } else {
-    output_path <- paste(paste("layout_", layout$name, sep = ""),
-                         format, sep = ".")
-
-  }
+  output_path <- file
 
   ppp_edges_col <- create_ppp_edges_col(layout)
   ppp_edges_row <- create_ppp_edges_row(layout)
@@ -469,10 +461,6 @@ plot_layout <- function(layout, file = NA, format = "pdf") {
 
   if (sum(layout$gap_col_sizes) + sum(layout$gap_row_sizes) == 0) {
 
-    # Define point patterns (spatstat) capturing gaps
-    ppp_gaps_col <- create_ppp_gaps_col(layout)
-    ppp_gaps_row <- create_ppp_gaps_row(layout)
-
     # vertical lines in x-positions given by xlines
     plot(ppp_edges_col, pch = ".", cex.main = 0.7,
          main = paste(layout$name, "layout\n (black=module edges)"), res = 10)
@@ -481,6 +469,10 @@ plot_layout <- function(layout, file = NA, format = "pdf") {
     points(ppp_edges_row, pch = ".")
 
   } else {
+    # Define point patterns (spatstat) capturing gaps
+    ppp_gaps_col <- create_ppp_gaps_col(layout)
+    ppp_gaps_row <- create_ppp_gaps_row(layout)
+
     # vertical lines in x-positions given by xlines
     plot(ppp_edges_col, pch = ".", cex.main = 0.7,
          main = paste(layout$name, "layout\n (black=module edges, grey=gaps)"))

@@ -11,8 +11,11 @@ Depends: R (>= 3.5.0)
 Imports:
     spatstat
 Suggests:
-    testthat, tiff, h5
+    testthat, tiff, h5,
+    knitr,
+    rmarkdown
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.0
+VignetteBuilder: knitr

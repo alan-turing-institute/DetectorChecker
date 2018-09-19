@@ -1,0 +1,47 @@
+---
+title: "DetectorChecker User Guide"
+# author: "Vignette Author"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## DetectorChecker
+
+DetectorChecker package ...
+
+### To check available layouts:
+
+```
+detectorchecker::available_layouts
+```
+
+It will output the list of implemented layouts, for example:
+
+```
+"Excalibur" "PerkinElmerFull" "Pilatus" 
+```
+
+### To create layout object
+
+```
+layout <- detectorchecker::create_module("Pilatus")
+```
+
+### To visualise layout object
+
+```
+detectorchecker::plot_layout(layout, "layout.pdf")
+```
+
+### To upload pixel file
