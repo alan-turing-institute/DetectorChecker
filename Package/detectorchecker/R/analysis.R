@@ -1,62 +1,16 @@
-#' A function to calculate pixel distances from edges
-#'
-#' @slot layout The name of the layout to be used
-#' @slot file Path(s) to the file(s) containing dead pixel information
-load_module <- function(layout_name = NA, file = NA) {
-
-  # Initial checks
-  if (is.na(layout_name)) {
-    stop("Layout has not been specified.")
-  }
-
-  # if (is.na(file)) {
-  #   stop("File(s) regarding dead pixels have(s) not been specified.")
-  # }
-
-  # create the named layout
-  layout <- create_module(layout_name)
-
-  # check whether we accept the file(s)
-  file_cnt <- length(file)
-
-  if (file_cnt == 1) {
-    file_extansion <- file_ext(file)
-
-    if (file_extansion == "tif") {
-      dead_data <- read_tiff(file_path = file, layout = layout)
-
-    } else if (file_extansion == "xml") {
-      dead_data <- read_xml(file_path = file, layout = layout)
-
-    } else if (file_extansion == "hdf") {
-      dead_data <- read_hdf(file_path = file, layout = layout)
-
-    } else {
-      stop(c("Undefined file extension: ", file_extansion, " [", file, "]"))
-
-    }
-  } else {
-    # if we have a list of files, at the moment we assume that  they are in the
-    #   hdf format.
-    dead_data <- read_hdf(file_path = file, layout = layout)
-  }
-
-  return(dead_data)
-}
-
 #' A function to plot layout with damaged pixels
 #'
 #' @slot layout Layout object
-#' @slot dead_data Matrix of damaged pixels coordinates
-#' @slot file Output file path
-plot_layout_damaged <- function(layout = NA, dead_data = NA, file = NA) {
+#' @slot pix_dead Matrix of damaged pixels coordinates
+#' @slot file_path Output file path
+plot_layout_damaged <- function(layout, pix_dead, file_path) {
 
   dirOut <- getwd()
 
-  ppp_dead <- ppp(dead_data[ , 1], dead_data[ , 2],
+  ppp_dead <- ppp(pix_dead[ , 1], pix_dead[ , 2],
                   c(1, layout$detector_width), c(1, layout$detector_height))
 
-  pdf(file)
+  pdf(file_path)
 
   ppp_edges_col <- create_ppp_edges_col(layout)
   ppp_edges_row <- create_ppp_edges_row(layout)
@@ -101,4 +55,21 @@ plot_layout_damaged <- function(layout = NA, dead_data = NA, file = NA) {
 
   points(ppp_dead, pch = 22, col = "brown", cex = 0.7)
   dev.off()
+}
+
+#' Extracts a table of dead pixel coordinates from a pixel matrix
+#'
+#' @slot pix_matrix pixel matrix with dead pixels flagged with 1
+#' @return dead_pix_coords a table containing dead pixel coordinates
+dead_pix_coords <- function(pix_matrix) {
+
+  # Matrix of damaged pixels coordinates
+  # The first col of dead (dead[ , 1]) corresponds to the detector width dimension (col in Layout).
+  # The second col of dead (dead[ , 2]) corresponds to the detector height dimension (row in Layout)
+
+  dead_pix_coords <- which(pix_matrix == 1, arr.ind = TRUE)
+
+  colnames(dead_pix_coords) <- c("col", "row")
+
+  return(dead_pix_coords)
 }

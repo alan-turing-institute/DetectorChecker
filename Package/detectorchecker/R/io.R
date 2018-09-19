@@ -2,11 +2,12 @@ library(tiff)
 library(h5)
 library(tools)
 
-#' Reads in dead pixels from a tiff file and checks against the layout
+#' Reads in a tiff file and returns a pixel matrix
 #'
 #' @slot file_path Path to the tiff file
 #' @slot layout Layout object
-read_tiff <- function(file_path = NA, layout = NA) {
+#' @return dead_matrix pixel matrix with dead pixels flagged with 1
+matrix_from_tiff <- function(layout, file_path) {
 
   # reading in the data
   tiff_data <- readTIFF(file_path, as.is = TRUE)
@@ -24,27 +25,21 @@ read_tiff <- function(file_path = NA, layout = NA) {
 
   # Check range of tiff_data
   # Assumption: max values in tiff_data are dead pixels, others are fine (only two categories).
-  # If not binary, transform into a binary matrix bins
+  # Transform into a binary matrix dead_matrix
   table(as.vector(tiff_data))
-  bins <- round(tiff_data / max(tiff_data))
-  table(as.vector(bins))
 
-  # Matrix of damaged pixels coordinates
-  dead <- which(bins == 1, arr.ind = tiff_data)
+  dead_matrix <- round(tiff_data / max(tiff_data))
 
-  # The first col of dead (dead[ , 1]) corresponds to the detector width dimension (col in Layout).
-  # The second col of dead (dead[ , 2]) corresponds to the detector height dimension (row in Layout)
+  table(as.vector(dead_matrix))
 
-  colnames(dead) <- c("col", "row")
-
-  return(dead)
+  return(dead_matrix)
 }
 
 #' Reads in multiple hdf files
 #'
 #' @slot file_path A list of paths to hdf files. Must be in the correct order.
 #' @return data combined dataset
-read_hdf <- function(file_path = NA, layout = NA) {
+read_hdf <- function(layout, file_path) {
   data <- NA
 
   # Reading in multiple hdf files at the same time
@@ -76,12 +71,23 @@ read_hdf <- function(file_path = NA, layout = NA) {
 
   # first consistency check: Detector dimensions okay?
   if (layout$detector_height != dim(hdf_data_t)[2]) {
-    stop("Error: Number of rows in row data file (tif) incorrect.
+
+    print("Height")
+
+    print(layout$detector_height)
+    print(dim(hdf_data_t)[2])
+
+    print("Width")
+
+    print(layout$detector_width)
+    print(dim(hdf_data_t)[1])
+
+    stop("Error: Number of rows in data file (hdf) incorrect.
          Please check the file and check if your Layout parameters match your damaged pixel data.")
   }
 
   if (layout$detector_width != dim(hdf_data_t)[1]) {
-    stop("Error: Number of columns in row data file (tif) incorrect.
+    stop("Error: Number of columns in data file (hdf) incorrect.
          Please check the file and check if your Layout parameters match your damaged pixel data.")
   }
 
@@ -148,4 +154,49 @@ dead_pix_mask <- function(layout, dead_data) {
   }
 
   return(mask)
+}
+
+#' A function to load pixel data
+#'
+#' @slot layout The name of the layout to be used
+#' @slot file_path Path(s) to the file(s) containing dead pixel information
+load_pix_matrix <- function(layout, file_path) {
+
+  # # Initial checks
+  # if (is.na(layout_name)) {
+  #   stop("Layout has not been specified.")
+  # }
+
+  # if (is.na(file)) {
+  #   stop("File(s) regarding dead pixels have(s) not been specified.")
+  # }
+
+  # check the number of files
+  file_cnt <- length(file_path)
+
+  if (file_cnt == 1) {
+    file_extansion <- file_ext(file_path)
+
+    if (file_extansion == "tif") {
+      dead_matrix <- matrix_from_tiff(layout = layout, file_path = file_path)
+
+    } else if (file_extansion == "xml") {
+      stop("Needs fixing")
+      #dead_matrix <- read_xml(file_path = file_path, layout = layout)
+
+    } else if (file_extansion == "hdf") {
+      stop("Needs fixing")
+      #dead_matrix <- read_hdf(file_path = file_path, layout = layout)
+
+    } else {
+      stop(c("Undefined file extension: ", file_extansion, " [", file_path, "]"))
+
+    }
+  } else {
+    # if we have a list of files, at the moment we assume that  they are in the
+    #   hdf format.
+    dead_matrix <- read_hdf(file_path = file_path, layout = layout)
+  }
+
+  return(dead_matrix)
 }
