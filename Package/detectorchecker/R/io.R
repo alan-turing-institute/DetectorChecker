@@ -109,9 +109,6 @@ matrix_from_xml <- function(layout, file_path) {
   pix_dead[, 1] <- xml_data_modi[, 1] + 1
   pix_dead[, 2] <- xml_data_modi[, 2] + 1
 
-
-  #print(pix_dead[1:200, 1:2])
-
   # TODO: This is not a good approach as we first read in pix_dead and convert it to
   #  pix_matrix. Later on pix_dead is recunstructed again from pix_matrix.
   pix_matrix <- matrix(0, nrow = layout$detector_width,
@@ -190,4 +187,29 @@ load_pix_matrix <- function(layout, file_path) {
   }
 
   return(pix_matrix)
+}
+
+
+
+# TODO: this is a duplicated function (analysis.plot_layout_damaged) and
+#   (layout.plot_layout). We should make it as one function.
+
+#' Starts the graphics device driver for producing graphics with respect to a
+#'   chosen format
+#'
+#' @slot file_path Output path with an extension
+ini_graphics <- function(file_path) {
+  # choosing output format
+  file_extansion <- file_ext(file_path)
+
+  if ((file_extansion == "jpeg") || (file_extansion == "jpg")) {
+    jpeg(file_path)
+
+  } else if (file_extansion == "pdf") {
+    pdf(file_path)
+
+  } else {
+    stop(c("Unknown output format: ", file_extansion, " [", file_path, "]\n",
+           "Supported formats: jpeg, pdf"))
+  }
 }

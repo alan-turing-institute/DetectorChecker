@@ -457,7 +457,7 @@ plot_layout <- function(layout, file) {
   ppp_edges_row <- create_ppp_edges_row(layout)
 
   # TODO: choose the correct output format
-  pdf(output_path)
+  jpeg(output_path)
 
   if (sum(layout$gap_col_sizes) + sum(layout$gap_row_sizes) == 0) {
 

@@ -16,9 +16,11 @@ knitr::opts_chunk$set(
 )
 ```
 
-## DetectorChecker
+# DetectorChecker
 
 DetectorChecker package ...
+
+## Loading and visualising data
 
 ### To check available layouts:
 
@@ -44,4 +46,74 @@ layout <- detectorchecker::create_module("Pilatus")
 detectorchecker::plot_layout(layout, "layout.pdf")
 ```
 
+![Pilatus layout](Pilatus_layout.jpg)
+
 ### To upload pixel file
+
+#### TIFF format
+
+```
+# Choosing layout
+layout <- detectorchecker::create_module("Pilatus")
+
+# Loading the pixel matrix
+dead_path <- "/Users/tlazauskas/git/Turing/DetectorChecker/Package/detectorchecker/tests/testthat/dead_pix/Pilatus/badpixel_mask.tif"
+pix_matrix <- detectorchecker::load_pix_matrix(layout = layout, file_path = dead_path)
+
+# Retreiving dead pixels
+pix_dead <- detectorchecker::dead_pix_coords(pix_matrix)
+
+# Plotting
+detectorchecker::plot_layout_damaged(layout = layout, pix_dead = pix_dead,
+                      file_path = "layout_damaged.jpeg")
+                      
+```
+
+![Pilatus damaged](Pilatus_damaged.jpeg)
+
+#### XML format
+
+```
+# Choosing layout
+layout <- create_module("PerkinElmerFull")
+
+# getting the dead (damaged) pixel data
+dead_path <- "/Users/tlazauskas/git/Turing/DetectorChecker/Package/detectorchecker/tests/testthat/dead_pix/PerkinElmer/BadPixelMap_0.bpm/BadPixelMap.bpm.xml"
+
+pix_matrix <- load_pix_matrix(layout = layout, file_path = dead_path)
+
+pix_dead <- dead_pix_coords(pix_matrix)
+
+# Plotting
+detectorchecker::plot_layout_damaged(layout = layout, pix_dead = pix_dead,
+                      file_path = "layout_damaged.pdf")
+```
+
+![PerkinElmerFull damaged](PerkinElmerFull_damaged.jpeg)
+
+#### HDF
+
+```
+# Choosing layout
+layout <- detectorchecker::create_module("Excalibur")
+
+# Loading the pixel matrix
+dead_path <- c("/Users/tlazauskas/git/Turing/DetectorChecker/Package/detectorchecker/tests/testthat/dead_pix/Excalibur/pixelmask.fem1.hdf", 
+               "/Users/tlazauskas/git/Turing/DetectorChecker/Package/detectorchecker/tests/testthat/dead_pix/Excalibur/pixelmask.fem2.hdf",
+               "/Users/tlazauskas/git/Turing/DetectorChecker/Package/detectorchecker/tests/testthat/dead_pix/Excalibur/pixelmask.fem3.hdf",
+               "/Users/tlazauskas/git/Turing/DetectorChecker/Package/detectorchecker/tests/testthat/dead_pix/Excalibur/pixelmask.fem4.hdf",
+               "/Users/tlazauskas/git/Turing/DetectorChecker/Package/detectorchecker/tests/testthat/dead_pix/Excalibur/pixelmask.fem5.hdf",
+               "/Users/tlazauskas/git/Turing/DetectorChecker/Package/detectorchecker/tests/testthat/dead_pix/Excalibur/pixelmask.fem6.hdf")
+
+pix_matrix <- detectorchecker::load_pix_matrix(layout = layout, file_path = dead_path)
+
+# Retreiving dead pixels
+pix_dead <- detectorchecker::dead_pix_coords(pix_matrix)
+
+# Plotting
+detectorchecker::plot_layout_damaged(layout = layout, pix_dead = pix_dead,
+                      file_path = "layout_damaged.jpeg")
+                      
+```
+
+![Excalibur damaged](Excalibur_damaged.jpeg)

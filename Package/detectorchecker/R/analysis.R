@@ -10,10 +10,11 @@ plot_layout_damaged <- function(layout, pix_dead, file_path) {
   ppp_dead <- ppp(pix_dead[ , 1], pix_dead[ , 2],
                   c(1, layout$detector_width), c(1, layout$detector_height))
 
-  pdf(file_path)
-
   ppp_edges_col <- create_ppp_edges_col(layout)
   ppp_edges_row <- create_ppp_edges_row(layout)
+
+  # starts the graphics device driver
+  ini_graphics(file_path = file_path)
 
   if (sum(layout$gap_col_sizes) + sum(layout$gap_row_sizes) == 0) {
 
