@@ -14,9 +14,9 @@ test_that("Initialization of layout objects", {
 
   # TODO: fix the inconsistancy
   # Excalibur layout unit test
-  # layout <- Excalibur_Layout()
-  # expect_equal(layout$name, "Excalibur")
-  # Layout.consistancyCheck(excalibur_layout)
+  layout <- Excalibur_Layout()
+  expect_equal(layout$name, "Excalibur")
+  layout_consist_check(layout)
 
   # Perkinelmer layout unit test
   layout <- PerkinElmerFull_Layout()
@@ -72,7 +72,7 @@ context("Plotting layout")
 test_that("plot layout", {
 
   test_out_name <- "unittest_layout"
-  test_out_fmt <- "pdf"
+  test_out_fmt <- "jpeg"
   test_out_dir <- getwd()
   test_out_path <- file.path(test_out_dir, paste(test_out_name, test_out_fmt, sep="."))
 
@@ -80,12 +80,11 @@ test_that("plot layout", {
   layout <- PerkinElmerFull_Layout()
 
   # Plotting layout in the cwd
-  plot_layout(layout, file=test_out_path)
+  plot_layout(layout = layout, file_path = test_out_path)
 
   # Check whether the file was created
   expect_that(file.exists(test_out_path), is_true())
 
   # Removing the test output file
   if (file.exists(test_out_path)) file.remove(test_out_path)
-
 })

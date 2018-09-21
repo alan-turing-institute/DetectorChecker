@@ -1,11 +1,12 @@
 #' A function to plot layout with damaged pixels
 #'
 #' @slot layout Layout object
-#' @slot pix_dead Matrix of damaged pixels coordinates
 #' @slot file_path Output file path
-plot_layout_damaged <- function(layout, pix_dead, file_path) {
+plot_layout_damaged <- function(layout, file_path) {
 
   dirOut <- getwd()
+
+  pix_dead <- layout$pix_dead
 
   ppp_dead <- ppp(pix_dead[ , 1], pix_dead[ , 2],
                   c(1, layout$detector_width), c(1, layout$detector_height))
@@ -75,6 +76,20 @@ dead_pix_coords <- function(pix_matrix) {
   return(dead_pix_coords)
 }
 
+#' Fits pixel distance from the centre to
+#'
+#' @slot layout Layout object
+#' @return glm_fit Fitted model
+glm_pixel_ctr_eucl <- function(layout) {
+
+  dist <- pixel_dist_ctr_eucl(layout)
+  pix_matrix <- layout$pix_matrix
+
+  glm_fit <- perform_glm(as.vector(pix_matrix) ~ as.vector(dist))
+
+  return(glm_fit)
+}
+
 #' Performs model fitting on the specified symbolic expression
 #'
 #' @slot symb_expr symbolic description of the linear predictor
@@ -83,5 +98,5 @@ perform_glm <- function(symb_expr, family = binomial(link = logit)) {
   #' @return glm_git fitted model
   glm_result <- glm(formula = symb_expr, family = family)
 
-  print(summary(glm_result))
+  return(glm_result)
 }

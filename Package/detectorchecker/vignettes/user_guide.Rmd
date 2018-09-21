@@ -93,14 +93,10 @@ layout <- detectorchecker::create_module("Pilatus")
 
 # Loading the pixel matrix
 dead_path <- "/Users/tlazauskas/git/Turing/DetectorChecker/Package/detectorchecker/tests/testthat/dead_pix/Pilatus/badpixel_mask.tif"
-pix_matrix <- detectorchecker::load_pix_matrix(layout = layout, file_path = dead_path)
-
-# Retreiving dead pixels
-pix_dead <- detectorchecker::dead_pix_coords(pix_matrix)
+layout <- detectorchecker::load_pix_matrix(layout = layout, file_path = dead_path)
 
 # Plotting
-detectorchecker::plot_layout_damaged(layout = layout, pix_dead = pix_dead,
-                      file_path = "layout_damaged.jpeg")
+detectorchecker::plot_layout_damaged(layout = layout, file_path = "layout_damaged.jpg")
                       
 ```
 
@@ -115,13 +111,10 @@ layout <- create_module("PerkinElmerFull")
 # getting the dead (damaged) pixel data
 dead_path <- "/Users/tlazauskas/git/Turing/DetectorChecker/Package/detectorchecker/tests/testthat/dead_pix/PerkinElmer/BadPixelMap_0.bpm/BadPixelMap.bpm.xml"
 
-pix_matrix <- load_pix_matrix(layout = layout, file_path = dead_path)
-
-pix_dead <- dead_pix_coords(pix_matrix)
+layout <- load_pix_matrix(layout = layout, file_path = dead_path)
 
 # Plotting
-detectorchecker::plot_layout_damaged(layout = layout, pix_dead = pix_dead,
-                      file_path = "layout_damaged.pdf")
+detectorchecker::plot_layout_damaged(layout = layout, file_path = "layout_damaged.jpg")
 ```
 
 ![PerkinElmerFull damaged](PerkinElmerFull_damaged.jpeg)
@@ -140,14 +133,10 @@ dead_path <- c("/Users/tlazauskas/git/Turing/DetectorChecker/Package/detectorche
                "/Users/tlazauskas/git/Turing/DetectorChecker/Package/detectorchecker/tests/testthat/dead_pix/Excalibur/pixelmask.fem5.hdf",
                "/Users/tlazauskas/git/Turing/DetectorChecker/Package/detectorchecker/tests/testthat/dead_pix/Excalibur/pixelmask.fem6.hdf")
 
-pix_matrix <- detectorchecker::load_pix_matrix(layout = layout, file_path = dead_path)
-
-# Retreiving dead pixels
-pix_dead <- detectorchecker::dead_pix_coords(pix_matrix)
+layout <- detectorchecker::load_pix_matrix(layout = layout, file_path = dead_path)
 
 # Plotting
-detectorchecker::plot_layout_damaged(layout = layout, pix_dead = pix_dead,
-                      file_path = "layout_damaged.jpeg")
+detectorchecker::plot_layout_damaged(layout = layout, file_path = "layout_damaged.jpg")
                       
 ```
 

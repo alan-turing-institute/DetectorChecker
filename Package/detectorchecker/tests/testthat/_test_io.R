@@ -13,16 +13,13 @@ test_that("TIFF", {
   test_path <- file.path(test_dir, "dead_pix", "Pilatus", "badpixel_mask.tif")
 
   # pixel matrix, with dead pixels flagged
-  pix_matrix <- matrix_from_tiff(file = test_path, layout = layout)
+  layout <- load_pix_matrix(layout = layout, file_path = test_path)
 
-  expect_equal(dim(pix_matrix)[1], 2527)
-  expect_equal(dim(pix_matrix)[2], 2463)
+  expect_equal(dim(layout$pix_matrix)[1], 2527)
+  expect_equal(dim(layout$pix_matrix)[2], 2463)
 
-  # dead pixel coordinate table
-  pix_dead <- dead_pix_coords(pix_matrix)
-
-  expect_equal(dim(pix_dead)[1], 1161)
-  expect_equal(dim(pix_dead)[2], 2)
+  expect_equal(dim(layout$pix_dead)[1], 1161)
+  expect_equal(dim(layout$pix_dead)[2], 2)
 })
 
 test_that("HDF", {
@@ -41,13 +38,13 @@ test_that("HDF", {
 
   test_list <- c(test_path1, test_path2, test_path3, test_path4, test_path5, test_path6)
 
-  pix_matrix <- matrix_from_hdf(layout = layout, file_path = test_list)
+  layout <- load_pix_matrix(layout = layout, file_path = test_list)
 
   # width
-  expect_equal(dim(pix_matrix)[1], 2048)
+  expect_equal(dim(layout$pix_matrix)[1], 2048)
 
   # height
-  expect_equal(dim(pix_matrix)[2], 1536)
+  expect_equal(dim(layout$pix_matrix)[2], 1536)
 })
 
 test_that("XML", {
@@ -60,12 +57,12 @@ test_that("XML", {
                          "BadPixelMap_0.bpm",
                          "BadPixelMap.bpm.xml")
 
-  pix_matrix <- matrix_from_xml(layout = layout, file_path = test_path)
+  layout <- load_pix_matrix(layout = layout, file_path = test_path)
 
   # width
-  expect_equal(dim(pix_matrix)[1], 2000)
+  expect_equal(dim(layout$pix_matrix)[1], 2000)
 
   # height
-  expect_equal(dim(pix_matrix)[2], 2000)
+  expect_equal(dim(layout$pix_matrix)[2], 2000)
 })
 

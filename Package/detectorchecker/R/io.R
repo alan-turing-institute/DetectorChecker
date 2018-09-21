@@ -186,7 +186,12 @@ load_pix_matrix <- function(layout, file_path) {
     pix_matrix <- matrix_from_hdf(file_path = file_path, layout = layout)
   }
 
-  return(pix_matrix)
+  pix_dead <- dead_pix_coords(pix_matrix)
+
+  layout$pix_matrix <- pix_matrix
+  layout$pix_dead <- pix_dead
+
+  return(layout)
 }
 
 # TODO: this is a duplicated function (analysis.plot_layout_damaged) and

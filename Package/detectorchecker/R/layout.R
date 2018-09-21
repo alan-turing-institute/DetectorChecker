@@ -23,7 +23,8 @@ Default_Layout <- function(name = "Default",
                            module_col_sizes = NA, module_row_sizes = NA,
                            gap_col_sizes = NA, gap_row_sizes = NA,
                            module_edges_col = NA, module_edges_row = NA,
-                           detector_inconsistency = NA) {
+                           detector_inconsistency = NA,
+                           pix_matrix = NA, pix_dead = NA) {
 
   layout <- list(
     name = name,
@@ -41,7 +42,10 @@ Default_Layout <- function(name = "Default",
     gap_col_sizes = gap_col_sizes,
     gap_row_sizes = gap_row_sizes,
 
-    detector_inconsistency = detector_inconsistency
+    detector_inconsistency = detector_inconsistency,
+
+    pix_matrix = pix_matrix,
+    pix_dead = pix_dead
   )
 
   layout <- derive_layout(layout)
@@ -445,13 +449,10 @@ create_ppp_gaps_row <- function(layout) {
   return(ppp_gaps_row)
 }
 
-#' TODO: Select different output format
 #' Deriving additional layout elements
 #'
 #' @param layout Layout object
-plot_layout <- function(layout, file) {
-
-  output_path <- file
+plot_layout <- function(layout, file_path) {
 
   ppp_edges_col <- create_ppp_edges_col(layout)
   ppp_edges_row <- create_ppp_edges_row(layout)
