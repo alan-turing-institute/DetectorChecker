@@ -90,6 +90,48 @@ glm_pixel_ctr_eucl <- function(layout) {
   return(glm_fit)
 }
 
+#' Fits pixel parallel maxima from the centre
+#'
+#' @slot layout Layout object
+#' @return glm_fit Fitted model
+glm_pixel_ctr_linf <- function(layout) {
+
+  dist <- pixel_dist_ctr_linf(layout)
+  pix_matrix <- layout$pix_matrix
+
+  glm_fit <- perform_glm(as.vector(pix_matrix) ~ as.vector(dist))
+
+  return(glm_fit)
+}
+
+#' Fits pixel istances from the module edges by column
+#'
+#' @slot layout Layout object
+#' @return glm_fit Fitted model
+glm_pixel_dist_edge_col <- function(layout) {
+
+  dist <- dist_edge_col(layout)
+  pix_matrix <- layout$pix_matrix
+
+  glm_fit <- perform_glm(as.vector(pix_matrix) ~ as.vector(dist))
+
+  return(glm_fit)
+}
+
+#' Fits pixel istances from the module edges by row
+#'
+#' @slot layout Layout object
+#' @return glm_fit Fitted model
+glm_pixel_dist_edge_row <- function(layout) {
+
+  dist <- dist_edge_row(layout)
+  pix_matrix <- layout$pix_matrix
+
+  glm_fit <- perform_glm(as.vector(pix_matrix) ~ as.vector(dist))
+
+  return(glm_fit)
+}
+
 #' Performs model fitting on the specified symbolic expression
 #'
 #' @slot symb_expr symbolic description of the linear predictor

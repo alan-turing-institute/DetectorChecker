@@ -146,13 +146,63 @@ detectorchecker::plot_layout_damaged(layout = layout, file_path = "layout_damage
 
 ```
 # Choosing layout
-layout <- create_module("Pilatus")
+layout <- detectorchecker::create_module("Pilatus")
 
-# getting the dead (damaged) pixel data
-dead_path <- file.path(test_dir, "dead_pix", "Pilatus", "badpixel_mask.tif")
+# Loading the pixel matrix
+dead_path <- "/Users/tlazauskas/git/Turing/DetectorChecker/Package/detectorchecker/tests/testthat/dead_pix/Pilatus/badpixel_mask.tif"
 
-pix_matrix <- load_pix_matrix(layout = layout, file_path = dead_path)
+layout <- detectorchecker::load_pix_matrix(layout = layout, file_path = dead_path)
 
+glm_fit <- glm_pixel_ctr_eucl(layout = layout)
 
+summary(glm_fit)
+```
+
+```
+Call:
+glm(formula = symb_expr, family = family)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-0.0262  -0.0211  -0.0193  -0.0171   4.3297  
+
+Coefficients:
+                  Estimate Std. Error z value Pr(>|z|)    
+(Intercept)     -9.392e+00  9.628e-02 -97.545   <2e-16 ***
+as.vector(dist)  8.021e-04  8.726e-05   9.192   <2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 22261  on 6224000  degrees of freedom
+Residual deviance: 22173  on 6223999  degrees of freedom
+AIC: 22177
+
+Number of Fisher Scoring iterations: 11
+```
+
+#### Similarly:
+```
+# Choosing layout
+layout <- detectorchecker::create_module("Pilatus")
+
+# Loading the pixel matrix
+dead_path <- "/Users/tlazauskas/git/Turing/DetectorChecker/Package/detectorchecker/tests/testthat/dead_pix/Pilatus/badpixel_mask.tif"
+
+layout <- detectorchecker::load_pix_matrix(layout = layout, file_path = dead_path)
+
+glm_fit <- detectorchecker::glm_pixel_ctr_linf(layout)
+
+glm_fit <- detectorchecker::glm_pixel_dist_edge_col(layout)
+
+glm_fit <- detectorchecker::glm_pixel_dist_edge_row(layout)
+
+# Custom
+
+dist_col <- detectorchecker::dist_edge_col(layout)
+dist_row <- detectorchecker::dist_edge_row(layout)
+
+glm_fit <- perform_glm(as.vector(layout$pix_matrix) ~ as.vector(dist_col) + as.vector(dist_row))
 
 ```
