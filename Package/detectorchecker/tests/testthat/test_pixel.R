@@ -72,7 +72,7 @@ test_that("Plotting pixel analysis", {
   # test_out_name <- "unittest_pixel_ctr_eucl"
   # test_out_path <- file.path(test_out_dir, paste(test_out_name, test_out_fmt, sep="."))
   #
-  # plot_pixel_ctr_eucl(layout, file = test_out_path)
+  # plot_pixel_ctr_eucl(layout, file_path = test_out_path)
   #
   # # Check whether the file was created
   # expect_that(file.exists(test_out_path), is_true())
@@ -86,7 +86,7 @@ test_that("Plotting pixel analysis", {
   # test_out_name <- "unittest_pixel_ctr_linf"
   # test_out_path <- file.path(test_out_dir, paste(test_out_name, test_out_fmt, sep="."))
   #
-  # plot_pixel_ctr_linf(layout, file = test_out_path)
+  # plot_pixel_ctr_linf(layout, file_path = test_out_path)
   #
   # # Check whether the file was created
   # expect_that(file.exists(test_out_path), is_true())
@@ -100,7 +100,7 @@ test_that("Plotting pixel analysis", {
   # test_out_name <- "unittest_pixel_dist_corner"
   # test_out_path <- file.path(test_out_dir, paste(test_out_name, test_out_fmt, sep="."))
   #
-  # plot_pixel_dist_corner(layout, file = test_out_path)
+  # plot_pixel_dist_corner(layout, file_path = test_out_path)
   #
   # # Check whether the file was created
   # expect_that(file.exists(test_out_path), is_true())
@@ -114,7 +114,7 @@ test_that("Plotting pixel analysis", {
   # test_out_name <- "unittest_pixel_dist_edge_col"
   # test_out_path <- file.path(test_out_dir, paste(test_out_name, test_out_fmt, sep="."))
   #
-  # plot_pixel_dist_edge_col(layout, file = test_out_path)
+  # plot_pixel_dist_edge_col(layout, file_path = test_out_path)
   #
   # # Check whether the file was created
   # expect_that(file.exists(test_out_path), is_true())
@@ -122,19 +122,19 @@ test_that("Plotting pixel analysis", {
   # # Removing the test output file
   # if (file.exists(test_out_path)) file.remove(test_out_path)
 
-  # # ----------------------------------------------------------------------------
-  # # Pixel distances from the module edges by row
-  #
-  # test_out_name <- "unittest_pixel_dist_edge_row"
-  # test_out_path <- file.path(test_out_dir, paste(test_out_name, test_out_fmt, sep="."))
-  #
-  # plot_pixel_dist_edge_row(layout, file = test_out_path)
-  #
-  # # Check whether the file was created
-  # expect_that(file.exists(test_out_path), is_true())
-  #
-  # # Removing the test output file
-  # if (file.exists(test_out_path)) file.remove(test_out_path)
+  # ----------------------------------------------------------------------------
+  # Pixel distances from the module edges by row
+
+  test_out_name <- "unittest_pixel_dist_edge_row"
+  test_out_path <- file.path(test_out_dir, paste(test_out_name, test_out_fmt, sep="."))
+
+  plot_pixel_dist_edge_row(layout, file_path = test_out_path)
+
+  # Check whether the file was created
+  expect_that(file.exists(test_out_path), is_true())
+
+  # Removing the test output file
+  if (file.exists(test_out_path)) file.remove(test_out_path)
 
   # # ----------------------------------------------------------------------------
   # # Pixel distances from the module edges
@@ -142,7 +142,7 @@ test_that("Plotting pixel analysis", {
   # test_out_name <- "unittest_pixel_dist_edge"
   # test_out_path <- file.path(test_out_dir, paste(test_out_name, test_out_fmt, sep="."))
   #
-  # plot_pixel_dist_edge(layout, file = test_out_path)
+  # plot_pixel_dist_edge(layout, file_path = test_out_path)
   #
   # # Check whether the file was created
   # expect_that(file.exists(test_out_path), is_true())

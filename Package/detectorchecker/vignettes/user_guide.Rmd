@@ -1,5 +1,5 @@
----
-title: "DetectorChecker User Guide"
+
+title: "DetectorChecker Usage"
 # author: "Vignette Author"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
@@ -47,6 +47,41 @@ detectorchecker::plot_layout(layout, "layout.pdf")
 ```
 
 ![Pilatus layout](Pilatus_layout.jpg)
+
+### Layout analysis
+
+```
+detectorchecker::plot_pixel_ctr_eucl(layout)
+```
+
+![Distance from the centre](pixel_ctr_eucl.jpg)
+
+```
+detectorchecker::plot_pixel_ctr_linf(layout)
+```
+
+![Parallel maxima from the centre](pixel_ctr_linf.jpg)
+
+```
+detectorchecker::plot_pixel_dist_corner(layout)
+```
+
+![Distance from corners](pixel_dist_corner.jpg)
+
+```
+detectorchecker::plot_pixel_dist_edge_col(layout)
+```
+![Distance from edges by column](pixel_dist_edge_col.jpg)
+
+```
+detectorchecker::plot_pixel_dist_edge_row(layout)
+```
+![Distance from edges by row](pixel_dist_edge_row.jpg)
+
+```
+detectorchecker::plot_pixel_dist_edge(layout)
+```
+![Distance from edges](pixel_dist_edge.jpg)
 
 ### To upload pixel file
 
@@ -117,3 +152,18 @@ detectorchecker::plot_layout_damaged(layout = layout, pix_dead = pix_dead,
 ```
 
 ![Excalibur damaged](Excalibur_damaged.jpeg)
+
+## Model fitting
+
+```
+# Choosing layout
+layout <- create_module("Pilatus")
+
+# getting the dead (damaged) pixel data
+dead_path <- file.path(test_dir, "dead_pix", "Pilatus", "badpixel_mask.tif")
+
+pix_matrix <- load_pix_matrix(layout = layout, file_path = dead_path)
+
+
+
+```

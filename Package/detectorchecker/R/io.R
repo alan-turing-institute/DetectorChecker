@@ -189,8 +189,6 @@ load_pix_matrix <- function(layout, file_path) {
   return(pix_matrix)
 }
 
-
-
 # TODO: this is a duplicated function (analysis.plot_layout_damaged) and
 #   (layout.plot_layout). We should make it as one function.
 

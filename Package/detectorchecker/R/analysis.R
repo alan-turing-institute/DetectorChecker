@@ -74,3 +74,14 @@ dead_pix_coords <- function(pix_matrix) {
 
   return(dead_pix_coords)
 }
+
+#' Performs model fitting on the specified symbolic expression
+#'
+#' @slot symb_expr symbolic description of the linear predictor
+perform_glm <- function(symb_expr, family = binomial(link = logit)) {
+
+  #' @return glm_git fitted model
+  glm_result <- glm(formula = symb_expr, family = family)
+
+  print(summary(glm_result))
+}

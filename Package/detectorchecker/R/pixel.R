@@ -1,3 +1,5 @@
+library(tools)
+
 # Pixel analysis functions -----------------------------------------------------
 
 #' A function to calculate euclidean distance from the centre
@@ -137,24 +139,16 @@ dist_edge_min <- function(layout) {
   return(dist)
 }
 
-# TODO: Fix selection of output format
 #' Plots pixel analysis
 #'
 #' @slot data Matrix containing pixel analysis data
 #' @slot width Plot width
 #' @slot height Plot height
-#' @slot file Output path
-#' @slot format Output format
-plot_pixel <- function(data, width, height, file = NA, format = "png") {
+#' @slot file_path Output path with an extension
+plot_pixel <- function(data, width, height, file_path) {
 
-  # Setting the output path
-  if (!is.na(file)) {
-    output_path <- file
-  } else {
-    output_path <- paste("pixel_analysis", format, sep = ".")
-  }
-
-  png(file = output_path, bg = "transparent")
+  # starts the graphics device driver
+  ini_graphics(file_path = file_path)
 
   iw <- c(1:width)
   ih <- c(1:height)
@@ -165,88 +159,70 @@ plot_pixel <- function(data, width, height, file = NA, format = "png") {
   dev.off()
 }
 
-# TODO: Fix selection of output format
-#' Plots calculates and plots pixel euclidean distance from the centre
+#' Calculates and plots pixel euclidean distance from the centre
 #'
 #' @slot layout Layout object
-plot_pixel_ctr_eucl <- function(layout, file = "pixel_ctr_eucl.png", format = "png") {
+plot_pixel_ctr_eucl <- function(layout, file_path = "pixel_ctr_eucl.jpg") {
 
   dist <- pixel_dist_ctr_eucl(layout)
 
   plot_pixel(dist, width = layout$detector_width, height = layout$detector_height,
-             file = file, format = format)
+             file_path = file_path)
 }
 
-# TODO: Fix selection of output format
-#' Plots calculates and plots pixel euclidean distance from the centre
+#' Calculates and plots pixel parallel maxima from the centre
 #'
 #' @slot layout Layout object
-plot_pixel_ctr_linf <- function(layout, file = "pixel_ctr_linf.png", format = "png") {
+plot_pixel_ctr_linf <- function(layout, file_path = "pixel_ctr_linf.jpg") {
 
   dist <- pixel_dist_ctr_linf(layout)
 
   plot_pixel(dist, width = layout$detector_width, height = layout$detector_height,
-             file = file, format = format)
+             file_path = file_path)
 }
 
-# TODO: Fix selection of output format
-#' Plots calculates and plots pixel parallel maxima from the centre
+#' Calculates and plots pixel distances from corners
 #'
 #' @slot layout Layout object
-plot_pixel_ctr_eucl <- function(layout, file = "pixel_ctr_eucl.png", format = "png") {
-
-  dist <- pixel_dist_ctr_eucl(layout)
-
-  plot_pixel(dist, width = layout$detector_width, height = layout$detector_height,
-             file = file, format = format)
-}
-
-# TODO: Fix selection of output format
-#' Plots calculates and plots pixel distances from corners
-#'
-#' @slot layout Layout object
-plot_pixel_dist_corner <- function(layout, file = "pixel_dist_corner.png", format = "png") {
+plot_pixel_dist_corner <- function(layout, file_path = "pixel_dist_corner.jpg") {
 
   dist <- dist_corner(layout)
 
   plot_pixel(dist, width = layout$detector_width, height = layout$detector_height,
-             file = file, format = format)
+             file_path = file_path)
 }
 
-# TODO: Fix selection of output format
-#' Plots calculates and plots distances from the module edges by column
+#' Calculates and plots distances from the module edges by column
 #'
 #' @slot layout Layout object
-plot_pixel_dist_edge_col <- function(layout, file = "pixel_dist_edge_col.png", format = "png") {
+plot_pixel_dist_edge_col <- function(layout, file_path = "pixel_dist_edge_col.jpg") {
 
   dist <- dist_edge_col(layout)
 
   plot_pixel(dist, width = layout$detector_width, height = layout$detector_height,
-             file = file, format = format)
+             file_path = file_path)
 }
 
-# TODO: Fix selection of output format
-#' Plots calculates and plots distances from the module edges by row
+#' Calculates and plots distances from the module edges by row
 #'
 #' @slot layout Layout object
-plot_pixel_dist_edge_row <- function(layout, file = "pixel_dist_edge_row.png", format = "png") {
+plot_pixel_dist_edge_row <- function(layout, file_path = "pixel_dist_edge_row.jpg") {
 
   dist <- dist_edge_row(layout)
 
   plot_pixel(dist, width = layout$detector_width, height = layout$detector_height,
-             file = file, format = format)
+             file_path = file_path)
 }
 
-# TODO: Fix selection of output format
-#' Plots calculates and plots distances from the module edges by row
+#' Calculates and plots minimum distances from the module edges
 #'
 #' @slot layout Layout object
-plot_pixel_dist_edge <- function(layout, file = "pixel_dist_edge.png", format = "png") {
+plot_pixel_dist_edge <- function(layout, file_path = "pixel_dist_edge.jpg") {
 
   dist <- dist_edge_min(layout)
 
   plot_pixel(dist, width = layout$detector_width, height = layout$detector_height,
-             file = file, format = format)
+             file_path = file_path)
 }
 
 #' Counts damaged pixel locations (dead_data) outside detector (layout)
