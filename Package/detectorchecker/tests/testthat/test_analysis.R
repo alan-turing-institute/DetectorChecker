@@ -126,7 +126,5 @@ test_that("Pilatus", {
   glm_fit <- glm_pixel_dist_edge_row(layout)
   print(summary(glm_fit))
 
-
-
   expect_that(TRUE, is_true())
 })
