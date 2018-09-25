@@ -17,7 +17,7 @@ library(spatstat)
 #' @slot gap_row_sizes vector with heights of the gaps
 #' @slot detector_inconsistency counts inconsistencies found in parameters entered
 #' @return layout Layout object
-Default_Layout <- function(name = "Default",
+Default_Layout <- function(name = "Default", date = NA,
                            detector_width = NA, detector_height = NA,
                            module_col_n = NA, module_row_n = NA,
                            module_col_sizes = NA, module_row_sizes = NA,
@@ -28,6 +28,7 @@ Default_Layout <- function(name = "Default",
 
   layout <- list(
     name = name,
+    date = date,
 
     detector_width = detector_width,
     detector_height = detector_height,
@@ -489,4 +490,24 @@ plot_layout <- function(layout, file_path) {
 
   # shuts down the specified (by default the current) device
   dev.off()
+}
+
+#' Returns a string with the layout summary
+#'
+#' @param layout Layout object
+layout_summary <- function(layout) {
+
+  summary <- paste("Detector:", "\n", "")
+  summary <- paste(summary, "Name: ", layout$name, "\n", "")
+  summary <- paste(summary, "Date: ", layout$date, "\n", "")
+  summary <- paste(summary, "Width: ", layout$detector_width, "\n", "")
+  summary <- paste(summary, "Height: ", layout$detector_height, "\n", "")
+  summary <- paste(summary, "Number of columns in array of module (= number of modules per row): ", layout$module_col_n, "\n", "")
+  summary <- paste(summary, "Number of rows in array of module (= number of modules per column): ", layout$module_row_n, "\n", "")
+  summary <- paste(summary, "Widths of modules: ", paste(layout$module_col_sizes, collapse = ' '), "\n", "")
+  summary <- paste(summary, "Heights of modules: ", paste(layout$module_row_sizes, collapse = ' '), "\n", "")
+  summary <- paste(summary, "Widths of gaps between modules: ", paste(layout$gap_col_sizes, collapse = ' '), "\n", "")
+  summary <- paste(summary, "Heights of gaps between modules: ", paste(layout$gap_row_sizes, collapse = ' '), "\n", "")
+
+  return(summary)
 }
