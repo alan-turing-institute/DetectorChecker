@@ -142,7 +142,7 @@ test_that("PerkinElmerFull", {
 
   layout <- load_pix_matrix(layout = layout, file_path = test_path)
 
-  dead_stats_summary <- dead_stats_summary(get_dead_stats(layout))
+  dead_stats_summary <- dead_stats_summary(layout)
 
   summary <- paste("\n", "\n", layout_summary(layout),"\n", "")
   summary <- paste(summary, dead_stats_summary,"\n", "")

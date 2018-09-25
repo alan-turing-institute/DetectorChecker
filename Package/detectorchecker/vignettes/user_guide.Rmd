@@ -142,6 +142,43 @@ detectorchecker::plot_layout_damaged(layout = layout, file_path = "layout_damage
 
 ![Excalibur damaged](Excalibur_damaged.jpeg)
 
+## Summaries
+
+```
+# Choosing layout
+layout <- create_module("PerkinElmerFull")
+
+# Loading the pixel matrix
+test_path <- "/Users/tlazauskas/git/Turing/DetectorChecker/Package/detectorchecker/tests/testthat/dead_pix/PerkinElmer/BadPixelMap_0.bpm/BadPixelMap.bpm.xml"
+
+layout <- load_pix_matrix(layout = layout, file_path = test_path)
+
+cat(detectorchecker::layout_summary(layout))
+cat(detectorchecker::dead_stats_summary(layout))
+```
+
+```
+Detector: 
+  Name:  PerkinElmerFull 
+  Date:  NA 
+  Width:  2000 
+  Height:  2000 
+  Number of columns in array of module (= number of modules per row):  16 
+  Number of rows in array of module (= number of modules per column):  2 
+  Widths of modules:  104 128 128 128 128 128 128 128 128 128 128 128 128 128 128 104 
+  Heights of modules:  1000 1000 
+  Widths of gaps between modules:  0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+  Heights of gaps between modules:  0 
+```
+```
+  Total number of damaged pixels:  9451 
+  Total number of modules:  32 
+  Average number of damaged pixels per module:  295.3 
+  
+  Chi-Squared Test results:
+  Xsq =  23280.5170881388 , Xsq df =  31 , Xsq p =  0 
+```
+
 ## Model fitting
 
 ```

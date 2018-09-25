@@ -202,9 +202,11 @@ get_dead_stats <- function(layout) {
 
 #' Count number of damaged pixels overall and in different modules
 #'
-#' @slot dead_stats Dead_Stats object
+#' @slot layout Layout object
 #' @return summary A string with damaged pixels overall statitics
-dead_stats_summary <- function(dead_stats) {
+dead_stats_summary <- function(layout) {
+
+  dead_stats <- get_dead_stats(layout)
 
   summary <- paste("Total number of damaged pixels: ", dead_stats$dead_n, "\n", "")
   summary <- paste(summary, "Total number of modules: ", dead_stats$module_n, "\n", "")
