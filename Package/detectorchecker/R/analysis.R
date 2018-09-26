@@ -126,6 +126,33 @@ plot_layout_density <- function(layout, file_path, adjust = 0.25) {
   dev.off()
 }
 
+#' A function to plot NN oriented arrrows
+#'
+#' @param layout Layout object
+#' @param file_path Output file path
+plot_layout_arrows <- function(layout, file_path) {
+
+  title <- "NN oriented arrows"
+
+  # starts the graphics device driver
+  ini_graphics(file_path = file_path)
+
+  par(mfrow = c(1, 1), mar = c(1, 1, 3, 1))
+
+  ppp_dead <- spatstat::ppp(layout$pix_dead[ , 1], layout$pix_dead[ , 2],
+                            c(1, layout$detector_width),
+                            c(1, layout$detector_height))
+
+  PPPnn <- ppp_dead[spatstat::nnwhich(ppp_dead)]
+
+  plot(ppp_dead, main = title)
+
+  arrows(PPPnn$x, PPPnn$y, ppp_dead$x, ppp_dead$y,
+         angle = 15, length = 0.07, col = "red")
+
+  dev.off()
+}
+
 #' Extracts a table of dead pixel coordinates from a pixel matrix
 #'
 #' @param pix_matrix pixel matrix with dead pixels flagged with 1
