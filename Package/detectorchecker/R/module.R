@@ -4,17 +4,17 @@
 #' @param coo ?
 #' @param me ?
 #' @return which_module what does this mean?
-which_module <- function(coo, me) {
+.which_module <- function(coo, me) {
 
-  which_module <- NA
+  .which_module <- NA
 
   for (i in 1:dim(me)[2]) {
     if ((coo >= me[1, i]) & (coo <= me[2, i])) {
-      which_module <- i
+      .which_module <- i
     }
   }
 
-  return(which_module)
+  return(.which_module)
 }
 
 # TODO: improve the definition of the function
@@ -26,9 +26,9 @@ which_module <- function(coo, me) {
 #' @param module_edges_col ?
 #' @param module_edges_row ?
 #' @return tmp ?
-which_module_idx <- function(x, y, module_edges_col, module_edges_row){
-  tmp <- list(col = which_module(x, module_edges_col),
-              row = which_module(y, module_edges_row))
+.which_module_idx <- function(x, y, module_edges_col, module_edges_row){
+  tmp <- list(col = .which_module(x, module_edges_col),
+              row = .which_module(y, module_edges_row))
 
   return(tmp)
 }
@@ -40,9 +40,9 @@ which_module_idx <- function(x, y, module_edges_col, module_edges_row){
 #' @param xy ?
 #' @param module_edges ?
 #' @return tmp ?
-dist_edge <- function(xy, module_edges){
+.dist_edge <- function(xy, module_edges){
 
-  i <- which_module(xy, module_edges)
+  i <- .which_module(xy, module_edges)
 
   tmp <-min(xy - module_edges[1, i], module_edges[2, i] - xy)
 

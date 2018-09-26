@@ -1,7 +1,3 @@
-#library(sp)
-#library(maptools)
-library(spatstat)
-
 #' A S3 class to represent a detector layout.
 #'
 #' @slot name detector's name
@@ -16,7 +12,7 @@ library(spatstat)
 #' @slot gap_col_sizes vector with widths of the gaps
 #' @slot gap_row_sizes vector with heights of the gaps
 #' @slot detector_inconsistency counts inconsistencies found in parameters entered
-#' @return layout Layout object
+#' @return Layout object
 Default_Layout <- function(name = "Default", date = NA,
                            detector_width = NA, detector_height = NA,
                            module_col_n = NA, module_row_n = NA,
@@ -24,7 +20,8 @@ Default_Layout <- function(name = "Default", date = NA,
                            gap_col_sizes = NA, gap_row_sizes = NA,
                            module_edges_col = NA, module_edges_row = NA,
                            detector_inconsistency = NA,
-                           pix_matrix = NA, pix_dead = NA) {
+                           pix_matrix = NA, pix_dead = NA,
+                           dead_stats = NA) {
 
   layout <- list(
     name = name,
@@ -46,7 +43,8 @@ Default_Layout <- function(name = "Default", date = NA,
     detector_inconsistency = detector_inconsistency,
 
     pix_matrix = pix_matrix,
-    pix_dead = pix_dead
+    pix_dead = pix_dead,
+    dead_stats = dead_stats
   )
 
   layout <- derive_layout(layout)
@@ -56,21 +54,22 @@ Default_Layout <- function(name = "Default", date = NA,
 
 # Available layouts ------------------------------------------------------------
 
-Excalibur_name <- "Excalibur"
-PerkinElmerFull_name <- "PerkinElmerFull"
-PerkinElmerCropped1600_name <- "PerkinElmerCropped1600"
-PerkinElmerRefurbished_name <- "PerkinElmerRefurbished"
-Pilatus_name <- "Pilatus"
+.Excalibur_name <- "Excalibur"
+.PerkinElmerFull_name <- "PerkinElmerFull"
+.PerkinElmerCropped1600_name <- "PerkinElmerCropped1600"
+.PerkinElmerRefurbished_name <- "PerkinElmerRefurbished"
+.Pilatus_name <- "Pilatus"
 
-available_layouts <- c(Excalibur_name, PerkinElmerFull_name,
-                       PerkinElmerCropped1600_name, PerkinElmerRefurbished_name,
-                       Pilatus_name)
+available_layouts <- c(.Excalibur_name, .PerkinElmerFull_name,
+                       .PerkinElmerCropped1600_name, .PerkinElmerRefurbished_name,
+                       .Pilatus_name)
 # ------------------------------------------------------------------------------
 
 #' A S3 class to represent the Excalibur detector layout.
 #'
+#' @returns Excalibur layout object
 Excalibur_Layout <- function() {
-  name <- Excalibur_name
+  name <- .Excalibur_name
 
   layout <- Default_Layout(name = name,
                            detector_width = 2048,
@@ -90,9 +89,10 @@ Excalibur_Layout <- function() {
 
 #' A S3 class to represent the PerkinElmerFull detector layout.
 #'
+#' @returns PerkinElmerFul layout object
 PerkinElmerFull_Layout <- function() {
 
-  name <- PerkinElmerFull_name
+  name <- .PerkinElmerFull_name
 
   layout <- Default_Layout(name = name,
                            detector_width = 2000,
@@ -112,9 +112,10 @@ PerkinElmerFull_Layout <- function() {
 
 #' A S3 class to represent the PerkinElmerCropped1600 detector layout.
 #'
+#' @returns PerkinElmerCropped1600 layout object
 PerkinElmerCropped1600_Layout <- function() {
 
-  name <- PerkinElmerCropped1600_name
+  name <- .PerkinElmerCropped1600_name
 
   layout <- Default_Layout(name = name,
                            detector_width = 2000,
@@ -134,9 +135,10 @@ PerkinElmerCropped1600_Layout <- function() {
 
 #' A S3 class to represent the PerkinElmerRefurbished detector layout.
 #'
+#' @returns PerkinElmerRefurbished layout object
 PerkinElmerRefurbished_Layout <- function() {
 
-  name <- PerkinElmerRefurbished_name
+  name <- .PerkinElmerRefurbished_name
 
   layout <- Default_Layout(name = name,
                            detector_width = 2000,
@@ -156,9 +158,10 @@ PerkinElmerRefurbished_Layout <- function() {
 
 #' A S3 class to represent the PerkinElmerRefurbished detector layout.
 #'
+#' @returns Pilatus layout object
 Pilatus_Layout <- function() {
 
-  name <- Pilatus_name
+  name <- .Pilatus_name
 
   layout <- Default_Layout(name = name,
                            detector_width = 2527,
@@ -178,9 +181,10 @@ Pilatus_Layout <- function() {
 
 # Layout selection -------------------------------------------------------------
 
-#' Checks whether layout is available
+#' Checks whether specified layout is available
 #'
-#' @slot layout_name The name of the layout
+#' @param layout_name The name of the layout
+#' @return True or False
 check_layout_avail <- function(layout_name) {
 
   avail <- layout_name %in% available_layouts
@@ -207,10 +211,10 @@ check_layout_avail <- function(layout_name) {
   return(avail)
 }
 
-#' Checks whether layout is available
+#' Checks whether layout is available, if so, creates a Layout object
 #'
-#' @slot layout_name The name of the layout
-#' @return layout Layout object
+#' @param layout_name The name of the layout
+#' @return Layout object
 create_module <- function(layout_name) {
 
   layout <- NA
@@ -218,19 +222,19 @@ create_module <- function(layout_name) {
   # Check if we know about layout_name
   if (check_layout_avail(layout_name)) {
 
-    if (layout_name == Excalibur_name) {
+    if (layout_name == .Excalibur_name) {
       layout <- Excalibur_Layout()
 
-    } else if (layout_name == PerkinElmerFull_name) {
+    } else if (layout_name == .PerkinElmerFull_name) {
       layout <- PerkinElmerFull_Layout()
 
-    } else if (layout_name == PerkinElmerCropped1600_name) {
+    } else if (layout_name == .PerkinElmerCropped1600_name) {
       layout <- PerkinElmerCropped1600_Layout()
 
-    } else if (layout_name == PerkinElmerRefurbished_name) {
+    } else if (layout_name == .PerkinElmerRefurbished_name) {
       layout <- PerkinElmerRefurbished_Layout()
 
-    } else if (layout_name == Pilatus_name) {
+    } else if (layout_name == .Pilatus_name) {
       layout <- Pilatus_Layout()
 
     } else {
@@ -244,9 +248,8 @@ create_module <- function(layout_name) {
 
 # Layout functions -------------------------------------------------------------
 
-#' Layout consistency checks
-#'
 #' Basic checks if parameters entered (slightly redundant on purpose) add up
+#'
 #' @param layout Layout object
 layout_consist_check <- function(layout = NA) {
   if (is.list(layout)) {
@@ -327,7 +330,7 @@ layout_consist_check <- function(layout = NA) {
 #' Edges are inside the modules (first/last row/col of module).
 #' @param m vector of module sizes
 #' @param g vectors of gap sizes
-#' @return layout_edges a matrix with the information about the edges
+#' @return Matrix with the information about the edges
 layout_edges <- function(m, g) {
 
   if (length(m) - 1 != length(g)) {
@@ -358,7 +361,7 @@ layout_edges <- function(m, g) {
 #' By definition, edges are part of modules (not part of gaps)
 #' i.e. for each module two pairs: first/last col and first/last row.
 #' @param layout Layout object
-#' @return layout Layout object
+#' @return Layout object
 derive_layout <- function(layout){
 
   module_edges_col <- layout_edges(layout$module_col_sizes, layout$gap_col_sizes)
@@ -375,9 +378,10 @@ derive_layout <- function(layout){
 }
 
 #' TODO: Better description of the function
-#' This is a function
+#' This is the ppp_edges_col function
 #'
 #' @param layout Layout object
+#' @return Point pattern dataset
 create_ppp_edges_col <- function(layout) {
 
   vedges <- as.vector(layout$module_edges_col)
@@ -385,16 +389,17 @@ create_ppp_edges_col <- function(layout) {
   ytmp <- rep(1:layout$detector_height, length(vedges))
   xtmp <- rep(vedges, rep(layout$detector_height, length(vedges)))
 
-  ppp_edges_col <- ppp(xtmp, ytmp, c(1, layout$detector_width),
-                       c(1, layout$detector_height))
+  ppp_edges_col <- spatstat::ppp(xtmp, ytmp, c(1, layout$detector_width),
+                                 c(1, layout$detector_height))
 
   return(ppp_edges_col)
 }
 
 #' TODO: Better description of the function
-#' This is a function
+#' This is the create_ppp_edges_row function
 #'
 #' @param layout Layout object
+#' @return Point pattern dataset
 create_ppp_edges_row <- function(layout) {
 
   vedges <- as.vector(layout$module_edges_row)
@@ -402,8 +407,8 @@ create_ppp_edges_row <- function(layout) {
   xtmp <- rep(1:layout$detector_width, length(vedges))
   ytmp <- rep(vedges, rep(layout$detector_width, length(vedges)))
 
-  ppp_edges_row <-ppp(xtmp, ytmp, c(1, layout$detector_width),
-                      c(1, layout$detector_height))
+  ppp_edges_row <- spatstat::ppp(xtmp, ytmp, c(1, layout$detector_width),
+                                 c(1, layout$detector_height))
 
   return(ppp_edges_row)
 }
@@ -412,6 +417,7 @@ create_ppp_edges_row <- function(layout) {
 #' This is a function
 #'
 #' @param layout Layout object
+#' @return Point pattern dataset
 create_ppp_gaps_col <- function(layout) {
   vgaps <- c()
 
@@ -423,8 +429,8 @@ create_ppp_gaps_col <- function(layout) {
   ytmp <- rep(1:layout$detector_height, length(vgaps))
   xtmp <- rep(vgaps, rep(layout$detector_height, length(vgaps)))
 
-  ppp_gaps_col <- ppp(xtmp, ytmp, c(1, layout$detector_width),
-                      c(1, layout$detector_height))
+  ppp_gaps_col <- spatstat::ppp(xtmp, ytmp, c(1, layout$detector_width),
+                                c(1, layout$detector_height))
 
   return(ppp_gaps_col)
 }
@@ -433,6 +439,7 @@ create_ppp_gaps_col <- function(layout) {
 #' This is a function
 #'
 #' @param layout Layout object
+#' @return Point pattern dataset
 create_ppp_gaps_row <- function(layout) {
   vgaps <- c()
 
@@ -444,8 +451,8 @@ create_ppp_gaps_row <- function(layout) {
   xtmp <- rep(1:layout$detector_width, length(vgaps))
   ytmp <- rep(vgaps, rep(layout$detector_width, length(vgaps)))
 
-  ppp_gaps_row <-ppp(xtmp, ytmp, c(1, layout$detector_width),
-                     c(1, layout$detector_height))
+  ppp_gaps_row <- spatstat::ppp(xtmp, ytmp, c(1, layout$detector_width),
+                                c(1, layout$detector_height))
 
   return(ppp_gaps_row)
 }
@@ -495,6 +502,7 @@ plot_layout <- function(layout, file_path) {
 #' Returns a string with the layout summary
 #'
 #' @param layout Layout object
+#' @return String with the layout summary
 layout_summary <- function(layout) {
 
   summary <- paste("Detector:", "\n", "")

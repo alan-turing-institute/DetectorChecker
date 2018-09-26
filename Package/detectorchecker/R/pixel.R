@@ -1,11 +1,9 @@
-library(tools)
-
 # Pixel analysis functions -----------------------------------------------------
 
 #' A function to calculate euclidean distance from the centre
 #'
-#' @slot layout Layout object
-#' @return dist Matrix containing euclidean distances from the centre for each
+#' @param layout Layout object
+#' @return Matrix containing euclidean distances from the centre for each
 #'   pixel
 pixel_dist_ctr_eucl <- function(layout) {
 
@@ -25,8 +23,8 @@ pixel_dist_ctr_eucl <- function(layout) {
 
 #' A function to calculate parallel maxima from the centre
 #'
-#' @slot layout Layout object
-#' @return dist Matrix containing parallel maxima from the centre for each pixel
+#' @param layout Layout object
+#' @return Matrix containing parallel maxima from the centre for each pixel
 pixel_dist_ctr_linf <- function(layout) {
 
   dist <- matrix(NA, nrow = layout$detector_height, ncol = layout$detector_width)
@@ -47,8 +45,8 @@ pixel_dist_ctr_linf <- function(layout) {
 # TODO: modify the description.
 #' A function to calclutate closest distance to an edge
 #'
-#' @slot x something
-#' @slot size something else
+#' @param x something
+#' @param size something else
 #' @return what does this mean?
 dist_closest_edge <- function(x, size) {
   # Why x-1? Because pixel locations start in 1, but we want both edges inside detector for symmetry
@@ -58,8 +56,8 @@ dist_closest_edge <- function(x, size) {
 # TODO: modify the description.
 #' A function to calculate pixel distances from corners
 #'
-#' @slot layout Layout object
-#' @return dist Matrix containing parallel maxima from the centre for each pixel
+#' @param layout Layout object
+#' @return Matrix containing parallel maxima from the centre for each pixel
 dist_corner <- function(layout) {
 
   #dist <- matrix(NA, nrow = layout$detector_height, ncol = layout$detector_width)
@@ -82,14 +80,14 @@ dist_corner <- function(layout) {
 # TODO: modify the description.
 #' A function to calculate pixel distances from edges by column
 #'
-#' @slot layout Layout object
+#' @param layout Layout object
 #' @return dist ?
 dist_edge_col <- function(layout) {
 
   dist <- matrix(NA, nrow = layout$detector_height, ncol = layout$detector_width)
 
   for (x in 1:layout$detector_width) {
-    dist[1, x] <- dist_edge(x, layout$module_edges_col)
+    dist[1, x] <- .dist_edge(x, layout$module_edges_col)
   }
 
   # TODO: Address this issue?
@@ -108,14 +106,14 @@ dist_edge_col <- function(layout) {
 # TODO: modify the description.
 #' A function to calculate pixel distances from edges by row
 #'
-#' @slot layout Layout object
+#' @param layout Layout object
 #' @return dist ?
 dist_edge_row <- function(layout) {
 
   dist <- matrix(NA, nrow = layout$detector_height, ncol = layout$detector_width)
 
   for (y in 1:layout$detector_height) {
-    dist[y, 1] <- dist_edge(y, layout$module_edges_row)
+    dist[y, 1] <- .dist_edge(y, layout$module_edges_row)
   }
 
   # all cols are like first col
@@ -127,7 +125,7 @@ dist_edge_row <- function(layout) {
 # TODO: modify the description.
 #' A function to calculate pixel distances from edges
 #'
-#' @slot layout Layout object
+#' @param layout Layout object
 #' @return dist ?
 dist_edge_min <- function(layout) {
 
@@ -141,10 +139,10 @@ dist_edge_min <- function(layout) {
 
 #' Plots pixel analysis
 #'
-#' @slot data Matrix containing pixel analysis data
-#' @slot width Plot width
-#' @slot height Plot height
-#' @slot file_path Output path with an extension
+#' @param data Matrix containing pixel analysis data
+#' @param width Plot width
+#' @param height Plot height
+#' @param file_path Output path with an extension
 plot_pixel <- function(data, width, height, file_path) {
 
   # starts the graphics device driver
@@ -161,7 +159,7 @@ plot_pixel <- function(data, width, height, file_path) {
 
 #' Calculates and plots pixel euclidean distance from the centre
 #'
-#' @slot layout Layout object
+#' @param layout Layout object
 plot_pixel_ctr_eucl <- function(layout, file_path = "pixel_ctr_eucl.jpg") {
 
   dist <- pixel_dist_ctr_eucl(layout)
@@ -172,7 +170,7 @@ plot_pixel_ctr_eucl <- function(layout, file_path = "pixel_ctr_eucl.jpg") {
 
 #' Calculates and plots pixel parallel maxima from the centre
 #'
-#' @slot layout Layout object
+#' @param layout Layout object
 plot_pixel_ctr_linf <- function(layout, file_path = "pixel_ctr_linf.jpg") {
 
   dist <- pixel_dist_ctr_linf(layout)
@@ -183,7 +181,7 @@ plot_pixel_ctr_linf <- function(layout, file_path = "pixel_ctr_linf.jpg") {
 
 #' Calculates and plots pixel distances from corners
 #'
-#' @slot layout Layout object
+#' @param layout Layout object
 plot_pixel_dist_corner <- function(layout, file_path = "pixel_dist_corner.jpg") {
 
   dist <- dist_corner(layout)
@@ -194,7 +192,7 @@ plot_pixel_dist_corner <- function(layout, file_path = "pixel_dist_corner.jpg") 
 
 #' Calculates and plots distances from the module edges by column
 #'
-#' @slot layout Layout object
+#' @param layout Layout object
 plot_pixel_dist_edge_col <- function(layout, file_path = "pixel_dist_edge_col.jpg") {
 
   dist <- dist_edge_col(layout)
@@ -205,7 +203,7 @@ plot_pixel_dist_edge_col <- function(layout, file_path = "pixel_dist_edge_col.jp
 
 #' Calculates and plots distances from the module edges by row
 #'
-#' @slot layout Layout object
+#' @param layout Layout object
 plot_pixel_dist_edge_row <- function(layout, file_path = "pixel_dist_edge_row.jpg") {
 
   dist <- dist_edge_row(layout)
@@ -216,7 +214,7 @@ plot_pixel_dist_edge_row <- function(layout, file_path = "pixel_dist_edge_row.jp
 
 #' Calculates and plots minimum distances from the module edges
 #'
-#' @slot layout Layout object
+#' @param layout Layout object
 plot_pixel_dist_edge <- function(layout, file_path = "pixel_dist_edge.jpg") {
 
   dist <- dist_edge_min(layout)
@@ -228,8 +226,9 @@ plot_pixel_dist_edge <- function(layout, file_path = "pixel_dist_edge.jpg") {
 #' Counts damaged pixel locations (dead_data) outside detector (layout)
 #'   and in gaps between modules and give warnings
 #'
-#' @slot dead_data Dead pixel locations
-#' @slot layout Layout object
+#' @param dead_data Dead pixel locations
+#' @param layout Layout object
+#' @return Inconsistency message
 inconsist_dead_layout <- function(dead_data, layout) {
 
   error <- ""

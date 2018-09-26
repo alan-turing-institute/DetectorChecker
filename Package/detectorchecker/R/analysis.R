@@ -2,18 +2,23 @@
 #'
 #' @slot dead_n Total number of damaged pixels:
 #' @slot module_n Total number of modules
+#' @slot module_count_arr Count of dead pixels in each quadrat
+#' @slot module_count Count of dead pixels in each quadrat
 #' @slot avg_dead_mod Average number of damaged pixels per module
 #' @slot Chisq_s The Chi-Squared test statistic value
 #' @slot Chisq_df Chi-Squared degrees of freedom
 #' @slot Chisq_p Chi-Squared p-value
 #'
-#' @return dead_stats Dead_Stats object
-Dead_Stats <- function(dead_n = NA, module_n = NA, avg_dead_mod = NA,
+#' @return Dead_Stats object
+Dead_Stats <- function(dead_n = NA, module_n = NA, module_count_arr = NA,
+                       module_count = NA, avg_dead_mod = NA,
                        Chisq_s = NA, Chisq_df = NA, Chisq_p = NA) {
 
   dead_stats <- list(
     dead_n = dead_n,
     module_n = module_n,
+    module_count_arr = module_count_arr,
+    module_count = module_count,
     avg_dead_mod = avg_dead_mod,
     Chisq_s = Chisq_s,
     Chisq_df = Chisq_df,
@@ -25,16 +30,17 @@ Dead_Stats <- function(dead_n = NA, module_n = NA, avg_dead_mod = NA,
 
 #' A function to plot layout with damaged pixels
 #'
-#' @slot layout Layout object
-#' @slot file_path Output file path
+#' @param layout Layout object
+#' @param file_path Output file path
 plot_layout_damaged <- function(layout, file_path) {
 
   dirOut <- getwd()
 
   pix_dead <- layout$pix_dead
 
-  ppp_dead <- ppp(pix_dead[ , 1], pix_dead[ , 2],
-                  c(1, layout$detector_width), c(1, layout$detector_height))
+  ppp_dead <- spatstat::ppp(pix_dead[ , 1], pix_dead[ , 2],
+                            c(1, layout$detector_width),
+                            c(1, layout$detector_height))
 
   ppp_edges_col <- create_ppp_edges_col(layout)
   ppp_edges_row <- create_ppp_edges_row(layout)
@@ -84,10 +90,46 @@ plot_layout_damaged <- function(layout, file_path) {
   dev.off()
 }
 
+#' A function to plot layout with counts per module
+#'
+#' @param layout Layout object
+#' @param file_path Output file path
+plot_layout_cnt_mod <- function(layout, file_path) {
+
+  # starts the graphics device driver
+  ini_graphics(file_path = file_path)
+
+  plot(layout$dead_stats$module_count_arr,
+       main = paste("Number of damaged pixels in modules\n", "Total number damaged pixels: ", layout$dead_stats$dead_n,
+                                        "\n (average per module: ", layout$dead_stats$avg_dead_mod, ")"))
+
+  dev.off()
+}
+
+#' A function to plot layout with dead pixel densities
+#'
+#' @param layout Layout object
+#' @param file_path Output file path
+plot_layout_density <- function(layout, file_path, adjust = 0.25) {
+
+  # starts the graphics device driver
+  ini_graphics(file_path = file_path)
+
+  title <- paste("Dead pixel density, adjust = ", adjust)
+
+  ppp_dead <- spatstat::ppp(layout$pix_dead[ , 1], layout$pix_dead[ , 2],
+                            c(1, layout$detector_width),
+                            c(1, layout$detector_height))
+
+  image(density(ppp_dead, adjust = adjust), main = title)
+
+  dev.off()
+}
+
 #' Extracts a table of dead pixel coordinates from a pixel matrix
 #'
-#' @slot pix_matrix pixel matrix with dead pixels flagged with 1
-#' @return dead_pix_coords a table containing dead pixel coordinates
+#' @param pix_matrix pixel matrix with dead pixels flagged with 1
+#' @return Table containing dead pixel coordinates
 dead_pix_coords <- function(pix_matrix) {
 
   # Matrix of damaged pixels coordinates
@@ -103,8 +145,8 @@ dead_pix_coords <- function(pix_matrix) {
 
 #' Fits pixel distance from the centre to
 #'
-#' @slot layout Layout object
-#' @return glm_fit Fitted model
+#' @param layout Layout object
+#' @return Fitted model
 glm_pixel_ctr_eucl <- function(layout) {
 
   dist <- pixel_dist_ctr_eucl(layout)
@@ -117,8 +159,8 @@ glm_pixel_ctr_eucl <- function(layout) {
 
 #' Fits pixel parallel maxima from the centre
 #'
-#' @slot layout Layout object
-#' @return glm_fit Fitted model
+#' @param layout Layout object
+#' @return Fitted model
 glm_pixel_ctr_linf <- function(layout) {
 
   dist <- pixel_dist_ctr_linf(layout)
@@ -131,8 +173,8 @@ glm_pixel_ctr_linf <- function(layout) {
 
 #' Fits pixel istances from the module edges by column
 #'
-#' @slot layout Layout object
-#' @return glm_fit Fitted model
+#' @param layout Layout object
+#' @return Fitted model
 glm_pixel_dist_edge_col <- function(layout) {
 
   dist <- dist_edge_col(layout)
@@ -145,8 +187,8 @@ glm_pixel_dist_edge_col <- function(layout) {
 
 #' Fits pixel istances from the module edges by row
 #'
-#' @slot layout Layout object
-#' @return glm_fit Fitted model
+#' @param layout Layout object
+#' @return Fitted model
 glm_pixel_dist_edge_row <- function(layout) {
 
   dist <- dist_edge_row(layout)
@@ -159,7 +201,9 @@ glm_pixel_dist_edge_row <- function(layout) {
 
 #' Performs model fitting on the specified symbolic expression
 #'
-#' @slot symb_expr symbolic description of the linear predictor
+#' @param symb_expr symbolic description of the linear predictor
+#' @param family a description of the error distribution
+#' @return Fitted model
 perform_glm <- function(symb_expr, family = binomial(link = logit)) {
 
   #' @return glm_git fitted model
@@ -170,50 +214,56 @@ perform_glm <- function(symb_expr, family = binomial(link = logit)) {
 
 #' Count number of damaged pixels overall and in different modules
 #'
-#' @slot layout Layout object
-#' @return dead_stats Dead_Stats object
+#' @param layout Layout object
+#' @return Dead_Stats object
 get_dead_stats <- function(layout) {
 
-  ppp_dead <- ppp(layout$pix_dead[ , 1], layout$pix_dead[ , 2],
-                  c(1, layout$detector_width), c(1, layout$detector_height))
+  ppp_dead <- spatstat::ppp(layout$pix_dead[ , 1], layout$pix_dead[ , 2],
+                            c(1, layout$detector_width),
+                            c(1, layout$detector_height))
 
-  # returns the count of points in each quadrat
-  quadrat_count_arr <- quadratcount(X = ppp_dead, nx = layout$module_col_n, ny=layout$module_row_n)
+  # count of points in each quadrat
+  module_count_arr <- spatstat::quadratcount(X = ppp_dead,
+                                             nx = layout$module_col_n,
+                                             ny = layout$module_row_n)
 
-  # returns the count of points in each quadrat
-  quadrat_count <- as.vector(quadrat_count_arr)
+  # count of points in each quadrat
+  module_count <- as.vector(module_count_arr)
 
   dead_n <- length(as.vector(layout$pix_dead[ , 2]))
   module_n <- layout$module_col_n * layout$module_row_n
   avg_dead_mod <- round(dead_n / module_n, digits = 1)
 
   # Xi Squared Test
-  Chisq <- chisq.test(x = quadrat_count, p = rep( 1 / module_n, module_n))
+  Chisq <- chisq.test(x = module_count, p = rep( 1 / module_n, module_n))
   Chisq_s <- Chisq$statistic
   Chisq_df <- Chisq$parameter
   Chisq_p <- Chisq$p.value
 
   dead_stats <- Dead_Stats(dead_n = dead_n, module_n = module_n,
+                           module_count_arr = module_count_arr, module_count = module_count,
                            avg_dead_mod = avg_dead_mod, Chisq_s = Chisq_s,
                            Chisq_df = Chisq_df, Chisq_p = Chisq_p)
 
-  return(dead_stats)
+  layout$dead_stats <- dead_stats
+
+  return(layout)
 }
 
 #' Count number of damaged pixels overall and in different modules
 #'
-#' @slot layout Layout object
-#' @return summary A string with damaged pixels overall statitics
+#' @param layout Layout object
+#' @return A string with damaged pixels overall statitics
 dead_stats_summary <- function(layout) {
 
-  dead_stats <- get_dead_stats(layout)
+  layout <- get_dead_stats(layout)
 
-  summary <- paste("Total number of damaged pixels: ", dead_stats$dead_n, "\n", "")
-  summary <- paste(summary, "Total number of modules: ", dead_stats$module_n, "\n", "")
-  summary <- paste(summary, "Average number of damaged pixels per module: ", dead_stats$avg_dead_mod, "\n", "")
+  summary <- paste("Total number of damaged pixels: ", layout$dead_stats$dead_n, "\n", "")
+  summary <- paste(summary, "Total number of modules: ", layout$dead_stats$module_n, "\n", "")
+  summary <- paste(summary, "Average number of damaged pixels per module: ", layout$dead_stats$avg_dead_mod, "\n", "")
   summary <- paste(summary, "\n", "")
   summary <- paste(summary, "Chi-Squared Test results:\n", "")
-  summary <- paste(summary, "Xsq = ", dead_stats$Chisq_s, ", Xsq df = ", dead_stats$Chisq_df, ", Xsq p = ", dead_stats$Chisq_p, "\n", "")
+  summary <- paste(summary, "Xsq = ", layout$dead_stats$Chisq_s, ", Xsq df = ", layout$dead_stats$Chisq_df, ", Xsq p = ", layout$dead_stats$Chisq_p, "\n", "")
 
   return(summary)
 }

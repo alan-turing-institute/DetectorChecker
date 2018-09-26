@@ -2,7 +2,7 @@
 #'
 #' @param m A square matrix
 #' @return tr The trace value
-tr <- function (m) {
+.tr <- function (m) {
   tr <- NA
 
   # is the object matrix?

@@ -106,12 +106,12 @@ detectorchecker::plot_layout_damaged(layout = layout, file_path = "layout_damage
 
 ```
 # Choosing layout
-layout <- create_module("PerkinElmerFull")
+layout <- detectorchecker::create_module("PerkinElmerFull")
 
 # getting the dead (damaged) pixel data
 dead_path <- "/Users/tlazauskas/git/Turing/DetectorChecker/Package/detectorchecker/tests/testthat/dead_pix/PerkinElmer/BadPixelMap_0.bpm/BadPixelMap.bpm.xml"
 
-layout <- load_pix_matrix(layout = layout, file_path = dead_path)
+layout <- detectorchecker::load_pix_matrix(layout = layout, file_path = dead_path)
 
 # Plotting
 detectorchecker::plot_layout_damaged(layout = layout, file_path = "layout_damaged.jpg")
@@ -142,16 +142,32 @@ detectorchecker::plot_layout_damaged(layout = layout, file_path = "layout_damage
 
 ![Excalibur damaged](Excalibur_damaged.jpeg)
 
-## Summaries
-
+### Damaged pixel density
 ```
 # Choosing layout
-layout <- create_module("PerkinElmerFull")
+layout <- detectorchecker::create_module("PerkinElmerFull")
 
 # Loading the pixel matrix
 test_path <- "/Users/tlazauskas/git/Turing/DetectorChecker/Package/detectorchecker/tests/testthat/dead_pix/PerkinElmer/BadPixelMap_0.bpm/BadPixelMap.bpm.xml"
 
-layout <- load_pix_matrix(layout = layout, file_path = test_path)
+layout <- detectorchecker::load_pix_matrix(layout = layout, file_path = test_path)
+
+detectorchecker::plot_layout_density(layout = layout, file_path = "perkinelmerfull_density.jpg", adjust = 0.5)
+```
+
+![PerkinElmerFull damaged pixels density](perkinelmerfull_density.jpg)
+
+### Summaries
+
+```
+# Choosing layout
+layout <- detectorchecker::create_module("PerkinElmerFull")
+
+# Loading the pixel matrix
+test_path <- "/Users/tlazauskas/git/Turing/DetectorChecker/Package/detectorchecker/tests/testthat/dead_pix/PerkinElmer/BadPixelMap_0.bpm/BadPixelMap.bpm.xml"
+
+layout <- detectorchecker::load_pix_matrix(layout = layout, file_path = test_path)
+layout <- detectorchecker::get_dead_stats(layout)
 
 cat(detectorchecker::layout_summary(layout))
 cat(detectorchecker::dead_stats_summary(layout))
@@ -179,6 +195,15 @@ Detector:
   Xsq =  23280.5170881388 , Xsq df =  31 , Xsq p =  0 
 ```
 
+### Damaged pixel counts per module
+```
+test_out_path <- "layout_module_cnt.jpg"
+detectorchecker::plot_layout_cnt_mod(layout = layout, file_path = test_out_path)
+
+```
+![PerkinElmerFull damanged pixel counts per module](layout_module_cnt.jpg)
+
+
 ## Model fitting
 
 ```
@@ -190,7 +215,7 @@ dead_path <- "/Users/tlazauskas/git/Turing/DetectorChecker/Package/detectorcheck
 
 layout <- detectorchecker::load_pix_matrix(layout = layout, file_path = dead_path)
 
-glm_fit <- glm_pixel_ctr_eucl(layout = layout)
+glm_fit <- detectorchecker::glm_pixel_ctr_eucl(layout = layout)
 
 summary(glm_fit)
 ```
@@ -240,6 +265,6 @@ glm_fit <- detectorchecker::glm_pixel_dist_edge_row(layout)
 dist_col <- detectorchecker::dist_edge_col(layout)
 dist_row <- detectorchecker::dist_edge_row(layout)
 
-glm_fit <- perform_glm(as.vector(layout$pix_matrix) ~ as.vector(dist_col) + as.vector(dist_row))
+glm_fit <- detectorchecker::perform_glm(as.vector(layout$pix_matrix) ~ as.vector(dist_col) + as.vector(dist_row))
 
 ```

@@ -9,11 +9,9 @@ Description: The description of a package is usually long,
     should be indented, usually with four spaces.
 Depends: R (>= 3.5.0)
 Imports:
-    spatstat
+    spatstat, tools, tiff, h5
 Suggests:
-    testthat, tiff, h5,
-    knitr,
-    rmarkdown
+    testthat, knitr, rmarkdown
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
