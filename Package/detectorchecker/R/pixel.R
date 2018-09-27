@@ -160,6 +160,7 @@ plot_pixel <- function(data, width, height, file_path) {
 #' Calculates and plots pixel euclidean distance from the centre
 #'
 #' @param layout Layout object
+#' @param file_path Output file path
 plot_pixel_ctr_eucl <- function(layout, file_path = "pixel_ctr_eucl.jpg") {
 
   dist <- pixel_dist_ctr_eucl(layout)
@@ -171,6 +172,7 @@ plot_pixel_ctr_eucl <- function(layout, file_path = "pixel_ctr_eucl.jpg") {
 #' Calculates and plots pixel parallel maxima from the centre
 #'
 #' @param layout Layout object
+#' @param file_path Output file path
 plot_pixel_ctr_linf <- function(layout, file_path = "pixel_ctr_linf.jpg") {
 
   dist <- pixel_dist_ctr_linf(layout)
@@ -182,6 +184,7 @@ plot_pixel_ctr_linf <- function(layout, file_path = "pixel_ctr_linf.jpg") {
 #' Calculates and plots pixel distances from corners
 #'
 #' @param layout Layout object
+#' @param file_path Output file path
 plot_pixel_dist_corner <- function(layout, file_path = "pixel_dist_corner.jpg") {
 
   dist <- dist_corner(layout)
@@ -193,6 +196,7 @@ plot_pixel_dist_corner <- function(layout, file_path = "pixel_dist_corner.jpg") 
 #' Calculates and plots distances from the module edges by column
 #'
 #' @param layout Layout object
+#' @param file_path Output file path
 plot_pixel_dist_edge_col <- function(layout, file_path = "pixel_dist_edge_col.jpg") {
 
   dist <- dist_edge_col(layout)
@@ -204,6 +208,7 @@ plot_pixel_dist_edge_col <- function(layout, file_path = "pixel_dist_edge_col.jp
 #' Calculates and plots distances from the module edges by row
 #'
 #' @param layout Layout object
+#' @param file_path Output file path
 plot_pixel_dist_edge_row <- function(layout, file_path = "pixel_dist_edge_row.jpg") {
 
   dist <- dist_edge_row(layout)
@@ -215,6 +220,7 @@ plot_pixel_dist_edge_row <- function(layout, file_path = "pixel_dist_edge_row.jp
 #' Calculates and plots minimum distances from the module edges
 #'
 #' @param layout Layout object
+#' @param file_path Output file path
 plot_pixel_dist_edge <- function(layout, file_path = "pixel_dist_edge.jpg") {
 
   dist <- dist_edge_min(layout)
@@ -255,16 +261,18 @@ inconsist_dead_layout <- function(dead_data, layout) {
 
   in.gaps.dead <- c()
 
-  in.gaps <- function(i,coo){
-    return((coo[i,1] %in% colgaps) | (coo[i,2] %in% rowgaps))
+  in.gaps <- function(i, coo) {
+    return((coo[i, 1] %in% colgaps) | (coo[i, 2] %in% rowgaps))
   }
-  in.gaps.dead <- vector(length=dim(dead_data)[1])
-  for (i in 1:length(in.gaps.dead)){
-    in.gaps.dead[i] <- in.gaps(i,dead_data)
+
+  in_gaps_dead <- vector(length = dim(dead_data)[1])
+
+  for (i in 1:length(in_gaps_dead)){
+    in_gaps_dead[i] <- in.gaps(i, dead_data)
   }
 
   if (sum(in.gaps.dead) != 0){
-    cat(paste("Warning: ", sum(in.gaps.dead.),
+    cat(paste("Warning: ", sum(in_gaps_dead),
               " of the coordinates of damaged pixels correspond to locations in gaps between modules of the detector.\n", sep=""))
   }
 

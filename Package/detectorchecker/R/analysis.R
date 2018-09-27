@@ -1,13 +1,13 @@
 #' A S3 class to represent dead pixels statistics summary
 #'
-#' @slot dead_n Total number of damaged pixels:
-#' @slot module_n Total number of modules
-#' @slot module_count_arr Count of dead pixels in each quadrat
-#' @slot module_count Count of dead pixels in each quadrat
-#' @slot avg_dead_mod Average number of damaged pixels per module
-#' @slot Chisq_s The Chi-Squared test statistic value
-#' @slot Chisq_df Chi-Squared degrees of freedom
-#' @slot Chisq_p Chi-Squared p-value
+#' @param dead_n Total number of damaged pixels:
+#' @param module_n Total number of modules
+#' @param module_count_arr Count of dead pixels in each quadrat
+#' @param module_count Count of dead pixels in each quadrat
+#' @param avg_dead_mod Average number of damaged pixels per module
+#' @param Chisq_s The Chi-Squared test statistic value
+#' @param Chisq_df Chi-Squared degrees of freedom
+#' @param Chisq_p Chi-Squared p-value
 #'
 #' @return Dead_Stats object
 Dead_Stats <- function(dead_n = NA, module_n = NA, module_count_arr = NA,
@@ -110,6 +110,7 @@ plot_layout_cnt_mod <- function(layout, file_path) {
 #'
 #' @param layout Layout object
 #' @param file_path Output file path
+#' @param adjust Kernel density bandwidth
 plot_layout_density <- function(layout, file_path, adjust = 0.25) {
 
   # starts the graphics device driver

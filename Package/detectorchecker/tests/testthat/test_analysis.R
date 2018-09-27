@@ -81,8 +81,7 @@ test_that("Perkin Elmer", {
   plot_layout_arrows(layout = perkinelmerfull_layout, file_path = test_out_path)
 
   # Removing the test output file
-  # if (file.exists(test_out_path)) file.remove(test_out_path)
-
+  if (file.exists(test_out_path)) file.remove(test_out_path)
 })
 
 # context("Testing reading in the dead pixel data and visualizing the layout: Excalibur")

@@ -1,17 +1,21 @@
 #' A S3 class to represent a detector layout.
 #'
-#' @slot name detector's name
-#' @slot detector_width detector's width
-#' @slot detector_height detector's height
-#' @slot module_col_n number of columns in the grid of modules
-#' @slot modulerow.n number of rows in the grid of modules
-#' @slot module_col_sizes vector with widths of the modules
-#' @slot module_row_sizes vector with heights of the modules
-#' @slot module_edges_col !
-#' @slot module_edges_row !
-#' @slot gap_col_sizes vector with widths of the gaps
-#' @slot gap_row_sizes vector with heights of the gaps
-#' @slot detector_inconsistency counts inconsistencies found in parameters entered
+#' @param name detector's name
+#' @param date date
+#' @param detector_width detector's width
+#' @param detector_height detector's height
+#' @param module_col_n number of columns in the grid of modules
+#' @param module_row_n number of rows in the grid of modules
+#' @param module_col_sizes vector with widths of the modules
+#' @param module_row_sizes vector with heights of the modules
+#' @param module_edges_col !
+#' @param module_edges_row !
+#' @param gap_col_sizes vector with widths of the gaps
+#' @param gap_row_sizes vector with heights of the gaps
+#' @param detector_inconsistency counts inconsistencies found in parameters entered
+#' @param pix_matrix pixel matrix
+#' @param pix_dead dead pixels coordinates
+#' @param dead_stats dead pixel statistics
 #' @return Layout object
 Default_Layout <- function(name = "Default", date = NA,
                            detector_width = NA, detector_height = NA,
@@ -67,7 +71,7 @@ available_layouts <- c(.Excalibur_name, .PerkinElmerFull_name,
 
 #' A S3 class to represent the Excalibur detector layout.
 #'
-#' @returns Excalibur layout object
+#' @return Excalibur layout object
 Excalibur_Layout <- function() {
   name <- .Excalibur_name
 
@@ -89,7 +93,7 @@ Excalibur_Layout <- function() {
 
 #' A S3 class to represent the PerkinElmerFull detector layout.
 #'
-#' @returns PerkinElmerFul layout object
+#' @return PerkinElmerFul layout object
 PerkinElmerFull_Layout <- function() {
 
   name <- .PerkinElmerFull_name
@@ -112,7 +116,7 @@ PerkinElmerFull_Layout <- function() {
 
 #' A S3 class to represent the PerkinElmerCropped1600 detector layout.
 #'
-#' @returns PerkinElmerCropped1600 layout object
+#' @return PerkinElmerCropped1600 layout object
 PerkinElmerCropped1600_Layout <- function() {
 
   name <- .PerkinElmerCropped1600_name
@@ -135,7 +139,7 @@ PerkinElmerCropped1600_Layout <- function() {
 
 #' A S3 class to represent the PerkinElmerRefurbished detector layout.
 #'
-#' @returns PerkinElmerRefurbished layout object
+#' @return PerkinElmerRefurbished layout object
 PerkinElmerRefurbished_Layout <- function() {
 
   name <- .PerkinElmerRefurbished_name
@@ -158,7 +162,7 @@ PerkinElmerRefurbished_Layout <- function() {
 
 #' A S3 class to represent the PerkinElmerRefurbished detector layout.
 #'
-#' @returns Pilatus layout object
+#' @return Pilatus layout object
 Pilatus_Layout <- function() {
 
   name <- .Pilatus_name
@@ -460,6 +464,7 @@ create_ppp_gaps_row <- function(layout) {
 #' Deriving additional layout elements
 #'
 #' @param layout Layout object
+#' @param file_path Output file path
 plot_layout <- function(layout, file_path) {
 
   ppp_edges_col <- create_ppp_edges_col(layout)
