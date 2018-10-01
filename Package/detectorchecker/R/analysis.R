@@ -34,11 +34,7 @@ Dead_Stats <- function(dead_n = NA, module_n = NA, module_count_arr = NA,
 #' @param file_path Output file path
 plot_layout_damaged <- function(layout, file_path) {
 
-  pix_dead <- layout$pix_dead
-
-  ppp_dead <- spatstat::ppp(pix_dead[ , 1], pix_dead[ , 2],
-                            c(1, layout$detector_width),
-                            c(1, layout$detector_height))
+  ppp_dead <- get_ppp_dead(layout)
 
   ppp_edges_col <- create_ppp_edges_col(layout)
   ppp_edges_row <- create_ppp_edges_row(layout)
@@ -116,9 +112,7 @@ plot_layout_density <- function(layout, file_path, adjust = 0.25) {
 
   title <- paste("Dead pixel density, adjust = ", adjust)
 
-  ppp_dead <- spatstat::ppp(layout$pix_dead[ , 1], layout$pix_dead[ , 2],
-                            c(1, layout$detector_width),
-                            c(1, layout$detector_height))
+  ppp_dead <- get_ppp_dead(layout)
 
   image(density(ppp_dead, adjust = adjust), main = title)
 
@@ -138,9 +132,7 @@ plot_layout_arrows <- function(layout, file_path) {
 
   par(mfrow = c(1, 1), mar = c(1, 1, 3, 1))
 
-  ppp_dead <- spatstat::ppp(layout$pix_dead[ , 1], layout$pix_dead[ , 2],
-                            c(1, layout$detector_width),
-                            c(1, layout$detector_height))
+  ppp_dead <- get_ppp_dead(layout)
 
   PPPnn <- ppp_dead[spatstat::nnwhich(ppp_dead)]
 
@@ -244,9 +236,7 @@ perform_glm <- function(symb_expr, family = binomial(link = logit)) {
 #' @return Dead_Stats object
 get_dead_stats <- function(layout) {
 
-  ppp_dead <- spatstat::ppp(layout$pix_dead[ , 1], layout$pix_dead[ , 2],
-                            c(1, layout$detector_width),
-                            c(1, layout$detector_height))
+  ppp_dead <- get_ppp_dead(layout)
 
   # count of points in each quadrat
   module_count_arr <- spatstat::quadratcount(X = ppp_dead,
@@ -294,6 +284,27 @@ dead_stats_summary <- function(layout) {
   return(summary)
 }
 
+#' ANGLES using nnorient() from spatstat package
+#'
+#' @param layout Layout object
+#' @param file_path Output file path
+plot_layout_angles <- function(layout, file_path) {
+
+  ppp_dead <- get_ppp_dead(layout)
+
+  title <- paste("NN to points orientations ", ppp_dead$n, " dead pixels\n", sep="")
+
+  # starts the graphics device driver
+  ini_graphics(file_path = file_path)
+
+  par(mfrow = c(1, 1), mar = c(1, 1, 3, 1))
+
+  spatstat::rose(spatstat::nnorient(ppp_dead, sigma = 4),
+                 col = "grey", main = title)
+
+  dev.off()
+}
+
 # TODO: define the function
 #' Get orient nn PP
 #' @param PPPdata describe
@@ -317,9 +328,7 @@ module_indiv_rose <- function(layout) {
 
   dirOut <- getwd()
 
-  ppp_dead <- spatstat::ppp(layout$pix_dead[ , 1], layout$pix_dead[ , 2],
-                            c(1, layout$detector_width),
-                            c(1, layout$detector_height))
+  ppp_dead <- get_ppp_dead(layout)
 
   dead_n <- length(as.vector(layout$pix_dead[ , 2]))
 
@@ -429,3 +438,16 @@ orientdist_vec <- function(v, w){
 # TODO: define the function
 #'
 orientcolfct <- function(b) orientdist_vec(b[1:2],b[3:4])$orient
+
+#' Generates ppp for the dead pixels
+#'
+#' @param layout Layout object
+#' @return ppp of dead pixels
+get_ppp_dead <- function(layout) {
+  ppp_dead <- spatstat::ppp(layout$pix_dead[ , 1], layout$pix_dead[ , 2],
+                            c(1, layout$detector_width),
+                            c(1, layout$detector_height))
+
+  return(ppp_dead)
+}
+
