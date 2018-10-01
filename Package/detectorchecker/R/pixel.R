@@ -259,9 +259,9 @@ inconsist_dead_layout <- function(dead_data, layout) {
     }
   }
 
-  in.gaps.dead <- c()
+  in_gaps_dead <- c()
 
-  in.gaps <- function(i, coo) {
+  in_gaps <- function(i, coo) {
     return((coo[i, 1] %in% colgaps) | (coo[i, 2] %in% rowgaps))
   }
 

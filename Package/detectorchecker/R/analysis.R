@@ -34,8 +34,6 @@ Dead_Stats <- function(dead_n = NA, module_n = NA, module_count_arr = NA,
 #' @param file_path Output file path
 plot_layout_damaged <- function(layout, file_path) {
 
-  dirOut <- getwd()
-
   pix_dead <- layout$pix_dead
 
   ppp_dead <- spatstat::ppp(pix_dead[ , 1], pix_dead[ , 2],
@@ -296,3 +294,138 @@ dead_stats_summary <- function(layout) {
   return(summary)
 }
 
+# TODO: define the function
+#' Get orient nn PP
+#' @param PPPdata describe
+#' @return describe
+orientnnPPP <- function(PPPdata) {
+  PPPnn <- PPPdata[spatstat::nnwhich(PPPdata)]
+  #now calculate our own thing for the orientations to compare
+  A <- matrix(c(PPPdata$x,PPPdata$y), nrow=2, ncol=length(PPPdata$x), byrow=TRUE)
+  # x,y values of original point pattern
+  Ann <- matrix(c(PPPnn$x,PPPnn$y), nrow=2, ncol=length(PPPnn$x), byrow=TRUE)
+  # x,y values of point pattern containing nn of each of the points in original
+  # Assigns a point patters (ppp object) a vector of the orientations of the arrows pointing from nearest neighbours to its points
+  return(round(apply(rbind(A,Ann), 2, orientcolfct), digits=3))
+}
+
+# TODO: Fix this
+#' Testing analysis functions
+#'
+#' @param layout Layout object
+module_indiv_rose <- function(layout) {
+
+  dirOut <- getwd()
+
+  ppp_dead <- spatstat::ppp(layout$pix_dead[ , 1], layout$pix_dead[ , 2],
+                            c(1, layout$detector_width),
+                            c(1, layout$detector_height))
+
+  dead_n <- length(as.vector(layout$pix_dead[ , 2]))
+
+  dead_modules <- data.frame(layout$pix_dead, NA, NA)
+  colnames(dead_modules) <- c("pixcol", "pixrow", "modcol", "modrow")
+
+  # TODO: more elegant with lapply or plyr etc
+  for (i in 1:dead_n) {
+    tmp <- .which_module_idx(layout$pix_dead[i, 1], layout$pix_dead[i, 2],
+                             layout$module_edges_col, layout$module_edges_row)
+
+    dead_modules[i, 3] <- tmp$col
+    dead_modules[i, 4] <- tmp$row
+  }
+
+  # Make angle histograms (rose plots) and pixel plots with arrows
+  for (i in 1:layout$module_col_n) {
+    for (j in 1:layout$module_row_n) {
+
+      # goes through modules in the order: start bottom left, move up, start over 2nd col, move up...
+      dead_module_select <- dead_modules[dead_modules[ , 3] == i & dead_modules[ , 4] == j, ]
+
+      ppp_dead_module_select <- spatstat::ppp(dead_module_select[ , 1],
+                                    dead_module_select[ , 2],
+                                    c(layout$module_edges_col[1, i],
+                                      layout$module_edges_col[2, i]),
+                                    c(layout$module_edges_row[1, j],
+                                      layout$module_edges_row[2, j]))
+
+      # need at least 2 points to calculate neighbours!
+      if (ppp_dead_module_select$n >= 2){
+
+        PPPnn <- ppp_dead_module_select[spatstat::nnwhich(ppp_dead_module_select)]
+
+        pdf(paste(dirOut, "/", "anglesOrientNNindivModules_DIY_",i,"_",j,"_",
+                  layout$name, ".pdf", sep = ""), bg = "transparent")
+
+        par(mfrow = c(1, 2), mar = c(1, 1, 5, 1), oma = c(1, 1, 5, 1))
+
+        plot(ppp_dead_module_select, main = "NN oriented arrows")
+
+        arrows(PPPnn$x, PPPnn$y,
+               ppp_dead_module_select$x, ppp_dead_module_select$y,
+               angle = 15, length = 0.07, col = "red")
+
+        spatstat::rose(orientnnPPP(ppp_dead_module_select), breaks=72,
+             main="NN oriented angles")
+
+        title(paste("Module in layout position col=", i,
+                    " row=", j, "\n", ppp_dead_module_select$n,
+                    " dead pixels\n", sep = ""), outer = TRUE)
+
+        dev.off()
+      }
+    }
+  }
+}
+
+#' Estimates the norm of a vector
+#'
+#' @param v vector
+#' @return norm of the vector v
+norm_vec <- function(v) {
+  norm <- sqrt(sum(v^2))
+  return(norm)
+}
+
+#' Estimates the distance between vectors v and w
+#'
+#' @param v vector
+#' @param w vector
+#' @return distance between vectors v and w
+dist_vec <- function(v,w) {
+  norm_vec(v - w)
+}
+
+# Calculates distance and orientation of the oriented vector between two points
+# in order of the second pointing to first (reflecting nearest neighbour (nn) framework)
+# v, w point coordinates indicating vectors wrt to the origin.
+# Values: distance and orientation (in [0,360) degrees) of w pointing towards v.
+#' @param v vector
+#' @param w vector
+#' @return distance and orientation of the oriented vector between two points
+orientdist_vec <- function(v, w){
+  v <- v - w
+  w <- c(0, 0)
+  tmp1 <- norm_vec(v)
+  v <- v / tmp1
+  x <- v[1]
+  y <- v[2]
+  tmp2 <- asin(abs(y)) * 180 / pi
+
+  if (x >= 0){
+    if (y < 0) {
+      tmp2 <- 360 - tmp2
+    }
+  } else {
+    tmp2 <- 180 - sign(y) * tmp2
+  }
+
+  orientdist_vec <- list(tmp2, tmp1)
+  names(orientdist_vec) <- c("orient", "dist")
+
+  return(orientdist_vec)
+}
+
+# TODO: define the function
+#'
+orientcolfct <- function(b) orientdist_vec(b[1:2],b[3:4])$orient
