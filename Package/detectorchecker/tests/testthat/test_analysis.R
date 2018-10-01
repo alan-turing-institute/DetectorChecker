@@ -252,7 +252,6 @@ test_that("Perkin Elmer", {
   # Removing the test output file
   if (file.exists(test_out_path)) file.remove(test_out_path)
 
-
   # test_analysis
   # test_analysis_functions(perkinelmerfull_layout)
 

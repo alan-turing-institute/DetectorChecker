@@ -215,10 +215,26 @@ test_path <- "/Users/tlazauskas/git/Turing/DetectorChecker/Package/detectorcheck
 layout <- detectorchecker::load_pix_matrix(layout = layout, file_path = test_path)
 
 # Arrows plot
-detectorchecker::plot_layout_arrows(layout = ayout, file_path = "perkinelmerfull_arrows.jpg")
+detectorchecker::plot_layout_arrows(layout = layout, file_path = "perkinelmerfull_arrows.jpg")
 ```
 
 ![PerkinElmerFull arrows](perkinelmerfull_arrows.jpg)
+# Angles
+
+```
+# Choosing layout
+layout <- detectorchecker::create_module("PerkinElmerFull")
+
+# Loading the pixel matrix
+test_path <- "/Users/tlazauskas/git/Turing/DetectorChecker/Package/detectorchecker/tests/testthat/dead_pix/PerkinElmer/BadPixelMap_0.bpm/BadPixelMap.bpm.xml"
+
+layout <- detectorchecker::load_pix_matrix(layout = layout, file_path = test_path)
+
+# Arrows plot
+detectorchecker::plot_layout_angles(layout = layout, file_path = "perkinelmerfull_arrows.jpg")
+```
+
+![PerkinElmerFull arrows](perkinelmerfull_angles.jpg)
 
 ## Model fitting
 
