@@ -180,10 +180,9 @@ detectorchecker:::plot_layout_angles(layout = layout_perkin)
 ```{r}
 layout_pilatus <- detectorchecker:::create_module("Pilatus")
 
-# Loading the pixel matrix
-dead_path <- "../tests/testthat/dead_pix/Pilatus/badpixel_mask.tif"
+file_path <- "../tests/testthat/dead_pix/Pilatus/badpixel_mask.tif"
 
-layout_pilatus <- detectorchecker:::load_pix_matrix(layout = layout_pilatus, file_path = dead_path)
+layout_pilatus <- detectorchecker:::load_pix_matrix(layout = layout_pilatus, file_path = file_path)
 
 glm_fit <- detectorchecker:::glm_pixel_ctr_eucl(layout = layout_pilatus)
 
@@ -194,9 +193,9 @@ summary(glm_fit)
 ```{r}
 layout_pilatus <- detectorchecker:::create_module("Pilatus")
 
-dead_path <- "../tests/testthat/dead_pix/Pilatus/badpixel_mask.tif"
+file_path <- "../tests/testthat/dead_pix/Pilatus/badpixel_mask.tif"
 
-layout_pilatus <- detectorchecker:::load_pix_matrix(layout = layout_pilatus, file_path = dead_path)
+layout_pilatus <- detectorchecker:::load_pix_matrix(layout = layout_pilatus, file_path = file_path)
 
 dist_col <- detectorchecker:::dist_edge_col(layout_pilatus)
 dist_row <- detectorchecker:::dist_edge_row(layout_pilatus)
@@ -205,4 +204,34 @@ glm_fit <- detectorchecker:::perform_glm(as.vector(layout_pilatus$pix_matrix) ~ 
 
 summary(glm_fit)
 
+```
+
+## KFG Analysis
+
+### K, F, G plots
+
+```{r}
+layout_perkin <- detectorchecker:::create_module("PerkinElmerFull")
+
+file_path <- "../tests/testthat/dead_pix/PerkinElmer/BadPixelMap_0.bpm/BadPixelMap.bpm.xml"
+
+layout_perkin <- detectorchecker:::load_pix_matrix(layout = layout_perkin, file_path = file_path)
+
+detectorchecker:::plot_kfg(layout = layout_perkin, func = "K")
+detectorchecker:::plot_kfg(layout = layout_perkin, func = "F")
+detectorchecker:::plot_kfg(layout = layout_perkin, func = "G")
+```
+
+### Inhomogenious K, F, G plots
+
+```{r}
+layout_pilatus <- detectorchecker:::create_module("Pilatus")
+
+file_path <- "../tests/testthat/dead_pix/Pilatus/badpixel_mask.tif"
+
+layout_pilatus <- detectorchecker:::load_pix_matrix(layout = layout_pilatus, file_path = file_path)
+
+detectorchecker:::plot_kfg(layout = layout_pilatus, func = "Kinhom")
+detectorchecker:::plot_kfg(layout = layout_pilatus, func = "Finhom")
+detectorchecker:::plot_kfg(layout = layout_pilatus, func = "Ginhom")
 ```

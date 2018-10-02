@@ -481,3 +481,58 @@ get_ppp_dead <- function(layout) {
   return(ppp_dead)
 }
 
+#' Plots K, F, G functions
+#'
+#' @param layout Layout object
+#' @param func Function name
+#' @param file_path Output file path
+plot_kfg <- function(layout, func, file_path = NA) {
+
+  if (missing(func) || is.null(func)) {
+    stop(c("Analysis function name is not specified.\n",
+           "Available functions: K, F, G, Kinhom, Finhom, Ginhom"))
+  }
+
+  ppp_dead <- get_ppp_dead(layout)
+
+  if(!is.na(file_path)) {
+    # starts the graphics device driver
+    ini_graphics(file_path = file_path)
+  }
+
+  if(func == "K") {
+    plot(spatstat::Kest(ppp_dead), main = "K-function")
+
+  } else if (func == "F") {
+    plot(spatstat::Fest(ppp_dead), main = "F-function")
+
+  } else if (func == "G") {
+    plot(spatstat::Gest(ppp_dead), main = "G-function")
+
+  } else if (func == "Kinhom") {
+    lambda <- density(ppp_dead)
+
+    plot(spatstat::Kinhom(ppp_dead, lambda, correction = "all"),
+         cex = 0.5, main = "Inhomogeneous K-Function")
+
+  } else if (func == "Finhom") {
+    lambda <- density(ppp_dead)
+
+    plot(spatstat::Finhom(ppp_dead, lambda, correction = "all"),
+         cex = 0.5, main = "Inhomogeneous F-Function")
+
+  } else if (func == "Ginhom") {
+    lambda <- density(ppp_dead)
+
+    plot(spatstat::Ginhom(ppp_dead, lambda, correction = "all"),
+         cex = 0.5, main = "Inhomogeneous G-Function")
+
+  } else {
+    stop(c("Cannot identify analysis function.\n",
+           "Available functions: K, F, G, Kinhom, Finhom, Ginhom"))
+  }
+
+  if(!is.na(file_path)) {
+    dev.off()
+  }
+}
