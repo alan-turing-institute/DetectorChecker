@@ -465,13 +465,15 @@ create_ppp_gaps_row <- function(layout) {
 #'
 #' @param layout Layout object
 #' @param file_path Output file path
-plot_layout <- function(layout, file_path) {
+plot_layout <- function(layout, file_path = NA) {
 
   ppp_edges_col <- create_ppp_edges_col(layout)
   ppp_edges_row <- create_ppp_edges_row(layout)
 
-  # starts the graphics device driver
-  ini_graphics(file_path = file_path)
+  if(!is.na(file_path)) {
+    # starts the graphics device driver
+    ini_graphics(file_path = file_path)
+  }
 
   if (sum(layout$gap_col_sizes) + sum(layout$gap_row_sizes) == 0) {
 
@@ -500,8 +502,10 @@ plot_layout <- function(layout, file_path) {
     points(ppp_gaps_row, pch = ".", col = "grey")
   }
 
-  # shuts down the specified (by default the current) device
-  dev.off()
+  if(!is.na(file_path)) {
+    # shuts down the specified (by default the current) device
+    dev.off()
+  }
 }
 
 #' Returns a string with the layout summary

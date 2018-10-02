@@ -32,15 +32,17 @@ Dead_Stats <- function(dead_n = NA, module_n = NA, module_count_arr = NA,
 #'
 #' @param layout Layout object
 #' @param file_path Output file path
-plot_layout_damaged <- function(layout, file_path) {
+plot_layout_damaged <- function(layout, file_path = NA) {
 
   ppp_dead <- get_ppp_dead(layout)
 
   ppp_edges_col <- create_ppp_edges_col(layout)
   ppp_edges_row <- create_ppp_edges_row(layout)
 
-  # starts the graphics device driver
-  ini_graphics(file_path = file_path)
+  if(!is.na(file_path)) {
+    # starts the graphics device driver
+    ini_graphics(file_path = file_path)
+  }
 
   if (sum(layout$gap_col_sizes) + sum(layout$gap_row_sizes) == 0) {
 
@@ -81,23 +83,34 @@ plot_layout_damaged <- function(layout, file_path) {
   # damaged pixels rather than cover them up.
 
   points(ppp_dead, pch = 22, col = "brown", cex = 0.7)
-  dev.off()
+
+  if(!is.na(file_path)) {
+    dev.off()
+  }
 }
 
 #' A function to plot layout with counts per module
 #'
 #' @param layout Layout object
 #' @param file_path Output file path
-plot_layout_cnt_mod <- function(layout, file_path) {
+plot_layout_cnt_mod <- function(layout, file_path = NA) {
 
-  # starts the graphics device driver
-  ini_graphics(file_path = file_path)
+  if(!is.na(file_path)) {
+    # starts the graphics device driver
+    ini_graphics(file_path = file_path)
+  }
+
+  if(any(is.na(layout$dead_stats))) {
+    stop("Is the damaged statistics is performed?")
+  }
 
   plot(layout$dead_stats$module_count_arr,
        main = paste("Number of damaged pixels in modules\n", "Total number damaged pixels: ", layout$dead_stats$dead_n,
                                         "\n (average per module: ", layout$dead_stats$avg_dead_mod, ")"))
 
-  dev.off()
+  if(!is.na(file_path)) {
+    dev.off()
+  }
 }
 
 #' A function to plot layout with dead pixel densities
@@ -105,10 +118,12 @@ plot_layout_cnt_mod <- function(layout, file_path) {
 #' @param layout Layout object
 #' @param file_path Output file path
 #' @param adjust Kernel density bandwidth
-plot_layout_density <- function(layout, file_path, adjust = 0.25) {
+plot_layout_density <- function(layout, file_path = NA, adjust = 0.25) {
 
-  # starts the graphics device driver
-  ini_graphics(file_path = file_path)
+  if(!is.na(file_path)) {
+    # starts the graphics device driver
+    ini_graphics(file_path = file_path)
+  }
 
   title <- paste("Dead pixel density, adjust = ", adjust)
 
@@ -116,19 +131,23 @@ plot_layout_density <- function(layout, file_path, adjust = 0.25) {
 
   image(density(ppp_dead, adjust = adjust), main = title)
 
-  dev.off()
+  if(!is.na(file_path)) {
+    dev.off()
+  }
 }
 
 #' A function to plot NN oriented arrrows
 #'
 #' @param layout Layout object
 #' @param file_path Output file path
-plot_layout_arrows <- function(layout, file_path) {
+plot_layout_arrows <- function(layout, file_path = NA) {
 
   title <- "NN oriented arrows"
 
-  # starts the graphics device driver
-  ini_graphics(file_path = file_path)
+  if(!is.na(file_path)) {
+    # starts the graphics device driver
+    ini_graphics(file_path = file_path)
+  }
 
   par(mfrow = c(1, 1), mar = c(1, 1, 3, 1))
 
@@ -141,7 +160,9 @@ plot_layout_arrows <- function(layout, file_path) {
   arrows(PPPnn$x, PPPnn$y, ppp_dead$x, ppp_dead$y,
          angle = 15, length = 0.07, col = "red")
 
-  dev.off()
+  if(!is.na(file_path)) {
+    dev.off()
+  }
 }
 
 #' Extracts a table of dead pixel coordinates from a pixel matrix
@@ -288,21 +309,25 @@ dead_stats_summary <- function(layout) {
 #'
 #' @param layout Layout object
 #' @param file_path Output file path
-plot_layout_angles <- function(layout, file_path) {
+plot_layout_angles <- function(layout, file_path = NA) {
 
   ppp_dead <- get_ppp_dead(layout)
 
   title <- paste("NN to points orientations ", ppp_dead$n, " dead pixels\n", sep="")
 
-  # starts the graphics device driver
-  ini_graphics(file_path = file_path)
+  if(!is.na(file_path)) {
+    # starts the graphics device driver
+    ini_graphics(file_path = file_path)
+  }
 
   par(mfrow = c(1, 1), mar = c(1, 1, 3, 1))
 
   spatstat::rose(spatstat::nnorient(ppp_dead, sigma = 4),
                  col = "grey", main = title)
 
-  dev.off()
+  if(!is.na(file_path)) {
+    dev.off()
+  }
 }
 
 # TODO: define the function
@@ -444,6 +469,11 @@ orientcolfct <- function(b) orientdist_vec(b[1:2],b[3:4])$orient
 #' @param layout Layout object
 #' @return ppp of dead pixels
 get_ppp_dead <- function(layout) {
+
+  if(suppressWarnings(any(is.na(layout$pix_dead)))) {
+    stop("Is the damaged pixel data loaded?")
+  }
+
   ppp_dead <- spatstat::ppp(layout$pix_dead[ , 1], layout$pix_dead[ , 2],
                             c(1, layout$detector_width),
                             c(1, layout$detector_height))
