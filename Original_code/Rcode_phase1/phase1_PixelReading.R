@@ -1,7 +1,7 @@
 # JAB 2018/07/11
 #
 # CONTENT:
-# LIBRARIES, PATHS 
+# LIBRARIES, PATHS
 # AUXILIARY FUNCTIONS
 # READ DAMAGED PIXEL DATA - choose one example!
 # COORDINATES WITH MODULES
@@ -11,16 +11,16 @@
 # WORKFLOW: Assumes already run
 #    - phase0_LayoutExamples.R (for matching Layout example)
 #    - phase0_LayoutPixels.R (for aux functions e.g. module.which.indices())
-#    
+#
 # INPUT: Layout (object built in Phase0 for suitable detector type)
 #
-# 0UTPUT: 
+# 0UTPUT:
 #     - coo.dead (list of pixel locations, can be used later to make ppp object)
 #
-# RUN: 
+# RUN:
 #   - LIBRARIES, PATHS (user has to adjust some paths names referring to directories in his own computer!)
 #   - AUXILIARY FUNCTIONS
-#   - Pick only one example in READ DAMAGED PIXEL DATA and, 
+#   - Pick only one example in READ DAMAGED PIXEL DATA and,
 #     after matching running matching parts of phase0_LayoutExamples (to the end!),
 #     run it
 #   - COORDINATES WITH MODULES
@@ -38,7 +38,7 @@ dirData <- "/Users/julia/Dropbox/Research/Projects2014+/DetectorChecker/Phase1/D
 dirOut <- paste(dirAnalysis, "Output_phase1/", sep="")
 
 
-##### READ DAMAGED PIXEL DATA 
+##### READ DAMAGED PIXEL DATA
 
 ### SELECT ONE & RUN THAT ONE ONLY
 
@@ -64,14 +64,14 @@ if (Layout$detector.height != dim(T)[2]){
       Please check the file and check if your Layout parameters match your damaged pixel data.")
 }
 if (Layout$detector.width != dim(T)[1]){
-  cat("Error: Number of columns in row data file (tif) incorrect. 
+  cat("Error: Number of columns in row data file (tif) incorrect.
       Please check the file and check if your Layout parameters match your damaged pixel data.")
 }
 
 # To Do: Figure out what to do with the Warning message:
 # In readTIFF(paste(dirData, "pilatus_badpixel_mask.tif", sep = "")) :
-# tiff package currently only supports unsigned integer or float sample formats in direct 
-# mode, but the image contains signed integer format - it will be treated as unsigned 
+# tiff package currently only supports unsigned integer or float sample formats in direct
+# mode, but the image contains signed integer format - it will be treated as unsigned
 # (use as.is=TRUE, native=TRUE or convert=TRUE depending on your intent)
 
 # Check range of T.
@@ -79,21 +79,21 @@ if (Layout$detector.width != dim(T)[1]){
 # If not binary, transform into a binary matrix Tbin.
 
 table(as.vector(T))
-Tbin<-round(T/max(T)) 
+Tbin<-round(T/max(T))
 table(as.vector(Tbin))
-# 0          1 
-# 6222840    1161 
+# 0          1
+# 6222840    1161
 
 coo.dead <- which(Tbin==1, arr.ind = T) # Matrix of damaged pixels coordinates
 dim(coo.dead)
-# [1] 1161    2  
+# [1] 1161    2
 colnames(coo.dead) <- c("col", "row")
 dead.n <- length(as.vector(coo.dead[,2]))
 
 T <- t(T)
 
 # The first col of coo.dead (coo.dead[,1]) corresponds to the detector width dimension (col in Layout).
-# The second col of coo.dead (coo.dead[,2]) corresponds to the detector height dimension (row in Layout) 
+# The second col of coo.dead (coo.dead[,2]) corresponds to the detector height dimension (row in Layout)
 #####################################################################
 
 
@@ -101,7 +101,7 @@ T <- t(T)
 ### Example Excalibur - does not currently work (since R update)
 
 # To do:
-# Existing codes needs package rhdf5, which worked on previous R version, 
+# Existing codes needs package rhdf5, which worked on previous R version,
 # but that package doesn't yet(?) exist for updated R:
 # package 'rhdf5' is not available (for R version 3.5.1)
 
@@ -118,10 +118,10 @@ T <- t(T)
 #####################################################################
 ### Examples by Perkin Elmer
 
-# Choose one of 6 examples (from different dates) by specifying k 
+# Choose one of 6 examples (from different dates) by specifying k
 # Then run load corresponding Layout:
 # For k=1,2,5,6: name = "PerkinElmerFull"
-# For k=3,4:     name = "PerkinElmerCropped1600" 
+# For k=3,4:     name = "PerkinElmerCropped1600"
 # (though use of the full detector Layout for the cropped one would not give errors at this stage, can't be detected from dead pixel coo)
 
 # Folder PerkinElmer contains 6 folders name
@@ -134,12 +134,12 @@ k <- 4 # default choice, may choose any k in 1:6 # done testrun for 5,6,1, 2,3
 ## Names, aux function
 
 nameBpm <- c(
-  "BadPixelMap_0 [2013-06-13 13.31.51].bpm", 
-  "BadPixelMap_0 [2013-07-01 11.49.29].bpm", 
-  "BadPixelMap_0 [2013-10-02 13.41.00].bpm", 
-  "BadPixelMap_0 [2013-11-22 10.54.30].bpm", 
-  "BadPixelMap_0 [2014-01-28 11.48.00].bpm", 
-  "BadPixelMap_0 [2014-01-28 15.14.02].bpm"  
+  "BadPixelMap_0 [2013-06-13 13.31.51].bpm",
+  "BadPixelMap_0 [2013-07-01 11.49.29].bpm",
+  "BadPixelMap_0 [2013-10-02 13.41.00].bpm",
+  "BadPixelMap_0 [2013-11-22 10.54.30].bpm",
+  "BadPixelMap_0 [2014-01-28 11.48.00].bpm",
+  "BadPixelMap_0 [2014-01-28 15.14.02].bpm"
 )
 
 timestamp <- substr(nameBpm,15,35)
@@ -147,29 +147,30 @@ timestamp <- substr(nameBpm,15,35)
 Layout$date <- timestamp[k]
 
 extract.number <- function(s){
-  s<-substring(s,4,4+nchar(s)-5)   
+  s<-substring(s,4,4+nchar(s)-5)
   s<-as.numeric(s)
 }
 
 ## Raw data
 
 # decode bad pixel map list from xml file (pedestrian way...)
-filename<-paste(dirData,"PerkinElmer/",nameBpm[k],"/BadPixelMap.bpm.xml", sep="") 
+filename<-paste(dirData,"PerkinElmer/",nameBpm[k],"/BadPixelMap.bpm.xml", sep="")
 d<-matrix(scan(filename, what=c("","","","","",""), skip=3), ncol=6, byrow=TRUE)
+
   # Warning message: e.g. for k=1 get: Read 56714 items
   # In matrix(scan(filename, what = c("", "", "", "", "", ""), skip = 3),  :
   # data length [56714] is not a sub-multiple or multiple of the number of rows [9453]
   # But(!), warning is just because of end of file, hence just remove last two lines and it works.
 D<-d[1:(nrow(d)-2),c(2,3)]
 D<-apply(D,2,extract.number)
-  # these are coordinates of dead pixels, with 
-  # D[,1] for detector cols (width) and D[,2] for detector rows (height) 
+  # these are coordinates of dead pixels, with
+  # D[,1] for detector cols (width) and D[,2] for detector rows (height)
 
 ## Convert into dead pixel matrix
 
 coo.dead <- matrix(NA, nrow = dim(D)[1], ncol = 2) # Matrix of damaged pixels coordinates
 dim(coo.dead)
-# [1] 1161    2  
+# [1] 1161    2
 colnames(coo.dead) <- c("col", "row")
 coo.dead[,1] <- D[,1]+1
 coo.dead[,2] <- D[,2]+1
@@ -199,11 +200,11 @@ for (i in 1: dim(coo.dead)[1]){
 
 ##### CONSISTENCY CHECKS
 
-# Count damaged pixel locations (coo.dead) outside detector (Layout) 
+# Count damaged pixel locations (coo.dead) outside detector (Layout)
 # and in gaps between modules and give warnings
 
 inconsistency.dead.layout <- function(coo.dead, Layout){
-  
+
   outleft <- sum(coo.dead[,1] < 1)
   outright <- sum(coo.dead[,1] > Layout$detector.width)
   if ( (outleft != 0) | (outright != 0) ){
@@ -221,26 +222,26 @@ inconsistency.dead.layout <- function(coo.dead, Layout){
     for (i in 1:(Layout$module.col.n-1)){
       colgaps <- c( colgaps, (Layout$module.edges.col[2,i]+1):(Layout$module.edges.col[1,i+1]-1) )
     }
-  }  
+  }
   rowgaps <- c()
   if (sum(Layout$gap.row.sizes) != 0){
     for (i in 1:(Layout$module.row.n-1)){
       rowgaps <- c(rowgaps, (Layout$module.edges.row[2,i]+1):(Layout$module.edges.row[1,i+1]-1) )
     }
-  } 
+  }
 
   in.gaps.dead <- c()
-  
+
    in.gaps <- function(i,coo){
       return((coo[i,1] %in% colgaps) | (coo[i,2] %in% rowgaps))
-   }   
+   }
    in.gaps.dead <- vector(length=dim(coo.dead)[1])
    for (i in 1:length(in.gaps.dead)){
      in.gaps.dead[i] <- in.gaps(i,coo.dead)
    }
-   
-  if (sum(in.gaps.dead) != 0){ 
-    cat(paste("Warning: ", sum(in.gaps.dead.), 
+
+  if (sum(in.gaps.dead) != 0){
+    cat(paste("Warning: ", sum(in.gaps.dead.),
         " of the coordinates of damaged pixels correspond to locations in gaps between modules of the detector.\n", sep=""))
   }
 
@@ -248,11 +249,5 @@ inconsistency.dead.layout <- function(coo.dead, Layout){
   names(inconsistency) <- c("left", "top","right","bottom","gaps")
   return(inconsistency)
 }
-  
+
 inconsistency.dead.layout(coo.dead, Layout)
-
-
-
-
-
-
