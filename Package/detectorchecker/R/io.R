@@ -38,6 +38,7 @@ matrix_from_tiff <- function(layout, file_path) {
 #' @return Data of a combined dataset from hdf files
 matrix_from_hdf <- function(layout, file_path) {
   data <- NA
+  hdf_data <- NA
 
   # Reading in multiple hdf files at the same time
   if (is.vector(file_path)) {
