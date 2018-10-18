@@ -118,7 +118,14 @@ plot_layout_cnt_mod <- function(layout, file_path = NA) {
 #' @param layout Layout object
 #' @param file_path Output file path
 #' @param adjust Kernel density bandwidth
-plot_layout_density <- function(layout, file_path = NA, adjust = 0.25) {
+plot_layout_density <- function(layout, file_path = NA, adjust = 0.25,
+                                row = NA, col = NA) {
+
+
+  # Check whether the row and col numbers are correct
+
+
+
 
   if(!is.na(file_path)) {
     # starts the graphics device driver
