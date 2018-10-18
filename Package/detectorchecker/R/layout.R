@@ -25,7 +25,7 @@ Default_Layout <- function(name = "Default", date = NA,
                            module_edges_col = NA, module_edges_row = NA,
                            detector_inconsistency = NA,
                            pix_matrix = NA, pix_dead = NA,
-                           dead_stats = NA) {
+                           dead_stats = NA, pix_dead_modules = NA) {
 
   layout <- list(
     name = name,
@@ -48,7 +48,8 @@ Default_Layout <- function(name = "Default", date = NA,
 
     pix_matrix = pix_matrix,
     pix_dead = pix_dead,
-    dead_stats = dead_stats
+    dead_stats = dead_stats,
+    pix_dead_modules = pix_dead_modules
   )
 
   layout <- derive_layout(layout)

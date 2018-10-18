@@ -121,21 +121,27 @@ plot_layout_cnt_mod <- function(layout, file_path = NA) {
 plot_layout_density <- function(layout, file_path = NA, adjust = 0.25,
                                 row = NA, col = NA) {
 
-
-  # Check whether the row and col numbers are correct
-
-
-
-
   if(!is.na(file_path)) {
     # starts the graphics device driver
     ini_graphics(file_path = file_path)
   }
 
-  title <- paste("Dead pixel density, adjust = ", adjust)
+  if (!is.na(row) && !is.na(col)) {
+    # check whether the row and col numbers are correct
+    .check_select(layout, row, col)
 
-  ppp_dead <- get_ppp_dead(layout)
+    # get the ppp for the selected module
+    ppp_dead <- .get_ppp_dead_module(layout, row, col)
 
+    title <- paste("Dead pixel density (row=", row, "col=", col, "), adjust = ", adjust)
+
+  } else {
+    ppp_dead <- get_ppp_dead(layout)
+
+    title <- paste("Dead pixel density, adjust = ", adjust)
+  }
+
+  par(mfrow=c(1,1), mar=c(1,1,3,1))
   image(density(ppp_dead, adjust = adjust), main = title)
 
   if(!is.na(file_path)) {
@@ -484,6 +490,27 @@ get_ppp_dead <- function(layout) {
   ppp_dead <- spatstat::ppp(layout$pix_dead[ , 1], layout$pix_dead[ , 2],
                             c(1, layout$detector_width),
                             c(1, layout$detector_height))
+
+  return(ppp_dead)
+}
+
+#' Generates ppp for the dead pixels for a selected module
+#'
+#' @param layout Layout object
+#' @param row module row number
+#' @param col module column number
+#' @return ppp of dead pixels
+.get_ppp_dead_module <- function(layout, row, col) {
+
+  module_sel <- layout$pix_dead_modules[layout$pix_dead_modules[ , 3] == col &
+                                          layout$pix_dead_modules[ , 4] == row,]
+
+  ppp_dead <- spatstat::ppp(module_sel[ , 1],
+                            module_sel[ , 2],
+                            c(layout$module_edges_col[1, col],
+                              layout$module_edges_col[2, col]),
+                            c(layout$module_edges_row[1, row],
+                              layout$module_edges_row[2, row]))
 
   return(ppp_dead)
 }

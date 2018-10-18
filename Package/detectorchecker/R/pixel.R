@@ -1,3 +1,25 @@
+#' Function assign a module to each dead pixel
+#'
+#' @param layout Layout object
+#' @return dead_modules
+.assign_module <- function(layout) {
+  dead_n <- length(as.vector(layout$pix_dead[ , 2]))
+
+  dead_modules <- data.frame(layout$pix_dead, NA, NA)
+  colnames(dead_modules) <- c("pixcol", "pixrow", "modcol", "modrow")
+
+  # TODO: more elegant with lapply or plyr etc
+  for (i in 1:dead_n) {
+    tmp <- .which_module_idx(layout$pix_dead[i, 1], layout$pix_dead[i, 2],
+                             layout$module_edges_col, layout$module_edges_row)
+
+    dead_modules[i, 3] <- tmp$col
+    dead_modules[i, 4] <- tmp$row
+  }
+
+  return(dead_modules)
+}
+
 # Pixel analysis functions -----------------------------------------------------
 
 #' A function to calculate euclidean distance from the centre

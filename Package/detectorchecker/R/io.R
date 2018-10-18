@@ -190,6 +190,10 @@ load_pix_matrix <- function(layout, file_path) {
   layout$pix_matrix <- pix_matrix
   layout$pix_dead <- pix_dead
 
+  # assigning a module to each dead pixels
+  dead_modules <- .assign_module(layout)
+  layout$pix_dead_modules <- dead_modules
+
   return(layout)
 }
 
