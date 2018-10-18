@@ -11,7 +11,7 @@ Depends: R (>= 3.5.0)
 Imports:
     spatstat, tools, tiff, h5
 Suggests:
-    testthat, knitr, rmarkdown
+    testthat, knitr, rmarkdown, roxygen2, devtools
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true

@@ -1,3 +1,5 @@
+#' @title Layout module
+
 #' A S3 class to represent a detector layout.
 #'
 #' @param name detector's name
@@ -16,6 +18,7 @@
 #' @param pix_matrix pixel matrix
 #' @param pix_dead dead pixels coordinates
 #' @param dead_stats dead pixel statistics
+#' @param pix_dead_modules assigned module for each dead pixel
 #' @return Layout object
 Default_Layout <- function(name = "Default", date = NA,
                            detector_width = NA, detector_height = NA,
@@ -25,7 +28,7 @@ Default_Layout <- function(name = "Default", date = NA,
                            module_edges_col = NA, module_edges_row = NA,
                            detector_inconsistency = NA,
                            pix_matrix = NA, pix_dead = NA,
-                           dead_stats = NA) {
+                           dead_stats = NA, pix_dead_modules = NA) {
 
   layout <- list(
     name = name,
@@ -48,7 +51,8 @@ Default_Layout <- function(name = "Default", date = NA,
 
     pix_matrix = pix_matrix,
     pix_dead = pix_dead,
-    dead_stats = dead_stats
+    dead_stats = dead_stats,
+    pix_dead_modules = pix_dead_modules
   )
 
   layout <- derive_layout(layout)
@@ -67,6 +71,7 @@ Default_Layout <- function(name = "Default", date = NA,
 available_layouts <- c(.Excalibur_name, .PerkinElmerFull_name,
                        .PerkinElmerCropped1600_name, .PerkinElmerRefurbished_name,
                        .Pilatus_name)
+
 # ------------------------------------------------------------------------------
 
 #' A S3 class to represent the Excalibur detector layout.

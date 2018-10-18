@@ -1,3 +1,5 @@
+#' @title Analysis module
+
 #' A S3 class to represent dead pixels statistics summary
 #'
 #' @param dead_n Total number of damaged pixels:
@@ -32,6 +34,7 @@ Dead_Stats <- function(dead_n = NA, module_n = NA, module_count_arr = NA,
 #'
 #' @param layout Layout object
 #' @param file_path Output file path
+#' @importFrom graphics points
 plot_layout_damaged <- function(layout, file_path = NA) {
 
   ppp_dead <- get_ppp_dead(layout)
@@ -118,17 +121,33 @@ plot_layout_cnt_mod <- function(layout, file_path = NA) {
 #' @param layout Layout object
 #' @param file_path Output file path
 #' @param adjust Kernel density bandwidth
-plot_layout_density <- function(layout, file_path = NA, adjust = 0.25) {
+#' @param row Module row number
+#' @param col Module column number
+#' @importFrom graphics image par
+plot_layout_density <- function(layout, file_path = NA, adjust = 0.25,
+                                row = NA, col = NA) {
 
   if(!is.na(file_path)) {
     # starts the graphics device driver
     ini_graphics(file_path = file_path)
   }
 
-  title <- paste("Dead pixel density, adjust = ", adjust)
+  if (!is.na(row) && !is.na(col)) {
+    # check whether the row and col numbers are correct
+    .check_select(layout, row, col)
 
-  ppp_dead <- get_ppp_dead(layout)
+    # get the ppp for the selected module
+    ppp_dead <- .get_ppp_dead_module(layout, row, col)
 
+    title <- paste("Dead pixel density (row=", row, "col=", col, "), adjust = ", adjust)
+
+  } else {
+    ppp_dead <- get_ppp_dead(layout)
+
+    title <- paste("Dead pixel density, adjust = ", adjust)
+  }
+
+  par(mfrow=c(1,1), mar=c(1,1,3,1))
   image(density(ppp_dead, adjust = adjust), main = title)
 
   if(!is.na(file_path)) {
@@ -140,7 +159,10 @@ plot_layout_density <- function(layout, file_path = NA, adjust = 0.25) {
 #'
 #' @param layout Layout object
 #' @param file_path Output file path
-plot_layout_arrows <- function(layout, file_path = NA) {
+#' @param row Module row number
+#' @param col Module column number
+#' @importFrom graphics arrows plot
+plot_layout_arrows <- function(layout, file_path = NA, row = NA, col = NA) {
 
   title <- "NN oriented arrows"
 
@@ -149,9 +171,22 @@ plot_layout_arrows <- function(layout, file_path = NA) {
     ini_graphics(file_path = file_path)
   }
 
-  par(mfrow = c(1, 1), mar = c(1, 1, 3, 1))
+  if (!is.na(row) && !is.na(col)) {
+    # check whether the row and col numbers are correct
+    .check_select(layout, row, col)
 
-  ppp_dead <- get_ppp_dead(layout)
+    # get the ppp for the selected module
+    ppp_dead <- .get_ppp_dead_module(layout, row, col)
+
+    title <- paste("NN oriented arrows (row=", row, "col=", col, ")")
+
+  } else {
+    ppp_dead <- get_ppp_dead(layout)
+
+    title <- "NN oriented arrows"
+  }
+
+  par(mfrow = c(1, 1), mar = c(1, 1, 3, 1))
 
   PPPnn <- ppp_dead[spatstat::nnwhich(ppp_dead)]
 
@@ -243,6 +278,7 @@ glm_pixel_dist_edge_row <- function(layout) {
 #' @param symb_expr symbolic description of the linear predictor
 #' @param family a description of the error distribution
 #' @return Fitted model
+#' @importFrom stats binomial glm
 perform_glm <- function(symb_expr, family = binomial(link = logit)) {
 
   #' @return glm_git fitted model
@@ -255,6 +291,7 @@ perform_glm <- function(symb_expr, family = binomial(link = logit)) {
 #'
 #' @param layout Layout object
 #' @return Dead_Stats object
+#' @importFrom stats chisq.test
 get_dead_stats <- function(layout) {
 
   ppp_dead <- get_ppp_dead(layout)
@@ -309,15 +346,32 @@ dead_stats_summary <- function(layout) {
 #'
 #' @param layout Layout object
 #' @param file_path Output file path
-plot_layout_angles <- function(layout, file_path = NA) {
+#' @param row Module row number
+#' @param col Module column number
+plot_layout_angles <- function(layout, file_path = NA, row = NA, col = NA) {
 
   ppp_dead <- get_ppp_dead(layout)
 
-  title <- paste("NN to points orientations ", ppp_dead$n, " dead pixels\n", sep="")
+
 
   if(!is.na(file_path)) {
     # starts the graphics device driver
     ini_graphics(file_path = file_path)
+  }
+
+  if (!is.na(row) && !is.na(col)) {
+    # check whether the row and col numbers are correct
+    .check_select(layout, row, col)
+
+    # get the ppp for the selected module
+    ppp_dead <- .get_ppp_dead_module(layout, row, col)
+
+    title <- paste("NN to points orientations (row=", row, "col=", col, ")")
+
+  } else {
+    ppp_dead <- get_ppp_dead(layout)
+
+    title <- paste("NN to points orientations ", ppp_dead$n, " dead pixels\n", sep="")
   }
 
   par(mfrow = c(1, 1), mar = c(1, 1, 3, 1))
@@ -345,73 +399,6 @@ orientnnPPP <- function(PPPdata) {
   return(round(apply(rbind(A,Ann), 2, orientcolfct), digits=3))
 }
 
-# TODO: Fix this
-#' Testing analysis functions
-#'
-#' @param layout Layout object
-module_indiv_rose <- function(layout) {
-
-  dirOut <- getwd()
-
-  ppp_dead <- get_ppp_dead(layout)
-
-  dead_n <- length(as.vector(layout$pix_dead[ , 2]))
-
-  dead_modules <- data.frame(layout$pix_dead, NA, NA)
-  colnames(dead_modules) <- c("pixcol", "pixrow", "modcol", "modrow")
-
-  # TODO: more elegant with lapply or plyr etc
-  for (i in 1:dead_n) {
-    tmp <- .which_module_idx(layout$pix_dead[i, 1], layout$pix_dead[i, 2],
-                             layout$module_edges_col, layout$module_edges_row)
-
-    dead_modules[i, 3] <- tmp$col
-    dead_modules[i, 4] <- tmp$row
-  }
-
-  # Make angle histograms (rose plots) and pixel plots with arrows
-  for (i in 1:layout$module_col_n) {
-    for (j in 1:layout$module_row_n) {
-
-      # goes through modules in the order: start bottom left, move up, start over 2nd col, move up...
-      dead_module_select <- dead_modules[dead_modules[ , 3] == i & dead_modules[ , 4] == j, ]
-
-      ppp_dead_module_select <- spatstat::ppp(dead_module_select[ , 1],
-                                    dead_module_select[ , 2],
-                                    c(layout$module_edges_col[1, i],
-                                      layout$module_edges_col[2, i]),
-                                    c(layout$module_edges_row[1, j],
-                                      layout$module_edges_row[2, j]))
-
-      # need at least 2 points to calculate neighbours!
-      if (ppp_dead_module_select$n >= 2){
-
-        PPPnn <- ppp_dead_module_select[spatstat::nnwhich(ppp_dead_module_select)]
-
-        pdf(paste(dirOut, "/", "anglesOrientNNindivModules_DIY_",i,"_",j,"_",
-                  layout$name, ".pdf", sep = ""), bg = "transparent")
-
-        par(mfrow = c(1, 2), mar = c(1, 1, 5, 1), oma = c(1, 1, 5, 1))
-
-        plot(ppp_dead_module_select, main = "NN oriented arrows")
-
-        arrows(PPPnn$x, PPPnn$y,
-               ppp_dead_module_select$x, ppp_dead_module_select$y,
-               angle = 15, length = 0.07, col = "red")
-
-        spatstat::rose(orientnnPPP(ppp_dead_module_select), breaks=72,
-             main="NN oriented angles")
-
-        title(paste("Module in layout position col=", i,
-                    " row=", j, "\n", ppp_dead_module_select$n,
-                    " dead pixels\n", sep = ""), outer = TRUE)
-
-        dev.off()
-      }
-    }
-  }
-}
-
 #' Estimates the norm of a vector
 #'
 #' @param v vector
@@ -430,10 +417,10 @@ dist_vec <- function(v,w) {
   norm_vec(v - w)
 }
 
-# Calculates distance and orientation of the oriented vector between two points
-# in order of the second pointing to first (reflecting nearest neighbour (nn) framework)
-# v, w point coordinates indicating vectors wrt to the origin.
-# Values: distance and orientation (in [0,360) degrees) of w pointing towards v.
+#' Calculates distance and orientation of the oriented vector between two points
+#' in order of the second pointing to first (reflecting nearest neighbour (nn) framework)
+#' v, w point coordinates indicating vectors wrt to the origin.
+#' Values: distance and orientation (in [0,360) degrees) of w pointing towards v.
 #' @param v vector
 #' @param w vector
 #' @return distance and orientation of the oriented vector between two points
@@ -481,11 +468,34 @@ get_ppp_dead <- function(layout) {
   return(ppp_dead)
 }
 
+#' Generates ppp for the dead pixels for a selected module
+#'
+#' @param layout Layout object
+#' @param row module row number
+#' @param col module column number
+#' @return ppp of dead pixels
+.get_ppp_dead_module <- function(layout, row, col) {
+
+  module_sel <- layout$pix_dead_modules[layout$pix_dead_modules[ , 3] == col &
+                                          layout$pix_dead_modules[ , 4] == row,]
+
+  ppp_dead <- spatstat::ppp(module_sel[ , 1],
+                            module_sel[ , 2],
+                            c(layout$module_edges_col[1, col],
+                              layout$module_edges_col[2, col]),
+                            c(layout$module_edges_row[1, row],
+                              layout$module_edges_row[2, row]))
+
+  return(ppp_dead)
+}
+
 #' Plots K, F, G functions
 #'
 #' @param layout Layout object
 #' @param func Function name
 #' @param file_path Output file path
+#' @importFrom stats density
+#' @importFrom grDevices dev.off
 plot_kfg <- function(layout, func, file_path = NA) {
 
   if (missing(func) || is.null(func)) {

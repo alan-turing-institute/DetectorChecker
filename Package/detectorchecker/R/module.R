@@ -1,3 +1,5 @@
+#' @title Module module
+
 # TODO: improve the definition of the function
 #' Which module function
 #'
@@ -47,4 +49,19 @@
   tmp <-min(xy - module_edges[1, i], module_edges[2, i] - xy)
 
   return(tmp)
+}
+
+# Checks if the selected row and column are within the boundaries of the layout
+.check_select <- function(layout, row, col) {
+
+  ok <- TRUE
+
+  if ((row < 1) || (col < 1) || (row > layout$module_row_n) || (col > layout$module_col_n)) {
+    ok <- FALSE
+  }
+
+  if (!ok) {
+
+    stop("Incorrectly chosen row and/or column indices.", "row: ", row, ". Must be > 0 and < ", layout$module_row_n)
+  }
 }
