@@ -1,3 +1,5 @@
+#' @title Layout module
+
 #' A S3 class to represent a detector layout.
 #'
 #' @param name detector's name
@@ -16,6 +18,7 @@
 #' @param pix_matrix pixel matrix
 #' @param pix_dead dead pixels coordinates
 #' @param dead_stats dead pixel statistics
+#' @param pix_dead_modules assigned module for each dead pixel
 #' @return Layout object
 Default_Layout <- function(name = "Default", date = NA,
                            detector_width = NA, detector_height = NA,

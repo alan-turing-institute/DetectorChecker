@@ -1,3 +1,5 @@
+#' @title Pixel module
+
 #' Function assign a module to each dead pixel
 #'
 #' @param layout Layout object
@@ -295,15 +297,15 @@ inconsist_dead_layout <- function(dead_data, layout) {
   in_gaps_dead <- vector(length = dim(dead_data)[1])
 
   for (i in 1:length(in_gaps_dead)){
-    in_gaps_dead[i] <- in.gaps(i, dead_data)
+    in_gaps_dead[i] <- in_gaps(i, dead_data)
   }
 
-  if (sum(in.gaps.dead) != 0){
+  if (sum(in_gaps_dead) != 0){
     cat(paste("Warning: ", sum(in_gaps_dead),
               " of the coordinates of damaged pixels correspond to locations in gaps between modules of the detector.\n", sep=""))
   }
 
-  inconsistency <- list(outleft, outtop, outright, outbottom, sum(in.gaps.dead))
+  inconsistency <- list(outleft, outtop, outright, outbottom, sum(in_gaps_dead))
   names(inconsistency) <- c("left", "top","right","bottom","gaps")
   return(inconsistency)
 }

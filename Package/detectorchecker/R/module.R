@@ -1,3 +1,5 @@
+#' @title Module module
+
 # TODO: improve the definition of the function
 #' Which module function
 #'

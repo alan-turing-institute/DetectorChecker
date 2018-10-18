@@ -1,3 +1,5 @@
+#' @title Analysis module
+
 #' A S3 class to represent dead pixels statistics summary
 #'
 #' @param dead_n Total number of damaged pixels:
@@ -32,6 +34,7 @@ Dead_Stats <- function(dead_n = NA, module_n = NA, module_count_arr = NA,
 #'
 #' @param layout Layout object
 #' @param file_path Output file path
+#' @importFrom graphics points
 plot_layout_damaged <- function(layout, file_path = NA) {
 
   ppp_dead <- get_ppp_dead(layout)
@@ -120,6 +123,7 @@ plot_layout_cnt_mod <- function(layout, file_path = NA) {
 #' @param adjust Kernel density bandwidth
 #' @param row Module row number
 #' @param col Module column number
+#' @importFrom graphics image par
 plot_layout_density <- function(layout, file_path = NA, adjust = 0.25,
                                 row = NA, col = NA) {
 
@@ -155,6 +159,9 @@ plot_layout_density <- function(layout, file_path = NA, adjust = 0.25,
 #'
 #' @param layout Layout object
 #' @param file_path Output file path
+#' @param row Module row number
+#' @param col Module column number
+#' @importFrom graphics arrows plot
 plot_layout_arrows <- function(layout, file_path = NA, row = NA, col = NA) {
 
   title <- "NN oriented arrows"
@@ -271,6 +278,7 @@ glm_pixel_dist_edge_row <- function(layout) {
 #' @param symb_expr symbolic description of the linear predictor
 #' @param family a description of the error distribution
 #' @return Fitted model
+#' @importFrom stats binomial glm
 perform_glm <- function(symb_expr, family = binomial(link = logit)) {
 
   #' @return glm_git fitted model
@@ -283,6 +291,7 @@ perform_glm <- function(symb_expr, family = binomial(link = logit)) {
 #'
 #' @param layout Layout object
 #' @return Dead_Stats object
+#' @importFrom stats chisq.test
 get_dead_stats <- function(layout) {
 
   ppp_dead <- get_ppp_dead(layout)
@@ -337,6 +346,8 @@ dead_stats_summary <- function(layout) {
 #'
 #' @param layout Layout object
 #' @param file_path Output file path
+#' @param row Module row number
+#' @param col Module column number
 plot_layout_angles <- function(layout, file_path = NA, row = NA, col = NA) {
 
   ppp_dead <- get_ppp_dead(layout)
@@ -406,10 +417,10 @@ dist_vec <- function(v,w) {
   norm_vec(v - w)
 }
 
-# Calculates distance and orientation of the oriented vector between two points
-# in order of the second pointing to first (reflecting nearest neighbour (nn) framework)
-# v, w point coordinates indicating vectors wrt to the origin.
-# Values: distance and orientation (in [0,360) degrees) of w pointing towards v.
+#' Calculates distance and orientation of the oriented vector between two points
+#' in order of the second pointing to first (reflecting nearest neighbour (nn) framework)
+#' v, w point coordinates indicating vectors wrt to the origin.
+#' Values: distance and orientation (in [0,360) degrees) of w pointing towards v.
 #' @param v vector
 #' @param w vector
 #' @return distance and orientation of the oriented vector between two points
@@ -483,6 +494,8 @@ get_ppp_dead <- function(layout) {
 #' @param layout Layout object
 #' @param func Function name
 #' @param file_path Output file path
+#' @importFrom stats density
+#' @importFrom grDevices dev.off
 plot_kfg <- function(layout, func, file_path = NA) {
 
   if (missing(func) || is.null(func)) {
