@@ -68,6 +68,7 @@ Default_Layout <- function(name = "Default", date = NA,
 available_layouts <- c(.Excalibur_name, .PerkinElmerFull_name,
                        .PerkinElmerCropped1600_name, .PerkinElmerRefurbished_name,
                        .Pilatus_name)
+
 # ------------------------------------------------------------------------------
 
 #' A S3 class to represent the Excalibur detector layout.

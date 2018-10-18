@@ -163,6 +163,8 @@ file_path <- "../tests/testthat/dead_pix/PerkinElmer/BadPixelMap_0.bpm/BadPixelM
 layout_perkin <- detectorchecker:::load_pix_matrix(layout = layout_perkin, file_path = file_path)
 
 detectorchecker:::plot_layout_arrows(layout = layout_perkin)
+
+detectorchecker:::plot_layout_arrows(layout = layout_perkin, row = 1, col = 5)
 ```
 
 # Angles
@@ -175,6 +177,8 @@ file_path <- "../tests/testthat/dead_pix/PerkinElmer/BadPixelMap_0.bpm/BadPixelM
 layout_perkin <- detectorchecker:::load_pix_matrix(layout = layout_perkin, file_path = file_path)
 
 detectorchecker:::plot_layout_angles(layout = layout_perkin)
+
+detectorchecker:::plot_layout_angles(layout = layout_perkin, row = 1, col = 5)
 ```
 
 ## Model fitting
