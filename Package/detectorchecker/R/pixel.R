@@ -143,10 +143,12 @@ dist_edge_min <- function(layout) {
 #' @param width Plot width
 #' @param height Plot height
 #' @param file_path Output path with an extension
-plot_pixel <- function(data, width, height, file_path) {
+plot_pixel <- function(data, width, height, file_path = NA) {
 
-  # starts the graphics device driver
-  ini_graphics(file_path = file_path)
+  if(!is.na(file_path)) {
+    # starts the graphics device driver
+    ini_graphics(file_path = file_path)
+  }
 
   iw <- c(1:width)
   ih <- c(1:height)
@@ -154,14 +156,17 @@ plot_pixel <- function(data, width, height, file_path) {
   # TODO: iw, ih?
   # note t() used to get orientations right in plots
   image(iw, ih, t(data))
-  dev.off()
+
+  if(!is.na(file_path)) {
+    dev.off()
+  }
 }
 
 #' Calculates and plots pixel euclidean distance from the centre
 #'
 #' @param layout Layout object
 #' @param file_path Output file path
-plot_pixel_ctr_eucl <- function(layout, file_path = "pixel_ctr_eucl.jpg") {
+plot_pixel_ctr_eucl <- function(layout, file_path = NA) {
 
   dist <- pixel_dist_ctr_eucl(layout)
 
@@ -173,7 +178,7 @@ plot_pixel_ctr_eucl <- function(layout, file_path = "pixel_ctr_eucl.jpg") {
 #'
 #' @param layout Layout object
 #' @param file_path Output file path
-plot_pixel_ctr_linf <- function(layout, file_path = "pixel_ctr_linf.jpg") {
+plot_pixel_ctr_linf <- function(layout, file_path = NA) {
 
   dist <- pixel_dist_ctr_linf(layout)
 
@@ -185,7 +190,7 @@ plot_pixel_ctr_linf <- function(layout, file_path = "pixel_ctr_linf.jpg") {
 #'
 #' @param layout Layout object
 #' @param file_path Output file path
-plot_pixel_dist_corner <- function(layout, file_path = "pixel_dist_corner.jpg") {
+plot_pixel_dist_corner <- function(layout, file_path = NA) {
 
   dist <- dist_corner(layout)
 
@@ -197,7 +202,7 @@ plot_pixel_dist_corner <- function(layout, file_path = "pixel_dist_corner.jpg") 
 #'
 #' @param layout Layout object
 #' @param file_path Output file path
-plot_pixel_dist_edge_col <- function(layout, file_path = "pixel_dist_edge_col.jpg") {
+plot_pixel_dist_edge_col <- function(layout, file_path = NA) {
 
   dist <- dist_edge_col(layout)
 
@@ -209,7 +214,7 @@ plot_pixel_dist_edge_col <- function(layout, file_path = "pixel_dist_edge_col.jp
 #'
 #' @param layout Layout object
 #' @param file_path Output file path
-plot_pixel_dist_edge_row <- function(layout, file_path = "pixel_dist_edge_row.jpg") {
+plot_pixel_dist_edge_row <- function(layout, file_path = NA) {
 
   dist <- dist_edge_row(layout)
 
@@ -221,7 +226,7 @@ plot_pixel_dist_edge_row <- function(layout, file_path = "pixel_dist_edge_row.jp
 #'
 #' @param layout Layout object
 #' @param file_path Output file path
-plot_pixel_dist_edge <- function(layout, file_path = "pixel_dist_edge.jpg") {
+plot_pixel_dist_edge <- function(layout, file_path = NA) {
 
   dist <- dist_edge_min(layout)
 
@@ -259,9 +264,9 @@ inconsist_dead_layout <- function(dead_data, layout) {
     }
   }
 
-  in.gaps.dead <- c()
+  in_gaps_dead <- c()
 
-  in.gaps <- function(i, coo) {
+  in_gaps <- function(i, coo) {
     return((coo[i, 1] %in% colgaps) | (coo[i, 2] %in% rowgaps))
   }
 
