@@ -1,8 +1,5 @@
 .DS_Store
 
-# Test file
-Package/detectorchecker/vignettes/TEST.Rmd
-
 # Manual files
 Package/detectorchecker/man/
 

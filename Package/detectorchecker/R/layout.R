@@ -20,6 +20,7 @@
 #' @param dead_stats dead pixel statistics
 #' @param pix_dead_modules assigned module for each dead pixel
 #' @return Layout object
+#' @export
 Default_Layout <- function(name = "Default", date = NA,
                            detector_width = NA, detector_height = NA,
                            module_col_n = NA, module_row_n = NA,
@@ -68,6 +69,7 @@ Default_Layout <- function(name = "Default", date = NA,
 .PerkinElmerRefurbished_name <- "PerkinElmerRefurbished"
 .Pilatus_name <- "Pilatus"
 
+#' @export
 available_layouts <- c(.Excalibur_name, .PerkinElmerFull_name,
                        .PerkinElmerCropped1600_name, .PerkinElmerRefurbished_name,
                        .Pilatus_name)
@@ -77,6 +79,7 @@ available_layouts <- c(.Excalibur_name, .PerkinElmerFull_name,
 #' A S3 class to represent the Excalibur detector layout.
 #'
 #' @return Excalibur layout object
+#' @export
 Excalibur_Layout <- function() {
   name <- .Excalibur_name
 
@@ -99,6 +102,7 @@ Excalibur_Layout <- function() {
 #' A S3 class to represent the PerkinElmerFull detector layout.
 #'
 #' @return PerkinElmerFul layout object
+#' @export
 PerkinElmerFull_Layout <- function() {
 
   name <- .PerkinElmerFull_name
@@ -122,6 +126,7 @@ PerkinElmerFull_Layout <- function() {
 #' A S3 class to represent the PerkinElmerCropped1600 detector layout.
 #'
 #' @return PerkinElmerCropped1600 layout object
+#' @export
 PerkinElmerCropped1600_Layout <- function() {
 
   name <- .PerkinElmerCropped1600_name
@@ -145,6 +150,7 @@ PerkinElmerCropped1600_Layout <- function() {
 #' A S3 class to represent the PerkinElmerRefurbished detector layout.
 #'
 #' @return PerkinElmerRefurbished layout object
+#' @export
 PerkinElmerRefurbished_Layout <- function() {
 
   name <- .PerkinElmerRefurbished_name
@@ -168,6 +174,7 @@ PerkinElmerRefurbished_Layout <- function() {
 #' A S3 class to represent the PerkinElmerRefurbished detector layout.
 #'
 #' @return Pilatus layout object
+#' @export
 Pilatus_Layout <- function() {
 
   name <- .Pilatus_name
@@ -194,6 +201,7 @@ Pilatus_Layout <- function() {
 #'
 #' @param layout_name The name of the layout
 #' @return True or False
+#' @export
 check_layout_avail <- function(layout_name) {
 
   avail <- layout_name %in% available_layouts
@@ -224,6 +232,7 @@ check_layout_avail <- function(layout_name) {
 #'
 #' @param layout_name The name of the layout
 #' @return Layout object
+#' @export
 create_module <- function(layout_name) {
 
   layout <- NA
@@ -260,6 +269,7 @@ create_module <- function(layout_name) {
 #' Basic checks if parameters entered (slightly redundant on purpose) add up
 #'
 #' @param layout Layout object
+#' @export
 layout_consist_check <- function(layout = NA) {
   if (is.list(layout)) {
 
@@ -340,6 +350,7 @@ layout_consist_check <- function(layout = NA) {
 #' @param m vector of module sizes
 #' @param g vectors of gap sizes
 #' @return Matrix with the information about the edges
+#' @export
 layout_edges <- function(m, g) {
 
   if (length(m) - 1 != length(g)) {
@@ -371,6 +382,7 @@ layout_edges <- function(m, g) {
 #' i.e. for each module two pairs: first/last col and first/last row.
 #' @param layout Layout object
 #' @return Layout object
+#' @export
 derive_layout <- function(layout){
 
   module_edges_col <- layout_edges(layout$module_col_sizes, layout$gap_col_sizes)
@@ -391,6 +403,7 @@ derive_layout <- function(layout){
 #'
 #' @param layout Layout object
 #' @return Point pattern dataset
+#' @export
 create_ppp_edges_col <- function(layout) {
 
   vedges <- as.vector(layout$module_edges_col)
@@ -409,6 +422,7 @@ create_ppp_edges_col <- function(layout) {
 #'
 #' @param layout Layout object
 #' @return Point pattern dataset
+#' @export
 create_ppp_edges_row <- function(layout) {
 
   vedges <- as.vector(layout$module_edges_row)
@@ -427,6 +441,7 @@ create_ppp_edges_row <- function(layout) {
 #'
 #' @param layout Layout object
 #' @return Point pattern dataset
+#' @export
 create_ppp_gaps_col <- function(layout) {
   vgaps <- c()
 
@@ -449,6 +464,7 @@ create_ppp_gaps_col <- function(layout) {
 #'
 #' @param layout Layout object
 #' @return Point pattern dataset
+#' @export
 create_ppp_gaps_row <- function(layout) {
   vgaps <- c()
 
@@ -470,6 +486,7 @@ create_ppp_gaps_row <- function(layout) {
 #'
 #' @param layout Layout object
 #' @param file_path Output file path
+#' @export
 plot_layout <- function(layout, file_path = NA) {
 
   ppp_edges_col <- create_ppp_edges_col(layout)
@@ -517,6 +534,7 @@ plot_layout <- function(layout, file_path = NA) {
 #'
 #' @param layout Layout object
 #' @return String with the layout summary
+#' @export
 layout_summary <- function(layout) {
 
   summary <- paste("Detector:", "\n", "")

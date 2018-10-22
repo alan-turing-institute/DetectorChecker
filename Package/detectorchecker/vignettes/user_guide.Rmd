@@ -28,45 +28,45 @@ library(detectorchecker)
 ### To check available layouts:
 
 ```{r}
-detectorchecker:::available_layouts
+available_layouts
 ```
 
 ### To create layout object
 
 ```{r}
-pilatus_layout <- detectorchecker:::create_module("Pilatus")
+pilatus_layout <- create_module("Pilatus")
 ```
 
 ### To visualise layout object
 
 ```{r}
-detectorchecker:::plot_layout(pilatus_layout)
+plot_layout(pilatus_layout)
 ```
 
 ### Layout analysis
 
 ```{r}
-detectorchecker:::plot_pixel_ctr_eucl(pilatus_layout)
+plot_pixel_ctr_eucl(pilatus_layout)
 ```
 
 ```{r}
-detectorchecker:::plot_pixel_ctr_linf(pilatus_layout)
+plot_pixel_ctr_linf(pilatus_layout)
 ```
 
 ```{r}
-detectorchecker:::plot_pixel_dist_corner(pilatus_layout)
+plot_pixel_dist_corner(pilatus_layout)
 ```
 
 ```{r}
-detectorchecker:::plot_pixel_dist_edge_col(pilatus_layout)
+plot_pixel_dist_edge_col(pilatus_layout)
 ```
 
 ```{r}
-detectorchecker:::plot_pixel_dist_edge_row(pilatus_layout)
+plot_pixel_dist_edge_row(pilatus_layout)
 ```
 
 ```{r}
-detectorchecker:::plot_pixel_dist_edge(pilatus_layout)
+plot_pixel_dist_edge(pilatus_layout)
 ```
 
 ### To upload pixel file
@@ -74,31 +74,31 @@ detectorchecker:::plot_pixel_dist_edge(pilatus_layout)
 #### TIFF format
 
 ```{r}
-pilatus_layout <- detectorchecker:::create_module("Pilatus")
+pilatus_layout <- create_module("Pilatus")
 
 file_path <- "../tests/testthat/dead_pix/Pilatus/badpixel_mask.tif"
 
-pilatus_layout <- detectorchecker:::load_pix_matrix(layout = pilatus_layout, file_path = file_path)
+pilatus_layout <- load_pix_matrix(layout = pilatus_layout, file_path = file_path)
 
-detectorchecker:::plot_layout_damaged(layout = pilatus_layout)
+plot_layout_damaged(layout = pilatus_layout)
 ```
 
 #### XML format
 
 ```{r}
-layout_perkin <- detectorchecker:::create_module("PerkinElmerFull")
+layout_perkin <- create_module("PerkinElmerFull")
 
 file_path <- "../tests/testthat/dead_pix/PerkinElmer/BadPixelMap_0.bpm/BadPixelMap.bpm.xml"
 
-layout_perkin <- detectorchecker:::load_pix_matrix(layout = layout_perkin, file_path = file_path)
+layout_perkin <- load_pix_matrix(layout = layout_perkin, file_path = file_path)
 
-detectorchecker:::plot_layout_damaged(layout = layout_perkin)
+plot_layout_damaged(layout = layout_perkin)
 ```
 
 #### HDF
 
 ```{r}
-layout_exc <- detectorchecker:::create_module("Excalibur")
+layout_exc <- create_module("Excalibur")
 
 file_path <- c("../tests/testthat/dead_pix/Excalibur/pixelmask.fem1.hdf", 
                "../tests/testthat/dead_pix/Excalibur/pixelmask.fem2.hdf",
@@ -107,106 +107,109 @@ file_path <- c("../tests/testthat/dead_pix/Excalibur/pixelmask.fem1.hdf",
                "../tests/testthat/dead_pix/Excalibur/pixelmask.fem5.hdf",
                "../tests/testthat/dead_pix/Excalibur/pixelmask.fem6.hdf")
 
-layout_exc <- detectorchecker:::load_pix_matrix(layout = layout_exc, file_path = file_path)
+layout_exc <- load_pix_matrix(layout = layout_exc, file_path = file_path)
 
-detectorchecker:::plot_layout_damaged(layout = layout_exc)
+plot_layout_damaged(layout = layout_exc)
 ```
 
 ### Damaged pixel density
 
 ```{r}
-layout_perkin <- detectorchecker:::create_module("PerkinElmerFull")
+layout_perkin <- create_module("PerkinElmerFull")
 
 file_path <- "../tests/testthat/dead_pix/PerkinElmer/BadPixelMap_0.bpm/BadPixelMap.bpm.xml"
 
-layout_perkin <- detectorchecker:::load_pix_matrix(layout = layout_perkin, file_path = file_path)
+layout_perkin <- load_pix_matrix(layout = layout_perkin, file_path = file_path)
 
-detectorchecker:::plot_layout_density(layout = layout_perkin, adjust = 0.5)
+plot_layout_density(layout = layout_perkin, adjust = 0.5)
 
-detectorchecker:::plot_layout_density(layout = layout_perkin, adjust = 0.5, row = 1, col = 2)
+plot_layout_density(layout = layout_perkin, adjust = 0.5, row = 1, col = 2)
+
 ```
 
 ### Summaries
 
 ```{r}
-layout_perkin <- detectorchecker:::create_module("PerkinElmerFull")
+layout_perkin <- create_module("PerkinElmerFull")
 
 file_path <- "../tests/testthat/dead_pix/PerkinElmer/BadPixelMap_0.bpm/BadPixelMap.bpm.xml"
 
-layout_perkin <- detectorchecker:::load_pix_matrix(layout = layout_perkin, file_path = file_path)
+layout_perkin <- load_pix_matrix(layout = layout_perkin, file_path = file_path)
 
-cat(detectorchecker:::layout_summary(layout_perkin))
-cat(detectorchecker:::dead_stats_summary(layout_perkin))
+cat(layout_summary(layout_perkin))
+cat(dead_stats_summary(layout_perkin))
 ```
 
 ### Damaged pixel counts per module
 
 ```{r}
-layout_perkin <- detectorchecker:::create_module("PerkinElmerFull")
+layout_perkin <- create_module("PerkinElmerFull")
 
 file_path <- "../tests/testthat/dead_pix/PerkinElmer/BadPixelMap_0.bpm/BadPixelMap.bpm.xml"
 
-layout_perkin <- detectorchecker:::load_pix_matrix(layout = layout_perkin, file_path = file_path)
+layout_perkin <- load_pix_matrix(layout = layout_perkin, file_path = file_path)
 
-layout_perkin <- detectorchecker:::get_dead_stats(layout_perkin)
+layout_perkin <- get_dead_stats(layout_perkin)
 
-detectorchecker:::plot_layout_cnt_mod(layout = layout_perkin)
+plot_layout_cnt_mod(layout = layout_perkin)
 ```
 
 ### Arrows
 
 ```{r}
-layout_perkin <- detectorchecker:::create_module("PerkinElmerFull")
+layout_perkin <- create_module("PerkinElmerFull")
 
 file_path <- "../tests/testthat/dead_pix/PerkinElmer/BadPixelMap_0.bpm/BadPixelMap.bpm.xml"
 
-layout_perkin <- detectorchecker:::load_pix_matrix(layout = layout_perkin, file_path = file_path)
+layout_perkin <- load_pix_matrix(layout = layout_perkin, file_path = file_path)
 
-detectorchecker:::plot_layout_arrows(layout = layout_perkin)
+plot_layout_arrows(layout = layout_perkin)
 
-detectorchecker:::plot_layout_arrows(layout = layout_perkin, row = 1, col = 5)
+plot_layout_arrows(layout = layout_perkin, row = 1, col = 5)
+
 ```
 
 # Angles
 
 ```{r}
-layout_perkin <- detectorchecker:::create_module("PerkinElmerFull")
+layout_perkin <- create_module("PerkinElmerFull")
 
 file_path <- "../tests/testthat/dead_pix/PerkinElmer/BadPixelMap_0.bpm/BadPixelMap.bpm.xml"
 
-layout_perkin <- detectorchecker:::load_pix_matrix(layout = layout_perkin, file_path = file_path)
+layout_perkin <- load_pix_matrix(layout = layout_perkin, file_path = file_path)
 
-detectorchecker:::plot_layout_angles(layout = layout_perkin)
+plot_layout_angles(layout = layout_perkin)
 
-detectorchecker:::plot_layout_angles(layout = layout_perkin, row = 1, col = 5)
+plot_layout_angles(layout = layout_perkin, row = 1, col = 5)
+
 ```
 
 ## Model fitting
 
 ```{r}
-layout_pilatus <- detectorchecker:::create_module("Pilatus")
+layout_pilatus <- create_module("Pilatus")
 
 file_path <- "../tests/testthat/dead_pix/Pilatus/badpixel_mask.tif"
 
-layout_pilatus <- detectorchecker:::load_pix_matrix(layout = layout_pilatus, file_path = file_path)
+layout_pilatus <- load_pix_matrix(layout = layout_pilatus, file_path = file_path)
 
-glm_fit <- detectorchecker:::glm_pixel_ctr_eucl(layout = layout_pilatus)
+glm_fit <- glm_pixel_ctr_eucl(layout = layout_pilatus)
 
 summary(glm_fit)
 ```
 
 #### Similarly:
 ```{r}
-layout_pilatus <- detectorchecker:::create_module("Pilatus")
+layout_pilatus <- create_module("Pilatus")
 
 file_path <- "../tests/testthat/dead_pix/Pilatus/badpixel_mask.tif"
 
-layout_pilatus <- detectorchecker:::load_pix_matrix(layout = layout_pilatus, file_path = file_path)
+layout_pilatus <- load_pix_matrix(layout = layout_pilatus, file_path = file_path)
 
-dist_col <- detectorchecker:::dist_edge_col(layout_pilatus)
-dist_row <- detectorchecker:::dist_edge_row(layout_pilatus)
+dist_col <- dist_edge_col(layout_pilatus)
+dist_row <- dist_edge_row(layout_pilatus)
 
-glm_fit <- detectorchecker:::perform_glm(as.vector(layout_pilatus$pix_matrix) ~ as.vector(dist_col) + as.vector(dist_row))
+glm_fit <- perform_glm(as.vector(layout_pilatus$pix_matrix) ~ as.vector(dist_col) + as.vector(dist_row))
 
 summary(glm_fit)
 
@@ -217,27 +220,27 @@ summary(glm_fit)
 ### K, F, G plots
 
 ```{r}
-layout_perkin <- detectorchecker:::create_module("PerkinElmerFull")
+layout_perkin <- create_module("PerkinElmerFull")
 
 file_path <- "../tests/testthat/dead_pix/PerkinElmer/BadPixelMap_0.bpm/BadPixelMap.bpm.xml"
 
-layout_perkin <- detectorchecker:::load_pix_matrix(layout = layout_perkin, file_path = file_path)
+layout_perkin <- load_pix_matrix(layout = layout_perkin, file_path = file_path)
 
-detectorchecker:::plot_kfg(layout = layout_perkin, func = "K")
-detectorchecker:::plot_kfg(layout = layout_perkin, func = "F")
-detectorchecker:::plot_kfg(layout = layout_perkin, func = "G")
+plot_kfg(layout = layout_perkin, func = "K")
+plot_kfg(layout = layout_perkin, func = "F")
+plot_kfg(layout = layout_perkin, func = "G")
 ```
 
 ### Inhomogenious K, F, G plots
 
 ```{r}
-layout_pilatus <- detectorchecker:::create_module("Pilatus")
+layout_pilatus <- create_module("Pilatus")
 
 file_path <- "../tests/testthat/dead_pix/Pilatus/badpixel_mask.tif"
 
-layout_pilatus <- detectorchecker:::load_pix_matrix(layout = layout_pilatus, file_path = file_path)
+layout_pilatus <- load_pix_matrix(layout = layout_pilatus, file_path = file_path)
 
-detectorchecker:::plot_kfg(layout = layout_pilatus, func = "Kinhom")
-detectorchecker:::plot_kfg(layout = layout_pilatus, func = "Finhom")
-detectorchecker:::plot_kfg(layout = layout_pilatus, func = "Ginhom")
+plot_kfg(layout = layout_pilatus, func = "Kinhom")
+plot_kfg(layout = layout_pilatus, func = "Finhom")
+plot_kfg(layout = layout_pilatus, func = "Ginhom")
 ```
