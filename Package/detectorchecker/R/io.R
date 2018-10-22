@@ -1,3 +1,6 @@
+#' @title I/O module
+
+
 #' Reads in tiff file and returns a pixel matrix
 #'
 #' @param layout Layout object
@@ -145,6 +148,7 @@ matrix_from_xml <- function(layout, file_path) {
 #' @param layout The name of the layout to be used
 #' @param file_path Path(s) to the file(s) containing dead pixel information
 #' @return Layout object
+#' @importFrom grDevices jpeg pdf
 #' @export
 load_pix_matrix <- function(layout, file_path) {
 
@@ -178,6 +182,10 @@ load_pix_matrix <- function(layout, file_path) {
 
   layout$pix_matrix <- pix_matrix
   layout$pix_dead <- pix_dead
+
+  # assigning a module to each dead pixels
+  dead_modules <- .assign_module(layout)
+  layout$pix_dead_modules <- dead_modules
 
   return(layout)
 }

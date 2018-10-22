@@ -1,3 +1,5 @@
+#' @title Utils module
+
 #' Calculates the trace value of a square matrix
 #'
 #' @param m A square matrix
