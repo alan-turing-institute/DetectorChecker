@@ -1,0 +1,26 @@
+---
+title: "TEST"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+layout_perkin <- create_module("PerkinElmerFull")
+
+file_path <- "../tests/testthat/dead_pix/PerkinElmer/BadPixelMap_0.bpm/BadPixelMap.bpm.xml"
+
+layout_perkin <- load_pix_matrix(layout = layout_perkin, file_path = file_path)
+
+dead_pix_mask <- get_dead_pix_mask(layout = layout_perkin)
+
+pix_events <- mask_to_events(layout = layout_perkin, dead_pix_mask)
+
+pe_ppp <- pixel_events_2_ppp(layout = layout_perkin, pix_events)
+
+plot_pixel_events(pe_ppp)
+
+```
+

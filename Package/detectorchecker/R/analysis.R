@@ -8,8 +8,8 @@
 #' @param Chisq_s The Chi-Squared test statistic value
 #' @param Chisq_df Chi-Squared degrees of freedom
 #' @param Chisq_p Chi-Squared p-value
-#'
 #' @return Dead_Stats object
+#' @export
 Dead_Stats <- function(dead_n = NA, module_n = NA, module_count_arr = NA,
                        module_count = NA, avg_dead_mod = NA,
                        Chisq_s = NA, Chisq_df = NA, Chisq_p = NA) {
@@ -32,6 +32,7 @@ Dead_Stats <- function(dead_n = NA, module_n = NA, module_count_arr = NA,
 #'
 #' @param layout Layout object
 #' @param file_path Output file path
+#' @export
 plot_layout_damaged <- function(layout, file_path = NA) {
 
   ppp_dead <- get_ppp_dead(layout)
@@ -93,6 +94,7 @@ plot_layout_damaged <- function(layout, file_path = NA) {
 #'
 #' @param layout Layout object
 #' @param file_path Output file path
+#' @export
 plot_layout_cnt_mod <- function(layout, file_path = NA) {
 
   if(!is.na(file_path)) {
@@ -118,6 +120,7 @@ plot_layout_cnt_mod <- function(layout, file_path = NA) {
 #' @param layout Layout object
 #' @param file_path Output file path
 #' @param adjust Kernel density bandwidth
+#' @export
 plot_layout_density <- function(layout, file_path = NA, adjust = 0.25) {
 
   if(!is.na(file_path)) {
@@ -140,6 +143,7 @@ plot_layout_density <- function(layout, file_path = NA, adjust = 0.25) {
 #'
 #' @param layout Layout object
 #' @param file_path Output file path
+#' @export
 plot_layout_arrows <- function(layout, file_path = NA) {
 
   title <- "NN oriented arrows"
@@ -169,6 +173,7 @@ plot_layout_arrows <- function(layout, file_path = NA) {
 #'
 #' @param pix_matrix pixel matrix with dead pixels flagged with 1
 #' @return Table containing dead pixel coordinates
+#' @export
 dead_pix_coords <- function(pix_matrix) {
 
   # Matrix of damaged pixels coordinates
@@ -186,6 +191,7 @@ dead_pix_coords <- function(pix_matrix) {
 #'
 #' @param layout Layout object
 #' @return Fitted model
+#' @export
 glm_pixel_ctr_eucl <- function(layout) {
 
   dist <- pixel_dist_ctr_eucl(layout)
@@ -200,6 +206,7 @@ glm_pixel_ctr_eucl <- function(layout) {
 #'
 #' @param layout Layout object
 #' @return Fitted model
+#' @export
 glm_pixel_ctr_linf <- function(layout) {
 
   dist <- pixel_dist_ctr_linf(layout)
@@ -214,6 +221,7 @@ glm_pixel_ctr_linf <- function(layout) {
 #'
 #' @param layout Layout object
 #' @return Fitted model
+#' @export
 glm_pixel_dist_edge_col <- function(layout) {
 
   dist <- dist_edge_col(layout)
@@ -228,6 +236,7 @@ glm_pixel_dist_edge_col <- function(layout) {
 #'
 #' @param layout Layout object
 #' @return Fitted model
+#' @export
 glm_pixel_dist_edge_row <- function(layout) {
 
   dist <- dist_edge_row(layout)
@@ -243,6 +252,7 @@ glm_pixel_dist_edge_row <- function(layout) {
 #' @param symb_expr symbolic description of the linear predictor
 #' @param family a description of the error distribution
 #' @return Fitted model
+#' @export
 perform_glm <- function(symb_expr, family = binomial(link = logit)) {
 
   #' @return glm_git fitted model
@@ -255,6 +265,7 @@ perform_glm <- function(symb_expr, family = binomial(link = logit)) {
 #'
 #' @param layout Layout object
 #' @return Dead_Stats object
+#' @export
 get_dead_stats <- function(layout) {
 
   ppp_dead <- get_ppp_dead(layout)
@@ -291,6 +302,7 @@ get_dead_stats <- function(layout) {
 #'
 #' @param layout Layout object
 #' @return A string with damaged pixels overall statitics
+#' @export
 dead_stats_summary <- function(layout) {
 
   layout <- get_dead_stats(layout)
@@ -309,6 +321,7 @@ dead_stats_summary <- function(layout) {
 #'
 #' @param layout Layout object
 #' @param file_path Output file path
+#' @export
 plot_layout_angles <- function(layout, file_path = NA) {
 
   ppp_dead <- get_ppp_dead(layout)
@@ -334,6 +347,7 @@ plot_layout_angles <- function(layout, file_path = NA) {
 #' Get orient nn PP
 #' @param PPPdata describe
 #' @return describe
+#' @export
 orientnnPPP <- function(PPPdata) {
   PPPnn <- PPPdata[spatstat::nnwhich(PPPdata)]
   #now calculate our own thing for the orientations to compare
@@ -349,6 +363,7 @@ orientnnPPP <- function(PPPdata) {
 #' Testing analysis functions
 #'
 #' @param layout Layout object
+#' @export
 module_indiv_rose <- function(layout) {
 
   dirOut <- getwd()
@@ -416,6 +431,7 @@ module_indiv_rose <- function(layout) {
 #'
 #' @param v vector
 #' @return norm of the vector v
+#' @export
 norm_vec <- function(v) {
   norm <- sqrt(sum(v^2))
   return(norm)
@@ -426,18 +442,20 @@ norm_vec <- function(v) {
 #' @param v vector
 #' @param w vector
 #' @return distance between vectors v and w
+#' @export
 dist_vec <- function(v,w) {
   norm_vec(v - w)
 }
 
-# Calculates distance and orientation of the oriented vector between two points
-# in order of the second pointing to first (reflecting nearest neighbour (nn) framework)
-# v, w point coordinates indicating vectors wrt to the origin.
-# Values: distance and orientation (in [0,360) degrees) of w pointing towards v.
+#' Calculates distance and orientation of the oriented vector between two points
+#' in order of the second pointing to first (reflecting nearest neighbour (nn) framework)
+#' v, w point coordinates indicating vectors wrt to the origin.
+#' Values: distance and orientation (in [0,360) degrees) of w pointing towards v.
 #' @param v vector
 #' @param w vector
 #' @return distance and orientation of the oriented vector between two points
-orientdist_vec <- function(v, w){
+#' @export
+orient_dist_vec <- function(v, w){
   v <- v - w
   w <- c(0, 0)
   tmp1 <- norm_vec(v)
@@ -454,20 +472,22 @@ orientdist_vec <- function(v, w){
     tmp2 <- 180 - sign(y) * tmp2
   }
 
-  orientdist_vec <- list(tmp2, tmp1)
-  names(orientdist_vec) <- c("orient", "dist")
+  orient_dist_vec <- list(tmp2, tmp1)
+  names(orient_dist_vec) <- c("orient", "dist")
 
-  return(orientdist_vec)
+  return(orient_dist_vec)
 }
 
 # TODO: define the function
 #'
-orientcolfct <- function(b) orientdist_vec(b[1:2],b[3:4])$orient
+#' @export
+orientcolfct <- function(b) orient_dist_vec(b[1:2],b[3:4])$orient
 
 #' Generates ppp for the dead pixels
 #'
 #' @param layout Layout object
 #' @return ppp of dead pixels
+#' @export
 get_ppp_dead <- function(layout) {
 
   if(suppressWarnings(any(is.na(layout$pix_dead)))) {
@@ -486,6 +506,7 @@ get_ppp_dead <- function(layout) {
 #' @param layout Layout object
 #' @param func Function name
 #' @param file_path Output file path
+#' @export
 plot_kfg <- function(layout, func, file_path = NA) {
 
   if (missing(func) || is.null(func)) {

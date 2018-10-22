@@ -19,3 +19,14 @@
 
   return(tr)
 }
+
+#' Returns the mode of a set of data
+#'
+#' @param v set of data
+#' @return uniqv the value of the mode
+.getmode <- function(v) {
+  uniqv <- unique(v)
+  mode <- uniqv[which.max(tabulate(match(v, uniqv)))]
+
+  return(mode)
+}
