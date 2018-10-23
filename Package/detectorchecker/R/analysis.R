@@ -167,7 +167,7 @@ plot_layout_density <- function(layout, file_path = NA, adjust = 0.25,
 #' @importFrom graphics arrows plot
 #' @export
 plot_layout_arrows <- function(layout, file_path = NA, row = NA, col = NA) {
-  
+
   title <- "NN oriented arrows"
 
   if(!is.na(file_path)) {
@@ -364,7 +364,7 @@ dead_stats_summary <- function(layout) {
 plot_layout_angles <- function(layout, file_path = NA, row = NA, col = NA) {
 
   ppp_dead <- get_ppp_dead(layout)
-  
+
   if(!is.na(file_path)) {
     # starts the graphics device driver
     ini_graphics(file_path = file_path)

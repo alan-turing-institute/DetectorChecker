@@ -81,6 +81,8 @@ file_path <- "../tests/testthat/dead_pix/Pilatus/badpixel_mask.tif"
 pilatus_layout <- load_pix_matrix(layout = pilatus_layout, file_path = file_path)
 
 plot_layout_damaged(layout = pilatus_layout)
+
+plot_layout_module(layout = pilatus_layout, col = 4, row = 5)
 ```
 
 #### XML format
