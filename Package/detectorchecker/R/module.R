@@ -28,7 +28,7 @@
 #' @param module_edges_col ?
 #' @param module_edges_row ?
 #' @return tmp ?
-.which_module_idx <- function(x, y, module_edges_col, module_edges_row){
+which_module_idx <- function(x, y, module_edges_col, module_edges_row){
   tmp <- list(col = .which_module(x, module_edges_col),
               row = .which_module(y, module_edges_row))
 
