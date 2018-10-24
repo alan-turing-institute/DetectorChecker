@@ -482,52 +482,6 @@ create_ppp_gaps_row <- function(layout) {
   return(ppp_gaps_row)
 }
 
-#' Plotting a module of a layout
-#'
-#' @param layout Layout object
-#' @param mod_col Module column number
-#' @param mod_row Module row number
-#' @param file_path Output file path
-#' @export
-plot_layout_module <- function(layout, col, row, file_path = NA) {
-
-  # check whether the row and col numbers are correct
-  .check_select(layout, row, col)
-
-  if(!is.na(file_path)) {
-    # starts the graphics device driver
-    ini_graphics(file_path = file_path)
-  }
-
-  shift_left <- layout$module_edges_col[1, col] - 1
-  shift_up <- layout$module_edges_row[1, row] - 1
-
-  width <- layout$module_col_sizes[col]
-  height <- layout$module_row_sizes[row]
-
-  ppp_frame <- spatstat::ppp(1, 1, c(1, width), c(1, height))
-
-  plot(ppp_frame, pch = ".", cex.main = 0.7,
-       main = paste(layout$name, "with damaged pixels\n (black=module edges)"))
-
-  # selecting dead pixels for the particular module
-  module_sel <- layout$pix_dead_modules[layout$pix_dead_modules[ , 3] == col &
-                                          layout$pix_dead_modules[ , 4] == row,]
-  module_sel[ , 1] <- module_sel[ , 1] - shift_left
-  module_sel[ , 2] <- module_sel[ , 2] - shift_up
-
-  ppp_dead <- spatstat::ppp(module_sel[ , 1], module_sel[ , 2],
-                            c(1, width), c(1, height))
-
-  points(ppp_dead, pch = 22, col = "brown", cex = 0.7)
-
-  if(!is.na(file_path)) {
-    # shuts down the specified (by default the current) device
-    dev.off()
-  }
-}
-
-
 #' Plotting layout
 #'
 #' @param layout Layout object
