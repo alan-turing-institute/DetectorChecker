@@ -48,7 +48,7 @@ which_module_idx <- function(x, y, module_edges_col, module_edges_row) {
 
   i <- which_module(xy, module_edges)
 
-  tmp <-min(xy - module_edges[1, i], module_edges[2, i] - xy)
+  tmp <- min(xy - module_edges[1, i], module_edges[2, i] - xy)
 
   return(tmp)
 }
@@ -63,7 +63,6 @@ which_module_idx <- function(x, y, module_edges_col, module_edges_row) {
   }
 
   if (!ok) {
-
     stop("Incorrectly chosen row and/or column indices.", "row: ", row, ". Must be > 0 and < ", layout$module_row_n)
   }
 }

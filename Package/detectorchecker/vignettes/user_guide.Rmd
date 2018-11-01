@@ -80,9 +80,9 @@ file_path <- "../tests/testthat/dead_pix/Pilatus/badpixel_mask.tif"
 
 pilatus_layout <- load_pix_matrix(layout = pilatus_layout, file_path = file_path)
 
-plot_layout_damaged(layout = pilatus_layout)
+plot_layout_damaged(layout = pilatus_layout, caption = FALSE)
 
-plot_layout_module_damaged(layout = pilatus_layout, col = 4, row = 5)
+plot_layout_module_damaged(layout = pilatus_layout, col = 4, row = 5, caption = FALSE)
 ```
 
 #### XML format
@@ -153,7 +153,9 @@ layout_perkin <- load_pix_matrix(layout = layout_perkin, file_path = file_path)
 
 layout_perkin <- get_dead_stats(layout_perkin)
 
-plot_layout_cnt_mod(layout = layout_perkin)
+plot_layout_cnt_mod(layout = layout_perkin, caption = FALSE)
+
+plot_layout_cnt_mod(layout = layout_perkin, row = 1, col = 5, caption = FALSE)
 ```
 
 ### Arrows
@@ -231,6 +233,10 @@ layout_perkin <- load_pix_matrix(layout = layout_perkin, file_path = file_path)
 plot_kfg(layout = layout_perkin, func = "K")
 plot_kfg(layout = layout_perkin, func = "F")
 plot_kfg(layout = layout_perkin, func = "G")
+
+plot_kfg(layout = layout_perkin, func = "K", row = 1, col = 5, caption = FALSE)
+plot_kfg(layout = layout_perkin, func = "F", row = 1, col = 5, caption = FALSE)
+plot_kfg(layout = layout_perkin, func = "G", row = 1, col = 5, caption = FALSE)
 ```
 
 ### Inhomogenious K, F, G plots
@@ -245,4 +251,8 @@ layout_pilatus <- load_pix_matrix(layout = layout_pilatus, file_path = file_path
 plot_kfg(layout = layout_pilatus, func = "Kinhom")
 plot_kfg(layout = layout_pilatus, func = "Finhom")
 plot_kfg(layout = layout_pilatus, func = "Ginhom")
+
+plot_kfg(layout = layout_pilatus, func = "Kinhom", row = 1, col = 5, caption = FALSE)
+plot_kfg(layout = layout_pilatus, func = "Finhom", row = 1, col = 5, caption = FALSE)
+plot_kfg(layout = layout_pilatus, func = "Ginhom", row = 1, col = 5, caption = FALSE)
 ```

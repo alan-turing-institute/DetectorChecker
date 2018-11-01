@@ -36,8 +36,12 @@ Dead_Stats <- function(dead_n = NA, module_n = NA, module_count_arr = NA,
 #' @param mod_col Module column number
 #' @param mod_row Module row number
 #' @param file_path Output file path
+#' @param caption Flag to turn on/off figure caption
 #' @export
-plot_layout_module_damaged <- function(layout, col, row, file_path = NA) {
+plot_layout_module_damaged <- function(layout, col, row, file_path = NA,
+                                       caption = TRUE) {
+
+  if (!caption) par(mar = c(0, 0, 0, 0))
 
   # check whether the row and col numbers are correct
   .check_select(layout, row, col)
@@ -55,8 +59,14 @@ plot_layout_module_damaged <- function(layout, col, row, file_path = NA) {
 
   ppp_frame <- spatstat::ppp(1, 1, c(1, width), c(1, height))
 
-  plot(ppp_frame, pch = ".", cex.main = 0.7,
-       main = paste(layout$name, "with damaged pixels\n (black=module edges)"))
+  if(caption) {
+    main_caption <- paste(layout$name, "with damaged pixels\n (black=module edges)")
+
+  } else {
+    main_caption <- ""
+  }
+
+  plot(ppp_frame, pch = ".", cex.main = 0.7, main = main_caption)
 
   # selecting dead pixels for the particular module
   module_sel <- layout$pix_dead_modules[layout$pix_dead_modules[ , 3] == col &
@@ -79,9 +89,13 @@ plot_layout_module_damaged <- function(layout, col, row, file_path = NA) {
 #'
 #' @param layout Layout object
 #' @param file_path Output file path
+#' @param caption Flag to turn on/off figure caption
 #' @importFrom graphics points
 #' @export
-plot_layout_damaged <- function(layout, file_path = NA) {
+plot_layout_damaged <- function(layout, file_path = NA, caption = TRUE) {
+
+  main_caption <- ""
+  if (!caption) par(mar = c(0, 0, 0, 0))
 
   ppp_dead <- get_ppp_dead(layout)
 
@@ -95,9 +109,12 @@ plot_layout_damaged <- function(layout, file_path = NA) {
 
   if (sum(layout$gap_col_sizes) + sum(layout$gap_row_sizes) == 0) {
 
+    if(caption) {
+      main_caption <- paste(layout$name, "with damaged pixels\n (black=module edges)")
+    }
+
     # vertical lines in x-positions given by xlines
-    plot(ppp_edges_col, pch = ".", cex.main = 0.7,
-         main = paste(layout$name, "with damaged pixels\n (black=module edges)"))
+    plot(ppp_edges_col, pch = ".", cex.main = 0.7, main = main_caption)
 
     # horizontal lines in y-positions given by ylines
     points(ppp_edges_row, pch = ".")
@@ -108,9 +125,12 @@ plot_layout_damaged <- function(layout, file_path = NA) {
     ppp_gaps_col <- create_ppp_gaps_col(layout)
     ppp_gaps_row <- create_ppp_gaps_row(layout)
 
+    if(caption) {
+      main_caption <- paste(layout$name, "with damaged pixels\n (black=module edges, grey=gaps)")
+    }
+
     # vertical lines in x-positions given by xlines
-    plot(ppp_edges_col, pch = ".", cex.main = 0.7,
-         main = paste(layout$name, "with damaged pixels\n (black=module edges, grey=gaps)"))
+    plot(ppp_edges_col, pch = ".", cex.main = 0.7, main = main_caption)
 
     # horizontal lines in y-positions given by ylines
     points(ppp_edges_row, pch = ".")
@@ -142,8 +162,14 @@ plot_layout_damaged <- function(layout, file_path = NA) {
 #'
 #' @param layout Layout object
 #' @param file_path Output file path
+#' @param row Module row number
+#' @param col Module column number
+#' @param caption Flag to turn on/off figure caption
 #' @export
-plot_layout_cnt_mod <- function(layout, file_path = NA) {
+plot_layout_cnt_mod <- function(layout, file_path = NA, row = NA, col = NA,
+                                caption = TRUE) {
+
+  if (!caption) par(mar = c(0, 0, 0, 0))
 
   if(!is.na(file_path)) {
     # starts the graphics device driver
@@ -151,12 +177,43 @@ plot_layout_cnt_mod <- function(layout, file_path = NA) {
   }
 
   if(any(is.na(layout$dead_stats))) {
-    stop("Is the damaged statistics is performed?")
+    stop("Is the damaged statistics calculated?")
   }
 
-  plot(layout$dead_stats$module_count_arr,
-       main = paste("Number of damaged pixels in modules\n", "Total number damaged pixels: ", layout$dead_stats$dead_n,
-                                        "\n (average per module: ", layout$dead_stats$avg_dead_mod, ")"))
+  if (!is.na(row) && !is.na(col)) {
+    # check whether the row and col numbers are correct
+    .check_select(layout, row, col)
+
+    if(caption) {
+      main_caption <- paste("Number of damaged pixels: ",
+                            layout$dead_stats$module_count_arr[col][row])
+    } else {
+      main_caption <- ""
+    }
+
+    width <- layout$module_col_sizes[col]
+    height <- layout$module_row_sizes[row]
+
+    ppp_frame <- spatstat::ppp(1, 1, c(1, width), c(1, height))
+
+    plot(ppp_frame, pch = ".", cex.main = 0.7, main = main_caption)
+
+    # This works only on rectangular layouts!!!
+    module_idx <- (col - 1) * layout$module_row_n + row
+
+    text(width/2, height/2, label = layout$dead_stats$module_count[module_idx])
+
+  } else {
+    if(caption) {
+      main_caption <- paste("Number of damaged pixels in modules\n",
+                            "Total number damaged pixels: ", layout$dead_stats$dead_n,
+                             "\n (average per module: ", layout$dead_stats$avg_dead_mod, ")")
+    } else {
+      main_caption <- ""
+    }
+
+    plot(layout$dead_stats$module_count_arr, main = main_caption)
+  }
 
   if(!is.na(file_path)) {
     dev.off()
@@ -170,10 +227,14 @@ plot_layout_cnt_mod <- function(layout, file_path = NA) {
 #' @param adjust Kernel density bandwidth
 #' @param row Module row number
 #' @param col Module column number
+#' @param caption Flag to turn on/off figure caption
 #' @importFrom graphics image par
 #' @export
 plot_layout_density <- function(layout, file_path = NA, adjust = 0.25,
-                                row = NA, col = NA) {
+                                row = NA, col = NA, caption = TRUE) {
+
+  if (!caption) par(mar = c(0, 0, 0, 0))
+  else par(mfrow=c(1,1), mar=c(1,1,3,1))
 
   if(!is.na(file_path)) {
     # starts the graphics device driver
@@ -187,16 +248,23 @@ plot_layout_density <- function(layout, file_path = NA, adjust = 0.25,
     # get the ppp for the selected module
     ppp_dead <- .get_ppp_dead_module(layout, row, col)
 
-    title <- paste("Dead pixel density (row=", row, "col=", col, "), adjust = ", adjust)
+    if (caption) {
+      main_caption <- paste("Dead pixel density (row=", row, "col=", col, "), adjust=", adjust)
+    } else {
+      main_caption <- ""
+    }
 
   } else {
     ppp_dead <- get_ppp_dead(layout)
 
-    title <- paste("Dead pixel density, adjust = ", adjust)
+    if (caption) {
+      main_caption <- paste("Dead pixel density, adjust = ", adjust)
+    } else {
+      main_caption <- ""
+    }
   }
 
-  par(mfrow=c(1,1), mar=c(1,1,3,1))
-  image(density(ppp_dead, adjust = adjust), main = title)
+  image(density(ppp_dead, adjust = adjust), main = main_caption)
 
   if(!is.na(file_path)) {
     dev.off()
@@ -209,11 +277,15 @@ plot_layout_density <- function(layout, file_path = NA, adjust = 0.25,
 #' @param file_path Output file path
 #' @param row Module row number
 #' @param col Module column number
+#' @param caption Flag to turn on/off figure caption
 #' @importFrom graphics arrows plot
 #' @export
-plot_layout_arrows <- function(layout, file_path = NA, row = NA, col = NA) {
+plot_layout_arrows <- function(layout, file_path = NA, row = NA, col = NA,
+                               caption = TRUE) {
 
-  title <- "NN oriented arrows"
+  main_caption <- ""
+  if (!caption) par(mar = c(0, 0, 0, 0))
+  else par(mfrow = c(1, 1), mar = c(1, 1, 3, 1))
 
   if(!is.na(file_path)) {
     # starts the graphics device driver
@@ -227,19 +299,21 @@ plot_layout_arrows <- function(layout, file_path = NA, row = NA, col = NA) {
     # get the ppp for the selected module
     ppp_dead <- .get_ppp_dead_module(layout, row, col)
 
-    title <- paste("NN oriented arrows (row=", row, "col=", col, ")")
+    if(caption) {
+      main_caption <- paste("NN oriented arrows (row=", row, "col=", col, ")")
+    }
 
   } else {
     ppp_dead <- get_ppp_dead(layout)
 
-    title <- "NN oriented arrows"
+    if(caption) {
+      main_caption <- "NN oriented arrows"
+    }
   }
-
-  par(mfrow = c(1, 1), mar = c(1, 1, 3, 1))
 
   PPPnn <- ppp_dead[spatstat::nnwhich(ppp_dead)]
 
-  plot(ppp_dead, main = title)
+  plot(ppp_dead, main = main_caption)
 
   arrows(PPPnn$x, PPPnn$y, ppp_dead$x, ppp_dead$y,
          angle = 15, length = 0.07, col = "red")
@@ -361,7 +435,10 @@ get_dead_stats <- function(layout) {
   module_count <- as.vector(module_count_arr)
 
   dead_n <- length(as.vector(layout$pix_dead[ , 2]))
+
+  # This works only on rectangular layouts!!!
   module_n <- layout$module_col_n * layout$module_row_n
+
   avg_dead_mod <- round(dead_n / module_n, digits = 1)
 
   # Xi Squared Test
@@ -405,8 +482,14 @@ dead_stats_summary <- function(layout) {
 #' @param file_path Output file path
 #' @param row Module row number
 #' @param col Module column number
+#' @param caption Flag to turn on/off figure caption
 #' @export
-plot_layout_angles <- function(layout, file_path = NA, row = NA, col = NA) {
+plot_layout_angles <- function(layout, file_path = NA, row = NA, col = NA,
+                               caption = TRUE) {
+
+  main_caption <- ""
+  if (!caption) par(mar = c(0, 0, 0, 0))
+  else par(mfrow = c(1, 1), mar = c(1, 1, 3, 1))
 
   ppp_dead <- get_ppp_dead(layout)
 
@@ -422,18 +505,20 @@ plot_layout_angles <- function(layout, file_path = NA, row = NA, col = NA) {
     # get the ppp for the selected module
     ppp_dead <- .get_ppp_dead_module(layout, row, col)
 
-    title <- paste("NN to points orientations (row=", row, "col=", col, ")")
+    if(caption) {
+      main_caption <- paste("NN to points orientations (row=", row, "col=", col, ")")
+    }
 
   } else {
     ppp_dead <- get_ppp_dead(layout)
 
-    title <- paste("NN to points orientations ", ppp_dead$n, " dead pixels\n", sep="")
+    if(caption) {
+      main_caption <- paste("NN to points orientations ", ppp_dead$n, " dead pixels\n", sep="")
+    }
   }
 
-  par(mfrow = c(1, 1), mar = c(1, 1, 3, 1))
-
   spatstat::rose(spatstat::nnorient(ppp_dead, sigma = 4),
-                 col = "grey", main = title)
+                 col = "grey", main = main_caption)
 
   if(!is.na(file_path)) {
     dev.off()
@@ -556,16 +641,23 @@ get_ppp_dead <- function(layout) {
 #' @param layout Layout object
 #' @param func Function name
 #' @param file_path Output file path
+#' @param row module row number
+#' @param col module column number
+#' @param caption Flag to turn on/off figure caption
 #' @importFrom stats density
 #' @importFrom grDevices dev.off
 #' @export
-plot_kfg <- function(layout, func, file_path = NA) {
+plot_kfg <- function(layout, func, file_path = NA, row = NA, col = NA,
+                     caption = TRUE) {
+
+  if (!caption) par(mar = c(0, 0, 0, 0))
 
   if (missing(func) || is.null(func)) {
     stop(c("Analysis function name is not specified.\n",
            "Available functions: K, F, G, Kinhom, Finhom, Ginhom"))
   }
 
+  main_caption <- ""
   ppp_dead <- get_ppp_dead(layout)
 
   if(!is.na(file_path)) {
@@ -573,32 +665,56 @@ plot_kfg <- function(layout, func, file_path = NA) {
     ini_graphics(file_path = file_path)
   }
 
+
+  if (!is.na(row) && !is.na(col)) {
+    # check whether the row and col numbers are correct
+    .check_select(layout, row, col)
+
+    # get the ppp for the selected module
+    ppp_dead <- .get_ppp_dead_module(layout, row, col)
+
+  } else {
+    ppp_dead <- get_ppp_dead(layout)
+  }
+
   if(func == "K") {
-    plot(spatstat::Kest(ppp_dead), main = "K-function")
+
+    if(caption) main_caption <- "K-function"
+
+    plot(spatstat::Kest(ppp_dead), main = main_caption)
 
   } else if (func == "F") {
-    plot(spatstat::Fest(ppp_dead), main = "F-function")
+
+    if(caption) main_caption <- "F-function"
+
+    plot(spatstat::Fest(ppp_dead), main = main_caption)
 
   } else if (func == "G") {
-    plot(spatstat::Gest(ppp_dead), main = "G-function")
+
+    if(caption) main_caption <- "G-function"
+
+    plot(spatstat::Gest(ppp_dead), main = main_caption)
 
   } else if (func == "Kinhom") {
     lambda <- density(ppp_dead)
+    if(caption) main_caption <- "Inhomogeneous K-Function"
 
     plot(spatstat::Kinhom(ppp_dead, lambda, correction = "all"),
-         cex = 0.5, main = "Inhomogeneous K-Function")
+         cex = 0.5, main = main_caption)
 
   } else if (func == "Finhom") {
     lambda <- density(ppp_dead)
+    if(caption) main_caption <- "Inhomogeneous F-Function"
 
     plot(spatstat::Finhom(ppp_dead, lambda, correction = "all"),
-         cex = 0.5, main = "Inhomogeneous F-Function")
+         cex = 0.5, main = main_caption)
 
   } else if (func == "Ginhom") {
     lambda <- density(ppp_dead)
+    if(caption) main_caption <- "Inhomogeneous G-Function"
 
     plot(spatstat::Ginhom(ppp_dead, lambda, correction = "all"),
-         cex = 0.5, main = "Inhomogeneous G-Function")
+         cex = 0.5, main = main_caption)
 
   } else {
     stop(c("Cannot identify analysis function.\n",
