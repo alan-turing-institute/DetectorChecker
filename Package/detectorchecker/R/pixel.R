@@ -12,7 +12,7 @@
 
   # TODO: more elegant with lapply or plyr etc
   for (i in 1:dead_n) {
-    tmp <- .which_module_idx(layout$pix_dead[i, 1], layout$pix_dead[i, 2],
+    tmp <- which_module_idx(layout$pix_dead[i, 1], layout$pix_dead[i, 2],
                              layout$module_edges_col, layout$module_edges_row)
 
     dead_modules[i, 3] <- tmp$col

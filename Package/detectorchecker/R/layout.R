@@ -482,7 +482,7 @@ create_ppp_gaps_row <- function(layout) {
   return(ppp_gaps_row)
 }
 
-#' Deriving additional layout elements
+#' Plotting layout
 #'
 #' @param layout Layout object
 #' @param file_path Output file path

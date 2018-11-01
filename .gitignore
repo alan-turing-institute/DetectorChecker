@@ -1,5 +1,5 @@
+# build packages
 Package/detectorchecker_*.tgz
-
 .DS_Store
 
 # Manual files
