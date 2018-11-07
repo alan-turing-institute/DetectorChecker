@@ -573,18 +573,20 @@ readin_layout <- function(file_path) {
 
   # reads file as a string line
   file_string <- readr::read_file(file_path)
-  print(file_string)
 
-  detector_width <- 2000
-  detector_height <- 2000
-  module_col_n <- 16
-  module_row_n <- 2
-  module_col_sizes <- c(104, rep(128, 14), 104)
-  module_row_sizes <- rep(1000, 2)
-  gap_col_sizes <- rep(0, 15)
-  gap_row_sizes <- c(0)
-  module_edges_col <- NA
-  module_edges_row <- NA
+  detector_width <- .extract_layout_parameter(file_string, "detector_width")
+  detector_height <- .extract_layout_parameter(file_string, "detector_height")
+
+  if (is.na(detector_width) || is.na(detector_height)) return(NULL)
+
+  module_col_n <- .extract_layout_parameter(file_string, "module_col_n")
+  module_row_n <- .extract_layout_parameter(file_string, "module_row_n")
+  module_col_sizes <- .extract_layout_parameter(file_string, "module_col_sizes")
+  module_row_sizes <- .extract_layout_parameter(file_string, "module_row_sizes")
+  gap_col_sizes <- .extract_layout_parameter(file_string, "gap_col_sizes")
+  gap_row_sizes <- .extract_layout_parameter(file_string, "gap_row_sizes")
+  module_edges_col <- .extract_layout_parameter(file_string, "module_edges_col")
+  module_edges_row <- .extract_layout_parameter(file_string, "module_edges_row")
 
   layout <- Default_Layout(name = name,
    detector_width = detector_width,
@@ -599,5 +601,6 @@ readin_layout <- function(file_path) {
    module_edges_row = module_edges_row,
    detector_inconsistency = 0)
 
-  return(layout)
+  if (check_layout_avail(layout)) return(layout)
+  else return(NA)
 }
