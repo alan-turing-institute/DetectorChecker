@@ -486,8 +486,12 @@ create_ppp_gaps_row <- function(layout) {
 #'
 #' @param layout Layout object
 #' @param file_path Output file path
+#' @param caption Flag to turn on/off figure caption
 #' @export
-plot_layout <- function(layout, file_path = NA) {
+plot_layout <- function(layout, file_path = NA, caption = TRUE) {
+
+  if (!caption) par(mar = c(0, 0, 0, 0))
+  main_caption <- ""
 
   ppp_edges_col <- create_ppp_edges_col(layout)
   ppp_edges_row <- create_ppp_edges_row(layout)
@@ -499,21 +503,28 @@ plot_layout <- function(layout, file_path = NA) {
 
   if (sum(layout$gap_col_sizes) + sum(layout$gap_row_sizes) == 0) {
 
+    if(caption) {
+      main_caption <- paste(layout$name, "layout\n (black=module edges)")
+    }
+
     # vertical lines in x-positions given by xlines
-    plot(ppp_edges_col, pch = ".", cex.main = 0.7,
-         main = paste(layout$name, "layout\n (black=module edges)"), res = 10)
+    plot(ppp_edges_col, pch = ".", cex.main = 0.7, main = main_caption)
 
     # horizontal lines in y-positions given by ylines
     points(ppp_edges_row, pch = ".")
 
   } else {
+
+    if(caption) {
+      main_caption <- paste(layout$name, "layout\n (black=module edges, grey=gaps)")
+    }
+
     # Define point patterns (spatstat) capturing gaps
     ppp_gaps_col <- create_ppp_gaps_col(layout)
     ppp_gaps_row <- create_ppp_gaps_row(layout)
 
     # vertical lines in x-positions given by xlines
-    plot(ppp_edges_col, pch = ".", cex.main = 0.7,
-         main = paste(layout$name, "layout\n (black=module edges, grey=gaps)"))
+    plot(ppp_edges_col, pch = ".", cex.main = 0.7, main = main_caption)
 
     points(ppp_edges_row, pch = ".") # horizontal lines in y-positions given by ylines
 
@@ -550,4 +561,43 @@ layout_summary <- function(layout) {
   summary <- paste(summary, "Heights of gaps between modules: ", paste(layout$gap_row_sizes, collapse = ' '), "\n", "")
 
   return(summary)
+}
+
+#' Reads in a user defined layout from a file
+#' @param file_path A path to the user defined layout file
+#' @return Layout object
+#' @export
+readin_layout <- function(file_path) {
+
+  name <- "user-defined"
+
+  # reads file as a string line
+  file_string <- readr::read_file(file_path)
+  print(file_string)
+
+  detector_width <- 2000
+  detector_height <- 2000
+  module_col_n <- 16
+  module_row_n <- 2
+  module_col_sizes <- c(104, rep(128, 14), 104)
+  module_row_sizes <- rep(1000, 2)
+  gap_col_sizes <- rep(0, 15)
+  gap_row_sizes <- c(0)
+  module_edges_col <- NA
+  module_edges_row <- NA
+
+  layout <- Default_Layout(name = name,
+   detector_width = detector_width,
+   detector_height = detector_height,
+   module_col_n = module_col_n,
+   module_row_n = module_row_n,
+   module_col_sizes = module_col_sizes,
+   module_row_sizes = module_row_sizes,
+   gap_col_sizes = gap_col_sizes,
+   gap_row_sizes = gap_row_sizes,
+   module_edges_col = module_edges_col,
+   module_edges_row = module_edges_row,
+   detector_inconsistency = 0)
+
+  return(layout)
 }
