@@ -271,6 +271,7 @@ create_module <- function(layout_name) {
 #' @param layout Layout object
 #' @export
 layout_consist_check <- function(layout = NA) {
+
   if (is.list(layout)) {
 
     error <- ""
@@ -340,6 +341,8 @@ layout_consist_check <- function(layout = NA) {
   } else {
     stop("Detector layout object has not been initialized.")
   }
+
+  return(TRUE)
 }
 
 #TODO: improve the definition of the function
@@ -486,8 +489,12 @@ create_ppp_gaps_row <- function(layout) {
 #'
 #' @param layout Layout object
 #' @param file_path Output file path
+#' @param caption Flag to turn on/off figure caption
 #' @export
-plot_layout <- function(layout, file_path = NA) {
+plot_layout <- function(layout, file_path = NA, caption = TRUE) {
+
+  if (!caption) par(mar = c(0, 0, 0, 0))
+  main_caption <- ""
 
   ppp_edges_col <- create_ppp_edges_col(layout)
   ppp_edges_row <- create_ppp_edges_row(layout)
@@ -499,21 +506,28 @@ plot_layout <- function(layout, file_path = NA) {
 
   if (sum(layout$gap_col_sizes) + sum(layout$gap_row_sizes) == 0) {
 
+    if(caption) {
+      main_caption <- paste(layout$name, "layout\n (black=module edges)")
+    }
+
     # vertical lines in x-positions given by xlines
-    plot(ppp_edges_col, pch = ".", cex.main = 0.7,
-         main = paste(layout$name, "layout\n (black=module edges)"), res = 10)
+    plot(ppp_edges_col, pch = ".", cex.main = 0.7, main = main_caption)
 
     # horizontal lines in y-positions given by ylines
     points(ppp_edges_row, pch = ".")
 
   } else {
+
+    if(caption) {
+      main_caption <- paste(layout$name, "layout\n (black=module edges, grey=gaps)")
+    }
+
     # Define point patterns (spatstat) capturing gaps
     ppp_gaps_col <- create_ppp_gaps_col(layout)
     ppp_gaps_row <- create_ppp_gaps_row(layout)
 
     # vertical lines in x-positions given by xlines
-    plot(ppp_edges_col, pch = ".", cex.main = 0.7,
-         main = paste(layout$name, "layout\n (black=module edges, grey=gaps)"))
+    plot(ppp_edges_col, pch = ".", cex.main = 0.7, main = main_caption)
 
     points(ppp_edges_row, pch = ".") # horizontal lines in y-positions given by ylines
 
@@ -550,4 +564,48 @@ layout_summary <- function(layout) {
   summary <- paste(summary, "Heights of gaps between modules: ", paste(layout$gap_row_sizes, collapse = ' '), "\n", "")
 
   return(summary)
+}
+
+#' Reads in a user defined layout from a file
+#' @param file_path A path to the user defined layout file
+#' @return Layout object
+#' @export
+readin_layout <- function(file_path) {
+
+  name <- "user-defined"
+
+  # reads file as a string line
+  file_string <- readr::read_file(file_path)
+
+  detector_width <- .extract_layout_parameter(file_string, "detector_width")
+  detector_height <- .extract_layout_parameter(file_string, "detector_height")
+
+  if (is.na(detector_width) || is.na(detector_height)) {
+    stop("Cannot determine detector's width/height. Is the file format correct?")
+  }
+
+  module_col_n <- .extract_layout_parameter(file_string, "module_col_n")
+  module_row_n <- .extract_layout_parameter(file_string, "module_row_n")
+  module_col_sizes <- .extract_layout_parameter(file_string, "module_col_sizes")
+  module_row_sizes <- .extract_layout_parameter(file_string, "module_row_sizes")
+  gap_col_sizes <- .extract_layout_parameter(file_string, "gap_col_sizes")
+  gap_row_sizes <- .extract_layout_parameter(file_string, "gap_row_sizes")
+  module_edges_col <- .extract_layout_parameter(file_string, "module_edges_col")
+  module_edges_row <- .extract_layout_parameter(file_string, "module_edges_row")
+
+  layout <- Default_Layout(name = name,
+   detector_width = detector_width,
+   detector_height = detector_height,
+   module_col_n = module_col_n,
+   module_row_n = module_row_n,
+   module_col_sizes = module_col_sizes,
+   module_row_sizes = module_row_sizes,
+   gap_col_sizes = gap_col_sizes,
+   gap_row_sizes = gap_row_sizes,
+   module_edges_col = module_edges_col,
+   module_edges_row = module_edges_row,
+   detector_inconsistency = 0)
+
+  if (layout_consist_check(layout)) return(layout)
+  else return(NA)
 }

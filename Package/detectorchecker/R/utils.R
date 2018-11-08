@@ -32,3 +32,34 @@
 
   return(mode)
 }
+
+#' Checks whether a layout parameter is in the file string
+#' @param file_string String of a file context
+#' @param parameter Layout parameter
+#' @return parameter value
+.extract_layout_parameter <- function(file_string, parameter) {
+  param_idx <- regexpr(parameter, file_string)
+
+  string_len <- nchar(file_string)
+
+  if (param_idx > 0) {
+    sub_file_string <- substr(file_string, param_idx, string_len)
+    end_line_idx <- regexpr("\n", sub_file_string)
+
+    if (end_line_idx == -1) end_line_idx <- nchar(sub_file_string)
+    # sub string the parameter line
+    sub_file_string <- substr(sub_file_string, 1, end_line_idx)
+
+    # look for =
+    eq_idx <- regexpr("=", sub_file_string)
+
+    if (eq_idx > 0) {
+
+      sub_file_string <- substr(sub_file_string, eq_idx+1, nchar(sub_file_string))
+
+      tryCatch({return(eval(parse(text=trimws(sub_file_string))))}, error = function(err) {return(NA)})
+
+    } else return(NA)
+
+  } else return(NA)
+}

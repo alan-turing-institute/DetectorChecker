@@ -69,6 +69,14 @@ plot_pixel_dist_edge_row(pilatus_layout)
 plot_pixel_dist_edge(pilatus_layout)
 ```
 
+### Importing user-defined layout
+```{r}
+user_def_layout <- readin_layout("../tests/testthat/user-defined.dc")
+
+plot_layout(user_def_layout)
+
+```
+
 ### To upload pixel file
 
 #### TIFF format

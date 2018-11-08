@@ -665,7 +665,6 @@ plot_kfg <- function(layout, func, file_path = NA, row = NA, col = NA,
     ini_graphics(file_path = file_path)
   }
 
-
   if (!is.na(row) && !is.na(col)) {
     # check whether the row and col numbers are correct
     .check_select(layout, row, col)
