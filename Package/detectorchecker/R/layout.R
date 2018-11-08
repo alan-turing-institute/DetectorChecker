@@ -271,6 +271,7 @@ create_module <- function(layout_name) {
 #' @param layout Layout object
 #' @export
 layout_consist_check <- function(layout = NA) {
+
   if (is.list(layout)) {
 
     error <- ""
@@ -340,6 +341,8 @@ layout_consist_check <- function(layout = NA) {
   } else {
     stop("Detector layout object has not been initialized.")
   }
+
+  return(TRUE)
 }
 
 #TODO: improve the definition of the function
@@ -577,7 +580,9 @@ readin_layout <- function(file_path) {
   detector_width <- .extract_layout_parameter(file_string, "detector_width")
   detector_height <- .extract_layout_parameter(file_string, "detector_height")
 
-  if (is.na(detector_width) || is.na(detector_height)) return(NULL)
+  if (is.na(detector_width) || is.na(detector_height)) {
+    stop("Cannot determine detector's width/height. Is the file format correct?")
+  }
 
   module_col_n <- .extract_layout_parameter(file_string, "module_col_n")
   module_row_n <- .extract_layout_parameter(file_string, "module_row_n")
@@ -601,6 +606,6 @@ readin_layout <- function(file_path) {
    module_edges_row = module_edges_row,
    detector_inconsistency = 0)
 
-  if (check_layout_avail(layout)) return(layout)
+  if (layout_consist_check(layout)) return(layout)
   else return(NA)
 }
