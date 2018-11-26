@@ -1,3 +1,5 @@
+library(igraph)
+
 #' Clasifies a clump
 #'
 #' @param x vector containing the x coordinates of a clump
@@ -172,6 +174,7 @@ xyc_pixels2events <- function(xyc_ply) {
 #' @return
 #' @export
 mask_to_events <- function(layout, dead_pix_mask) {
+
   nr <- layout$detector_height
   nc <- layout$detector_width
 
@@ -186,7 +189,8 @@ mask_to_events <- function(layout, dead_pix_mask) {
   raster::values(rr) <- t(dead_pix_mask[ , c(nr:1)])
 
   # detect clumps (patches) of connected cells, directions = 4 (Rook's case)
-  rrc <- raster::clump(rr, directions = 4)
+
+  rrc <- suppressWarnings(raster::clump(rr, directions = 4))
 
   # Make data frame with all pixels part of clusters (clumps) and their clump
   #  ID and centre's coordinates. Note we use ceiling, because xyc would have
@@ -197,7 +201,7 @@ mask_to_events <- function(layout, dead_pix_mask) {
 
   xyc_events <- xyc_pixels2events(xyc_ply_func(layout, xyc_df))
 
-  return(list(Pixels = xyc_df, Events = xyc_events))
+  return(list(pixels = xyc_df, events = xyc_events))
 }
 
 #' Something
@@ -211,13 +215,43 @@ pixel_events_2_ppp <- function(layout, pix_events){
   nc <- layout$detector_width
 
   # Make into a point pattern and plot ppp pattern and density
-  pixel_ppp <- spatstat::ppp(pix_events$Pixels[, 1], pix_events$Pixels[, 2],
+  pixel_ppp <- spatstat::ppp(pix_events$pixels[, 1], pix_events$pixels[, 2],
                    c(1, nc), c(1, nr))
 
-  event_ppp <- spatstat::ppp(pix_events$Events[, 1], pix_events$Events[, 2],
+  event_ppp <- spatstat::ppp(pix_events$events[, 1], pix_events$events[, 2],
                    c(1, nc), c(1, nr))
 
-  return(list(Pixels = pixel_ppp, Events = event_ppp))
+  return(list(pixels = pixel_ppp, events = event_ppp))
+}
+
+
+#'
+#'
+plot_events <- function(layout, file_path = NA, caption = TRUE) {
+
+  main_caption <- ""
+
+  if (!caption) par(mar = c(0, 0, 0, 0))
+  else par(mfrow = c(1, 1), mar = c(1, 1, 3, 1))
+
+  if(!is.na(file_path)) {
+    # starts the graphics device driver
+    ini_graphics(file_path = file_path)
+  }
+
+  #par(mfrow=c(1,1), mar=c(0,0,4,0)+0.1, oma=c(0,0,0,0))
+
+  # "Defective events"
+  plot(layout$clumps$ppp_events, pch = 22, main=main_caption)
+
+  # # plot(Eventppp, pch=22, col=2, main="Defective events") doesn't work, instead cheat:
+  # points(pe_ppp$events, pch = 22, col = 2)
+  #
+
+
+  if(!is.na(file_path)) {
+    dev.off()
+  }
 }
 
 #' Visualise pixels and events in one plot and separately
@@ -229,30 +263,30 @@ plot_pixel_events <- function(pe_ppp) {
 
   pdf(file = paste("ppp_pixelsEvents.pdf",sep=""))
   par(mfrow=c(1,1), mar=c(0,0,4,0)+0.1, oma=c(0,0,0,0))
-  plot(pe_ppp$Pixels, pch=22, main="Defective pixels (black) and events (red)")
-  points(pe_ppp$Events, pch=1, col=2)
+  plot(pe_ppp$pixels, pch=22, main="Defective pixels (black) and events (red)")
+  points(pe_ppp$events, pch=1, col=2)
   dev.off()
 
   pdf(file = paste("ppp_pixels.pdf", sep=""))
   par(mfrow=c(1,1), mar=c(0,0,4,0)+0.1, oma=c(0,0,0,0))
-  plot(pe_ppp$Pixels, pch=22, main="Defective pixels")
+  plot(pe_ppp$pixels, pch=22, main="Defective pixels")
   dev.off()
 
   pdf(file = paste("ppp_events.pdf", sep=""))
   par(mfrow=c(1,1), mar=c(0,0,4,0)+0.1, oma=c(0,0,0,0))
-  plot(pe_ppp$Events, pch=22, main="Defective events")
+  plot(pe_ppp$events, pch=22, main="Defective events")
   # plot(Eventppp, pch=22, col=2, main="Defective events") doesn't work, instead cheat:
-  points(pe_ppp$Events, pch=22, col=2)
+  points(pe_ppp$events, pch=22, col=2)
   dev.off()
 
   ### Visualise densities of pixels and events
   pdf(file = paste("density_pixels.pdf", sep=""))
   par(mfrow=c(1,1), mar=c(0,0,4,2)+0.1, oma=c(0,0,0,0))
-  plot(density(pe_ppp$Pixels), main="Density Pixels")
+  plot(density(pe_ppp$pixels), main="Density Pixels")
   dev.off()
 
   pdf(file = paste("density_events.pdf", sep=""))
   par(mfrow=c(1,1), mar=c(0,0,4,2)+0.1, oma=c(0,0,0,0))
-  plot(density(pe_ppp$Pixels), main="Density Pixels")
+  plot(density(pe_ppp$pixels), main="Density Pixels")
   dev.off()
 }

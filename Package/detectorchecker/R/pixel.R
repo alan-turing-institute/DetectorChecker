@@ -332,10 +332,14 @@ inconsist_dead_layout <- function(dead_data, layout) {
 #' @export
 get_dead_pix_mask <- function(layout){
 
-  mask <- matrix(0, nrow = layout$detector_height, ncol = layout$detector_width)
+  # TODO: check because we needed to swap detector_width with detector_height.
+  mask <- matrix(0, nrow = layout$detector_width, ncol = layout$detector_height)
 
-  for (i in c(1:dim(layout$pix_dead)[1])) {
-    mask[layout$pix_dead[i, 1], layout$pix_dead[i, 2]] <- 1
+  for (i in c(1:(dim(layout$pix_dead)[1]))) {
+    x <- as.numeric(layout$pix_dead[i, 1])
+    y <- as.numeric(layout$pix_dead[i, 2])
+
+    mask[x, y] <- 1
   }
 
   return(mask)

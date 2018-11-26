@@ -1,0 +1,38 @@
+---
+title: "Events"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+pilatus_layout <- create_module("Pilatus")
+
+file_path <- "../tests/testthat/dead_pix/Pilatus/badpixel_mask.tif"
+
+pilatus_layout <- load_pix_matrix(layout = pilatus_layout, file_path = file_path)
+
+plot_layout_damaged(layout = pilatus_layout)
+```
+```{r}
+pixel_mask <- get_dead_pix_mask(pilatus_layout)
+
+pixel_events <- mask_to_events(pilatus_layout, pixel_mask)
+
+ppp_events <- pixel_events_2_ppp(pilatus_layout, pixel_events)
+
+pilatus_layout$clumps <- list(pixels = pixel_events$pixels, 
+                              events = pixel_events$events, 
+                              ppp_pixels = ppp_events$pixels, 
+                              ppp_events = ppp_events$events)
+
+```
+
+```{r}
+
+plot_events(pilatus_layout)
+
+```
+
