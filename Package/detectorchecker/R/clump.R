@@ -86,8 +86,7 @@ classify_clump <- function(layout, x, y) {
 #'
 #' @param layout Layout object
 #' @return data frame
-#' @export
-xyc_ply_func <- function(layout, xyc_pixel_df) {
+.xyc_ply_func <- function(layout, xyc_pixel_df) {
 
   dataFrame <- plyr::ddply(xyc_pixel_df, "id",
     dplyr::summarise,                     # 1
@@ -134,8 +133,7 @@ xyc_ply_func <- function(layout, xyc_pixel_df) {
 #' This is inspired by Perkin Elmer Layout and be replaced by other choices if desired.
 #' @param xyc_ply
 #' @return
-#' @export
-xyc_pixels2events <- function(xyc_ply) {
+.xyc_pixels2events <- function(xyc_ply) {
 
   xyc_events <- xyc_ply[, c(6, 7, 1, 2, 3)]
 
@@ -167,13 +165,12 @@ xyc_pixels2events <- function(xyc_ply) {
   return(xyc_events)
 }
 
-#' Something
+#' Converts mask (dead pixels) to events
 #'
 #' @param layout Layout object
 #' @param dead_pix_mask Deaad pixels mask
-#' @return
-#' @export
-mask_to_events <- function(layout, dead_pix_mask) {
+#' @return list of pixels and events
+.mask_to_events <- function(layout, dead_pix_mask) {
 
   nr <- layout$detector_height
   nc <- layout$detector_width
@@ -189,7 +186,6 @@ mask_to_events <- function(layout, dead_pix_mask) {
   raster::values(rr) <- t(dead_pix_mask[ , c(nr:1)])
 
   # detect clumps (patches) of connected cells, directions = 4 (Rook's case)
-
   rrc <- suppressWarnings(raster::clump(rr, directions = 4))
 
   # Make data frame with all pixels part of clusters (clumps) and their clump
@@ -199,94 +195,141 @@ mask_to_events <- function(layout, dead_pix_mask) {
     ceiling(raster::xyFromCell(rrc, which(!is.na(raster::getValues(rrc))))),
     id = raster::getValues(rrc)[!is.na(raster::getValues(rrc))])
 
-  xyc_events <- xyc_pixels2events(xyc_ply_func(layout, xyc_df))
+  xyc_events <- .xyc_pixels2events(.xyc_ply_func(layout, xyc_df))
 
   return(list(pixels = xyc_df, events = xyc_events))
 }
 
-#' Something
+#' Locates and clusifies clumps of a damaged layout
 #'
 #' @param layout Layout object
-#' @return
 #' @export
-pixel_events_2_ppp <- function(layout, pix_events){
+find_clumps <- function(layout) {
 
-  nr <- layout$detector_height
-  nc <- layout$detector_width
+  pixel_mask <- get_dead_pix_mask(layout)
 
-  # Make into a point pattern and plot ppp pattern and density
-  pixel_ppp <- spatstat::ppp(pix_events$pixels[, 1], pix_events$pixels[, 2],
-                   c(1, nc), c(1, nr))
+  pixel_events <- .mask_to_events(layout, pixel_mask)
 
-  event_ppp <- spatstat::ppp(pix_events$events[, 1], pix_events$events[, 2],
-                   c(1, nc), c(1, nr))
+  layout$clumps <- list(pixels = pixel_events$pixels,
+                        events = pixel_events$events)
 
-  return(list(pixels = pixel_ppp, events = event_ppp))
+  return(layout)
 }
 
+#' Plots damaged layout events
+#' @param layout Layout object
+#' @param file_path Output file path
+#' @param caption Flag to turn on/off figure caption
+#' @param incl_event_list a list of events to be included
+#' @export
+plot_events <- function(layout, file_path = NA, caption = TRUE, incl_event_list = NA) {
 
-#'
-#'
-plot_events <- function(layout, file_path = NA, caption = TRUE) {
+  if (!caption) {
+    main_caption <- ""
+    par(mar = c(0, 0, 0, 0))
 
-  main_caption <- ""
-
-  if (!caption) par(mar = c(0, 0, 0, 0))
-  else par(mfrow = c(1, 1), mar = c(1, 1, 3, 1))
+  } else {
+    main_caption <- "Defective events"
+    par(mfrow = c(1, 1), mar = c(1, 1, 3, 1))
+  }
 
   if(!is.na(file_path)) {
     # starts the graphics device driver
     ini_graphics(file_path = file_path)
   }
 
-  #par(mfrow=c(1,1), mar=c(0,0,4,0)+0.1, oma=c(0,0,0,0))
+  ppp_events <- .get_clump_event_ppp(layout, incl_event_list = incl_event_list)
 
   # "Defective events"
-  plot(layout$clumps$ppp_events, pch = 22, main=main_caption)
+  plot(ppp_events, pch = 22, main = main_caption)
 
-  # # plot(Eventppp, pch=22, col=2, main="Defective events") doesn't work, instead cheat:
-  # points(pe_ppp$events, pch = 22, col = 2)
-  #
-
+  # plot(ppp_events, pch=22, col=2, main="Defective events") doesn't work, hense, cheat:
+  points(ppp_events, pch = 22, col = 2)
 
   if(!is.na(file_path)) {
     dev.off()
   }
 }
 
-#' Visualise pixels and events in one plot and separately
-#'
-#' @param
-#' @return
+#' Creates ppp for damaged layout events
+#' @param layout Layout object
+#' @param incl_event_list a list of events to be included
+.get_clump_event_ppp <- function(layout, incl_event_list = NA) {
+
+  nr <- layout$detector_height
+  nc <- layout$detector_width
+
+  if (suppressWarnings(is.list(incl_event_list))) {
+    events <- layout$clumps$events[layout$clumps$events$class %in% incl_event_list, ]
+
+  } else if (suppressWarnings(!is.na(incl_event_list))) {
+    events <- layout$clumps$events[layout$clumps$events$class == incl_event_list, ]
+
+  } else {
+    events <- layout$clumps$event
+  }
+
+  event_ppp <- spatstat::ppp(events[, 1], events[, 2], c(1, nc), c(1, nr))
+
+  return(event_ppp)
+}
+
+#' Creates ppp for damaged layout pixels
+#' @param layout Layout object
+#' @param incl_event_list a list of events to be included
+.get_clump_pixel_ppp <- function(layout, incl_event_list = NA) {
+
+  nr <- layout$detector_height
+  nc <- layout$detector_width
+
+  if (suppressWarnings(is.list(incl_event_list))) {
+    pixels <- layout$clumps$pixels[layout$clumps$pixels$id %in% incl_event_list, ]
+
+  } else if (suppressWarnings(!is.na(incl_event_list))) {
+    pixels <- layout$clumps$pixels[layout$clumps$pixels$id == incl_event_list, ]
+
+  } else {
+    pixels <- layout$clumps$pixels
+  }
+
+  pixel_ppp <- spatstat::ppp(pixels[, 1], pixels[, 2], c(1, nc), c(1, nr))
+
+  return(pixel_ppp)
+}
+
+#' Plots damaged layout pixels and events
+#' @param layout Layout object
+#' @param file_path Output file path
+#' @param caption Flag to turn on/off figure caption
+#' @param incl_event_list a list of events to be included
 #' @export
-plot_pixel_events <- function(pe_ppp) {
+plot_pixels_events <- function(layout, file_path = NA, caption = TRUE, incl_event_list = NA) {
 
-  pdf(file = paste("ppp_pixelsEvents.pdf",sep=""))
-  par(mfrow=c(1,1), mar=c(0,0,4,0)+0.1, oma=c(0,0,0,0))
-  plot(pe_ppp$pixels, pch=22, main="Defective pixels (black) and events (red)")
-  points(pe_ppp$events, pch=1, col=2)
-  dev.off()
+  if (!caption) {
+    main_caption <- ""
+    par(mar = c(0, 0, 0, 0))
 
-  pdf(file = paste("ppp_pixels.pdf", sep=""))
-  par(mfrow=c(1,1), mar=c(0,0,4,0)+0.1, oma=c(0,0,0,0))
-  plot(pe_ppp$pixels, pch=22, main="Defective pixels")
-  dev.off()
+  } else {
+    main_caption <- "Defective pixels (black) and events (red)"
+    par(mfrow = c(1, 1), mar = c(0, 0, 4, 0) + 0.1, oma = c(0, 0, 0, 0))
+  }
 
-  pdf(file = paste("ppp_events.pdf", sep=""))
-  par(mfrow=c(1,1), mar=c(0,0,4,0)+0.1, oma=c(0,0,0,0))
-  plot(pe_ppp$events, pch=22, main="Defective events")
-  # plot(Eventppp, pch=22, col=2, main="Defective events") doesn't work, instead cheat:
-  points(pe_ppp$events, pch=22, col=2)
-  dev.off()
+  if(!is.na(file_path)) {
+    # starts the graphics device driver
+    ini_graphics(file_path = file_path)
+  }
 
-  ### Visualise densities of pixels and events
-  pdf(file = paste("density_pixels.pdf", sep=""))
-  par(mfrow=c(1,1), mar=c(0,0,4,2)+0.1, oma=c(0,0,0,0))
-  plot(density(pe_ppp$pixels), main="Density Pixels")
-  dev.off()
+  ppp_pixels <- .get_clump_pixel_ppp(layout, incl_event_list = incl_event_list)
+  ppp_events <- .get_clump_event_ppp(layout, incl_event_list = incl_event_list)
 
-  pdf(file = paste("density_events.pdf", sep=""))
-  par(mfrow=c(1,1), mar=c(0,0,4,2)+0.1, oma=c(0,0,0,0))
-  plot(density(pe_ppp$pixels), main="Density Pixels")
-  dev.off()
+  # Defective pixels
+  plot(ppp_pixels, pch = 22, main=main_caption)
+
+  # Defective events
+  # plot(ppp_events, pch=22, col=2, main="Defective events") doesn't work, hense, cheat:
+  points(ppp_events, pch = 22, col = 2)
+
+  if(!is.na(file_path)) {
+    dev.off()
+  }
 }

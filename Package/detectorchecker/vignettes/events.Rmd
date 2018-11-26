@@ -7,6 +7,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+Damaged layout
 ```{r}
 pilatus_layout <- create_module("Pilatus")
 
@@ -16,23 +17,21 @@ pilatus_layout <- load_pix_matrix(layout = pilatus_layout, file_path = file_path
 
 plot_layout_damaged(layout = pilatus_layout)
 ```
+Classifying and plotting events
 ```{r}
-pixel_mask <- get_dead_pix_mask(pilatus_layout)
 
-pixel_events <- mask_to_events(pilatus_layout, pixel_mask)
-
-ppp_events <- pixel_events_2_ppp(pilatus_layout, pixel_events)
-
-pilatus_layout$clumps <- list(pixels = pixel_events$pixels, 
-                              events = pixel_events$events, 
-                              ppp_pixels = ppp_events$pixels, 
-                              ppp_events = ppp_events$events)
-
-```
-
-```{r}
+pilatus_layout <- find_clumps(pilatus_layout)
 
 plot_events(pilatus_layout)
 
-```
+plot_pixels_events(pilatus_layout)
 
+plot_events(pilatus_layout, incl_event_list = 4)
+
+plot_pixels_events(pilatus_layout, incl_event_list = 4)
+
+plot_events(pilatus_layout, incl_event_list = list(2,3,4,5,6,7,8,9))
+
+plot_pixels_events(pilatus_layout, incl_event_list = list(2,3,4,5,6,7,8,9))
+
+```
