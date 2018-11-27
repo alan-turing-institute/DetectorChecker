@@ -238,13 +238,13 @@ file_path <- "../tests/testthat/dead_pix/PerkinElmer/BadPixelMap_0.bpm/BadPixelM
 
 layout_perkin <- load_pix_matrix(layout = layout_perkin, file_path = file_path)
 
-plot_kfg(layout = layout_perkin, func = "K")
-plot_kfg(layout = layout_perkin, func = "F")
-plot_kfg(layout = layout_perkin, func = "G")
+plot_layout_kfg(layout = layout_perkin, func = "K")
+plot_layout_kfg(layout = layout_perkin, func = "F")
+plot_layout_kfg(layout = layout_perkin, func = "G")
 
-plot_kfg(layout = layout_perkin, func = "K", row = 1, col = 5, caption = FALSE)
-plot_kfg(layout = layout_perkin, func = "F", row = 1, col = 5, caption = FALSE)
-plot_kfg(layout = layout_perkin, func = "G", row = 1, col = 5, caption = FALSE)
+plot_layout_kfg(layout = layout_perkin, func = "K", row = 1, col = 5, caption = FALSE)
+plot_layout_kfg(layout = layout_perkin, func = "F", row = 1, col = 5, caption = FALSE)
+plot_layout_kfg(layout = layout_perkin, func = "G", row = 1, col = 5, caption = FALSE)
 ```
 
 ### Inhomogenious K, F, G plots
@@ -256,11 +256,11 @@ file_path <- "../tests/testthat/dead_pix/Pilatus/badpixel_mask.tif"
 
 layout_pilatus <- load_pix_matrix(layout = layout_pilatus, file_path = file_path)
 
-plot_kfg(layout = layout_pilatus, func = "Kinhom")
-plot_kfg(layout = layout_pilatus, func = "Finhom")
-plot_kfg(layout = layout_pilatus, func = "Ginhom")
+plot_layout_kfg(layout = layout_pilatus, func = "Kinhom")
+plot_layout_kfg(layout = layout_pilatus, func = "Finhom")
+plot_layout_kfg(layout = layout_pilatus, func = "Ginhom")
 
-plot_kfg(layout = layout_pilatus, func = "Kinhom", row = 1, col = 5, caption = FALSE)
-plot_kfg(layout = layout_pilatus, func = "Finhom", row = 1, col = 5, caption = FALSE)
-plot_kfg(layout = layout_pilatus, func = "Ginhom", row = 1, col = 5, caption = FALSE)
+plot_layout_kfg(layout = layout_pilatus, func = "Kinhom", row = 1, col = 5, caption = FALSE)
+plot_layout_kfg(layout = layout_pilatus, func = "Finhom", row = 1, col = 5, caption = FALSE)
+plot_layout_kfg(layout = layout_pilatus, func = "Ginhom", row = 1, col = 5, caption = FALSE)
 ```

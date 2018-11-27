@@ -60,3 +60,11 @@ pilatus_layout <- find_clumps(pilatus_layout, row=5, col=1)
 
 plot_events_arrows(pilatus_layout, incl_event_list = list(4))
 ```
+### Plotting KFGs
+
+```{r}
+pilatus_layout <- find_clumps(pilatus_layout)
+
+plot_events_kfg(pilatus_layout, func = "Kinhom", incl_event_list = list(4))
+
+```

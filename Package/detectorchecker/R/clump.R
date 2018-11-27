@@ -435,3 +435,33 @@ plot_events_arrows <- function(layout, file_path = NA,
 
   plot_arrows(ppp_events, main_caption, file_path = file_path)
 }
+
+#' Plots K, F, G functions
+#'
+#' @param layout Layout object
+#' @param func Function name
+#' @param file_path Output file path
+#' @param row Module row number
+#' @param col Module column number
+#' @param caption Flag to turn on/off figure caption
+#' @param incl_event_list a list of events to be included
+#' @export
+plot_events_kfg <- function(layout, func, file_path = NA,
+                            row = NA, col = NA, caption = TRUE,
+                            incl_event_list = NA) {
+
+  if (!is.na(row) && !is.na(col)) {
+    # check whether the row and col numbers are correct
+    .check_select(layout, row, col)
+
+    # get the ppp for the selected module
+    # ppp_dead <- .get_ppp_dead_module(layout, row, col)
+    stop("Not implemented yet")
+
+  } else {
+
+    ppp_events <- .get_clump_event_ppp(layout, incl_event_list = incl_event_list)
+  }
+
+  plot_kfg(ppp_events, func, file_path = file_path, caption = caption)
+}

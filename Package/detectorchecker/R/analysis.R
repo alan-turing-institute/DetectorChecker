@@ -455,16 +455,7 @@ dead_stats_summary <- function(layout) {
 plot_layout_angles <- function(layout, file_path = NA, row = NA, col = NA,
                                caption = TRUE) {
 
-  main_caption <- ""
-  if (!caption) par(mar = c(0, 0, 0, 0))
-  else par(mfrow = c(1, 1), mar = c(1, 1, 3, 1))
-
   ppp_dead <- get_ppp_dead(layout)
-
-  if(!is.na(file_path)) {
-    # starts the graphics device driver
-    ini_graphics(file_path = file_path)
-  }
 
   if (!is.na(row) && !is.na(col)) {
     # check whether the row and col numbers are correct
@@ -485,12 +476,7 @@ plot_layout_angles <- function(layout, file_path = NA, row = NA, col = NA,
     }
   }
 
-  spatstat::rose(spatstat::nnorient(ppp_dead, sigma = 4),
-                 col = "grey", main = main_caption)
-
-  if(!is.na(file_path)) {
-    dev.off()
-  }
+  plot_angles(ppp_dead, main_caption, file_path = file_path)
 }
 
 # TODO: define the function
@@ -612,26 +598,11 @@ get_ppp_dead <- function(layout) {
 #' @param row module row number
 #' @param col module column number
 #' @param caption Flag to turn on/off figure caption
-#' @importFrom stats density
-#' @importFrom grDevices dev.off
 #' @export
-plot_kfg <- function(layout, func, file_path = NA, row = NA, col = NA,
+plot_layout_kfg <- function(layout, func, file_path = NA, row = NA, col = NA,
                      caption = TRUE) {
 
-  if (!caption) par(mar = c(0, 0, 0, 0))
-
-  if (missing(func) || is.null(func)) {
-    stop(c("Analysis function name is not specified.\n",
-           "Available functions: K, F, G, Kinhom, Finhom, Ginhom"))
-  }
-
-  main_caption <- ""
   ppp_dead <- get_ppp_dead(layout)
-
-  if(!is.na(file_path)) {
-    # starts the graphics device driver
-    ini_graphics(file_path = file_path)
-  }
 
   if (!is.na(row) && !is.na(col)) {
     # check whether the row and col numbers are correct
@@ -644,51 +615,5 @@ plot_kfg <- function(layout, func, file_path = NA, row = NA, col = NA,
     ppp_dead <- get_ppp_dead(layout)
   }
 
-  if(func == "K") {
-
-    if(caption) main_caption <- "K-function"
-
-    plot(spatstat::Kest(ppp_dead), main = main_caption)
-
-  } else if (func == "F") {
-
-    if(caption) main_caption <- "F-function"
-
-    plot(spatstat::Fest(ppp_dead), main = main_caption)
-
-  } else if (func == "G") {
-
-    if(caption) main_caption <- "G-function"
-
-    plot(spatstat::Gest(ppp_dead), main = main_caption)
-
-  } else if (func == "Kinhom") {
-    lambda <- density(ppp_dead)
-    if(caption) main_caption <- "Inhomogeneous K-Function"
-
-    plot(spatstat::Kinhom(ppp_dead, lambda, correction = "all"),
-         cex = 0.5, main = main_caption)
-
-  } else if (func == "Finhom") {
-    lambda <- density(ppp_dead)
-    if(caption) main_caption <- "Inhomogeneous F-Function"
-
-    plot(spatstat::Finhom(ppp_dead, lambda, correction = "all"),
-         cex = 0.5, main = main_caption)
-
-  } else if (func == "Ginhom") {
-    lambda <- density(ppp_dead)
-    if(caption) main_caption <- "Inhomogeneous G-Function"
-
-    plot(spatstat::Ginhom(ppp_dead, lambda, correction = "all"),
-         cex = 0.5, main = main_caption)
-
-  } else {
-    stop(c("Cannot identify analysis function.\n",
-           "Available functions: K, F, G, Kinhom, Finhom, Ginhom"))
-  }
-
-  if(!is.na(file_path)) {
-    dev.off()
-  }
+  plot_kfg(ppp_dead, func, file_path = file_path, caption = caption)
 }
