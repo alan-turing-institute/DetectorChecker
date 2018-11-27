@@ -104,6 +104,7 @@ library(igraph)
     xmode = .getmode(x),                  #14
     ymode = .getmode(y))                  #15
 
+
   # Explanations:
   # Clumps have IDs and come with a set of xy coordinates.
   # For each clump, extract features and store in data frame using dplyr.
@@ -143,19 +144,16 @@ library(igraph)
     if (xyc_events[i, 4] == 5) {
       xyc_events[i, 1] <- xyc_ply[i, 14]   # xmode
       xyc_events[i, 2] <- xyc_ply[i, 12]   # ymin
-    }
 
-    if (xyc_events[i, 4] == 6) {
+    } else if (xyc_events[i, 4] == 6) {
       xyc_events[i, 1] <- xyc_ply[i, 14]   # xmode
       xyc_events[i, 2] <- xyc_ply[i, 11]   # ymax
-    }
 
-    if (xyc_events[i, 4] == 7) {
+    } else if (xyc_events[i, 4] == 7) {
       xyc_events[i, 1] <- xyc_ply[i, 9]    # ymode
       xyc_events[i, 2] <- xyc_ply[i, 15]   # xmin
-    }
 
-    if (xyc_events[i, 4] == 8) {
+    } else if (xyc_events[i, 4] == 8) {
       xyc_events[i, 1] <- xyc_ply[i, 8]    # ymode
       xyc_events[i, 2] <- xyc_ply[i, 15]   # xmax
     }
@@ -169,7 +167,7 @@ library(igraph)
 #' @param layout Layout object
 #' @param dead_pix_mask Dead pixels mask
 #' @return list of pixels and events
-.mask_to_events <- function(layout, dead_pix_mask) {
+.mask_to_events <- function(layout, dead_pix_mask, row = NA, col = NA) {
 
   nr <- layout$detector_height
   nc <- layout$detector_width
@@ -192,22 +190,54 @@ library(igraph)
   #  coordinates converted from integers to .5 ending
   xyc_df <- data.frame(
     ceiling(raster::xyFromCell(rrc, which(!is.na(raster::getValues(rrc))))),
-    id = raster::getValues(rrc)[!is.na(raster::getValues(rrc))])
+    id = raster::getValues(rrc)[!is.na(raster::getValues(rrc))],
+    .clump_module(layout, rrc))
+
+  if (!is.na(row) && !is.na(col)) {
+
+    # check whether the row and col numbers are correct
+    .check_select(layout, row, col)
+
+    xyc_df <- xyc_df[xyc_df$mod_row == row & xyc_df$mod_row == row, ]
+  }
 
   xyc_events <- .xyc_pixels2events(.xyc_ply_func(layout, xyc_df))
 
   return(list(pixels = xyc_df, events = xyc_events))
 }
 
+#' Identifying modules for clumps
+#'
+#' @param layout Layout object
+#' @param rrc raster clumps objects
+.clump_module <- function(layout, rrc) {
+
+  xy_df_temp <- data.frame(ceiling(raster::xyFromCell(rrc, which(!is.na(raster::getValues(rrc))))))
+
+  xy_df_temp$mod_row <- NA
+  xy_df_temp$mod_col <- NA
+
+  for (i in 1:nrow(xy_df_temp)) {
+    xy_df_temp$mod_row[i] <- which_module(xy_df_temp$y[i], layout$module_edges_row)
+    xy_df_temp$mod_col[i] <- which_module(xy_df_temp$x[i], layout$module_edges_col)
+  }
+
+  dataFrame <- data.frame(mod_row=xy_df_temp$mod_row, mod_col=xy_df_temp$mod_col)
+
+  return(dataFrame)
+}
+
 #' Locates and clusifies clumps of a damaged layout
 #'
 #' @param layout Layout object
+#' @param row Module row number
+#' @param col Module column number
 #' @export
-find_clumps <- function(layout) {
+find_clumps <- function(layout, row = NA, col = NA) {
 
   pixel_mask <- get_dead_pix_mask(layout)
 
-  pixel_events <- .mask_to_events(layout, pixel_mask)
+  pixel_events <- .mask_to_events(layout, pixel_mask, row = row, col = row)
 
   layout$clumps <- list(pixels = pixel_events$pixels,
                         events = pixel_events$events)

@@ -45,4 +45,11 @@ plot_pixels_events(pilatus_layout, incl_event_list = list(2,3,4,5,6,7,8,9))
 plot_events_density(pilatus_layout, incl_event_list = list(4))
 
 ```
+### Selecting modules for events
+```{r}
 
+pilatus_layout <- find_clumps(pilatus_layout, row=5, col=1)
+
+plot_events_density(pilatus_layout, incl_event_list = list(4))
+
+```

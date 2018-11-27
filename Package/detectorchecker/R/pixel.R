@@ -328,9 +328,11 @@ inconsist_dead_layout <- function(dead_data, layout) {
 #' Creates a mask matrix of dead pixels
 #'
 #' @param layout Layout object
+#' @param row Module row number
+#' @param col Module column number
 #' @return dead pixel mask
 #' @export
-get_dead_pix_mask <- function(layout){
+get_dead_pix_mask <- function(layout) {
 
   # TODO: check because we needed to swap detector_width with detector_height.
   mask <- matrix(0, nrow = layout$detector_width, ncol = layout$detector_height)
