@@ -30,8 +30,19 @@ plot_events(pilatus_layout, incl_event_list = 4)
 
 plot_pixels_events(pilatus_layout, incl_event_list = 4)
 
+```
+### Selecting events for analysis
+```{r}
+
 plot_events(pilatus_layout, incl_event_list = list(2,3,4,5,6,7,8,9))
 
 plot_pixels_events(pilatus_layout, incl_event_list = list(2,3,4,5,6,7,8,9))
 
 ```
+### Plotting events density
+```{r}
+
+plot_events_density(pilatus_layout, incl_event_list = list(4))
+
+```
+

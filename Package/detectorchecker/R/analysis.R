@@ -228,18 +228,12 @@ plot_layout_cnt_mod <- function(layout, file_path = NA, row = NA, col = NA,
 #' @param row Module row number
 #' @param col Module column number
 #' @param caption Flag to turn on/off figure caption
-#' @importFrom graphics image par
 #' @export
 plot_layout_density <- function(layout, file_path = NA, adjust = 0.25,
                                 row = NA, col = NA, caption = TRUE) {
 
-  if (!caption) par(mar = c(0, 0, 0, 0))
-  else par(mfrow=c(1,1), mar=c(1,1,3,1))
-
-  if(!is.na(file_path)) {
-    # starts the graphics device driver
-    ini_graphics(file_path = file_path)
-  }
+  ppp_dead <- NA
+  main_caption <- ""
 
   if (!is.na(row) && !is.na(col)) {
     # check whether the row and col numbers are correct
@@ -250,8 +244,6 @@ plot_layout_density <- function(layout, file_path = NA, adjust = 0.25,
 
     if (caption) {
       main_caption <- paste("Dead pixel density (row=", row, "col=", col, "), adjust=", adjust)
-    } else {
-      main_caption <- ""
     }
 
   } else {
@@ -259,17 +251,12 @@ plot_layout_density <- function(layout, file_path = NA, adjust = 0.25,
 
     if (caption) {
       main_caption <- paste("Dead pixel density, adjust = ", adjust)
-    } else {
-      main_caption <- ""
     }
   }
 
-  image(density(ppp_dead, adjust = adjust), main = main_caption)
-
-  if(!is.na(file_path)) {
-    dev.off()
-  }
+  plot_density(ppp_dead, main_caption, file_path = file_path, adjust = adjust)
 }
+
 
 #' A function to plot NN oriented arrrows
 #'

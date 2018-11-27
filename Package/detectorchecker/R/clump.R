@@ -8,8 +8,7 @@ library(igraph)
 #'   4 - larger cluster, unless it actually has the shape of a line,
 #'   5 (6): vertical line where closest edge is the upper (lower) one,
 #'   7 (8): horizontal line where closest edge is the right (left) one)
-#' @export
-classify_clump <- function(layout, x, y) {
+.classify_clump <- function(layout, x, y) {
 
   # x and y are vectors of the same length
   # x=columns=horizontale positions
@@ -90,7 +89,7 @@ classify_clump <- function(layout, x, y) {
 
   dataFrame <- plyr::ddply(xyc_pixel_df, "id",
     dplyr::summarise,                     # 1
-    class = classify_clump(layout, x, y), # 2
+    class = .classify_clump(layout, x, y), # 2
     size = length(x),                     # 3
     xct = min(x) + (max(x) - min(x)) / 2, # 4 not always a pixel (see below)
     yct = min(y) + (max(y) - min(y)) / 2, # 5 not always a pixel
@@ -131,8 +130,8 @@ classify_clump <- function(layout, x, y) {
 #' type 7 (closest to right edge): xmin
 #' type 8 (closest to left edge):  xmax
 #' This is inspired by Perkin Elmer Layout and be replaced by other choices if desired.
-#' @param xyc_ply
-#' @return
+#' @param xyc_ply clums data frame
+#' @return events
 .xyc_pixels2events <- function(xyc_ply) {
 
   xyc_events <- xyc_ply[, c(6, 7, 1, 2, 3)]
@@ -168,7 +167,7 @@ classify_clump <- function(layout, x, y) {
 #' Converts mask (dead pixels) to events
 #'
 #' @param layout Layout object
-#' @param dead_pix_mask Deaad pixels mask
+#' @param dead_pix_mask Dead pixels mask
 #' @return list of pixels and events
 .mask_to_events <- function(layout, dead_pix_mask) {
 
@@ -332,4 +331,39 @@ plot_pixels_events <- function(layout, file_path = NA, caption = TRUE, incl_even
   if(!is.na(file_path)) {
     dev.off()
   }
+}
+
+#' Plots density graph of events
+#'
+#' @param layout Layout object
+#' @param file_path Output file path
+#' @param adjust Kernel density bandwidth
+#' @param caption Flag to turn on/off figure caption
+#' @param incl_event_list a list of events to be included
+#' @export
+plot_events_density <- function(layout, file_path = NA, adjust = 0.25,
+                                row = NA, col = NA, caption = TRUE,
+                                incl_event_list = NA) {
+
+  if (!is.na(row) && !is.na(col)) {
+    # check whether the row and col numbers are correct
+    .check_select(layout, row, col)
+
+    if (caption) {
+      main_caption <- paste("Events density (row=", row, "col=", col, "), adjust=", adjust)
+    }
+
+    # get the ppp for the selected module
+    # ppp_dead <- .get_ppp_dead_module(layout, row, col)
+    stop("Not implemented yet")
+
+  } else {
+    if (caption) {
+      main_caption <- paste("Dead pixel density, adjust = ", adjust)
+    }
+
+    ppp_events <- .get_clump_event_ppp(layout, incl_event_list = incl_event_list)
+  }
+
+  plot_density(ppp_events, main_caption, file_path = file_path, adjust = adjust)
 }
