@@ -98,7 +98,7 @@ plot_angles <- function(ppp_obj, caption, file_path = NA) {
 #' @importFrom stats density
 #' @importFrom grDevices dev.off
 #' @export
-plot_kfg <- function(module_count_arr, func, file_path = NA, caption = TRUE) {
+plot_kfg <- function(ppp_obj, func, file_path = NA, caption = TRUE) {
 
   if (missing(func) || is.null(func)) {
     stop(c("Analysis function name is not specified.\n",
