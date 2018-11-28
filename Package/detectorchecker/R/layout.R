@@ -19,6 +19,7 @@
 #' @param pix_dead dead pixels coordinates
 #' @param dead_stats dead pixel statistics
 #' @param pix_dead_modules assigned module for each dead pixel
+#' @param clumps clumps data (xyc_df data frame with pixels and their clump ID's, xyc_events data frame with clusters (clumps) and their clump ID's and centre coordinates)
 #' @return Layout object
 #' @export
 Default_Layout <- function(name = "Default", date = NA,
@@ -29,7 +30,8 @@ Default_Layout <- function(name = "Default", date = NA,
                            module_edges_col = NA, module_edges_row = NA,
                            detector_inconsistency = NA,
                            pix_matrix = NA, pix_dead = NA,
-                           dead_stats = NA, pix_dead_modules = NA) {
+                           dead_stats = NA, pix_dead_modules = NA,
+                           clumps = NA) {
 
   layout <- list(
     name = name,
@@ -53,7 +55,10 @@ Default_Layout <- function(name = "Default", date = NA,
     pix_matrix = pix_matrix,
     pix_dead = pix_dead,
     dead_stats = dead_stats,
-    pix_dead_modules = pix_dead_modules
+    pix_dead_modules = pix_dead_modules,
+
+    # Clumps
+    clumps = clumps
   )
 
   layout <- derive_layout(layout)

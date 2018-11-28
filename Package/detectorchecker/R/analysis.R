@@ -169,26 +169,27 @@ plot_layout_damaged <- function(layout, file_path = NA, caption = TRUE) {
 plot_layout_cnt_mod <- function(layout, file_path = NA, row = NA, col = NA,
                                 caption = TRUE) {
 
-  if (!caption) par(mar = c(0, 0, 0, 0))
-
-  if(!is.na(file_path)) {
-    # starts the graphics device driver
-    ini_graphics(file_path = file_path)
-  }
+  main_caption <- ""
 
   if(any(is.na(layout$dead_stats))) {
     stop("Is the damaged statistics calculated?")
   }
 
   if (!is.na(row) && !is.na(col)) {
+
+    if (!caption) par(mar = c(0, 0, 0, 0))
+
+    if(!is.na(file_path)) {
+      # starts the graphics device driver
+      ini_graphics(file_path = file_path)
+    }
+
     # check whether the row and col numbers are correct
     .check_select(layout, row, col)
 
     if(caption) {
       main_caption <- paste("Number of damaged pixels: ",
                             layout$dead_stats$module_count_arr[col][row])
-    } else {
-      main_caption <- ""
     }
 
     width <- layout$module_col_sizes[col]
@@ -203,20 +204,20 @@ plot_layout_cnt_mod <- function(layout, file_path = NA, row = NA, col = NA,
 
     text(width/2, height/2, label = layout$dead_stats$module_count[module_idx])
 
+
+    if(!is.na(file_path)) {
+      dev.off()
+    }
+
+
   } else {
     if(caption) {
       main_caption <- paste("Number of damaged pixels in modules\n",
                             "Total number damaged pixels: ", layout$dead_stats$dead_n,
                              "\n (average per module: ", layout$dead_stats$avg_dead_mod, ")")
-    } else {
-      main_caption <- ""
     }
 
-    plot(layout$dead_stats$module_count_arr, main = main_caption)
-  }
-
-  if(!is.na(file_path)) {
-    dev.off()
+    plot_counts(layout$dead_stats$module_count_arr, caption = main_caption, file_path = file_path)
   }
 }
 
@@ -228,18 +229,12 @@ plot_layout_cnt_mod <- function(layout, file_path = NA, row = NA, col = NA,
 #' @param row Module row number
 #' @param col Module column number
 #' @param caption Flag to turn on/off figure caption
-#' @importFrom graphics image par
 #' @export
 plot_layout_density <- function(layout, file_path = NA, adjust = 0.25,
                                 row = NA, col = NA, caption = TRUE) {
 
-  if (!caption) par(mar = c(0, 0, 0, 0))
-  else par(mfrow=c(1,1), mar=c(1,1,3,1))
-
-  if(!is.na(file_path)) {
-    # starts the graphics device driver
-    ini_graphics(file_path = file_path)
-  }
+  ppp_dead <- NA
+  main_caption <- ""
 
   if (!is.na(row) && !is.na(col)) {
     # check whether the row and col numbers are correct
@@ -250,8 +245,6 @@ plot_layout_density <- function(layout, file_path = NA, adjust = 0.25,
 
     if (caption) {
       main_caption <- paste("Dead pixel density (row=", row, "col=", col, "), adjust=", adjust)
-    } else {
-      main_caption <- ""
     }
 
   } else {
@@ -259,16 +252,10 @@ plot_layout_density <- function(layout, file_path = NA, adjust = 0.25,
 
     if (caption) {
       main_caption <- paste("Dead pixel density, adjust = ", adjust)
-    } else {
-      main_caption <- ""
     }
   }
 
-  image(density(ppp_dead, adjust = adjust), main = main_caption)
-
-  if(!is.na(file_path)) {
-    dev.off()
-  }
+  plot_density(ppp_dead, main_caption, file_path = file_path, adjust = adjust)
 }
 
 #' A function to plot NN oriented arrrows
@@ -283,14 +270,8 @@ plot_layout_density <- function(layout, file_path = NA, adjust = 0.25,
 plot_layout_arrows <- function(layout, file_path = NA, row = NA, col = NA,
                                caption = TRUE) {
 
+  ppp_dead <- NA
   main_caption <- ""
-  if (!caption) par(mar = c(0, 0, 0, 0))
-  else par(mfrow = c(1, 1), mar = c(1, 1, 3, 1))
-
-  if(!is.na(file_path)) {
-    # starts the graphics device driver
-    ini_graphics(file_path = file_path)
-  }
 
   if (!is.na(row) && !is.na(col)) {
     # check whether the row and col numbers are correct
@@ -311,16 +292,7 @@ plot_layout_arrows <- function(layout, file_path = NA, row = NA, col = NA,
     }
   }
 
-  PPPnn <- ppp_dead[spatstat::nnwhich(ppp_dead)]
-
-  plot(ppp_dead, main = main_caption)
-
-  arrows(PPPnn$x, PPPnn$y, ppp_dead$x, ppp_dead$y,
-         angle = 15, length = 0.07, col = "red")
-
-  if(!is.na(file_path)) {
-    dev.off()
-  }
+  plot_arrows(ppp_dead, main_caption, file_path = file_path)
 }
 
 #' Extracts a table of dead pixel coordinates from a pixel matrix
@@ -487,16 +459,8 @@ dead_stats_summary <- function(layout) {
 plot_layout_angles <- function(layout, file_path = NA, row = NA, col = NA,
                                caption = TRUE) {
 
+  ppp_dead <- NA
   main_caption <- ""
-  if (!caption) par(mar = c(0, 0, 0, 0))
-  else par(mfrow = c(1, 1), mar = c(1, 1, 3, 1))
-
-  ppp_dead <- get_ppp_dead(layout)
-
-  if(!is.na(file_path)) {
-    # starts the graphics device driver
-    ini_graphics(file_path = file_path)
-  }
 
   if (!is.na(row) && !is.na(col)) {
     # check whether the row and col numbers are correct
@@ -517,12 +481,7 @@ plot_layout_angles <- function(layout, file_path = NA, row = NA, col = NA,
     }
   }
 
-  spatstat::rose(spatstat::nnorient(ppp_dead, sigma = 4),
-                 col = "grey", main = main_caption)
-
-  if(!is.na(file_path)) {
-    dev.off()
-  }
+  plot_angles(ppp_dead, main_caption, file_path = file_path)
 }
 
 # TODO: define the function
@@ -644,26 +603,11 @@ get_ppp_dead <- function(layout) {
 #' @param row module row number
 #' @param col module column number
 #' @param caption Flag to turn on/off figure caption
-#' @importFrom stats density
-#' @importFrom grDevices dev.off
 #' @export
-plot_kfg <- function(layout, func, file_path = NA, row = NA, col = NA,
+plot_layout_kfg <- function(layout, func, file_path = NA, row = NA, col = NA,
                      caption = TRUE) {
 
-  if (!caption) par(mar = c(0, 0, 0, 0))
-
-  if (missing(func) || is.null(func)) {
-    stop(c("Analysis function name is not specified.\n",
-           "Available functions: K, F, G, Kinhom, Finhom, Ginhom"))
-  }
-
-  main_caption <- ""
   ppp_dead <- get_ppp_dead(layout)
-
-  if(!is.na(file_path)) {
-    # starts the graphics device driver
-    ini_graphics(file_path = file_path)
-  }
 
   if (!is.na(row) && !is.na(col)) {
     # check whether the row and col numbers are correct
@@ -676,51 +620,5 @@ plot_kfg <- function(layout, func, file_path = NA, row = NA, col = NA,
     ppp_dead <- get_ppp_dead(layout)
   }
 
-  if(func == "K") {
-
-    if(caption) main_caption <- "K-function"
-
-    plot(spatstat::Kest(ppp_dead), main = main_caption)
-
-  } else if (func == "F") {
-
-    if(caption) main_caption <- "F-function"
-
-    plot(spatstat::Fest(ppp_dead), main = main_caption)
-
-  } else if (func == "G") {
-
-    if(caption) main_caption <- "G-function"
-
-    plot(spatstat::Gest(ppp_dead), main = main_caption)
-
-  } else if (func == "Kinhom") {
-    lambda <- density(ppp_dead)
-    if(caption) main_caption <- "Inhomogeneous K-Function"
-
-    plot(spatstat::Kinhom(ppp_dead, lambda, correction = "all"),
-         cex = 0.5, main = main_caption)
-
-  } else if (func == "Finhom") {
-    lambda <- density(ppp_dead)
-    if(caption) main_caption <- "Inhomogeneous F-Function"
-
-    plot(spatstat::Finhom(ppp_dead, lambda, correction = "all"),
-         cex = 0.5, main = main_caption)
-
-  } else if (func == "Ginhom") {
-    lambda <- density(ppp_dead)
-    if(caption) main_caption <- "Inhomogeneous G-Function"
-
-    plot(spatstat::Ginhom(ppp_dead, lambda, correction = "all"),
-         cex = 0.5, main = main_caption)
-
-  } else {
-    stop(c("Cannot identify analysis function.\n",
-           "Available functions: K, F, G, Kinhom, Finhom, Ginhom"))
-  }
-
-  if(!is.na(file_path)) {
-    dev.off()
-  }
+  plot_kfg(ppp_dead, func, file_path = file_path, caption = caption)
 }
