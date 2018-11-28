@@ -377,6 +377,8 @@ plot_events_density <- function(layout, file_path = NA, adjust = 0.25,
                                 row = NA, col = NA, caption = TRUE,
                                 incl_event_list = NA) {
 
+  main_caption <- ""
+
   if (!is.na(row) && !is.na(col)) {
     # check whether the row and col numbers are correct
     .check_select(layout, row, col)
@@ -400,7 +402,7 @@ plot_events_density <- function(layout, file_path = NA, adjust = 0.25,
   plot_density(ppp_events, main_caption, file_path = file_path, adjust = adjust)
 }
 
-#' Plots density graph of events
+#' Plots arrows graph of events
 #'
 #' @param layout Layout object
 #' @param file_path Output file path
@@ -412,6 +414,8 @@ plot_events_density <- function(layout, file_path = NA, adjust = 0.25,
 plot_events_arrows <- function(layout, file_path = NA,
                                row = NA, col = NA, caption = TRUE,
                                incl_event_list = NA) {
+
+  main_caption <- ""
 
   if (!is.na(row) && !is.na(col)) {
     # check whether the row and col numbers are correct
@@ -434,6 +438,44 @@ plot_events_arrows <- function(layout, file_path = NA,
   }
 
   plot_arrows(ppp_events, main_caption, file_path = file_path)
+}
+
+#' Plots angles graph of events
+#'
+#' @param layout Layout object
+#' @param file_path Output file path
+#' @param row Module row number
+#' @param col Module column number
+#' @param caption Flag to turn on/off figure caption
+#' @param incl_event_list a list of events to be included
+#' @export
+plot_events_angles <- function(layout, file_path = NA,
+                               row = NA, col = NA, caption = TRUE,
+                               incl_event_list = NA) {
+
+  main_caption <- ""
+
+  if (!is.na(row) && !is.na(col)) {
+    # check whether the row and col numbers are correct
+    .check_select(layout, row, col)
+
+    if (caption) {
+      main_caption <- paste("Angles of events (row=", row, "col=", col, ")")
+    }
+
+    # get the ppp for the selected module
+    # ppp_dead <- .get_ppp_dead_module(layout, row, col)
+    stop("Not implemented yet")
+
+  } else {
+    if (caption) {
+      main_caption <- paste("Angles of events")
+    }
+
+    ppp_events <- .get_clump_event_ppp(layout, incl_event_list = incl_event_list)
+  }
+
+  plot_angles(ppp_events, main_caption, file_path = file_path)
 }
 
 #' Plots K, F, G functions

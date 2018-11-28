@@ -17,6 +17,13 @@ pilatus_layout <- load_pix_matrix(layout = pilatus_layout, file_path = file_path
 
 plot_layout_damaged(layout = pilatus_layout)
 ```
+```{r}
+
+pilatus_layout_temp <- find_clumps(pilatus_layout)
+
+plot_events(pilatus_layout_temp, caption = FALSE, incl_event_list = NA)
+```
+
 ### Classifying and plotting events (Selecting events for analysis)
 ```{r}
 
@@ -39,13 +46,15 @@ plot_pixels_events(pilatus_layout, incl_event_list = list(2,3,4,5,6,7,8,9))
 ### Plotting events density (selecting modules too)
 ```{r}
 
-pilatus_layout <- find_clumps(pilatus_layout)
+pilatus_layout_temp <- find_clumps(pilatus_layout)
 
-plot_events_density(pilatus_layout, incl_event_list = list(4))
+plot_events_density(pilatus_layout_temp, caption = FALSE, incl_event_list = NA)
+```
 
-pilatus_layout <- find_clumps(pilatus_layout, row=5, col=1)
+```{r}
+pilatus_layout_temp <- find_clumps(pilatus_layout, row=5, col=1)
 
-plot_events_density(pilatus_layout, incl_event_list = list(4))
+plot_events_density(pilatus_layout_temp, incl_event_list = list(4))
 
 ```
 

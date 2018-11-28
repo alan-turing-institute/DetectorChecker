@@ -169,6 +169,8 @@ plot_layout_damaged <- function(layout, file_path = NA, caption = TRUE) {
 plot_layout_cnt_mod <- function(layout, file_path = NA, row = NA, col = NA,
                                 caption = TRUE) {
 
+  main_caption <- ""
+
   if (!caption) par(mar = c(0, 0, 0, 0))
 
   if(!is.na(file_path)) {
@@ -187,8 +189,6 @@ plot_layout_cnt_mod <- function(layout, file_path = NA, row = NA, col = NA,
     if(caption) {
       main_caption <- paste("Number of damaged pixels: ",
                             layout$dead_stats$module_count_arr[col][row])
-    } else {
-      main_caption <- ""
     }
 
     width <- layout$module_col_sizes[col]
@@ -208,8 +208,6 @@ plot_layout_cnt_mod <- function(layout, file_path = NA, row = NA, col = NA,
       main_caption <- paste("Number of damaged pixels in modules\n",
                             "Total number damaged pixels: ", layout$dead_stats$dead_n,
                              "\n (average per module: ", layout$dead_stats$avg_dead_mod, ")")
-    } else {
-      main_caption <- ""
     }
 
     plot(layout$dead_stats$module_count_arr, main = main_caption)
@@ -268,6 +266,9 @@ plot_layout_density <- function(layout, file_path = NA, adjust = 0.25,
 #' @export
 plot_layout_arrows <- function(layout, file_path = NA, row = NA, col = NA,
                                caption = TRUE) {
+
+  ppp_dead <- NA
+  main_caption <- ""
 
   if (!is.na(row) && !is.na(col)) {
     # check whether the row and col numbers are correct
@@ -455,7 +456,8 @@ dead_stats_summary <- function(layout) {
 plot_layout_angles <- function(layout, file_path = NA, row = NA, col = NA,
                                caption = TRUE) {
 
-  ppp_dead <- get_ppp_dead(layout)
+  ppp_dead <- NA
+  main_caption <- ""
 
   if (!is.na(row) && !is.na(col)) {
     # check whether the row and col numbers are correct
