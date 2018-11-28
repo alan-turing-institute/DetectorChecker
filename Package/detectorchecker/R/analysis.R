@@ -171,18 +171,19 @@ plot_layout_cnt_mod <- function(layout, file_path = NA, row = NA, col = NA,
 
   main_caption <- ""
 
-  if (!caption) par(mar = c(0, 0, 0, 0))
-
-  if(!is.na(file_path)) {
-    # starts the graphics device driver
-    ini_graphics(file_path = file_path)
-  }
-
   if(any(is.na(layout$dead_stats))) {
     stop("Is the damaged statistics calculated?")
   }
 
   if (!is.na(row) && !is.na(col)) {
+
+    if (!caption) par(mar = c(0, 0, 0, 0))
+
+    if(!is.na(file_path)) {
+      # starts the graphics device driver
+      ini_graphics(file_path = file_path)
+    }
+
     # check whether the row and col numbers are correct
     .check_select(layout, row, col)
 
@@ -203,6 +204,12 @@ plot_layout_cnt_mod <- function(layout, file_path = NA, row = NA, col = NA,
 
     text(width/2, height/2, label = layout$dead_stats$module_count[module_idx])
 
+
+    if(!is.na(file_path)) {
+      dev.off()
+    }
+
+
   } else {
     if(caption) {
       main_caption <- paste("Number of damaged pixels in modules\n",
@@ -210,11 +217,7 @@ plot_layout_cnt_mod <- function(layout, file_path = NA, row = NA, col = NA,
                              "\n (average per module: ", layout$dead_stats$avg_dead_mod, ")")
     }
 
-    plot(layout$dead_stats$module_count_arr, main = main_caption)
-  }
-
-  if(!is.na(file_path)) {
-    dev.off()
+    plot_counts(layout$dead_stats$module_count_arr, caption = main_caption, file_path = file_path)
   }
 }
 

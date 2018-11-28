@@ -98,7 +98,7 @@ plot_angles <- function(ppp_obj, caption, file_path = NA) {
 #' @importFrom stats density
 #' @importFrom grDevices dev.off
 #' @export
-plot_kfg <- function(ppp_obj, func, file_path = NA, caption = TRUE) {
+plot_kfg <- function(module_count_arr, func, file_path = NA, caption = TRUE) {
 
   if (missing(func) || is.null(func)) {
     stop(c("Analysis function name is not specified.\n",
@@ -155,6 +155,33 @@ plot_kfg <- function(ppp_obj, func, file_path = NA, caption = TRUE) {
     stop(c("Cannot identify analysis function.\n",
            "Available functions: K, F, G, Kinhom, Finhom, Ginhom"))
   }
+
+  if(!is.na(file_path)) {
+    dev.off()
+  }
+}
+
+#' A function to plot NN oriented arrrows
+#'
+#' @param module_count_arr Counts per array
+#' @param caption caption of the figure
+#' @param file_path file path
+#' @export
+plot_counts <- function(module_count_arr, caption, file_path = NA) {
+
+  if (nchar(caption) > 0) {
+    par(mfrow=c(1,1), mar=c(1,1,3,1))
+
+  } else {
+    par(mar = c(0, 0, 0, 0))
+  }
+
+  if(!is.na(file_path)) {
+    # starts the graphics device driver
+    ini_graphics(file_path = file_path)
+  }
+
+  plot(module_count_arr, main = caption)
 
   if(!is.na(file_path)) {
     dev.off()

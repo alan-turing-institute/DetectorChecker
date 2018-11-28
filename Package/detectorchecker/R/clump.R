@@ -507,3 +507,41 @@ plot_events_kfg <- function(layout, func, file_path = NA,
 
   plot_kfg(ppp_events, func, file_path = file_path, caption = caption)
 }
+
+#' A function to plot layout with counts per module
+#'
+#' @param layout Layout object
+#' @param file_path Output file path
+#' @param row Module row number
+#' @param col Module column number
+#' @param caption Flag to turn on/off figure caption
+#' @export
+plot_events_count <- function(layout, file_path = NA,
+                              row = NA, col = NA, caption = TRUE,
+                              incl_event_list = NA) {
+
+  main_caption <- ""
+
+  if (!is.na(row) && !is.na(col)) {
+    # check whether the row and col numbers are correct
+    .check_select(layout, row, col)
+
+    # get the ppp for the selected module
+    # ppp_dead <- .get_ppp_dead_module(layout, row, col)
+    stop("Not implemented yet")
+
+  } else {
+
+    ppp_events <- .get_clump_event_ppp(layout, incl_event_list = incl_event_list)
+
+    # count of points in each quadrat
+    module_count_arr <- spatstat::quadratcount(X = ppp_events,
+      nx = layout$module_col_n, ny = layout$module_row_n)
+
+    if (caption) {
+      main_caption <- "Number of events in modules"
+    }
+
+    plot_counts(module_count_arr, file_path = file_path, caption = main_caption)
+  }
+}

@@ -57,6 +57,14 @@ pilatus_layout_temp <- find_clumps(pilatus_layout, row=5, col=1)
 plot_events_density(pilatus_layout_temp, incl_event_list = list(4))
 
 ```
+### Plotting counts
+```{r}
+pilatus_layout_temp <- find_clumps(pilatus_layout)
+
+plot_events_count(pilatus_layout_temp, caption = FALSE)
+
+```
+
 
 ### Plotting arrows (selecting modules too)
 ```{r}
