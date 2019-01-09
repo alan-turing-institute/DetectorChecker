@@ -264,3 +264,27 @@ plot_layout_kfg(layout = layout_pilatus, func = "Kinhom", row = 1, col = 5, capt
 plot_layout_kfg(layout = layout_pilatus, func = "Finhom", row = 1, col = 5, caption = FALSE)
 plot_layout_kfg(layout = layout_pilatus, func = "Ginhom", row = 1, col = 5, caption = FALSE)
 ```
+
+### Events
+
+```{r}
+layout_perkin <- create_module("PerkinElmerFull")
+
+file_path <- "../tests/testthat/dead_pix/PerkinElmer/BadPixelMap_0.bpm/BadPixelMap.bpm.xml"
+
+layout_perkin <- load_pix_matrix(layout = layout_perkin, file_path = file_path)
+
+plot_layout_damaged(layout = layout_perkin)
+```
+```{r}
+
+      incl_event_list <- list(1, 2, 3, 4, 5, 6, 7, 8)
+      
+      layout_events <- detectorchecker::find_clumps(layout_perkin)
+      
+      detectorchecker::plot_events(layout_events, caption = FALSE, incl_event_list = incl_event_list)
+```
+```{r}
+
+
+```

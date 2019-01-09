@@ -251,7 +251,8 @@ find_clumps <- function(layout, row = NA, col = NA) {
 #' @param caption Flag to turn on/off figure caption
 #' @param incl_event_list a list of events to be included
 #' @export
-plot_events <- function(layout, file_path = NA, caption = TRUE, incl_event_list = NA) {
+plot_events <- function(layout, file_path = NA, caption = TRUE, incl_event_list = NA,
+                        plot_edges_gaps = TRUE) {
 
   if (!caption) {
     main_caption <- ""
@@ -274,6 +275,18 @@ plot_events <- function(layout, file_path = NA, caption = TRUE, incl_event_list 
 
   # plot(ppp_events, pch=22, col=2, main="Defective events") doesn't work, hense, cheat:
   points(ppp_events, pch = 22, col = 2)
+
+  if (plot_edges_gaps) {
+    edges_gaps <- .get_layout_ppps(layout_perkin)
+
+    points(edges_gaps[[1]], pch = ".")
+    points(edges_gaps[[2]], pch = ".")
+
+    if ((!is.null(edges_gaps[[3]])) && (!is.null(edges_gaps[[4]]))) {
+      points(edges_gaps[[3]], pch = ".")
+      points(edges_gaps[[4]], pch = ".")
+    }
+  }
 
   if(!is.na(file_path)) {
     dev.off()

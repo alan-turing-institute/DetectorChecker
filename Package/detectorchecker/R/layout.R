@@ -490,6 +490,28 @@ create_ppp_gaps_row <- function(layout) {
   return(ppp_gaps_row)
 }
 
+#' Generate layout ppps
+#'
+#' @param layout Layout object
+#' @return a list of ppps for edges and gaps
+.get_layout_ppps <- function(layout) {
+
+  ppp_edges_col <- create_ppp_edges_col(layout)
+  ppp_edges_row <- create_ppp_edges_row(layout)
+
+  # Does the layout have gaps?
+  if (sum(layout$gap_col_sizes) + sum(layout$gap_row_sizes) != 0) {
+    ppp_gaps_col <- NULL
+    ppp_gaps_row <- NULL
+
+  } else {
+    ppp_gaps_col <- create_ppp_gaps_col(layout)
+    ppp_gaps_row <- create_ppp_gaps_row(layout)
+  }
+
+  return(list(ppp_edges_col, ppp_edges_row, ppp_gaps_col, ppp_gaps_row))
+}
+
 #' Plotting layout
 #'
 #' @param layout Layout object
@@ -501,13 +523,16 @@ plot_layout <- function(layout, file_path = NA, caption = TRUE) {
   if (!caption) par(mar = c(0, 0, 0, 0))
   main_caption <- ""
 
-  ppp_edges_col <- create_ppp_edges_col(layout)
-  ppp_edges_row <- create_ppp_edges_row(layout)
 
   if(!is.na(file_path)) {
     # starts the graphics device driver
     ini_graphics(file_path = file_path)
   }
+
+  edges_gaps <- .get_layout_ppps(layout)
+
+  ppp_edges_col <- edges_gaps[[1]]
+  ppp_edges_row <- edges_gaps[[2]]
 
   if (sum(layout$gap_col_sizes) + sum(layout$gap_row_sizes) == 0) {
 
@@ -528,8 +553,8 @@ plot_layout <- function(layout, file_path = NA, caption = TRUE) {
     }
 
     # Define point patterns (spatstat) capturing gaps
-    ppp_gaps_col <- create_ppp_gaps_col(layout)
-    ppp_gaps_row <- create_ppp_gaps_row(layout)
+    ppp_gaps_col <- edges_gaps[[3]]
+    ppp_gaps_row <- edges_gaps[[4]]
 
     # vertical lines in x-positions given by xlines
     plot(ppp_edges_col, pch = ".", cex.main = 0.7, main = main_caption)
