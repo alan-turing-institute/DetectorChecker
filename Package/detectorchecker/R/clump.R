@@ -169,6 +169,16 @@ library(igraph)
 #' @return list of pixels and events
 .mask_to_events <- function(layout, dead_pix_mask, row = NA, col = NA) {
 
+  if (!is.na(row) && !is.na(col)) {
+
+    shift_left <- layout$module_edges_col[1, col] - 1
+    shift_up <- layout$module_edges_row[1, row] - 1
+
+    nc <- layout$module_col_sizes[col]
+    nr <- layout$module_row_sizes[row]
+
+  }
+
   nr <- layout$detector_height
   nc <- layout$detector_width
 
@@ -198,6 +208,12 @@ library(igraph)
     .check_select(layout, row, col)
 
     xyc_df <- xyc_df[xyc_df$mod_row == row & xyc_df$mod_col == col, ]
+
+    xyc_df$x <- xyc_df$x - shift_left
+    xyc_df$y <- xyc_df$y - shift_up
+    print("xyc_df")
+    print(xyc_df)
+
   }
 
   xyc_events <- .xyc_pixels2events(.xyc_ply_func(layout, xyc_df))
@@ -312,9 +328,6 @@ plot_module_events <- function(layout, col, row, file_path = NA, caption = TRUE,
     ini_graphics(file_path = file_path)
   }
 
-  shift_left <- layout$module_edges_col[1, col] - 1
-  shift_up <- layout$module_edges_row[1, row] - 1
-
   width <- layout$module_col_sizes[col]
   height <- layout$module_row_sizes[row]
 
@@ -330,9 +343,7 @@ plot_module_events <- function(layout, col, row, file_path = NA, caption = TRUE,
   plot(ppp_frame, pch = ".", cex.main = 0.7, main = main_caption)
 
   ppp_events <- .get_clump_event_ppp(layout, incl_event_list = incl_event_list,
-                                     height = height, width = width,
-                                     shift_left = shift_left,
-                                     shift_up = shift_up)
+                                     height = height, width = width)
 
   points(ppp_events, pch = 22, col = 2)
 
@@ -346,8 +357,7 @@ plot_module_events <- function(layout, col, row, file_path = NA, caption = TRUE,
 #' @param layout Layout object
 #' @param incl_event_list a list of events to be included
 .get_clump_event_ppp <- function(layout, incl_event_list = NA,
-                                 height = NULL, width = NULL,
-                                 shift_left = 0, shift_up = 0) {
+                                 height = NULL, width = NULL) {
 
   if (is.null(height)) nr <- layout$detector_height
   else nr <- height
@@ -365,7 +375,7 @@ plot_module_events <- function(layout, col, row, file_path = NA, caption = TRUE,
     events <- layout$clumps$events
   }
   #TODO: FIX
-  event_ppp <- spatstat::ppp(events[, 1] - shift_left, events[, 2] - shift_up, c(1, nc), c(1, nr))
+  event_ppp <- spatstat::ppp(events[, 1], events[, 2], c(1, nc), c(1, nr))
 
   return(event_ppp)
 }
@@ -454,17 +464,20 @@ plot_events_density <- function(layout, file_path = NA, adjust = 0.25,
       main_caption <- paste("Events density (row=", row, "col=", col, "), adjust=", adjust)
     }
 
-    # get the ppp for the selected module
-    # ppp_dead <- .get_ppp_dead_module(layout, row, col)
-    stop("Not implemented yet")
+    height <- layout$module_row_sizes[row]
+    width <- layout$module_col_sizes[col]
 
   } else {
     if (caption) {
-      main_caption <- paste("Dead pixel density, adjust = ", adjust)
+      main_caption <- paste("Events density, adjust = ", adjust)
     }
 
-    ppp_events <- .get_clump_event_ppp(layout, incl_event_list = incl_event_list)
+    height = NULL
+    width = NULL
   }
+
+  ppp_events <- .get_clump_event_ppp(layout, incl_event_list = incl_event_list,
+                                     height = height, width = width)
 
   plot_density(ppp_events, main_caption, file_path = file_path, adjust = adjust)
 }
@@ -492,17 +505,20 @@ plot_events_arrows <- function(layout, file_path = NA,
       main_caption <- paste("Arrows of events (row=", row, "col=", col, ")")
     }
 
-    # get the ppp for the selected module
-    # ppp_dead <- .get_ppp_dead_module(layout, row, col)
-    stop("Not implemented yet")
+    height <- layout$module_row_sizes[row]
+    width <- layout$module_col_sizes[col]
 
   } else {
     if (caption) {
       main_caption <- paste("Arrows of events")
     }
 
-    ppp_events <- .get_clump_event_ppp(layout, incl_event_list = incl_event_list)
+    height = NULL
+    width = NULL
   }
+
+  ppp_events <- .get_clump_event_ppp(layout, incl_event_list = incl_event_list,
+                                     height = height, width = width)
 
   plot_arrows(ppp_events, main_caption, file_path = file_path)
 }
@@ -530,17 +546,20 @@ plot_events_angles <- function(layout, file_path = NA,
       main_caption <- paste("Angles of events (row=", row, "col=", col, ")")
     }
 
-    # get the ppp for the selected module
-    # ppp_dead <- .get_ppp_dead_module(layout, row, col)
-    stop("Not implemented yet")
+    height <- layout$module_row_sizes[row]
+    width <- layout$module_col_sizes[col]
 
   } else {
     if (caption) {
       main_caption <- paste("Angles of events")
     }
 
-    ppp_events <- .get_clump_event_ppp(layout, incl_event_list = incl_event_list)
+    height = NULL
+    width = NULL
   }
+
+  ppp_events <- .get_clump_event_ppp(layout, incl_event_list = incl_event_list,
+                                     height = height, width = width)
 
   plot_angles(ppp_events, main_caption, file_path = file_path)
 }
@@ -563,14 +582,17 @@ plot_events_kfg <- function(layout, func, file_path = NA,
     # check whether the row and col numbers are correct
     .check_select(layout, row, col)
 
-    # get the ppp for the selected module
-    # ppp_dead <- .get_ppp_dead_module(layout, row, col)
-    stop("Not implemented yet")
+    height <- layout$module_row_sizes[row]
+    width <- layout$module_col_sizes[col]
 
   } else {
 
-    ppp_events <- .get_clump_event_ppp(layout, incl_event_list = incl_event_list)
+    height = NULL
+    width = NULL
   }
+
+  ppp_events <- .get_clump_event_ppp(layout, incl_event_list = incl_event_list,
+                                     height = height, width = width)
 
   plot_kfg(ppp_events, func, file_path = file_path, caption = caption)
 }
