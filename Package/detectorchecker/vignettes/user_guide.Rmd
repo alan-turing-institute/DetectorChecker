@@ -278,13 +278,20 @@ plot_layout_damaged(layout = layout_perkin)
 ```
 ```{r}
 
-      incl_event_list <- list(1, 2, 3, 4, 5, 6, 7, 8)
+incl_event_list <- list(1,2,3,4,5,6,7,8)
       
-      layout_events <- detectorchecker::find_clumps(layout_perkin)
+layout_events <- detectorchecker::find_clumps(layout_perkin)
       
-      detectorchecker::plot_events(layout_events, caption = FALSE, incl_event_list = incl_event_list)
+detectorchecker::plot_events(layout_events, caption = FALSE, incl_event_list = incl_event_list)
 ```
 ```{r}
 
+row_ = 2
+col_ = 3
+
+layout_events <- detectorchecker::find_clumps(layout_perkin, row = row_, col = col_)
+
+plot_module_events(layout_events, row = row_, col = col_, caption = FALSE, 
+                   incl_event_list = incl_event_list)
 
 ```

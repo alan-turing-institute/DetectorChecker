@@ -194,11 +194,10 @@ library(igraph)
     .clump_module(layout, rrc))
 
   if (!is.na(row) && !is.na(col)) {
-
     # check whether the row and col numbers are correct
     .check_select(layout, row, col)
 
-    xyc_df <- xyc_df[xyc_df$mod_row == row & xyc_df$mod_row == row, ]
+    xyc_df <- xyc_df[xyc_df$mod_row == row & xyc_df$mod_col == col, ]
   }
 
   xyc_events <- .xyc_pixels2events(.xyc_ply_func(layout, xyc_df))
@@ -237,7 +236,7 @@ find_clumps <- function(layout, row = NA, col = NA) {
 
   pixel_mask <- get_dead_pix_mask(layout)
 
-  pixel_events <- .mask_to_events(layout, pixel_mask, row = row, col = row)
+  pixel_events <- .mask_to_events(layout, pixel_mask, row = row, col = col)
 
   layout$clumps <- list(pixels = pixel_events$pixels,
                         events = pixel_events$events)
@@ -277,7 +276,7 @@ plot_events <- function(layout, file_path = NA, caption = TRUE, incl_event_list 
   points(ppp_events, pch = 22, col = 2)
 
   if (plot_edges_gaps) {
-    edges_gaps <- .get_layout_ppps(layout_perkin)
+    edges_gaps <- .get_layout_ppps(layout)
 
     points(edges_gaps[[1]], pch = ".")
     points(edges_gaps[[2]], pch = ".")
@@ -293,13 +292,68 @@ plot_events <- function(layout, file_path = NA, caption = TRUE, incl_event_list 
   }
 }
 
+#' Plots damaged layout module events
+#' @param layout Layout object
+#' @param mod_col Module column number
+#' @param mod_row Module row number
+#' @param file_path Output file path
+#' @param caption Flag to turn on/off figure caption
+#' @param incl_event_list a list of events to be included
+#' @export
+plot_module_events <- function(layout, col, row, file_path = NA, caption = TRUE, incl_event_list = NA) {
+
+  if (!caption) par(mar = c(0, 0, 0, 0))
+
+  # check whether the row and col numbers are correct
+  .check_select(layout, row, col)
+
+  if(!is.na(file_path)) {
+    # starts the graphics device driver
+    ini_graphics(file_path = file_path)
+  }
+
+  shift_left <- layout$module_edges_col[1, col] - 1
+  shift_up <- layout$module_edges_row[1, row] - 1
+
+  width <- layout$module_col_sizes[col]
+  height <- layout$module_row_sizes[row]
+
+  ppp_frame <- spatstat::ppp(1, 1, c(1, width), c(1, height))
+
+  if(caption) {
+    main_caption <- paste(layout$name, "with damaged pixels\n (black=module edges)")
+
+  } else {
+    main_caption <- ""
+  }
+
+  plot(ppp_frame, pch = ".", cex.main = 0.7, main = main_caption)
+
+  ppp_events <- .get_clump_event_ppp(layout, incl_event_list = incl_event_list,
+                                     height = height, width = width,
+                                     shift_left = shift_left,
+                                     shift_up = shift_up)
+
+  points(ppp_events, pch = 22, col = 2)
+
+  if(!is.na(file_path)) {
+    # shuts down the specified (by default the current) device
+    dev.off()
+  }
+}
+
 #' Creates ppp for damaged layout events
 #' @param layout Layout object
 #' @param incl_event_list a list of events to be included
-.get_clump_event_ppp <- function(layout, incl_event_list = NA) {
+.get_clump_event_ppp <- function(layout, incl_event_list = NA,
+                                 height = NULL, width = NULL,
+                                 shift_left = 0, shift_up = 0) {
 
-  nr <- layout$detector_height
-  nc <- layout$detector_width
+  if (is.null(height)) nr <- layout$detector_height
+  else nr <- height
+
+  if (is.null(height)) nc <- layout$detector_width
+  else nc <- width
 
   if (suppressWarnings(is.list(incl_event_list))) {
     events <- layout$clumps$events[layout$clumps$events$class %in% incl_event_list, ]
@@ -308,10 +362,10 @@ plot_events <- function(layout, file_path = NA, caption = TRUE, incl_event_list 
     events <- layout$clumps$events[layout$clumps$events$class == incl_event_list, ]
 
   } else {
-    events <- layout$clumps$event
+    events <- layout$clumps$events
   }
-
-  event_ppp <- spatstat::ppp(events[, 1], events[, 2], c(1, nc), c(1, nr))
+  #TODO: FIX
+  event_ppp <- spatstat::ppp(events[, 1] - shift_left, events[, 2] - shift_up, c(1, nc), c(1, nr))
 
   return(event_ppp)
 }
