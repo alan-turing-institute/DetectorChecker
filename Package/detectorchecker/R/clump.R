@@ -211,9 +211,6 @@ library(igraph)
 
     xyc_df$x <- xyc_df$x - shift_left
     xyc_df$y <- xyc_df$y - shift_up
-    print("xyc_df")
-    print(xyc_df)
-
   }
 
   xyc_events <- .xyc_pixels2events(.xyc_ply_func(layout, xyc_df))
@@ -610,14 +607,36 @@ plot_events_count <- function(layout, file_path = NA,
                               incl_event_list = NA) {
 
   main_caption <- ""
+  if (!caption) par(mar = c(0, 0, 0, 0))
 
   if (!is.na(row) && !is.na(col)) {
     # check whether the row and col numbers are correct
     .check_select(layout, row, col)
 
-    # get the ppp for the selected module
-    # ppp_dead <- .get_ppp_dead_module(layout, row, col)
-    stop("Not implemented yet")
+
+    if(caption) {
+      main_caption <- paste("Number of events in a module ",
+                            layout$dead_stats$module_count_arr[col][row])
+    }
+
+    width <- layout$module_col_sizes[col]
+    height <- layout$module_row_sizes[row]
+
+    ppp_frame <- spatstat::ppp(1, 1, c(1, width), c(1, height))
+
+    plot(ppp_frame, pch = ".", cex.main = 0.7, main = main_caption)
+
+    # This works only on rectangular layouts!!!
+    module_idx <- (col - 1) * layout$module_row_n + row
+
+    ppp_events <- .get_clump_event_ppp(layout, incl_event_list = incl_event_list,
+                                       height = height, width = width)
+
+    text(width/2, height/2, label = length(ppp_events$x))
+
+    if(!is.na(file_path)) {
+      dev.off()
+    }
 
   } else {
 
