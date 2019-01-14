@@ -254,6 +254,9 @@ find_clumps <- function(layout, row = NA, col = NA) {
   layout$clumps <- list(pixels = pixel_events$pixels,
                         events = pixel_events$events)
 
+  # getting the events mask (0 and 1 s)
+  layout$clumps$events_matrix <- get_events_mask(layout)
+
   return(layout)
 }
 
@@ -398,6 +401,29 @@ plot_module_events <- function(layout, col, row, file_path = NA, caption = TRUE,
   pixel_ppp <- spatstat::ppp(pixels[, 1], pixels[, 2], c(1, nc), c(1, nr))
 
   return(pixel_ppp)
+}
+
+
+#' Generates events matrix (a matrix with pixels as 0 and events as 1)
+#' @param layout Layout object
+#' @return events mask
+#' @export
+get_events_mask <- function(layout) {
+
+  mask <- matrix(0, nrow = layout$detector_width, ncol = layout$detector_height)
+
+  events_cnt <- nrow(layout$clumps$events)
+  if (events_cnt > 0) {
+    for (event_i in 1:events_cnt) {
+
+      x <- layout$clumps$events[event_i, ]$xctpix
+      y <- layout$clumps$events[event_i, ]$yctpix
+
+      mask[x, y] <- 1
+    }
+  }
+
+  return(mask)
 }
 
 #' Plots damaged layout pixels and events
