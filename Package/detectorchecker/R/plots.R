@@ -13,7 +13,7 @@ plot_density <- function(ppp_obj, caption, file_path = NA, adjust = 0.25) {
     par(mfrow=c(1,1), mar=c(1,1,3,1))
 
   } else {
-    par(mar = c(0, 0, 0, 0))
+    par(mfrow=c(1,1), mar = c(1, 1, 1, 1))
   }
 
   if(!is.na(file_path)) {
@@ -41,7 +41,7 @@ plot_arrows <- function(ppp_obj, caption, file_path = NA) {
     par(mfrow=c(1,1), mar=c(1,1,3,1))
 
   } else {
-    par(mar = c(0, 0, 0, 0))
+    par(mfrow=c(1,1), mar = c(1, 1, 1, 1))
   }
 
   if(!is.na(file_path)) {
@@ -73,7 +73,7 @@ plot_angles <- function(ppp_obj, caption, file_path = NA) {
     par(mfrow=c(1,1), mar=c(1,1,3,1))
 
   } else {
-    par(mar = c(0, 0, 0, 0))
+    par(mfrow=c(1,1), mar = c(1, 1, 1, 1))
   }
 
   if(!is.na(file_path)) {
@@ -174,7 +174,7 @@ plot_counts <- function(module_count_arr, caption, file_path = NA) {
     par(mfrow=c(1,1), mar=c(1,1,3,1))
 
   } else {
-    par(mar = c(0, 0, 0, 0))
+    par(mfrow=c(1,1), mar = c(1, 1, 1, 1))
   }
 
   if(!is.na(file_path)) {
