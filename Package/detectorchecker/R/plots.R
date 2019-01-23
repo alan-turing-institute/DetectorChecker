@@ -106,11 +106,12 @@ plot_kfg <- function(ppp_obj, func, file_path = NA, caption = TRUE) {
   }
 
   fig_caption <- ""
+
   if (caption > 0) {
-    par(mfrow=c(1,1), mar=c(1,1,3,1))
+    par(mfrow=c(1,1), mar=c(3,3,4,1))
 
   } else {
-    par(mar = c(0, 0, 0, 0))
+    par(mfrow=c(1,1), mar = c(3, 3, 1, 1))
   }
 
   if(!is.na(file_path)) {

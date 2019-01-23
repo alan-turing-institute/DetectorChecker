@@ -238,7 +238,7 @@ file_path <- "../tests/testthat/dead_pix/PerkinElmer/BadPixelMap_0.bpm/BadPixelM
 
 layout_perkin <- load_pix_matrix(layout = layout_perkin, file_path = file_path)
 
-plot_layout_kfg(layout = layout_perkin, func = "K")
+plot_layout_kfg(layout = layout_perkin, func = "K", caption = FALSE)
 plot_layout_kfg(layout = layout_perkin, func = "F")
 plot_layout_kfg(layout = layout_perkin, func = "G")
 
