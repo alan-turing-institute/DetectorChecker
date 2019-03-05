@@ -1,3 +1,27 @@
+#' @title Pixel module
+
+#' Function assign a module to each dead pixel
+#'
+#' @param layout Layout object
+#' @return dead_modules
+.assign_module <- function(layout) {
+  dead_n <- length(as.vector(layout$pix_dead[ , 2]))
+
+  dead_modules <- data.frame(layout$pix_dead, NA, NA)
+  colnames(dead_modules) <- c("pixcol", "pixrow", "modcol", "modrow")
+
+  # TODO: more elegant with lapply or plyr etc
+  for (i in 1:dead_n) {
+    tmp <- which_module_idx(layout$pix_dead[i, 1], layout$pix_dead[i, 2],
+                             layout$module_edges_col, layout$module_edges_row)
+
+    dead_modules[i, 3] <- tmp$col
+    dead_modules[i, 4] <- tmp$row
+  }
+
+  return(dead_modules)
+}
+
 # Pixel analysis functions -----------------------------------------------------
 
 #' A function to calculate euclidean distance from the centre
@@ -5,6 +29,7 @@
 #' @param layout Layout object
 #' @return Matrix containing euclidean distances from the centre for each
 #'   pixel
+#' @export
 pixel_dist_ctr_eucl <- function(layout) {
 
   dist <- matrix(NA, nrow = layout$detector_height, ncol = layout$detector_width)
@@ -25,6 +50,7 @@ pixel_dist_ctr_eucl <- function(layout) {
 #'
 #' @param layout Layout object
 #' @return Matrix containing parallel maxima from the centre for each pixel
+#' @export
 pixel_dist_ctr_linf <- function(layout) {
 
   dist <- matrix(NA, nrow = layout$detector_height, ncol = layout$detector_width)
@@ -48,6 +74,7 @@ pixel_dist_ctr_linf <- function(layout) {
 #' @param x something
 #' @param size something else
 #' @return what does this mean?
+#' @export
 dist_closest_edge <- function(x, size) {
   # Why x-1? Because pixel locations start in 1, but we want both edges inside detector for symmetry
   return(min(x - 1, size - x))
@@ -58,6 +85,7 @@ dist_closest_edge <- function(x, size) {
 #'
 #' @param layout Layout object
 #' @return Matrix containing parallel maxima from the centre for each pixel
+#' @export
 dist_corner <- function(layout) {
 
   #dist <- matrix(NA, nrow = layout$detector_height, ncol = layout$detector_width)
@@ -82,6 +110,7 @@ dist_corner <- function(layout) {
 #'
 #' @param layout Layout object
 #' @return dist ?
+#' @export
 dist_edge_col <- function(layout) {
 
   dist <- matrix(NA, nrow = layout$detector_height, ncol = layout$detector_width)
@@ -108,6 +137,7 @@ dist_edge_col <- function(layout) {
 #'
 #' @param layout Layout object
 #' @return dist ?
+#' @export
 dist_edge_row <- function(layout) {
 
   dist <- matrix(NA, nrow = layout$detector_height, ncol = layout$detector_width)
@@ -127,6 +157,7 @@ dist_edge_row <- function(layout) {
 #'
 #' @param layout Layout object
 #' @return dist ?
+#' @export
 dist_edge_min <- function(layout) {
 
   dist_col <- dist_edge_col(layout)
@@ -143,6 +174,7 @@ dist_edge_min <- function(layout) {
 #' @param width Plot width
 #' @param height Plot height
 #' @param file_path Output path with an extension
+#' @export
 plot_pixel <- function(data, width, height, file_path = NA) {
 
   if(!is.na(file_path)) {
@@ -166,6 +198,7 @@ plot_pixel <- function(data, width, height, file_path = NA) {
 #'
 #' @param layout Layout object
 #' @param file_path Output file path
+#' @export
 plot_pixel_ctr_eucl <- function(layout, file_path = NA) {
 
   dist <- pixel_dist_ctr_eucl(layout)
@@ -178,6 +211,7 @@ plot_pixel_ctr_eucl <- function(layout, file_path = NA) {
 #'
 #' @param layout Layout object
 #' @param file_path Output file path
+#' @export
 plot_pixel_ctr_linf <- function(layout, file_path = NA) {
 
   dist <- pixel_dist_ctr_linf(layout)
@@ -190,6 +224,7 @@ plot_pixel_ctr_linf <- function(layout, file_path = NA) {
 #'
 #' @param layout Layout object
 #' @param file_path Output file path
+#' @export
 plot_pixel_dist_corner <- function(layout, file_path = NA) {
 
   dist <- dist_corner(layout)
@@ -202,6 +237,7 @@ plot_pixel_dist_corner <- function(layout, file_path = NA) {
 #'
 #' @param layout Layout object
 #' @param file_path Output file path
+#' @export
 plot_pixel_dist_edge_col <- function(layout, file_path = NA) {
 
   dist <- dist_edge_col(layout)
@@ -214,6 +250,7 @@ plot_pixel_dist_edge_col <- function(layout, file_path = NA) {
 #'
 #' @param layout Layout object
 #' @param file_path Output file path
+#' @export
 plot_pixel_dist_edge_row <- function(layout, file_path = NA) {
 
   dist <- dist_edge_row(layout)
@@ -226,6 +263,7 @@ plot_pixel_dist_edge_row <- function(layout, file_path = NA) {
 #'
 #' @param layout Layout object
 #' @param file_path Output file path
+#' @export
 plot_pixel_dist_edge <- function(layout, file_path = NA) {
 
   dist <- dist_edge_min(layout)
@@ -240,6 +278,7 @@ plot_pixel_dist_edge <- function(layout, file_path = NA) {
 #' @param dead_data Dead pixel locations
 #' @param layout Layout object
 #' @return Inconsistency message
+#' @export
 inconsist_dead_layout <- function(dead_data, layout) {
 
   error <- ""
@@ -273,15 +312,35 @@ inconsist_dead_layout <- function(dead_data, layout) {
   in_gaps_dead <- vector(length = dim(dead_data)[1])
 
   for (i in 1:length(in_gaps_dead)){
-    in_gaps_dead[i] <- in.gaps(i, dead_data)
+    in_gaps_dead[i] <- in_gaps(i, dead_data)
   }
 
-  if (sum(in.gaps.dead) != 0){
+  if (sum(in_gaps_dead) != 0){
     cat(paste("Warning: ", sum(in_gaps_dead),
               " of the coordinates of damaged pixels correspond to locations in gaps between modules of the detector.\n", sep=""))
   }
 
-  inconsistency <- list(outleft, outtop, outright, outbottom, sum(in.gaps.dead))
+  inconsistency <- list(outleft, outtop, outright, outbottom, sum(in_gaps_dead))
   names(inconsistency) <- c("left", "top","right","bottom","gaps")
   return(inconsistency)
+}
+
+#' Creates a mask matrix of dead pixels
+#'
+#' @param layout Layout object
+#' @return dead pixel mask
+#' @export
+get_dead_pix_mask <- function(layout) {
+
+  # TODO: check because we needed to swap detector_width with detector_height.
+  mask <- matrix(0, nrow = layout$detector_width, ncol = layout$detector_height)
+
+  for (i in c(1:(dim(layout$pix_dead)[1]))) {
+    x <- as.numeric(layout$pix_dead[i, 1])
+    y <- as.numeric(layout$pix_dead[i, 2])
+
+    mask[x, y] <- 1
+  }
+
+  return(mask)
 }

@@ -1,3 +1,5 @@
+#' @title Layout module
+
 #' A S3 class to represent a detector layout.
 #'
 #' @param name detector's name
@@ -16,7 +18,10 @@
 #' @param pix_matrix pixel matrix
 #' @param pix_dead dead pixels coordinates
 #' @param dead_stats dead pixel statistics
+#' @param pix_dead_modules assigned module for each dead pixel
+#' @param clumps clumps data (xyc_df data frame with pixels and their clump ID's, xyc_events data frame with clusters (clumps) and their clump ID's and centre coordinates)
 #' @return Layout object
+#' @export
 Default_Layout <- function(name = "Default", date = NA,
                            detector_width = NA, detector_height = NA,
                            module_col_n = NA, module_row_n = NA,
@@ -25,7 +30,8 @@ Default_Layout <- function(name = "Default", date = NA,
                            module_edges_col = NA, module_edges_row = NA,
                            detector_inconsistency = NA,
                            pix_matrix = NA, pix_dead = NA,
-                           dead_stats = NA) {
+                           dead_stats = NA, pix_dead_modules = NA,
+                           clumps = NA) {
 
   layout <- list(
     name = name,
@@ -48,7 +54,11 @@ Default_Layout <- function(name = "Default", date = NA,
 
     pix_matrix = pix_matrix,
     pix_dead = pix_dead,
-    dead_stats = dead_stats
+    dead_stats = dead_stats,
+    pix_dead_modules = pix_dead_modules,
+
+    # Clumps
+    clumps = clumps
   )
 
   layout <- derive_layout(layout)
@@ -64,14 +74,17 @@ Default_Layout <- function(name = "Default", date = NA,
 .PerkinElmerRefurbished_name <- "PerkinElmerRefurbished"
 .Pilatus_name <- "Pilatus"
 
+#' @export
 available_layouts <- c(.Excalibur_name, .PerkinElmerFull_name,
                        .PerkinElmerCropped1600_name, .PerkinElmerRefurbished_name,
                        .Pilatus_name)
+
 # ------------------------------------------------------------------------------
 
 #' A S3 class to represent the Excalibur detector layout.
 #'
 #' @return Excalibur layout object
+#' @export
 Excalibur_Layout <- function() {
   name <- .Excalibur_name
 
@@ -94,6 +107,7 @@ Excalibur_Layout <- function() {
 #' A S3 class to represent the PerkinElmerFull detector layout.
 #'
 #' @return PerkinElmerFul layout object
+#' @export
 PerkinElmerFull_Layout <- function() {
 
   name <- .PerkinElmerFull_name
@@ -117,6 +131,7 @@ PerkinElmerFull_Layout <- function() {
 #' A S3 class to represent the PerkinElmerCropped1600 detector layout.
 #'
 #' @return PerkinElmerCropped1600 layout object
+#' @export
 PerkinElmerCropped1600_Layout <- function() {
 
   name <- .PerkinElmerCropped1600_name
@@ -140,6 +155,7 @@ PerkinElmerCropped1600_Layout <- function() {
 #' A S3 class to represent the PerkinElmerRefurbished detector layout.
 #'
 #' @return PerkinElmerRefurbished layout object
+#' @export
 PerkinElmerRefurbished_Layout <- function() {
 
   name <- .PerkinElmerRefurbished_name
@@ -163,6 +179,7 @@ PerkinElmerRefurbished_Layout <- function() {
 #' A S3 class to represent the PerkinElmerRefurbished detector layout.
 #'
 #' @return Pilatus layout object
+#' @export
 Pilatus_Layout <- function() {
 
   name <- .Pilatus_name
@@ -189,6 +206,7 @@ Pilatus_Layout <- function() {
 #'
 #' @param layout_name The name of the layout
 #' @return True or False
+#' @export
 check_layout_avail <- function(layout_name) {
 
   avail <- layout_name %in% available_layouts
@@ -219,6 +237,7 @@ check_layout_avail <- function(layout_name) {
 #'
 #' @param layout_name The name of the layout
 #' @return Layout object
+#' @export
 create_module <- function(layout_name) {
 
   layout <- NA
@@ -255,7 +274,9 @@ create_module <- function(layout_name) {
 #' Basic checks if parameters entered (slightly redundant on purpose) add up
 #'
 #' @param layout Layout object
+#' @export
 layout_consist_check <- function(layout = NA) {
+
   if (is.list(layout)) {
 
     error <- ""
@@ -325,6 +346,8 @@ layout_consist_check <- function(layout = NA) {
   } else {
     stop("Detector layout object has not been initialized.")
   }
+
+  return(TRUE)
 }
 
 #TODO: improve the definition of the function
@@ -335,6 +358,7 @@ layout_consist_check <- function(layout = NA) {
 #' @param m vector of module sizes
 #' @param g vectors of gap sizes
 #' @return Matrix with the information about the edges
+#' @export
 layout_edges <- function(m, g) {
 
   if (length(m) - 1 != length(g)) {
@@ -366,6 +390,7 @@ layout_edges <- function(m, g) {
 #' i.e. for each module two pairs: first/last col and first/last row.
 #' @param layout Layout object
 #' @return Layout object
+#' @export
 derive_layout <- function(layout){
 
   module_edges_col <- layout_edges(layout$module_col_sizes, layout$gap_col_sizes)
@@ -386,6 +411,7 @@ derive_layout <- function(layout){
 #'
 #' @param layout Layout object
 #' @return Point pattern dataset
+#' @export
 create_ppp_edges_col <- function(layout) {
 
   vedges <- as.vector(layout$module_edges_col)
@@ -404,6 +430,7 @@ create_ppp_edges_col <- function(layout) {
 #'
 #' @param layout Layout object
 #' @return Point pattern dataset
+#' @export
 create_ppp_edges_row <- function(layout) {
 
   vedges <- as.vector(layout$module_edges_row)
@@ -422,6 +449,7 @@ create_ppp_edges_row <- function(layout) {
 #'
 #' @param layout Layout object
 #' @return Point pattern dataset
+#' @export
 create_ppp_gaps_col <- function(layout) {
   vgaps <- c()
 
@@ -444,6 +472,7 @@ create_ppp_gaps_col <- function(layout) {
 #'
 #' @param layout Layout object
 #' @return Point pattern dataset
+#' @export
 create_ppp_gaps_row <- function(layout) {
   vgaps <- c()
 
@@ -461,37 +490,74 @@ create_ppp_gaps_row <- function(layout) {
   return(ppp_gaps_row)
 }
 
-#' Deriving additional layout elements
+#' Generate layout ppps
 #'
 #' @param layout Layout object
-#' @param file_path Output file path
-plot_layout <- function(layout, file_path = NA) {
+#' @return a list of ppps for edges and gaps
+.get_layout_ppps <- function(layout) {
 
   ppp_edges_col <- create_ppp_edges_col(layout)
   ppp_edges_row <- create_ppp_edges_row(layout)
+
+  # Does the layout have gaps?
+  if (sum(layout$gap_col_sizes) + sum(layout$gap_row_sizes) != 0) {
+    ppp_gaps_col <- NULL
+    ppp_gaps_row <- NULL
+
+  } else {
+    ppp_gaps_col <- create_ppp_gaps_col(layout)
+    ppp_gaps_row <- create_ppp_gaps_row(layout)
+  }
+
+  return(list(ppp_edges_col, ppp_edges_row, ppp_gaps_col, ppp_gaps_row))
+}
+
+#' Plotting layout
+#'
+#' @param layout Layout object
+#' @param file_path Output file path
+#' @param caption Flag to turn on/off figure caption
+#' @export
+plot_layout <- function(layout, file_path = NA, caption = TRUE) {
+
+  if (!caption) par(mar = c(0, 0, 0, 0))
+  main_caption <- ""
+
 
   if(!is.na(file_path)) {
     # starts the graphics device driver
     ini_graphics(file_path = file_path)
   }
 
+  edges_gaps <- .get_layout_ppps(layout)
+
+  ppp_edges_col <- edges_gaps[[1]]
+  ppp_edges_row <- edges_gaps[[2]]
+
   if (sum(layout$gap_col_sizes) + sum(layout$gap_row_sizes) == 0) {
 
+    if(caption) {
+      main_caption <- paste(layout$name, "layout\n (black=module edges)")
+    }
+
     # vertical lines in x-positions given by xlines
-    plot(ppp_edges_col, pch = ".", cex.main = 0.7,
-         main = paste(layout$name, "layout\n (black=module edges)"), res = 10)
+    plot(ppp_edges_col, pch = ".", cex.main = 0.7, main = main_caption)
 
     # horizontal lines in y-positions given by ylines
     points(ppp_edges_row, pch = ".")
 
   } else {
+
+    if(caption) {
+      main_caption <- paste(layout$name, "layout\n (black=module edges, grey=gaps)")
+    }
+
     # Define point patterns (spatstat) capturing gaps
-    ppp_gaps_col <- create_ppp_gaps_col(layout)
-    ppp_gaps_row <- create_ppp_gaps_row(layout)
+    ppp_gaps_col <- edges_gaps[[3]]
+    ppp_gaps_row <- edges_gaps[[4]]
 
     # vertical lines in x-positions given by xlines
-    plot(ppp_edges_col, pch = ".", cex.main = 0.7,
-         main = paste(layout$name, "layout\n (black=module edges, grey=gaps)"))
+    plot(ppp_edges_col, pch = ".", cex.main = 0.7, main = main_caption)
 
     points(ppp_edges_row, pch = ".") # horizontal lines in y-positions given by ylines
 
@@ -512,6 +578,7 @@ plot_layout <- function(layout, file_path = NA) {
 #'
 #' @param layout Layout object
 #' @return String with the layout summary
+#' @export
 layout_summary <- function(layout) {
 
   summary <- paste("Detector:", "\n", "")
@@ -527,4 +594,48 @@ layout_summary <- function(layout) {
   summary <- paste(summary, "Heights of gaps between modules: ", paste(layout$gap_row_sizes, collapse = ' '), "\n", "")
 
   return(summary)
+}
+
+#' Reads in a user defined layout from a file
+#' @param file_path A path to the user defined layout file
+#' @return Layout object
+#' @export
+readin_layout <- function(file_path) {
+
+  name <- "user-defined"
+
+  # reads file as a string line
+  file_string <- readr::read_file(file_path)
+
+  detector_width <- .extract_layout_parameter(file_string, "detector_width")
+  detector_height <- .extract_layout_parameter(file_string, "detector_height")
+
+  if (is.na(detector_width) || is.na(detector_height)) {
+    stop("Cannot determine detector's width/height. Is the file format correct?")
+  }
+
+  module_col_n <- .extract_layout_parameter(file_string, "module_col_n")
+  module_row_n <- .extract_layout_parameter(file_string, "module_row_n")
+  module_col_sizes <- .extract_layout_parameter(file_string, "module_col_sizes")
+  module_row_sizes <- .extract_layout_parameter(file_string, "module_row_sizes")
+  gap_col_sizes <- .extract_layout_parameter(file_string, "gap_col_sizes")
+  gap_row_sizes <- .extract_layout_parameter(file_string, "gap_row_sizes")
+  module_edges_col <- .extract_layout_parameter(file_string, "module_edges_col")
+  module_edges_row <- .extract_layout_parameter(file_string, "module_edges_row")
+
+  layout <- Default_Layout(name = name,
+   detector_width = detector_width,
+   detector_height = detector_height,
+   module_col_n = module_col_n,
+   module_row_n = module_row_n,
+   module_col_sizes = module_col_sizes,
+   module_row_sizes = module_row_sizes,
+   gap_col_sizes = gap_col_sizes,
+   gap_row_sizes = gap_row_sizes,
+   module_edges_col = module_edges_col,
+   module_edges_row = module_edges_row,
+   detector_inconsistency = 0)
+
+  if (layout_consist_check(layout)) return(layout)
+  else return(NA)
 }

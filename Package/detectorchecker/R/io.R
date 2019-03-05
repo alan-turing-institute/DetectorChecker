@@ -1,8 +1,12 @@
+#' @title I/O module
+
+
 #' Reads in tiff file and returns a pixel matrix
 #'
 #' @param layout Layout object
 #' @param file_path Path to the tiff file
 #' @return Pixel matrix with dead pixels flagged with 1
+#' @export
 matrix_from_tiff <- function(layout, file_path) {
 
   # reading in the data
@@ -36,6 +40,7 @@ matrix_from_tiff <- function(layout, file_path) {
 #' @param layout Layout object
 #' @param file_path A list of paths to hdf files. Must be in the correct order.
 #' @return Data of a combined dataset from hdf files
+#' @export
 matrix_from_hdf <- function(layout, file_path) {
   data <- NA
   hdf_data <- NA
@@ -86,6 +91,7 @@ matrix_from_hdf <- function(layout, file_path) {
 #' @param layout Layout object
 #' @param file_path Path to the xml file
 #' @return Data from an xml file
+#' @export
 matrix_from_xml <- function(layout, file_path) {
 
   # decode bad pixel map list from xml file (pedestrian way...)
@@ -128,6 +134,7 @@ matrix_from_xml <- function(layout, file_path) {
 #'
 #' @param s String expression?
 #' @return Numeric value
+#' @export
 .extract_number <- function(s) {
 
   v <- substring(s, 4, 4 + nchar(s) - 5)
@@ -136,27 +143,13 @@ matrix_from_xml <- function(layout, file_path) {
   return(v)
 }
 
-#' Creates a dead pixel mask
-#'
-#' @param layout Layout object
-#' @param dead_data Dead pixel data
-#' @return Dead pixel mask
-dead_pix_mask <- function(layout, dead_data) {
-
-  mask <- matrix(0, nrow = layout$detector_height, ncol = layout$detector_width)
-
-  for (i in c(1:dim(dead_data)[1])) {
-    mask[dead_data[i, ]] <- 1
-  }
-
-  return(mask)
-}
-
 #' A function to load pixel data
 #'
 #' @param layout The name of the layout to be used
 #' @param file_path Path(s) to the file(s) containing dead pixel information
 #' @return Layout object
+#' @importFrom grDevices jpeg pdf
+#' @export
 load_pix_matrix <- function(layout, file_path) {
 
   pix_matrix <- NA
@@ -190,6 +183,10 @@ load_pix_matrix <- function(layout, file_path) {
   layout$pix_matrix <- pix_matrix
   layout$pix_dead <- pix_dead
 
+  # assigning a module to each dead pixels
+  dead_modules <- .assign_module(layout)
+  layout$pix_dead_modules <- dead_modules
+
   return(layout)
 }
 
@@ -197,6 +194,7 @@ load_pix_matrix <- function(layout, file_path) {
 #'   chosen format
 #'
 #' @param file_path Output path with an extension
+#' @export
 ini_graphics <- function(file_path) {
   # choosing output format
   file_extansion <- tools::file_ext(file_path)
