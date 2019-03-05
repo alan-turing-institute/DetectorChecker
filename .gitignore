@@ -1,7 +1,6 @@
-# build packages
-Package/detectorchecker_*.tgz
 *.tar.gz
 .DS_Store
+Package/detectorchecker_*.tgz
 
 # Manual files
 Package/detectorchecker/man/
