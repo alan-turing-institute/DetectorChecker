@@ -275,37 +275,37 @@ test_that("Perkin Elmer", {
 
   # K
   test_out_path <- "K-Function.jpg"
-  plot_kfg(layout = layout, func = "K", file_path = test_out_path)
+  plot_layout_kfg(layout = layout, func = "K", file_path = test_out_path)
   expect_that(file.exists(test_out_path), is_true())
   if (file.exists(test_out_path)) file.remove(test_out_path)
 
   # F
   test_out_path <- "F-Function.jpg"
-  plot_kfg(layout = layout, func = "F", file_path = test_out_path)
+  plot_layout_kfg(layout = layout, func = "F", file_path = test_out_path)
   expect_that(file.exists(test_out_path), is_true())
   if (file.exists(test_out_path)) file.remove(test_out_path)
 
   # G
   test_out_path <- "G-Function.jpg"
-  plot_kfg(layout = layout, func = "G", file_path = test_out_path)
+  plot_layout_kfg(layout = layout, func = "G", file_path = test_out_path)
   expect_that(file.exists(test_out_path), is_true())
   if (file.exists(test_out_path)) file.remove(test_out_path)
 
   # Kinhom
   test_out_path <- "Kinhom.jpg"
-  plot_kfg(layout = layout, func = "Kinhom", file_path = test_out_path)
+  plot_layout_kfg(layout = layout, func = "Kinhom", file_path = test_out_path)
   expect_that(file.exists(test_out_path), is_true())
   if (file.exists(test_out_path)) file.remove(test_out_path)
 
   # Finhom
   test_out_path <- "Finhom.jpg"
-  plot_kfg(layout = layout, func = "Finhom", file_path = test_out_path)
+  plot_layout_kfg(layout = layout, func = "Finhom", file_path = test_out_path)
   expect_that(file.exists(test_out_path), is_true())
   if (file.exists(test_out_path)) file.remove(test_out_path)
 
   # Ginhom
   test_out_path <- "Ginhom.jpg"
-  plot_kfg(layout = layout, func = "Ginhom", file_path = test_out_path)
+  plot_layout_kfg(layout = layout, func = "Ginhom", file_path = test_out_path)
   expect_that(file.exists(test_out_path), is_true())
   if (file.exists(test_out_path)) file.remove(test_out_path)
 })
