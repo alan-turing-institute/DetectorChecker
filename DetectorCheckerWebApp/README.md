@@ -4,11 +4,6 @@
 
 # Docker image preparation
 
-## Adding credentials
-To build the Docker image you need to add to following to the shiny.sh file:
-1. Azure credentials
-2. Gmail email address and account password
-
 ## Building a docker image
 docker build -t tomaslaz/detectorchecker_dashboard:0.1.8 -f detectorchecker.dockerfile .
 
