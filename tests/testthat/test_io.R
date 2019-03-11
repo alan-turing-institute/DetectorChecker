@@ -3,7 +3,6 @@
 context("I/O functions")
 
 test_that("TIFF", {
-
   test_dir <- getwd()
 
   # Pilatus layout unit test
@@ -23,7 +22,6 @@ test_that("TIFF", {
 })
 
 test_that("HDF", {
-
   test_dir <- getwd()
 
   # Excalibur layout unit test
@@ -53,9 +51,11 @@ test_that("XML", {
 
   test_dir <- getwd()
 
-  test_path <- file.path(test_dir, "dead_pix", "PerkinElmer",
-                         "BadPixelMap_0.bpm",
-                         "BadPixelMap.bpm.xml")
+  test_path <- file.path(
+    test_dir, "dead_pix", "PerkinElmer",
+    "BadPixelMap_0.bpm",
+    "BadPixelMap.bpm.xml"
+  )
 
   layout <- load_pix_matrix(layout = layout, file_path = test_path)
 
@@ -65,4 +65,3 @@ test_that("XML", {
   # height
   expect_equal(dim(layout$pix_matrix)[2], 2000)
 })
-

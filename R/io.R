@@ -47,18 +47,15 @@ matrix_from_hdf <- function(layout, file_path) {
 
   # Reading in multiple hdf files at the same time
   if (is.vector(file_path)) {
-
     file_cnt <- 0
-    for(file in file_path) {
-
-      data_file <- h5::h5file(file, mode = 'r')
+    for (file in file_path) {
+      data_file <- h5::h5file(file, mode = "r")
 
       hdf_data_file <- h5::readDataSet(data_file[h5::list.datasets(data_file)])
 
       if (file_cnt > 0) {
         # The data is combined by rows!
         hdf_data <- rbind(hdf_data, hdf_data_file)
-
       } else {
         hdf_data <- hdf_data_file
       }
@@ -96,8 +93,9 @@ matrix_from_xml <- function(layout, file_path) {
 
   # decode bad pixel map list from xml file (pedestrian way...)
   xml_data <- suppressWarnings(matrix(scan(file_path,
-                                           what = c("", "", "", "", "", ""),
-                                           skip = 3), ncol = 6, byrow = TRUE))
+    what = c("", "", "", "", "", ""),
+    skip = 3
+  ), ncol = 6, byrow = TRUE))
 
   # Applying data treatment
   # But(!), warning is just because of end of file, hence just remove last two lines and it works.
@@ -116,11 +114,12 @@ matrix_from_xml <- function(layout, file_path) {
 
   # TODO: This is not a good approach as we first read in pix_dead and convert it to
   #  pix_matrix. Later on pix_dead is recunstructed again from pix_matrix.
-  pix_matrix <- matrix(0, nrow = layout$detector_width,
-                       ncol = layout$detector_height)
+  pix_matrix <- matrix(0,
+    nrow = layout$detector_width,
+    ncol = layout$detector_height
+  )
 
   for (i in c(1:dim(pix_dead)[1])) {
-
     coord_x <- pix_dead[i, 1]
     coord_y <- pix_dead[i, 2]
 
@@ -136,7 +135,6 @@ matrix_from_xml <- function(layout, file_path) {
 #' @return Numeric value
 #' @export
 .extract_number <- function(s) {
-
   v <- substring(s, 4, 4 + nchar(s) - 5)
   v <- as.numeric(v)
 
@@ -151,7 +149,6 @@ matrix_from_xml <- function(layout, file_path) {
 #' @importFrom grDevices jpeg pdf
 #' @export
 load_pix_matrix <- function(layout, file_path) {
-
   pix_matrix <- NA
 
   # check the number of files
@@ -162,13 +159,10 @@ load_pix_matrix <- function(layout, file_path) {
 
     if (file_extansion == "tif") {
       pix_matrix <- matrix_from_tiff(layout = layout, file_path = file_path)
-
     } else if (file_extansion == "xml") {
       pix_matrix <- matrix_from_xml(layout = layout, file_path = file_path)
-
     } else if (file_extansion == "hdf") {
       pix_matrix <- matrix_from_hdf(layout = layout, file_path = file_path)
-
     } else {
       stop(c("Undefined file extension: ", file_extansion, " [", file_path, "]"))
     }
@@ -201,12 +195,12 @@ ini_graphics <- function(file_path) {
 
   if ((file_extansion == "jpeg") || (file_extansion == "jpg")) {
     jpeg(file_path)
-
   } else if (file_extansion == "pdf") {
     pdf(file_path)
-
   } else {
-    stop(c("Unknown output format: ", file_extansion, " [", file_path, "]\n",
-           "Supported formats: jpeg, pdf"))
+    stop(c(
+      "Unknown output format: ", file_extansion, " [", file_path, "]\n",
+      "Supported formats: jpeg, pdf"
+    ))
   }
 }

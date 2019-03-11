@@ -59,7 +59,6 @@ test_that("Distance analysis functions", {
 context("Plotting pixel analysis")
 
 test_that("Plotting pixel analysis", {
-
   test_out_fmt <- "jpg"
   test_out_dir <- getwd()
 
@@ -70,7 +69,7 @@ test_that("Plotting pixel analysis", {
   # Euclidean distances from the centre
 
   test_out_name <- "unittest_pixel_ctr_eucl"
-  test_out_path <- file.path(test_out_dir, paste(test_out_name, test_out_fmt, sep="."))
+  test_out_path <- file.path(test_out_dir, paste(test_out_name, test_out_fmt, sep = "."))
 
   plot_pixel_ctr_eucl(layout, file_path = test_out_path)
 
@@ -84,7 +83,7 @@ test_that("Plotting pixel analysis", {
   # Parallel maxima distances from the centre
 
   test_out_name <- "unittest_pixel_ctr_linf"
-  test_out_path <- file.path(test_out_dir, paste(test_out_name, test_out_fmt, sep="."))
+  test_out_path <- file.path(test_out_dir, paste(test_out_name, test_out_fmt, sep = "."))
 
   plot_pixel_ctr_linf(layout, file_path = test_out_path)
 
@@ -98,7 +97,7 @@ test_that("Plotting pixel analysis", {
   # Pixel distances from corners
 
   test_out_name <- "unittest_pixel_dist_corner"
-  test_out_path <- file.path(test_out_dir, paste(test_out_name, test_out_fmt, sep="."))
+  test_out_path <- file.path(test_out_dir, paste(test_out_name, test_out_fmt, sep = "."))
 
   plot_pixel_dist_corner(layout, file_path = test_out_path)
 
@@ -112,7 +111,7 @@ test_that("Plotting pixel analysis", {
   # Pixel distances from the module edges by column
 
   test_out_name <- "unittest_pixel_dist_edge_col"
-  test_out_path <- file.path(test_out_dir, paste(test_out_name, test_out_fmt, sep="."))
+  test_out_path <- file.path(test_out_dir, paste(test_out_name, test_out_fmt, sep = "."))
 
   plot_pixel_dist_edge_col(layout, file_path = test_out_path)
 
@@ -126,7 +125,7 @@ test_that("Plotting pixel analysis", {
   # Pixel distances from the module edges by row
 
   test_out_name <- "unittest_pixel_dist_edge_row"
-  test_out_path <- file.path(test_out_dir, paste(test_out_name, test_out_fmt, sep="."))
+  test_out_path <- file.path(test_out_dir, paste(test_out_name, test_out_fmt, sep = "."))
 
   plot_pixel_dist_edge_row(layout, file_path = test_out_path)
 
@@ -140,7 +139,7 @@ test_that("Plotting pixel analysis", {
   # Pixel distances from the module edges
 
   test_out_name <- "unittest_pixel_dist_edge"
-  test_out_path <- file.path(test_out_dir, paste(test_out_name, test_out_fmt, sep="."))
+  test_out_path <- file.path(test_out_dir, paste(test_out_name, test_out_fmt, sep = "."))
 
   plot_pixel_dist_edge(layout, file_path = test_out_path)
 

@@ -50,16 +50,20 @@ test_that("derive_plot", {
   layout <- derive_layout(layout)
 
   # Test values for the PerkinElmerFull layout
-  test_horiz_values <- matrix(c(1, 105, 233, 361, 489, 617, 745, 873, 1001,
-                                1129, 1257, 1385, 1513, 1641, 1769, 1897, 104,
-                                232, 360, 488, 616, 744, 872, 1000, 1128, 1256,
-                                1384, 1512, 1640, 1768, 1896, 2000),
-                              nrow = 2, ncol = 16, byrow = TRUE)
+  test_horiz_values <- matrix(c(
+    1, 105, 233, 361, 489, 617, 745, 873, 1001,
+    1129, 1257, 1385, 1513, 1641, 1769, 1897, 104,
+    232, 360, 488, 616, 744, 872, 1000, 1128, 1256,
+    1384, 1512, 1640, 1768, 1896, 2000
+  ),
+  nrow = 2, ncol = 16, byrow = TRUE
+  )
 
   dimnames(test_horiz_values)[[1]] <- c("left", "right")
 
   test_vert_values <- matrix(c(1, 1001, 1000, 2000),
-                             nrow = 2, ncol = 2, byrow = TRUE)
+    nrow = 2, ncol = 2, byrow = TRUE
+  )
 
   dimnames(test_vert_values)[[1]] <- c("top", "bottom")
 
@@ -70,11 +74,10 @@ test_that("derive_plot", {
 context("Plotting layout")
 
 test_that("plot layout", {
-
   test_out_name <- "unittest_layout"
   test_out_fmt <- "jpeg"
   test_out_dir <- getwd()
-  test_out_path <- file.path(test_out_dir, paste(test_out_name, test_out_fmt, sep="."))
+  test_out_path <- file.path(test_out_dir, paste(test_out_name, test_out_fmt, sep = "."))
 
   # PerkinElmerFull layout unit test
   layout <- PerkinElmerFull_Layout()

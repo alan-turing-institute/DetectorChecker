@@ -4,7 +4,7 @@
 #'
 #' @param m A square matrix
 #' @return tr The trace value
-.tr <- function (m) {
+.tr <- function(m) {
   tr <- NA
 
   # is the object matrix?
@@ -13,7 +13,7 @@
     col_count <- ncol(m)
 
     # is it a square matrix?
-    if(row_count == col_count) {
+    if (row_count == col_count) {
       tr <- 0.0
       tr <- sum(diag(m))
     }
@@ -54,12 +54,17 @@
     eq_idx <- regexpr("=", sub_file_string)
 
     if (eq_idx > 0) {
+      sub_file_string <- substr(sub_file_string, eq_idx + 1, nchar(sub_file_string))
 
-      sub_file_string <- substr(sub_file_string, eq_idx+1, nchar(sub_file_string))
-
-      tryCatch({return(eval(parse(text=trimws(sub_file_string))))}, error = function(err) {return(NA)})
-
-    } else return(NA)
-
-  } else return(NA)
+      tryCatch({
+        return(eval(parse(text = trimws(sub_file_string))))
+      }, error = function(err) {
+        return(NA)
+      })
+    } else {
+      return(NA)
+    }
+  } else {
+    return(NA)
+  }
 }
