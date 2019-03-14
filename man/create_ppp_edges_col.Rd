@@ -2,8 +2,7 @@
 % Please edit documentation in R/layout.R
 \name{create_ppp_edges_col}
 \alias{create_ppp_edges_col}
-\title{TODO: Better description of the function
-This is the ppp_edges_col function}
+\title{This is the ppp_edges_col function}
 \usage{
 create_ppp_edges_col(layout)
 }
@@ -14,6 +13,5 @@ create_ppp_edges_col(layout)
 Point pattern dataset
 }
 \description{
-TODO: Better description of the function
 This is the ppp_edges_col function
 }

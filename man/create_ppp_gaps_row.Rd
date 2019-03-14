@@ -2,8 +2,7 @@
 % Please edit documentation in R/layout.R
 \name{create_ppp_gaps_row}
 \alias{create_ppp_gaps_row}
-\title{TODO: Better description of the function
-This is a function}
+\title{This is a function}
 \usage{
 create_ppp_gaps_row(layout)
 }
@@ -14,6 +13,5 @@ create_ppp_gaps_row(layout)
 Point pattern dataset
 }
 \description{
-TODO: Better description of the function
 This is a function
 }

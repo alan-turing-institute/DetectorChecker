@@ -407,7 +407,7 @@ derive_layout <- function(layout) {
   return(layout)
 }
 
-#' TODO: Better description of the function
+# TODO: Better description of the function
 #' This is the ppp_edges_col function
 #'
 #' @param layout Layout object
@@ -427,7 +427,7 @@ create_ppp_edges_col <- function(layout) {
   return(ppp_edges_col)
 }
 
-#' TODO: Better description of the function
+# TODO: Better description of the function
 #' This is the create_ppp_edges_row function
 #'
 #' @param layout Layout object
@@ -447,7 +447,7 @@ create_ppp_edges_row <- function(layout) {
   return(ppp_edges_row)
 }
 
-#' TODO: Better description of the function
+# TODO: Better description of the function
 #' This is a function
 #'
 #' @param layout Layout object
@@ -472,7 +472,7 @@ create_ppp_gaps_col <- function(layout) {
   return(ppp_gaps_col)
 }
 
-#' TODO: Better description of the function
+# TODO: Better description of the function
 #' This is a function
 #'
 #' @param layout Layout object
