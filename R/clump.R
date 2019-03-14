@@ -174,6 +174,8 @@ library(igraph)
 #'
 #' @param layout Layout object
 #' @param dead_pix_mask Dead pixels mask
+#' @param row Module row number
+#' @param col Module col number
 #' @return list of pixels and events
 .mask_to_events <- function(layout, dead_pix_mask, row = NA, col = NA) {
   if (!is.na(row) && !is.na(col)) {

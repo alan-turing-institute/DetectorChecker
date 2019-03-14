@@ -10,6 +10,10 @@
 \item{layout}{Layout object}
 
 \item{dead_pix_mask}{Dead pixels mask}
+
+\item{row}{Module row number}
+
+\item{col}{Module col number}
 }
 \value{
 list of pixels and events
