@@ -7,6 +7,8 @@
 .classify_clump(layout, x, y)
 }
 \arguments{
+\item{layout}{Layout object}
+
 \item{x}{vector containing the x coordinates of a clump}
 
 \item{y}{vector containing the y coordinates of a clump}

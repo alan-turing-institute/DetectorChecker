@@ -2,6 +2,7 @@ library(igraph)
 
 #' Clasifies a clump
 #'
+#' @param layout Layout object
 #' @param x vector containing the x coordinates of a clump
 #' @param y vector containing the y coordinates of a clump
 #' @return the class of a clump (1 - singleton, 2 - double, 3 - triplet,
