@@ -10,8 +10,8 @@
 #' @param module_row_n number of rows in the grid of modules
 #' @param module_col_sizes vector with widths of the modules
 #' @param module_row_sizes vector with heights of the modules
-#' @param module_edges_col !
-#' @param module_edges_row !
+#' @param module_edges_col vector of columns that contain edges of modules
+#' @param module_edges_row vector of rows that contain edges of modules
 #' @param gap_col_sizes vector with widths of the gaps
 #' @param gap_row_sizes vector with heights of the gaps
 #' @param detector_inconsistency counts inconsistencies found in parameters entered

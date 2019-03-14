@@ -33,9 +33,9 @@ Default_Layout(name = "Default", date = NA, detector_width = NA,
 
 \item{gap_row_sizes}{vector with heights of the gaps}
 
-\item{module_edges_col}{!}
+\item{module_edges_col}{vector of columns that contain edges of modules}
 
-\item{module_edges_row}{!}
+\item{module_edges_row}{vector of rows that contain edges of modules}
 
 \item{detector_inconsistency}{counts inconsistencies found in parameters entered}
 
