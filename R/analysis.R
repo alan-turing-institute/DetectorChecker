@@ -32,8 +32,8 @@ Dead_Stats <- function(dead_n = NA, module_n = NA, module_count_arr = NA,
 #' Plotting a module of a layout
 #'
 #' @param layout Layout object
-#' @param mod_col Module column number
-#' @param mod_row Module row number
+#' @param col Module column number
+#' @param row Module row number
 #' @param file_path Output file path
 #' @param caption Flag to turn on/off figure caption
 #' @export

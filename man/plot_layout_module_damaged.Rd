@@ -10,13 +10,13 @@ plot_layout_module_damaged(layout, col, row, file_path = NA,
 \arguments{
 \item{layout}{Layout object}
 
+\item{col}{Module column number}
+
+\item{row}{Module row number}
+
 \item{file_path}{Output file path}
 
 \item{caption}{Flag to turn on/off figure caption}
-
-\item{mod_col}{Module column number}
-
-\item{mod_row}{Module row number}
 }
 \description{
 Plotting a module of a layout
