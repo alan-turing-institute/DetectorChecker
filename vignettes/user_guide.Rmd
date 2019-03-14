@@ -284,6 +284,7 @@ layout_events <- detectorchecker::find_clumps(layout_perkin)
       
 detectorchecker::plot_events(layout_events, caption = FALSE, incl_event_list = incl_event_list)
 ```
+
 ```{r}
 
 row_ = 2
@@ -305,6 +306,7 @@ detectorchecker::plot_events_arrows(layout_events, caption = FALSE, incl_event_l
 
 ### Events with selected rows and cols
 ```{r}
+layout_events <- detectorchecker::find_clumps(layout_perkin, row = row_, col = col_)
 
 detectorchecker::plot_events_density(layout_events, row = row_, col = col_, caption = FALSE, incl_event_list = incl_event_list)
 detectorchecker::plot_events_arrows(layout_events, row = row_, col = col_, caption = FALSE, incl_event_list = incl_event_list)
