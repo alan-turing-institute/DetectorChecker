@@ -73,6 +73,7 @@ Default_Layout <- function(name = "Default", date = NA,
 .PerkinElmerRefurbished_name <- "PerkinElmerRefurbished"
 .Pilatus_name <- "Pilatus"
 
+#' A list of available layouts
 #' @export
 available_layouts <- c(
   .Excalibur_name, .PerkinElmerFull_name,
