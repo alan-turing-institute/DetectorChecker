@@ -539,8 +539,11 @@ orient_dist_vec <- function(v, w) {
   return(orient_dist_vec)
 }
 
-# TODO: define the function
-#'
+
+#' Calculates orientation of the oriented vector between two points
+#' in order of the second pointing to first (reflecting nearest neighbour (nn) framework)
+#' @param b vector with elements 1:2 correspoding to first point and 3:4 corresponding to the second
+#' @return orientation of the oriented vector between two points
 #' @export
 orientcolfct <- function(b) orient_dist_vec(b[1:2], b[3:4])$orient
 
