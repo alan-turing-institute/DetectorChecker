@@ -316,8 +316,8 @@ plot_events <- function(layout, file_path = NA, caption = TRUE, incl_event_list 
 
 #' Plots damaged layout module events
 #' @param layout Layout object
-#' @param mod_col Module column number
-#' @param mod_row Module row number
+#' @param col Module column number
+#' @param row Module row number
 #' @param file_path Output file path
 #' @param caption Flag to turn on/off figure caption
 #' @param incl_event_list a list of events to be included

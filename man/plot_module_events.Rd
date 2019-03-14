@@ -10,15 +10,15 @@ plot_module_events(layout, col, row, file_path = NA, caption = TRUE,
 \arguments{
 \item{layout}{Layout object}
 
+\item{col}{Module column number}
+
+\item{row}{Module row number}
+
 \item{file_path}{Output file path}
 
 \item{caption}{Flag to turn on/off figure caption}
 
 \item{incl_event_list}{a list of events to be included}
-
-\item{mod_col}{Module column number}
-
-\item{mod_row}{Module row number}
 }
 \description{
 Plots damaged layout module events
