@@ -628,6 +628,7 @@ plot_events_kfg <- function(layout, func, file_path = NA,
 #' @param row Module row number
 #' @param col Module column number
 #' @param caption Flag to turn on/off figure caption
+#' @param incl_event_list a list of events to be included
 #' @export
 plot_events_count <- function(layout, file_path = NA,
                               row = NA, col = NA, caption = TRUE,

@@ -17,6 +17,8 @@ plot_events_count(layout, file_path = NA, row = NA, col = NA,
 \item{col}{Module column number}
 
 \item{caption}{Flag to turn on/off figure caption}
+
+\item{incl_event_list}{a list of events to be included}
 }
 \description{
 A function to plot layout with counts per module
