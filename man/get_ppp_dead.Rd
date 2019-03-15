@@ -4,10 +4,10 @@
 \alias{get_ppp_dead}
 \title{Generates ppp for the dead pixels}
 \usage{
-get_ppp_dead(layout)
+get_ppp_dead(detector)
 }
 \arguments{
-\item{layout}{Layout object}
+\item{detector}{Detector object}
 }
 \value{
 ppp of dead pixels

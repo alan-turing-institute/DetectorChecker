@@ -4,10 +4,10 @@
 \alias{.get_ppp_dead_module}
 \title{Generates ppp for the dead pixels for a selected module}
 \usage{
-.get_ppp_dead_module(layout, row, col)
+.get_ppp_dead_module(detector, row, col)
 }
 \arguments{
-\item{layout}{Layout object}
+\item{detector}{Detector object}
 
 \item{row}{module row number}
 

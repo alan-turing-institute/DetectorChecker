@@ -5,10 +5,10 @@
 \title{Pixel module
 Function assign a module to each dead pixel}
 \usage{
-.assign_module(layout)
+.assign_module(detector)
 }
 \arguments{
-\item{layout}{Layout object}
+\item{detector}{Detector object}
 }
 \value{
 dead_modules

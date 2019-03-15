@@ -4,10 +4,10 @@
 \alias{glm_pixel_ctr_eucl}
 \title{Fits pixel distance from the centre to}
 \usage{
-glm_pixel_ctr_eucl(layout)
+glm_pixel_ctr_eucl(detector)
 }
 \arguments{
-\item{layout}{Layout object}
+\item{detector}{Detector object}
 }
 \value{
 Fitted model

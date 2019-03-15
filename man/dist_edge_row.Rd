@@ -4,10 +4,10 @@
 \alias{dist_edge_row}
 \title{A function to calculate pixel distances from edges by row}
 \usage{
-dist_edge_row(layout)
+dist_edge_row(detector)
 }
 \arguments{
-\item{layout}{Layout object}
+\item{detector}{Detector object}
 }
 \value{
 dist ?

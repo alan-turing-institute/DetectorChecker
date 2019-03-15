@@ -4,11 +4,11 @@
 \alias{plot_events_angles}
 \title{Plots angles graph of events}
 \usage{
-plot_events_angles(layout, file_path = NA, row = NA, col = NA,
+plot_events_angles(detector, file_path = NA, row = NA, col = NA,
   caption = TRUE, incl_event_list = NA)
 }
 \arguments{
-\item{layout}{Layout object}
+\item{detector}{Detector object}
 
 \item{file_path}{Output file path}
 

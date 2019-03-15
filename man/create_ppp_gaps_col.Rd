@@ -5,10 +5,10 @@
 \title{TODO: Better description of the function
 This is a function}
 \usage{
-create_ppp_gaps_col(layout)
+create_ppp_gaps_col(detector)
 }
 \arguments{
-\item{layout}{Layout object}
+\item{detector}{Detector object}
 }
 \value{
 Point pattern dataset

@@ -2,16 +2,16 @@
 % Please edit documentation in R/layout.R
 \name{create_module}
 \alias{create_module}
-\title{Checks whether layout is available, if so, creates a Layout object}
+\title{Checks whether detector is available, if so, creates a Detector object}
 \usage{
-create_module(layout_name)
+create_module(detector_name)
 }
 \arguments{
-\item{layout_name}{The name of the layout}
+\item{detector_name}{The name of the detector}
 }
 \value{
-Layout object
+Detector object
 }
 \description{
-Checks whether layout is available, if so, creates a Layout object
+Checks whether detector is available, if so, creates a Detector object
 }

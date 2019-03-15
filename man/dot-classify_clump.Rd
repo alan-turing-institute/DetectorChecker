@@ -4,10 +4,10 @@
 \alias{.classify_clump}
 \title{Clasifies a clump}
 \usage{
-.classify_clump(layout, x, y)
+.classify_clump(detector, x, y)
 }
 \arguments{
-\item{layout}{Layout object}
+\item{detector}{Detector object}
 
 \item{x}{vector containing the x coordinates of a clump}
 

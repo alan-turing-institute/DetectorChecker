@@ -4,10 +4,10 @@
 \alias{plot_pixel_dist_edge}
 \title{Calculates and plots minimum distances from the module edges}
 \usage{
-plot_pixel_dist_edge(layout, file_path = NA)
+plot_pixel_dist_edge(detector, file_path = NA)
 }
 \arguments{
-\item{layout}{Layout object}
+\item{detector}{Detector object}
 
 \item{file_path}{Output file path}
 }

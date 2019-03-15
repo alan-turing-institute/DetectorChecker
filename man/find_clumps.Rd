@@ -2,17 +2,17 @@
 % Please edit documentation in R/clump.R
 \name{find_clumps}
 \alias{find_clumps}
-\title{Locates and clusifies clumps of a damaged layout}
+\title{Locates and clusifies clumps of a damaged detector}
 \usage{
-find_clumps(layout, row = NA, col = NA)
+find_clumps(detector, row = NA, col = NA)
 }
 \arguments{
-\item{layout}{Layout object}
+\item{detector}{Detector object}
 
 \item{row}{Module row number}
 
 \item{col}{Module column number}
 }
 \description{
-Locates and clusifies clumps of a damaged layout
+Locates and clusifies clumps of a damaged detector
 }

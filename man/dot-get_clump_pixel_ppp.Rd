@@ -2,15 +2,15 @@
 % Please edit documentation in R/clump.R
 \name{.get_clump_pixel_ppp}
 \alias{.get_clump_pixel_ppp}
-\title{Creates ppp for damaged layout pixels}
+\title{Creates ppp for damaged detector pixels}
 \usage{
-.get_clump_pixel_ppp(layout, incl_event_list = NA)
+.get_clump_pixel_ppp(detector, incl_event_list = NA)
 }
 \arguments{
-\item{layout}{Layout object}
+\item{detector}{Detector object}
 
 \item{incl_event_list}{a list of events to be included}
 }
 \description{
-Creates ppp for damaged layout pixels
+Creates ppp for damaged detector pixels
 }

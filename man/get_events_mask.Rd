@@ -4,10 +4,10 @@
 \alias{get_events_mask}
 \title{Generates events matrix (a matrix with pixels as 0 and events as 1)}
 \usage{
-get_events_mask(layout)
+get_events_mask(detector)
 }
 \arguments{
-\item{layout}{Layout object}
+\item{detector}{Detector object}
 }
 \value{
 events mask

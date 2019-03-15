@@ -4,11 +4,11 @@
 \alias{plot_events_kfg}
 \title{Plots K, F, G functions}
 \usage{
-plot_events_kfg(layout, func, file_path = NA, row = NA, col = NA,
+plot_events_kfg(detector, func, file_path = NA, row = NA, col = NA,
   caption = TRUE, incl_event_list = NA)
 }
 \arguments{
-\item{layout}{Layout object}
+\item{detector}{Detector object}
 
 \item{func}{Function name}
 

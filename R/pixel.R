@@ -2,19 +2,19 @@
 
 #' Function assign a module to each dead pixel
 #'
-#' @param layout Layout object
+#' @param detector Detector object
 #' @return dead_modules
-.assign_module <- function(layout) {
-  dead_n <- length(as.vector(layout$pix_dead[, 2]))
+.assign_module <- function(detector) {
+  dead_n <- length(as.vector(detector$pix_dead[, 2]))
 
-  dead_modules <- data.frame(layout$pix_dead, NA, NA)
+  dead_modules <- data.frame(detector$pix_dead, NA, NA)
   colnames(dead_modules) <- c("pixcol", "pixrow", "modcol", "modrow")
 
   # TODO: more elegant with lapply or plyr etc
   for (i in 1:dead_n) {
     tmp <- which_module_idx(
-      layout$pix_dead[i, 1], layout$pix_dead[i, 2],
-      layout$module_edges_col, layout$module_edges_row
+      detector$pix_dead[i, 1], detector$pix_dead[i, 2],
+      detector$module_edges_col, detector$module_edges_row
     )
 
     dead_modules[i, 3] <- tmp$col
@@ -28,20 +28,20 @@
 
 #' A function to calculate euclidean distance from the centre
 #'
-#' @param layout Layout object
+#' @param detector Detector object
 #' @return Matrix containing euclidean distances from the centre for each
 #'   pixel
 #' @export
-pixel_dist_ctr_eucl <- function(layout) {
-  dist <- matrix(NA, nrow = layout$detector_height, ncol = layout$detector_width)
+pixel_dist_ctr_eucl <- function(detector) {
+  dist <- matrix(NA, nrow = detector$detector_height, ncol = detector$detector_width)
 
-  xx <- matrix(abs(1:layout$detector_width - layout$detector_width / 2),
-    nrow = layout$detector_height, ncol = layout$detector_width,
+  xx <- matrix(abs(1:detector$detector_width - detector$detector_width / 2),
+    nrow = detector$detector_height, ncol = detector$detector_width,
     byrow = TRUE
   )
 
-  yy <- matrix(abs(1:layout$detector_height - layout$detector_height / 2),
-    nrow = layout$detector_height, ncol = layout$detector_width
+  yy <- matrix(abs(1:detector$detector_height - detector$detector_height / 2),
+    nrow = detector$detector_height, ncol = detector$detector_width
   )
 
   dist <- sqrt(xx^2 + yy^2)
@@ -51,20 +51,20 @@ pixel_dist_ctr_eucl <- function(layout) {
 
 #' A function to calculate parallel maxima from the centre
 #'
-#' @param layout Layout object
+#' @param detector Detector object
 #' @return Matrix containing parallel maxima from the centre for each pixel
 #' @export
-pixel_dist_ctr_linf <- function(layout) {
-  dist <- matrix(NA, nrow = layout$detector_height, ncol = layout$detector_width)
+pixel_dist_ctr_linf <- function(detector) {
+  dist <- matrix(NA, nrow = detector$detector_height, ncol = detector$detector_width)
 
-  # TODO: Should it be done only once per layout?
-  xx <- matrix(abs(1:layout$detector_width - layout$detector_width / 2),
-    nrow = layout$detector_height, ncol = layout$detector_width,
+  # TODO: Should it be done only once per detector?
+  xx <- matrix(abs(1:detector$detector_width - detector$detector_width / 2),
+    nrow = detector$detector_height, ncol = detector$detector_width,
     byrow = TRUE
   )
 
-  yy <- matrix(abs(1:layout$detector_height - layout$detector_height / 2),
-    nrow = layout$detector_height, ncol = layout$detector_width
+  yy <- matrix(abs(1:detector$detector_height - detector$detector_height / 2),
+    nrow = detector$detector_height, ncol = detector$detector_width
   )
 
   dist <- pmax(xx, yy, na.rm = TRUE)
@@ -87,27 +87,27 @@ dist_closest_edge <- function(x, size) {
 # TODO: modify the description.
 #' A function to calculate pixel distances from corners
 #'
-#' @param layout Layout object
+#' @param detector Detector object
 #' @return Matrix containing parallel maxima from the centre for each pixel
 #' @export
-dist_corner <- function(layout) {
+dist_corner <- function(detector) {
 
-  # dist <- matrix(NA, nrow = layout$detector_height, ncol = layout$detector_width)
+  # dist <- matrix(NA, nrow = detector$detector_height, ncol = detector$detector_width)
 
   xx <- matrix(sapply(
-    c(1:layout$detector_width),
-    function(x) dist_closest_edge(x, layout$detector_width)
+    c(1:detector$detector_width),
+    function(x) dist_closest_edge(x, detector$detector_width)
   ),
-  nrow = layout$detector_height,
-  ncol = layout$detector_width, byrow = TRUE
+  nrow = detector$detector_height,
+  ncol = detector$detector_width, byrow = TRUE
   )
 
   yy <- matrix(sapply(
-    c(1:layout$detector_height),
-    function(x) dist_closest_edge(x, layout$detector_height)
+    c(1:detector$detector_height),
+    function(x) dist_closest_edge(x, detector$detector_height)
   ),
-  nrow = layout$detector_height,
-  ncol = layout$detector_width
+  nrow = detector$detector_height,
+  ncol = detector$detector_width
   )
 
   dist <- sqrt(xx^2 + yy^2)
@@ -118,23 +118,23 @@ dist_corner <- function(layout) {
 # TODO: modify the description.
 #' A function to calculate pixel distances from edges by column
 #'
-#' @param layout Layout object
+#' @param detector Detector object
 #' @return dist ?
 #' @export
-dist_edge_col <- function(layout) {
-  dist <- matrix(NA, nrow = layout$detector_height, ncol = layout$detector_width)
+dist_edge_col <- function(detector) {
+  dist <- matrix(NA, nrow = detector$detector_height, ncol = detector$detector_width)
 
-  for (x in 1:layout$detector_width) {
-    dist[1, x] <- .dist_edge(x, layout$module_edges_col)
+  for (x in 1:detector$detector_width) {
+    dist[1, x] <- .dist_edge(x, detector$module_edges_col)
   }
 
   # TODO: Address this issue?
   # Mystery: should work but does not! dist.matrix.col[2:detector.height, ] <- dist.matrix.col[1, ]    # all rows are like first row
   # Replace by pedestrain version:
-  # dist[2:layout$detector_height, ] <- dist[1, ]
+  # dist[2:detector$detector_height, ] <- dist[1, ]
 
   # all rows are like first row
-  for (y in 2:layout$detector_height) {
+  for (y in 2:detector$detector_height) {
     dist[y, ] <- dist[1, ]
   }
 
@@ -144,18 +144,18 @@ dist_edge_col <- function(layout) {
 # TODO: modify the description.
 #' A function to calculate pixel distances from edges by row
 #'
-#' @param layout Layout object
+#' @param detector Detector object
 #' @return dist ?
 #' @export
-dist_edge_row <- function(layout) {
-  dist <- matrix(NA, nrow = layout$detector_height, ncol = layout$detector_width)
+dist_edge_row <- function(detector) {
+  dist <- matrix(NA, nrow = detector$detector_height, ncol = detector$detector_width)
 
-  for (y in 1:layout$detector_height) {
-    dist[y, 1] <- .dist_edge(y, layout$module_edges_row)
+  for (y in 1:detector$detector_height) {
+    dist[y, 1] <- .dist_edge(y, detector$module_edges_row)
   }
 
   # all cols are like first col
-  dist[, 2:layout$detector_width] <- dist[, 1]
+  dist[, 2:detector$detector_width] <- dist[, 1]
 
   return(dist)
 }
@@ -163,12 +163,12 @@ dist_edge_row <- function(layout) {
 # TODO: modify the description.
 #' A function to calculate pixel distances from edges
 #'
-#' @param layout Layout object
+#' @param detector Detector object
 #' @return dist ?
 #' @export
-dist_edge_min <- function(layout) {
-  dist_col <- dist_edge_col(layout)
-  dist_row <- dist_edge_row(layout)
+dist_edge_min <- function(detector) {
+  dist_col <- dist_edge_col(detector)
+  dist_row <- dist_edge_row(detector)
 
   dist <- pmin(dist_col, dist_row)
 
@@ -202,115 +202,115 @@ plot_pixel <- function(data, width, height, file_path = NA) {
 
 #' Calculates and plots pixel euclidean distance from the centre
 #'
-#' @param layout Layout object
+#' @param detector Detector object
 #' @param file_path Output file path
 #' @export
-plot_pixel_ctr_eucl <- function(layout, file_path = NA) {
-  dist <- pixel_dist_ctr_eucl(layout)
+plot_pixel_ctr_eucl <- function(detector, file_path = NA) {
+  dist <- pixel_dist_ctr_eucl(detector)
 
   plot_pixel(dist,
-    width = layout$detector_width, height = layout$detector_height,
+    width = detector$detector_width, height = detector$detector_height,
     file_path = file_path
   )
 }
 
 #' Calculates and plots pixel parallel maxima from the centre
 #'
-#' @param layout Layout object
+#' @param detector Detector object
 #' @param file_path Output file path
 #' @export
-plot_pixel_ctr_linf <- function(layout, file_path = NA) {
-  dist <- pixel_dist_ctr_linf(layout)
+plot_pixel_ctr_linf <- function(detector, file_path = NA) {
+  dist <- pixel_dist_ctr_linf(detector)
 
   plot_pixel(dist,
-    width = layout$detector_width, height = layout$detector_height,
+    width = detector$detector_width, height = detector$detector_height,
     file_path = file_path
   )
 }
 
 #' Calculates and plots pixel distances from corners
 #'
-#' @param layout Layout object
+#' @param detector Detector object
 #' @param file_path Output file path
 #' @export
-plot_pixel_dist_corner <- function(layout, file_path = NA) {
-  dist <- dist_corner(layout)
+plot_pixel_dist_corner <- function(detector, file_path = NA) {
+  dist <- dist_corner(detector)
 
   plot_pixel(dist,
-    width = layout$detector_width, height = layout$detector_height,
+    width = detector$detector_width, height = detector$detector_height,
     file_path = file_path
   )
 }
 
 #' Calculates and plots distances from the module edges by column
 #'
-#' @param layout Layout object
+#' @param detector Detector object
 #' @param file_path Output file path
 #' @export
-plot_pixel_dist_edge_col <- function(layout, file_path = NA) {
-  dist <- dist_edge_col(layout)
+plot_pixel_dist_edge_col <- function(detector, file_path = NA) {
+  dist <- dist_edge_col(detector)
 
   plot_pixel(dist,
-    width = layout$detector_width, height = layout$detector_height,
+    width = detector$detector_width, height = detector$detector_height,
     file_path = file_path
   )
 }
 
 #' Calculates and plots distances from the module edges by row
 #'
-#' @param layout Layout object
+#' @param detector Detector object
 #' @param file_path Output file path
 #' @export
-plot_pixel_dist_edge_row <- function(layout, file_path = NA) {
-  dist <- dist_edge_row(layout)
+plot_pixel_dist_edge_row <- function(detector, file_path = NA) {
+  dist <- dist_edge_row(detector)
 
   plot_pixel(dist,
-    width = layout$detector_width, height = layout$detector_height,
+    width = detector$detector_width, height = detector$detector_height,
     file_path = file_path
   )
 }
 
 #' Calculates and plots minimum distances from the module edges
 #'
-#' @param layout Layout object
+#' @param detector Detector object
 #' @param file_path Output file path
 #' @export
-plot_pixel_dist_edge <- function(layout, file_path = NA) {
-  dist <- dist_edge_min(layout)
+plot_pixel_dist_edge <- function(detector, file_path = NA) {
+  dist <- dist_edge_min(detector)
 
   plot_pixel(dist,
-    width = layout$detector_width, height = layout$detector_height,
+    width = detector$detector_width, height = detector$detector_height,
     file_path = file_path
   )
 }
 
-#' Counts damaged pixel locations (dead_data) outside detector (layout)
+#' Counts damaged pixel locations (dead_data) outside detector (detector)
 #'   and in gaps between modules and give warnings
 #'
 #' @param dead_data Dead pixel locations
-#' @param layout Layout object
+#' @param detector Detector object
 #' @return Inconsistency message
 #' @export
-inconsist_dead_layout <- function(dead_data, layout) {
+inconsist_dead_detector <- function(dead_data, detector) {
   error <- ""
 
   outleft <- sum(dead_data[, 1] < 1)
-  outright <- sum(dead_data[, 1] > layout$detector_width)
+  outright <- sum(dead_data[, 1] > detector$detector_width)
 
   outtop <- sum(dead_data[, 2] < 1)
-  outbottom <- sum(dead_data[, 2] > layout$detector_height)
+  outbottom <- sum(dead_data[, 2] > detector$detector_height)
 
   colgaps <- c()
-  if (sum(layout$gap_col_sizes) != 0) {
-    for (i in 1:(layout$module_col_n - 1)) {
-      colgaps <- c(colgaps, (layout$module_edges_col[2, i] + 1):(layout$module_edges_col[1, i + 1] - 1))
+  if (sum(detector$gap_col_sizes) != 0) {
+    for (i in 1:(detector$module_col_n - 1)) {
+      colgaps <- c(colgaps, (detector$module_edges_col[2, i] + 1):(detector$module_edges_col[1, i + 1] - 1))
     }
   }
 
   rowgaps <- c()
-  if (sum(layout$gap_row_sizes) != 0) {
-    for (i in 1:(layout$module_row_n - 1)) {
-      rowgaps <- c(rowgaps, (layout$module_edges_row[2, i] + 1):(layout$module_edges_row[1, i + 1] - 1))
+  if (sum(detector$gap_row_sizes) != 0) {
+    for (i in 1:(detector$module_row_n - 1)) {
+      rowgaps <- c(rowgaps, (detector$module_edges_row[2, i] + 1):(detector$module_edges_row[1, i + 1] - 1))
     }
   }
 
@@ -340,17 +340,17 @@ inconsist_dead_layout <- function(dead_data, layout) {
 
 #' Creates a mask matrix of dead pixels
 #'
-#' @param layout Layout object
+#' @param detector Detector object
 #' @return dead pixel mask
 #' @export
-get_dead_pix_mask <- function(layout) {
+get_dead_pix_mask <- function(detector) {
 
   # TODO: check because we needed to swap detector_width with detector_height.
-  mask <- matrix(0, nrow = layout$detector_width, ncol = layout$detector_height)
+  mask <- matrix(0, nrow = detector$detector_width, ncol = detector$detector_height)
 
-  for (i in c(1:(dim(layout$pix_dead)[1]))) {
-    x <- as.numeric(layout$pix_dead[i, 1])
-    y <- as.numeric(layout$pix_dead[i, 2])
+  for (i in c(1:(dim(detector$pix_dead)[1]))) {
+    x <- as.numeric(detector$pix_dead[i, 1])
+    y <- as.numeric(detector$pix_dead[i, 2])
 
     mask[x, y] <- 1
   }

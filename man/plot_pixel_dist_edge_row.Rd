@@ -4,10 +4,10 @@
 \alias{plot_pixel_dist_edge_row}
 \title{Calculates and plots distances from the module edges by row}
 \usage{
-plot_pixel_dist_edge_row(layout, file_path = NA)
+plot_pixel_dist_edge_row(detector, file_path = NA)
 }
 \arguments{
-\item{layout}{Layout object}
+\item{detector}{Detector object}
 
 \item{file_path}{Output file path}
 }

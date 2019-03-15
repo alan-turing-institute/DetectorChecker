@@ -4,15 +4,15 @@
 \alias{load_pix_matrix}
 \title{A function to load pixel data}
 \usage{
-load_pix_matrix(layout, file_path)
+load_pix_matrix(detector, file_path)
 }
 \arguments{
-\item{layout}{The name of the layout to be used}
+\item{detector}{The name of the detector to be used}
 
 \item{file_path}{Path(s) to the file(s) containing dead pixel information}
 }
 \value{
-Layout object
+Detector object
 }
 \description{
 A function to load pixel data

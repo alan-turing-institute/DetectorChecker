@@ -4,10 +4,10 @@
 \alias{matrix_from_xml}
 \title{Reads in xml file and returns a pixel matrix}
 \usage{
-matrix_from_xml(layout, file_path)
+matrix_from_xml(detector, file_path)
 }
 \arguments{
-\item{layout}{Layout object}
+\item{detector}{Detector object}
 
 \item{file_path}{Path to the xml file}
 }

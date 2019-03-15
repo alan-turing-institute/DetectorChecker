@@ -4,10 +4,10 @@
 \alias{.clump_module}
 \title{Identifying modules for clumps}
 \usage{
-.clump_module(layout, rrc)
+.clump_module(detector, rrc)
 }
 \arguments{
-\item{layout}{Layout object}
+\item{detector}{Detector object}
 
 \item{rrc}{raster clumps objects}
 }

@@ -2,8 +2,8 @@ context("Pixel analysis functions")
 
 test_that("Distance analysis functions", {
 
-  # PerkinElmerFull layout unit test
-  layout <- PerkinElmerFull_Layout()
+  # PerkinElmerFull detector unit test
+  detector <- PerkinElmerFull_Detector()
 
   # TODO: Check the following
   # This is not perfect and maybe we can come up with a better way to compare to
@@ -13,44 +13,44 @@ test_that("Distance analysis functions", {
 
   # ----------------------------------------------------------------------------
   # Euclidean distances from the centre
-  dist <- pixel_dist_ctr_eucl(layout)
+  dist <- pixel_dist_ctr_eucl(detector)
 
-  # Expected value for the PerkinElmerFull layout
+  # Expected value for the PerkinElmerFull detector
   expect_equal(.tr(dist), 1414213.562)
 
   # ----------------------------------------------------------------------------
   # Parallel maxima distances from the centre
-  dist <- pixel_dist_ctr_linf(layout)
+  dist <- pixel_dist_ctr_linf(detector)
 
-  # Expected value for the PerkinElmerFull layout
+  # Expected value for the PerkinElmerFull detector
   expect_equal(.tr(dist), 1000000)
 
   # ----------------------------------------------------------------------------
   # Pixel distances from corners
-  dist <- dist_corner(layout)
+  dist <- dist_corner(detector)
 
-  # Expected value for the PerkinElmerFull layout
+  # Expected value for the PerkinElmerFull detector
   expect_equal(.tr(dist), 1412799.349)
 
   # # ----------------------------------------------------------------------------
   # # Pixel distances from the module edges by column
-  # dist <- dist_edge_col(layout)
+  # dist <- dist_edge_col(detector)
   #
-  # # Expected value for the PerkinElmerFull layout
+  # # Expected value for the PerkinElmerFull detector
   # expect_equal(.tr(dist), 100.00)
   #
   # # ----------------------------------------------------------------------------
   # # Pixel distances from the module edges by row
-  # dist <- dist_edge_row(layout)
+  # dist <- dist_edge_row(detector)
   #
-  # # Expected value for the PerkinElmerFull layout
+  # # Expected value for the PerkinElmerFull detector
   # expect_equal(.tr(dist), 100.00)
   #
   # # ----------------------------------------------------------------------------
   # # Pixel distances from the module edges by column
-  # dist <- dist_edge_min(layout)
+  # dist <- dist_edge_min(detector)
   #
-  # # Expected value for the PerkinElmerFull layout
+  # # Expected value for the PerkinElmerFull detector
   # expect_equal(.tr(dist), 100.00)
   #
   # # ----------------------------------------------------------------------------
@@ -62,8 +62,8 @@ test_that("Plotting pixel analysis", {
   test_out_fmt <- "jpg"
   test_out_dir <- getwd()
 
-  # PerkinElmerFull layout unit test
-  layout <- PerkinElmerFull_Layout()
+  # PerkinElmerFull detector unit test
+  detector <- PerkinElmerFull_Detector()
 
   # ----------------------------------------------------------------------------
   # Euclidean distances from the centre
@@ -71,7 +71,7 @@ test_that("Plotting pixel analysis", {
   test_out_name <- "unittest_pixel_ctr_eucl"
   test_out_path <- file.path(test_out_dir, paste(test_out_name, test_out_fmt, sep = "."))
 
-  plot_pixel_ctr_eucl(layout, file_path = test_out_path)
+  plot_pixel_ctr_eucl(detector, file_path = test_out_path)
 
   # Check whether the file was created
   expect_that(file.exists(test_out_path), is_true())
@@ -85,7 +85,7 @@ test_that("Plotting pixel analysis", {
   test_out_name <- "unittest_pixel_ctr_linf"
   test_out_path <- file.path(test_out_dir, paste(test_out_name, test_out_fmt, sep = "."))
 
-  plot_pixel_ctr_linf(layout, file_path = test_out_path)
+  plot_pixel_ctr_linf(detector, file_path = test_out_path)
 
   # Check whether the file was created
   expect_that(file.exists(test_out_path), is_true())
@@ -99,7 +99,7 @@ test_that("Plotting pixel analysis", {
   test_out_name <- "unittest_pixel_dist_corner"
   test_out_path <- file.path(test_out_dir, paste(test_out_name, test_out_fmt, sep = "."))
 
-  plot_pixel_dist_corner(layout, file_path = test_out_path)
+  plot_pixel_dist_corner(detector, file_path = test_out_path)
 
   # Check whether the file was created
   expect_that(file.exists(test_out_path), is_true())
@@ -113,7 +113,7 @@ test_that("Plotting pixel analysis", {
   test_out_name <- "unittest_pixel_dist_edge_col"
   test_out_path <- file.path(test_out_dir, paste(test_out_name, test_out_fmt, sep = "."))
 
-  plot_pixel_dist_edge_col(layout, file_path = test_out_path)
+  plot_pixel_dist_edge_col(detector, file_path = test_out_path)
 
   # Check whether the file was created
   expect_that(file.exists(test_out_path), is_true())
@@ -127,7 +127,7 @@ test_that("Plotting pixel analysis", {
   test_out_name <- "unittest_pixel_dist_edge_row"
   test_out_path <- file.path(test_out_dir, paste(test_out_name, test_out_fmt, sep = "."))
 
-  plot_pixel_dist_edge_row(layout, file_path = test_out_path)
+  plot_pixel_dist_edge_row(detector, file_path = test_out_path)
 
   # Check whether the file was created
   expect_that(file.exists(test_out_path), is_true())
@@ -141,7 +141,7 @@ test_that("Plotting pixel analysis", {
   test_out_name <- "unittest_pixel_dist_edge"
   test_out_path <- file.path(test_out_dir, paste(test_out_name, test_out_fmt, sep = "."))
 
-  plot_pixel_dist_edge(layout, file_path = test_out_path)
+  plot_pixel_dist_edge(detector, file_path = test_out_path)
 
   # Check whether the file was created
   expect_that(file.exists(test_out_path), is_true())

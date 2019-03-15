@@ -4,11 +4,11 @@
 \alias{plot_events_density}
 \title{Plots density graph of events}
 \usage{
-plot_events_density(layout, file_path = NA, adjust = 0.25, row = NA,
-  col = NA, caption = TRUE, incl_event_list = NA)
+plot_events_density(detector, file_path = NA, adjust = 0.25,
+  row = NA, col = NA, caption = TRUE, incl_event_list = NA)
 }
 \arguments{
-\item{layout}{Layout object}
+\item{detector}{Detector object}
 
 \item{file_path}{Output file path}
 
