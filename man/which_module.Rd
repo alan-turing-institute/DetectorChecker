@@ -8,7 +8,7 @@ Which module function}
 which_module(coo, me)
 }
 \arguments{
-\item{coo}{?}
+\item{coo}{}
 
 \item{me}{?}
 }

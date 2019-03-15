@@ -8,7 +8,7 @@ Given xy coo of pixel and matrices with positions of edges in both directions.}
 .dist_edge(xy, module_edges)
 }
 \arguments{
-\item{xy}{?}
+\item{xy}{}
 
 \item{module_edges}{?}
 }
