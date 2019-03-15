@@ -2,13 +2,13 @@
 % Please edit documentation in R/clump.R
 \name{plot_module_events}
 \alias{plot_module_events}
-\title{Plots damaged layout module events}
+\title{Plots damaged detector module events}
 \usage{
-plot_module_events(layout, col, row, file_path = NA, caption = TRUE,
+plot_module_events(detector, col, row, file_path = NA, caption = TRUE,
   incl_event_list = NA)
 }
 \arguments{
-\item{layout}{Layout object}
+\item{detector}{Detector object}
 
 \item{col}{Module column number}
 
@@ -21,5 +21,5 @@ plot_module_events(layout, col, row, file_path = NA, caption = TRUE,
 \item{incl_event_list}{a list of events to be included}
 }
 \description{
-Plots damaged layout module events
+Plots damaged detector module events
 }

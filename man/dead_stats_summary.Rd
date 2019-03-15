@@ -4,10 +4,10 @@
 \alias{dead_stats_summary}
 \title{Count number of damaged pixels overall and in different modules}
 \usage{
-dead_stats_summary(layout)
+dead_stats_summary(detector)
 }
 \arguments{
-\item{layout}{Layout object}
+\item{detector}{Detector object}
 }
 \value{
 A string with damaged pixels overall statitics

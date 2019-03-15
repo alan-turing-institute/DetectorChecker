@@ -1,11 +1,11 @@
-context("Testing reading in the dead pixel data and visualizing the layout: Pilatus")
+context("Testing reading in the dead pixel data and visualizing the detector: Pilatus")
 
 test_that("Pilatus", {
   test_dir <- getwd()
 
-  layout_name <- "Pilatus"
+  detector_name <- "Pilatus"
 
-  pilatus_layout <- create_module(layout_name)
+  pilatus_detector <- create_module(detector_name)
 
   # getting the dead (damaged) pixel data
   dead_path <- file.path(
@@ -13,13 +13,13 @@ test_that("Pilatus", {
     "badpixel_mask.tif"
   )
 
-  pilatus_layout <- load_pix_matrix(layout = pilatus_layout, file_path = dead_path)
+  pilatus_detector <- load_pix_matrix(detector = pilatus_detector, file_path = dead_path)
 
   # output file
   test_out_path <- "pilatus_damaged.jpg"
 
   # Visualizing damaged pixels
-  plot_layout_damaged(layout = pilatus_layout, file_path = test_out_path)
+  plot_detector_damaged(detector = pilatus_detector, file_path = test_out_path)
 
   # Check whether the file was created
   expect_that(file.exists(test_out_path), is_true())
@@ -28,14 +28,14 @@ test_that("Pilatus", {
   if (file.exists(test_out_path)) file.remove(test_out_path)
 })
 
-context("Testing reading in the dead pixel data and visualizing the layout: Perkin Elmer")
+context("Testing reading in the dead pixel data and visualizing the detector: Perkin Elmer")
 
 test_that("Perkin Elmer", {
   test_dir <- getwd()
 
-  layout_name <- "PerkinElmerFull"
+  detector_name <- "PerkinElmerFull"
 
-  perkinelmerfull_layout <- create_module(layout_name)
+  perkinelmerfull_detector <- create_module(detector_name)
 
   # getting the dead (damaged) pixel data
   dead_path <- file.path(
@@ -43,13 +43,13 @@ test_that("Perkin Elmer", {
     "BadPixelMap_0.bpm", "BadPixelMap.bpm.xml"
   )
 
-  perkinelmerfull_layout <- load_pix_matrix(layout = perkinelmerfull_layout, file_path = dead_path)
+  perkinelmerfull_detector <- load_pix_matrix(detector = perkinelmerfull_detector, file_path = dead_path)
 
   # output file
   test_out_path <- "perkinelmerfull_damaged.pdf"
 
   # Visualizing damaged pixels
-  plot_layout_damaged(layout = perkinelmerfull_layout, file_path = test_out_path)
+  plot_detector_damaged(detector = perkinelmerfull_detector, file_path = test_out_path)
 
   # Check whether the file was created
   expect_that(file.exists(test_out_path), is_true())
@@ -58,11 +58,11 @@ test_that("Perkin Elmer", {
   if (file.exists(test_out_path)) file.remove(test_out_path)
 
   # Dead stats
-  perkinelmerfull_layout <- get_dead_stats(perkinelmerfull_layout)
+  perkinelmerfull_detector <- get_dead_stats(perkinelmerfull_detector)
 
   # Plotting counts per module
   test_out_path <- "perkinelmerfull_module_cnt.pdf"
-  plot_layout_cnt_mod(layout = perkinelmerfull_layout, file_path = test_out_path)
+  plot_detector_cnt_mod(detector = perkinelmerfull_detector, file_path = test_out_path)
 
   # Check whether the file was created
   expect_that(file.exists(test_out_path), is_true())
@@ -72,8 +72,8 @@ test_that("Perkin Elmer", {
 
   # Plotting dead pixel density
   test_out_path <- "perkinelmerfull_density.jpg"
-  plot_layout_density(
-    layout = perkinelmerfull_layout, file_path = test_out_path,
+  plot_detector_density(
+    detector = perkinelmerfull_detector, file_path = test_out_path,
     adjust = 0.5
   )
 
@@ -83,20 +83,20 @@ test_that("Perkin Elmer", {
   # Arrows
   test_out_path <- "perkinelmerfull_arrows.jpg"
 
-  plot_layout_arrows(layout = perkinelmerfull_layout, file_path = test_out_path)
+  plot_detector_arrows(detector = perkinelmerfull_detector, file_path = test_out_path)
 
   # Removing the test output file
   if (file.exists(test_out_path)) file.remove(test_out_path)
 })
 
-context("Testing reading in the dead pixel data and visualizing the layout: Excalibur")
+context("Testing reading in the dead pixel data and visualizing the detector: Excalibur")
 
 test_that("Excalibur - mutiple files", {
   test_dir <- getwd()
 
-  layout_name <- "Excalibur"
+  detector_name <- "Excalibur"
 
-  excalibur_layout <- create_module(layout_name)
+  excalibur_detector <- create_module(detector_name)
 
   # getting the dead (damaged) pixel data
   dead_paths <- file.path(
@@ -129,13 +129,13 @@ test_that("Excalibur - mutiple files", {
     "pixelmask.fem6.hdf"
   ))
 
-  excalibur_layout <- load_pix_matrix(layout = excalibur_layout, file_path = dead_paths)
+  excalibur_detector <- load_pix_matrix(detector = excalibur_detector, file_path = dead_paths)
 
   # output file
   test_out_path <- "Excalibur_damaged.pdf"
 
   # Visualizing damaged pixels
-  plot_layout_damaged(layout = excalibur_layout, file_path = test_out_path)
+  plot_detector_damaged(detector = excalibur_detector, file_path = test_out_path)
 
   # Check whether the file was created
   expect_that(file.exists(test_out_path), is_true())
@@ -149,27 +149,27 @@ context("Model fitting")
 test_that("Pilatus", {
   test_dir <- getwd()
 
-  layout <- create_module("Pilatus")
+  detector <- create_module("Pilatus")
 
   # getting the dead (damaged) pixel data
   dead_path <- file.path(test_dir, "dead_pix", "Pilatus", "badpixel_mask.tif")
 
-  layout <- load_pix_matrix(layout = layout, file_path = dead_path)
+  detector <- load_pix_matrix(detector = detector, file_path = dead_path)
 
   # Euclidean distances from the centre
-  # glm_fit <- glm_pixel_ctr_eucl(layout)
+  # glm_fit <- glm_pixel_ctr_eucl(detector)
   # print(summary(glm_fit))
 
   # Parallel maxima from the centre
-  # glm_fit <- glm_pixel_ctr_linf(layout)
+  # glm_fit <- glm_pixel_ctr_linf(detector)
   # print(summary(glm_fit))
 
   # Distances from the module edges by column
-  # glm_fit <- glm_pixel_dist_edge_col(layout)
+  # glm_fit <- glm_pixel_dist_edge_col(detector)
   # print(summary(glm_fit))
 
   # Distances from the module edges by row
-  glm_fit <- glm_pixel_dist_edge_row(layout)
+  glm_fit <- glm_pixel_dist_edge_row(detector)
 
   # TODO: check the fitted values
   # print(summary(glm_fit))
@@ -182,7 +182,7 @@ context("Dead Stats Summary")
 test_that("PerkinElmerFull", {
   test_dir <- getwd()
 
-  layout <- create_module("PerkinElmerFull")
+  detector <- create_module("PerkinElmerFull")
 
   # getting the dead (damaged) pixel data
   test_path <- file.path(
@@ -191,11 +191,11 @@ test_that("PerkinElmerFull", {
     "BadPixelMap.bpm.xml"
   )
 
-  layout <- load_pix_matrix(layout = layout, file_path = test_path)
+  detector <- load_pix_matrix(detector = detector, file_path = test_path)
 
-  dead_stats_summary <- dead_stats_summary(layout)
+  dead_stats_summary <- dead_stats_summary(detector)
 
-  summary <- paste("\n", "\n", layout_summary(layout), "\n", "")
+  summary <- paste("\n", "\n", detector_summary(detector), "\n", "")
   summary <- paste(summary, dead_stats_summary, "\n", "")
 
   expect_that(TRUE, is_true())
@@ -206,9 +206,9 @@ context("Testing analysis: Perkin Elmer")
 test_that("Perkin Elmer", {
   test_dir <- getwd()
 
-  layout_name <- "PerkinElmerFull"
+  detector_name <- "PerkinElmerFull"
 
-  perkinelmerfull_layout <- create_module(layout_name)
+  perkinelmerfull_detector <- create_module(detector_name)
 
   # getting the dead (damaged) pixel data
   dead_path <- file.path(
@@ -216,13 +216,13 @@ test_that("Perkin Elmer", {
     "BadPixelMap_0.bpm", "BadPixelMap.bpm.xml"
   )
 
-  perkinelmerfull_layout <- load_pix_matrix(layout = perkinelmerfull_layout, file_path = dead_path)
+  perkinelmerfull_detector <- load_pix_matrix(detector = perkinelmerfull_detector, file_path = dead_path)
 
   # output file
   test_out_path <- "perkinelmerfull_damaged.pdf"
 
   # Visualizing damaged pixels
-  plot_layout_damaged(layout = perkinelmerfull_layout, file_path = test_out_path)
+  plot_detector_damaged(detector = perkinelmerfull_detector, file_path = test_out_path)
 
   # Check whether the file was created
   expect_that(file.exists(test_out_path), is_true())
@@ -231,11 +231,11 @@ test_that("Perkin Elmer", {
   if (file.exists(test_out_path)) file.remove(test_out_path)
 
   # Dead stats
-  perkinelmerfull_layout <- get_dead_stats(perkinelmerfull_layout)
+  perkinelmerfull_detector <- get_dead_stats(perkinelmerfull_detector)
 
   # Plotting counts per module
   test_out_path <- "perkinelmerfull_module_cnt.pdf"
-  plot_layout_cnt_mod(layout = perkinelmerfull_layout, file_path = test_out_path)
+  plot_detector_cnt_mod(detector = perkinelmerfull_detector, file_path = test_out_path)
 
   # Check whether the file was created
   expect_that(file.exists(test_out_path), is_true())
@@ -245,8 +245,8 @@ test_that("Perkin Elmer", {
 
   # Plotting dead pixel density
   test_out_path <- "perkinelmerfull_density.jpg"
-  plot_layout_density(
-    layout = perkinelmerfull_layout, file_path = test_out_path,
+  plot_detector_density(
+    detector = perkinelmerfull_detector, file_path = test_out_path,
     adjust = 0.5
   )
 
@@ -258,7 +258,7 @@ test_that("Perkin Elmer", {
 
   # Arrows
   test_out_path <- "perkinelmerfull_arrows.jpg"
-  plot_layout_arrows(layout = perkinelmerfull_layout, file_path = test_out_path)
+  plot_detector_arrows(detector = perkinelmerfull_detector, file_path = test_out_path)
 
   # Check whether the file was created
   expect_that(file.exists(test_out_path), is_true())
@@ -268,7 +268,7 @@ test_that("Perkin Elmer", {
 
   # Full detector angle plot
   test_out_path <- "perkinelmerfull_angles.jpg"
-  plot_layout_angles(layout = perkinelmerfull_layout, file_path = test_out_path)
+  plot_detector_angles(detector = perkinelmerfull_detector, file_path = test_out_path)
 
   # Check whether the file was created
   expect_that(file.exists(test_out_path), is_true())
@@ -277,7 +277,7 @@ test_that("Perkin Elmer", {
   if (file.exists(test_out_path)) file.remove(test_out_path)
 
   # test_analysis
-  # test_analysis_functions(perkinelmerfull_layout)
+  # test_analysis_functions(perkinelmerfull_detector)
 })
 
 context("Testing KFG: ")
@@ -285,9 +285,9 @@ context("Testing KFG: ")
 test_that("Perkin Elmer", {
   test_dir <- getwd()
 
-  layout_name <- "PerkinElmerFull"
+  detector_name <- "PerkinElmerFull"
 
-  layout <- create_module(layout_name)
+  detector <- create_module(detector_name)
 
   # getting the dead (damaged) pixel data
   dead_path <- file.path(
@@ -295,41 +295,41 @@ test_that("Perkin Elmer", {
     "BadPixelMap_0.bpm", "BadPixelMap.bpm.xml"
   )
 
-  layout <- load_pix_matrix(layout = layout, file_path = dead_path)
+  detector <- load_pix_matrix(detector = detector, file_path = dead_path)
 
   # K
   test_out_path <- "K-Function.jpg"
-  plot_layout_kfg(layout = layout, func = "K", file_path = test_out_path)
+  plot_detector_kfg(detector = detector, func = "K", file_path = test_out_path)
   expect_that(file.exists(test_out_path), is_true())
   if (file.exists(test_out_path)) file.remove(test_out_path)
 
   # F
   test_out_path <- "F-Function.jpg"
-  plot_layout_kfg(layout = layout, func = "F", file_path = test_out_path)
+  plot_detector_kfg(detector = detector, func = "F", file_path = test_out_path)
   expect_that(file.exists(test_out_path), is_true())
   if (file.exists(test_out_path)) file.remove(test_out_path)
 
   # G
   test_out_path <- "G-Function.jpg"
-  plot_layout_kfg(layout = layout, func = "G", file_path = test_out_path)
+  plot_detector_kfg(detector = detector, func = "G", file_path = test_out_path)
   expect_that(file.exists(test_out_path), is_true())
   if (file.exists(test_out_path)) file.remove(test_out_path)
 
   # Kinhom
   test_out_path <- "Kinhom.jpg"
-  plot_layout_kfg(layout = layout, func = "Kinhom", file_path = test_out_path)
+  plot_detector_kfg(detector = detector, func = "Kinhom", file_path = test_out_path)
   expect_that(file.exists(test_out_path), is_true())
   if (file.exists(test_out_path)) file.remove(test_out_path)
 
   # Finhom
   test_out_path <- "Finhom.jpg"
-  plot_layout_kfg(layout = layout, func = "Finhom", file_path = test_out_path)
+  plot_detector_kfg(detector = detector, func = "Finhom", file_path = test_out_path)
   expect_that(file.exists(test_out_path), is_true())
   if (file.exists(test_out_path)) file.remove(test_out_path)
 
   # Ginhom
   test_out_path <- "Ginhom.jpg"
-  plot_layout_kfg(layout = layout, func = "Ginhom", file_path = test_out_path)
+  plot_detector_kfg(detector = detector, func = "Ginhom", file_path = test_out_path)
   expect_that(file.exists(test_out_path), is_true())
   if (file.exists(test_out_path)) file.remove(test_out_path)
 })

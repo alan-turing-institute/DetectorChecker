@@ -2,14 +2,14 @@ library(igraph)
 
 #' Clasifies a clump
 #'
-#' @param layout Layout object
+#' @param detector Detector object
 #' @param x vector containing the x coordinates of a clump
 #' @param y vector containing the y coordinates of a clump
 #' @return the class of a clump (1 - singleton, 2 - double, 3 - triplet,
 #'   4 - larger cluster, unless it actually has the shape of a line,
 #'   5 (6): vertical line where closest edge is the upper (lower) one,
 #'   7 (8): horizontal line where closest edge is the right (left) one)
-.classify_clump <- function(layout, x, y) {
+.classify_clump <- function(detector, x, y) {
 
   # x and y are vectors of the same length
   # x=columns=horizontale positions
@@ -18,8 +18,8 @@ library(igraph)
   # Note that size of clump is given by length(x) (=length(y)).
   # range(x) length shows expansion in x-direction, range(y) expansion in y-direction.
 
-  nr <- layout$detector_height
-  nc <- layout$detector_width
+  nr <- detector$detector_height
+  nc <- detector$detector_width
 
   # a priori assignment for class label is 0, which means nothing and is used
   #   later to check if class label assignment failed
@@ -96,12 +96,12 @@ library(igraph)
 
 #' Something something dark side
 #'
-#' @param layout Layout object
+#' @param detector Detector object
 #' @return data frame
-.xyc_ply_func <- function(layout, xyc_pixel_df) {
+.xyc_ply_func <- function(detector, xyc_pixel_df) {
   dataFrame <- plyr::ddply(xyc_pixel_df, "id",
     dplyr::summarise, # 1
-    class = .classify_clump(layout, x, y), # 2
+    class = .classify_clump(detector, x, y), # 2
     size = length(x), # 3
     xct = min(x) + (max(x) - min(x)) / 2, # 4 not always a pixel (see below)
     yct = min(y) + (max(y) - min(y)) / 2, # 5 not always a pixel
@@ -143,7 +143,7 @@ library(igraph)
 #' type 6 (closest to lower edge): ymax
 #' type 7 (closest to right edge): xmin
 #' type 8 (closest to left edge):  xmax
-#' This is inspired by Perkin Elmer Layout and be replaced by other choices if desired.
+#' This is inspired by Perkin Elmer Detector and be replaced by other choices if desired.
 #' @param xyc_ply clums data frame
 #' @return events
 .xyc_pixels2events <- function(xyc_ply) {
@@ -172,22 +172,22 @@ library(igraph)
 
 #' Converts mask (dead pixels) to events
 #'
-#' @param layout Layout object
+#' @param detector Detector object
 #' @param dead_pix_mask Dead pixels mask
 #' @param row Module row number
 #' @param col Module col number
 #' @return list of pixels and events
-.mask_to_events <- function(layout, dead_pix_mask, row = NA, col = NA) {
+.mask_to_events <- function(detector, dead_pix_mask, row = NA, col = NA) {
   if (!is.na(row) && !is.na(col)) {
-    shift_left <- layout$module_edges_col[1, col] - 1
-    shift_up <- layout$module_edges_row[1, row] - 1
+    shift_left <- detector$module_edges_col[1, col] - 1
+    shift_up <- detector$module_edges_row[1, row] - 1
 
-    nc <- layout$module_col_sizes[col]
-    nr <- layout$module_row_sizes[row]
+    nc <- detector$module_col_sizes[col]
+    nr <- detector$module_row_sizes[row]
   }
 
-  nr <- layout$detector_height
-  nc <- layout$detector_width
+  nr <- detector$detector_height
+  nc <- detector$detector_width
 
   # Raster object preparation:
   # Detect & classify into lines, clusters, duplicates etc using functions above
@@ -208,12 +208,12 @@ library(igraph)
   xyc_df <- data.frame(
     ceiling(raster::xyFromCell(rrc, which(!is.na(raster::getValues(rrc))))),
     id = raster::getValues(rrc)[!is.na(raster::getValues(rrc))],
-    .clump_module(layout, rrc)
+    .clump_module(detector, rrc)
   )
 
   if (!is.na(row) && !is.na(col)) {
     # check whether the row and col numbers are correct
-    .check_select(layout, row, col)
+    .check_select(detector, row, col)
 
     xyc_df <- xyc_df[xyc_df$mod_row == row & xyc_df$mod_col == col, ]
 
@@ -221,24 +221,24 @@ library(igraph)
     xyc_df$y <- xyc_df$y - shift_up
   }
 
-  xyc_events <- .xyc_pixels2events(.xyc_ply_func(layout, xyc_df))
+  xyc_events <- .xyc_pixels2events(.xyc_ply_func(detector, xyc_df))
 
   return(list(pixels = xyc_df, events = xyc_events))
 }
 
 #' Identifying modules for clumps
 #'
-#' @param layout Layout object
+#' @param detector Detector object
 #' @param rrc raster clumps objects
-.clump_module <- function(layout, rrc) {
+.clump_module <- function(detector, rrc) {
   xy_df_temp <- data.frame(ceiling(raster::xyFromCell(rrc, which(!is.na(raster::getValues(rrc))))))
 
   xy_df_temp$mod_row <- NA
   xy_df_temp$mod_col <- NA
 
   for (i in 1:nrow(xy_df_temp)) {
-    xy_df_temp$mod_row[i] <- which_module(xy_df_temp$y[i], layout$module_edges_row)
-    xy_df_temp$mod_col[i] <- which_module(xy_df_temp$x[i], layout$module_edges_col)
+    xy_df_temp$mod_row[i] <- which_module(xy_df_temp$y[i], detector$module_edges_row)
+    xy_df_temp$mod_col[i] <- which_module(xy_df_temp$x[i], detector$module_edges_col)
   }
 
   dataFrame <- data.frame(mod_row = xy_df_temp$mod_row, mod_col = xy_df_temp$mod_col)
@@ -246,35 +246,35 @@ library(igraph)
   return(dataFrame)
 }
 
-#' Locates and clusifies clumps of a damaged layout
+#' Locates and clusifies clumps of a damaged detector
 #'
-#' @param layout Layout object
+#' @param detector Detector object
 #' @param row Module row number
 #' @param col Module column number
 #' @export
-find_clumps <- function(layout, row = NA, col = NA) {
-  pixel_mask <- get_dead_pix_mask(layout)
+find_clumps <- function(detector, row = NA, col = NA) {
+  pixel_mask <- get_dead_pix_mask(detector)
 
-  pixel_events <- .mask_to_events(layout, pixel_mask, row = row, col = col)
+  pixel_events <- .mask_to_events(detector, pixel_mask, row = row, col = col)
 
-  layout$clumps <- list(
+  detector$clumps <- list(
     pixels = pixel_events$pixels,
     events = pixel_events$events
   )
 
   # getting the events mask (0 and 1 s)
-  layout$clumps$events_matrix <- get_events_mask(layout)
+  detector$clumps$events_matrix <- get_events_mask(detector)
 
-  return(layout)
+  return(detector)
 }
 
-#' Plots damaged layout events
-#' @param layout Layout object
+#' Plots damaged detector events
+#' @param detector Detector object
 #' @param file_path Output file path
 #' @param caption Flag to turn on/off figure caption
 #' @param incl_event_list a list of events to be included
 #' @export
-plot_events <- function(layout, file_path = NA, caption = TRUE, incl_event_list = NA,
+plot_events <- function(detector, file_path = NA, caption = TRUE, incl_event_list = NA,
                         plot_edges_gaps = TRUE) {
   if (!caption) {
     main_caption <- ""
@@ -289,7 +289,7 @@ plot_events <- function(layout, file_path = NA, caption = TRUE, incl_event_list 
     ini_graphics(file_path = file_path)
   }
 
-  ppp_events <- .get_clump_event_ppp(layout, incl_event_list = incl_event_list)
+  ppp_events <- .get_clump_event_ppp(detector, incl_event_list = incl_event_list)
 
   # "Defective events"
   plot(ppp_events, pch = 22, main = main_caption)
@@ -298,7 +298,7 @@ plot_events <- function(layout, file_path = NA, caption = TRUE, incl_event_list 
   points(ppp_events, pch = 22, col = 2)
 
   if (plot_edges_gaps) {
-    edges_gaps <- .get_layout_ppps(layout)
+    edges_gaps <- .get_detector_ppps(detector)
 
     points(edges_gaps[[1]], pch = ".")
     points(edges_gaps[[2]], pch = ".")
@@ -314,39 +314,39 @@ plot_events <- function(layout, file_path = NA, caption = TRUE, incl_event_list 
   }
 }
 
-#' Plots damaged layout module events
-#' @param layout Layout object
+#' Plots damaged detector module events
+#' @param detector Detector object
 #' @param col Module column number
 #' @param row Module row number
 #' @param file_path Output file path
 #' @param caption Flag to turn on/off figure caption
 #' @param incl_event_list a list of events to be included
 #' @export
-plot_module_events <- function(layout, col, row, file_path = NA, caption = TRUE, incl_event_list = NA) {
+plot_module_events <- function(detector, col, row, file_path = NA, caption = TRUE, incl_event_list = NA) {
   if (!caption) par(mar = c(0, 0, 0, 0))
 
   # check whether the row and col numbers are correct
-  .check_select(layout, row, col)
+  .check_select(detector, row, col)
 
   if (!is.na(file_path)) {
     # starts the graphics device driver
     ini_graphics(file_path = file_path)
   }
 
-  width <- layout$module_col_sizes[col]
-  height <- layout$module_row_sizes[row]
+  width <- detector$module_col_sizes[col]
+  height <- detector$module_row_sizes[row]
 
   ppp_frame <- spatstat::ppp(1, 1, c(1, width), c(1, height))
 
   if (caption) {
-    main_caption <- paste(layout$name, "with damaged pixels\n (black=module edges)")
+    main_caption <- paste(detector$name, "with damaged pixels\n (black=module edges)")
   } else {
     main_caption <- ""
   }
 
   plot(ppp_frame, pch = ".", cex.main = 0.7, main = main_caption)
 
-  ppp_events <- .get_clump_event_ppp(layout,
+  ppp_events <- .get_clump_event_ppp(detector,
     incl_event_list = incl_event_list,
     height = height, width = width
   )
@@ -359,29 +359,29 @@ plot_module_events <- function(layout, col, row, file_path = NA, caption = TRUE,
   }
 }
 
-#' Creates ppp for damaged layout events
-#' @param layout Layout object
+#' Creates ppp for damaged detector events
+#' @param detector Detector object
 #' @param incl_event_list a list of events to be included
-.get_clump_event_ppp <- function(layout, incl_event_list = NA,
+.get_clump_event_ppp <- function(detector, incl_event_list = NA,
                                  height = NULL, width = NULL) {
   if (is.null(height)) {
-    nr <- layout$detector_height
+    nr <- detector$detector_height
   } else {
     nr <- height
   }
 
   if (is.null(height)) {
-    nc <- layout$detector_width
+    nc <- detector$detector_width
   } else {
     nc <- width
   }
 
   if (suppressWarnings(is.list(incl_event_list))) {
-    events <- layout$clumps$events[layout$clumps$events$class %in% incl_event_list, ]
+    events <- detector$clumps$events[detector$clumps$events$class %in% incl_event_list, ]
   } else if (suppressWarnings(!is.na(incl_event_list))) {
-    events <- layout$clumps$events[layout$clumps$events$class == incl_event_list, ]
+    events <- detector$clumps$events[detector$clumps$events$class == incl_event_list, ]
   } else {
-    events <- layout$clumps$events
+    events <- detector$clumps$events
   }
   # TODO: FIX
   event_ppp <- spatstat::ppp(events[, 1], events[, 2], c(1, nc), c(1, nr))
@@ -389,19 +389,19 @@ plot_module_events <- function(layout, col, row, file_path = NA, caption = TRUE,
   return(event_ppp)
 }
 
-#' Creates ppp for damaged layout pixels
-#' @param layout Layout object
+#' Creates ppp for damaged detector pixels
+#' @param detector Detector object
 #' @param incl_event_list a list of events to be included
-.get_clump_pixel_ppp <- function(layout, incl_event_list = NA) {
-  nr <- layout$detector_height
-  nc <- layout$detector_width
+.get_clump_pixel_ppp <- function(detector, incl_event_list = NA) {
+  nr <- detector$detector_height
+  nc <- detector$detector_width
 
   if (suppressWarnings(is.list(incl_event_list))) {
-    pixels <- layout$clumps$pixels[layout$clumps$pixels$id %in% incl_event_list, ]
+    pixels <- detector$clumps$pixels[detector$clumps$pixels$id %in% incl_event_list, ]
   } else if (suppressWarnings(!is.na(incl_event_list))) {
-    pixels <- layout$clumps$pixels[layout$clumps$pixels$id == incl_event_list, ]
+    pixels <- detector$clumps$pixels[detector$clumps$pixels$id == incl_event_list, ]
   } else {
-    pixels <- layout$clumps$pixels
+    pixels <- detector$clumps$pixels
   }
 
   pixel_ppp <- spatstat::ppp(pixels[, 1], pixels[, 2], c(1, nc), c(1, nr))
@@ -411,17 +411,17 @@ plot_module_events <- function(layout, col, row, file_path = NA, caption = TRUE,
 
 
 #' Generates events matrix (a matrix with pixels as 0 and events as 1)
-#' @param layout Layout object
+#' @param detector Detector object
 #' @return events mask
 #' @export
-get_events_mask <- function(layout) {
-  mask <- matrix(0, nrow = layout$detector_width, ncol = layout$detector_height)
+get_events_mask <- function(detector) {
+  mask <- matrix(0, nrow = detector$detector_width, ncol = detector$detector_height)
 
-  events_cnt <- nrow(layout$clumps$events)
+  events_cnt <- nrow(detector$clumps$events)
   if (events_cnt > 0) {
     for (event_i in 1:events_cnt) {
-      x <- layout$clumps$events[event_i, ]$xctpix
-      y <- layout$clumps$events[event_i, ]$yctpix
+      x <- detector$clumps$events[event_i, ]$xctpix
+      y <- detector$clumps$events[event_i, ]$yctpix
 
       mask[x, y] <- 1
     }
@@ -430,13 +430,13 @@ get_events_mask <- function(layout) {
   return(mask)
 }
 
-#' Plots damaged layout pixels and events
-#' @param layout Layout object
+#' Plots damaged detector pixels and events
+#' @param detector Detector object
 #' @param file_path Output file path
 #' @param caption Flag to turn on/off figure caption
 #' @param incl_event_list a list of events to be included
 #' @export
-plot_pixels_events <- function(layout, file_path = NA, caption = TRUE, incl_event_list = NA) {
+plot_pixels_events <- function(detector, file_path = NA, caption = TRUE, incl_event_list = NA) {
   if (!caption) {
     main_caption <- ""
     par(mar = c(0, 0, 0, 0))
@@ -450,8 +450,8 @@ plot_pixels_events <- function(layout, file_path = NA, caption = TRUE, incl_even
     ini_graphics(file_path = file_path)
   }
 
-  ppp_pixels <- .get_clump_pixel_ppp(layout, incl_event_list = incl_event_list)
-  ppp_events <- .get_clump_event_ppp(layout, incl_event_list = incl_event_list)
+  ppp_pixels <- .get_clump_pixel_ppp(detector, incl_event_list = incl_event_list)
+  ppp_events <- .get_clump_event_ppp(detector, incl_event_list = incl_event_list)
 
   # Defective pixels
   plot(ppp_pixels, pch = 22, main = main_caption)
@@ -467,7 +467,7 @@ plot_pixels_events <- function(layout, file_path = NA, caption = TRUE, incl_even
 
 #' Plots density graph of events
 #'
-#' @param layout Layout object
+#' @param detector Detector object
 #' @param file_path Output file path
 #' @param adjust Kernel density bandwidth
 #' @param row Module row number
@@ -475,21 +475,21 @@ plot_pixels_events <- function(layout, file_path = NA, caption = TRUE, incl_even
 #' @param caption Flag to turn on/off figure caption
 #' @param incl_event_list a list of events to be included
 #' @export
-plot_events_density <- function(layout, file_path = NA, adjust = 0.25,
+plot_events_density <- function(detector, file_path = NA, adjust = 0.25,
                                 row = NA, col = NA, caption = TRUE,
                                 incl_event_list = NA) {
   main_caption <- ""
 
   if (!is.na(row) && !is.na(col)) {
     # check whether the row and col numbers are correct
-    .check_select(layout, row, col)
+    .check_select(detector, row, col)
 
     if (caption) {
       main_caption <- paste("Events density (row=", row, "col=", col, "), adjust=", adjust)
     }
 
-    height <- layout$module_row_sizes[row]
-    width <- layout$module_col_sizes[col]
+    height <- detector$module_row_sizes[row]
+    width <- detector$module_col_sizes[col]
   } else {
     if (caption) {
       main_caption <- paste("Events density, adjust = ", adjust)
@@ -499,7 +499,7 @@ plot_events_density <- function(layout, file_path = NA, adjust = 0.25,
     width <- NULL
   }
 
-  ppp_events <- .get_clump_event_ppp(layout,
+  ppp_events <- .get_clump_event_ppp(detector,
     incl_event_list = incl_event_list,
     height = height, width = width
   )
@@ -509,28 +509,28 @@ plot_events_density <- function(layout, file_path = NA, adjust = 0.25,
 
 #' Plots arrows graph of events
 #'
-#' @param layout Layout object
+#' @param detector Detector object
 #' @param file_path Output file path
 #' @param row Module row number
 #' @param col Module column number
 #' @param caption Flag to turn on/off figure caption
 #' @param incl_event_list a list of events to be included
 #' @export
-plot_events_arrows <- function(layout, file_path = NA,
+plot_events_arrows <- function(detector, file_path = NA,
                                row = NA, col = NA, caption = TRUE,
                                incl_event_list = NA) {
   main_caption <- ""
 
   if (!is.na(row) && !is.na(col)) {
     # check whether the row and col numbers are correct
-    .check_select(layout, row, col)
+    .check_select(detector, row, col)
 
     if (caption) {
       main_caption <- paste("Arrows of events (row=", row, "col=", col, ")")
     }
 
-    height <- layout$module_row_sizes[row]
-    width <- layout$module_col_sizes[col]
+    height <- detector$module_row_sizes[row]
+    width <- detector$module_col_sizes[col]
   } else {
     if (caption) {
       main_caption <- paste("Arrows of events")
@@ -540,7 +540,7 @@ plot_events_arrows <- function(layout, file_path = NA,
     width <- NULL
   }
 
-  ppp_events <- .get_clump_event_ppp(layout,
+  ppp_events <- .get_clump_event_ppp(detector,
     incl_event_list = incl_event_list,
     height = height, width = width
   )
@@ -550,28 +550,28 @@ plot_events_arrows <- function(layout, file_path = NA,
 
 #' Plots angles graph of events
 #'
-#' @param layout Layout object
+#' @param detector Detector object
 #' @param file_path Output file path
 #' @param row Module row number
 #' @param col Module column number
 #' @param caption Flag to turn on/off figure caption
 #' @param incl_event_list a list of events to be included
 #' @export
-plot_events_angles <- function(layout, file_path = NA,
+plot_events_angles <- function(detector, file_path = NA,
                                row = NA, col = NA, caption = TRUE,
                                incl_event_list = NA) {
   main_caption <- ""
 
   if (!is.na(row) && !is.na(col)) {
     # check whether the row and col numbers are correct
-    .check_select(layout, row, col)
+    .check_select(detector, row, col)
 
     if (caption) {
       main_caption <- paste("Angles of events (row=", row, "col=", col, ")")
     }
 
-    height <- layout$module_row_sizes[row]
-    width <- layout$module_col_sizes[col]
+    height <- detector$module_row_sizes[row]
+    width <- detector$module_col_sizes[col]
   } else {
     if (caption) {
       main_caption <- paste("Angles of events")
@@ -581,7 +581,7 @@ plot_events_angles <- function(layout, file_path = NA,
     width <- NULL
   }
 
-  ppp_events <- .get_clump_event_ppp(layout,
+  ppp_events <- .get_clump_event_ppp(detector,
     incl_event_list = incl_event_list,
     height = height, width = width
   )
@@ -591,7 +591,7 @@ plot_events_angles <- function(layout, file_path = NA,
 
 #' Plots K, F, G functions
 #'
-#' @param layout Layout object
+#' @param detector Detector object
 #' @param func Function name
 #' @param file_path Output file path
 #' @param row Module row number
@@ -599,21 +599,21 @@ plot_events_angles <- function(layout, file_path = NA,
 #' @param caption Flag to turn on/off figure caption
 #' @param incl_event_list a list of events to be included
 #' @export
-plot_events_kfg <- function(layout, func, file_path = NA,
+plot_events_kfg <- function(detector, func, file_path = NA,
                             row = NA, col = NA, caption = TRUE,
                             incl_event_list = NA) {
   if (!is.na(row) && !is.na(col)) {
     # check whether the row and col numbers are correct
-    .check_select(layout, row, col)
+    .check_select(detector, row, col)
 
-    height <- layout$module_row_sizes[row]
-    width <- layout$module_col_sizes[col]
+    height <- detector$module_row_sizes[row]
+    width <- detector$module_col_sizes[col]
   } else {
     height <- NULL
     width <- NULL
   }
 
-  ppp_events <- .get_clump_event_ppp(layout,
+  ppp_events <- .get_clump_event_ppp(detector,
     incl_event_list = incl_event_list,
     height = height, width = width
   )
@@ -621,16 +621,16 @@ plot_events_kfg <- function(layout, func, file_path = NA,
   plot_kfg(ppp_events, func, file_path = file_path, caption = caption)
 }
 
-#' A function to plot layout with counts per module
+#' A function to plot detector with counts per module
 #'
-#' @param layout Layout object
+#' @param detector Detector object
 #' @param file_path Output file path
 #' @param row Module row number
 #' @param col Module column number
 #' @param caption Flag to turn on/off figure caption
 #' @param incl_event_list a list of events to be included
 #' @export
-plot_events_count <- function(layout, file_path = NA,
+plot_events_count <- function(detector, file_path = NA,
                               row = NA, col = NA, caption = TRUE,
                               incl_event_list = NA) {
   main_caption <- ""
@@ -638,27 +638,27 @@ plot_events_count <- function(layout, file_path = NA,
 
   if (!is.na(row) && !is.na(col)) {
     # check whether the row and col numbers are correct
-    .check_select(layout, row, col)
+    .check_select(detector, row, col)
 
 
     if (caption) {
       main_caption <- paste(
         "Number of events in a module ",
-        layout$dead_stats$module_count_arr[col][row]
+        detector$dead_stats$module_count_arr[col][row]
       )
     }
 
-    width <- layout$module_col_sizes[col]
-    height <- layout$module_row_sizes[row]
+    width <- detector$module_col_sizes[col]
+    height <- detector$module_row_sizes[row]
 
     ppp_frame <- spatstat::ppp(1, 1, c(1, width), c(1, height))
 
     plot(ppp_frame, pch = ".", cex.main = 0.7, main = main_caption)
 
-    # This works only on rectangular layouts!!!
-    module_idx <- (col - 1) * layout$module_row_n + row
+    # This works only on rectangular detectors!!!
+    module_idx <- (col - 1) * detector$module_row_n + row
 
-    ppp_events <- .get_clump_event_ppp(layout,
+    ppp_events <- .get_clump_event_ppp(detector,
       incl_event_list = incl_event_list,
       height = height, width = width
     )
@@ -669,12 +669,12 @@ plot_events_count <- function(layout, file_path = NA,
       dev.off()
     }
   } else {
-    ppp_events <- .get_clump_event_ppp(layout, incl_event_list = incl_event_list)
+    ppp_events <- .get_clump_event_ppp(detector, incl_event_list = incl_event_list)
 
     # count of points in each quadrat
     module_count_arr <- spatstat::quadratcount(
       X = ppp_events,
-      nx = layout$module_col_n, ny = layout$module_row_n
+      nx = detector$module_col_n, ny = detector$module_row_n
     )
 
     if (caption) {

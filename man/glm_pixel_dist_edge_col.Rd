@@ -4,10 +4,10 @@
 \alias{glm_pixel_dist_edge_col}
 \title{Fits pixel istances from the module edges by column}
 \usage{
-glm_pixel_dist_edge_col(layout)
+glm_pixel_dist_edge_col(detector)
 }
 \arguments{
-\item{layout}{Layout object}
+\item{detector}{Detector object}
 }
 \value{
 Fitted model

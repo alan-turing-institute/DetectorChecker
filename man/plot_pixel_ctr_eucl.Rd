@@ -4,10 +4,10 @@
 \alias{plot_pixel_ctr_eucl}
 \title{Calculates and plots pixel euclidean distance from the centre}
 \usage{
-plot_pixel_ctr_eucl(layout, file_path = NA)
+plot_pixel_ctr_eucl(detector, file_path = NA)
 }
 \arguments{
-\item{layout}{Layout object}
+\item{detector}{Detector object}
 
 \item{file_path}{Output file path}
 }

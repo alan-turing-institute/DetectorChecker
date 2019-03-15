@@ -5,10 +5,10 @@
 \title{TODO: Better description of the function
 This is the ppp_edges_col function}
 \usage{
-create_ppp_edges_col(layout)
+create_ppp_edges_col(detector)
 }
 \arguments{
-\item{layout}{Layout object}
+\item{detector}{Detector object}
 }
 \value{
 Point pattern dataset

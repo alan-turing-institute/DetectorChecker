@@ -4,10 +4,10 @@
 \alias{dist_corner}
 \title{A function to calculate pixel distances from corners}
 \usage{
-dist_corner(layout)
+dist_corner(detector)
 }
 \arguments{
-\item{layout}{Layout object}
+\item{detector}{Detector object}
 }
 \value{
 Matrix containing parallel maxima from the centre for each pixel

@@ -4,10 +4,10 @@
 \alias{pixel_dist_ctr_eucl}
 \title{A function to calculate euclidean distance from the centre}
 \usage{
-pixel_dist_ctr_eucl(layout)
+pixel_dist_ctr_eucl(detector)
 }
 \arguments{
-\item{layout}{Layout object}
+\item{detector}{Detector object}
 }
 \value{
 Matrix containing euclidean distances from the centre for each

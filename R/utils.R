@@ -33,11 +33,11 @@
   return(mode)
 }
 
-#' Checks whether a layout parameter is in the file string
+#' Checks whether a detector parameter is in the file string
 #' @param file_string String of a file context
-#' @param parameter Layout parameter
+#' @param parameter Detector parameter
 #' @return parameter value
-.extract_layout_parameter <- function(file_string, parameter) {
+.extract_detector_parameter <- function(file_string, parameter) {
   param_idx <- regexpr(parameter, file_string)
 
   string_len <- nchar(file_string)

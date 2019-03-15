@@ -2,16 +2,16 @@
 % Please edit documentation in R/clump.R
 \name{.get_clump_event_ppp}
 \alias{.get_clump_event_ppp}
-\title{Creates ppp for damaged layout events}
+\title{Creates ppp for damaged detector events}
 \usage{
-.get_clump_event_ppp(layout, incl_event_list = NA, height = NULL,
+.get_clump_event_ppp(detector, incl_event_list = NA, height = NULL,
   width = NULL)
 }
 \arguments{
-\item{layout}{Layout object}
+\item{detector}{Detector object}
 
 \item{incl_event_list}{a list of events to be included}
 }
 \description{
-Creates ppp for damaged layout events
+Creates ppp for damaged detector events
 }

@@ -4,10 +4,10 @@
 \alias{.xyc_ply_func}
 \title{Something something dark side}
 \usage{
-.xyc_ply_func(layout, xyc_pixel_df)
+.xyc_ply_func(detector, xyc_pixel_df)
 }
 \arguments{
-\item{layout}{Layout object}
+\item{detector}{Detector object}
 }
 \value{
 data frame

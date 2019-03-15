@@ -4,10 +4,10 @@
 \alias{dist_edge_min}
 \title{A function to calculate pixel distances from edges}
 \usage{
-dist_edge_min(layout)
+dist_edge_min(detector)
 }
 \arguments{
-\item{layout}{Layout object}
+\item{detector}{Detector object}
 }
 \value{
 dist ?

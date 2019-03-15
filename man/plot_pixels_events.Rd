@@ -2,13 +2,13 @@
 % Please edit documentation in R/clump.R
 \name{plot_pixels_events}
 \alias{plot_pixels_events}
-\title{Plots damaged layout pixels and events}
+\title{Plots damaged detector pixels and events}
 \usage{
-plot_pixels_events(layout, file_path = NA, caption = TRUE,
+plot_pixels_events(detector, file_path = NA, caption = TRUE,
   incl_event_list = NA)
 }
 \arguments{
-\item{layout}{Layout object}
+\item{detector}{Detector object}
 
 \item{file_path}{Output file path}
 
@@ -17,5 +17,5 @@ plot_pixels_events(layout, file_path = NA, caption = TRUE,
 \item{incl_event_list}{a list of events to be included}
 }
 \description{
-Plots damaged layout pixels and events
+Plots damaged detector pixels and events
 }

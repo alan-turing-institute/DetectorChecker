@@ -2,7 +2,7 @@
 % Please edit documentation in R/module.R
 \name{which_module_idx}
 \alias{which_module_idx}
-\title{Function returns both col and row wrt layout grid.
+\title{Function returns both col and row wrt detector grid.
 Given xy coo of pixel and matrices with positions of edges in both directions.}
 \usage{
 which_module_idx(x, y, module_edges_col, module_edges_row)
@@ -20,6 +20,6 @@ which_module_idx(x, y, module_edges_col, module_edges_row)
 tmp ?
 }
 \description{
-Function returns both col and row wrt layout grid.
+Function returns both col and row wrt detector grid.
 Given xy coo of pixel and matrices with positions of edges in both directions.
 }

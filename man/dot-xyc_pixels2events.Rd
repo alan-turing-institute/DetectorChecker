@@ -9,7 +9,7 @@ type 5 (closest to upper edge): ymin
 type 6 (closest to lower edge): ymax
 type 7 (closest to right edge): xmin
 type 8 (closest to left edge):  xmax
-This is inspired by Perkin Elmer Layout and be replaced by other choices if desired.}
+This is inspired by Perkin Elmer Detector and be replaced by other choices if desired.}
 \usage{
 .xyc_pixels2events(xyc_ply)
 }
@@ -27,5 +27,5 @@ type 5 (closest to upper edge): ymin
 type 6 (closest to lower edge): ymax
 type 7 (closest to right edge): xmin
 type 8 (closest to left edge):  xmax
-This is inspired by Perkin Elmer Layout and be replaced by other choices if desired.
+This is inspired by Perkin Elmer Detector and be replaced by other choices if desired.
 }

@@ -4,10 +4,10 @@
 \alias{matrix_from_hdf}
 \title{Reads in hdf file(s) and returns a pixel matrix}
 \usage{
-matrix_from_hdf(layout, file_path)
+matrix_from_hdf(detector, file_path)
 }
 \arguments{
-\item{layout}{Layout object}
+\item{detector}{Detector object}
 
 \item{file_path}{A list of paths to hdf files. Must be in the correct order.}
 }

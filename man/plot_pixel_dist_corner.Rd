@@ -4,10 +4,10 @@
 \alias{plot_pixel_dist_corner}
 \title{Calculates and plots pixel distances from corners}
 \usage{
-plot_pixel_dist_corner(layout, file_path = NA)
+plot_pixel_dist_corner(detector, file_path = NA)
 }
 \arguments{
-\item{layout}{Layout object}
+\item{detector}{Detector object}
 
 \item{file_path}{Output file path}
 }

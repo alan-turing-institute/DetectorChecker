@@ -20,7 +20,7 @@ which_module <- function(coo, me) {
 }
 
 # TODO: improve the definition of the function
-#' Function returns both col and row wrt layout grid.
+#' Function returns both col and row wrt detector grid.
 #' Given xy coo of pixel and matrices with positions of edges in both directions.
 #'
 #' @param x ?
@@ -53,15 +53,15 @@ which_module_idx <- function(x, y, module_edges_col, module_edges_row) {
   return(tmp)
 }
 
-# Checks if the selected row and column are within the boundaries of the layout
-.check_select <- function(layout, row, col) {
+# Checks if the selected row and column are within the boundaries of the detector
+.check_select <- function(detector, row, col) {
   ok <- TRUE
 
-  if ((row < 1) || (col < 1) || (row > layout$module_row_n) || (col > layout$module_col_n)) {
+  if ((row < 1) || (col < 1) || (row > detector$module_row_n) || (col > detector$module_col_n)) {
     ok <- FALSE
   }
 
   if (!ok) {
-    stop("Incorrectly chosen row and/or column indices.", "row: ", row, ". Must be > 0 and < ", layout$module_row_n)
+    stop("Incorrectly chosen row and/or column indices.", "row: ", row, ". Must be > 0 and < ", detector$module_row_n)
   }
 }

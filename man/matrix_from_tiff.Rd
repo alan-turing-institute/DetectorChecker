@@ -5,10 +5,10 @@
 \title{I/O module
 Reads in tiff file and returns a pixel matrix}
 \usage{
-matrix_from_tiff(layout, file_path)
+matrix_from_tiff(detector, file_path)
 }
 \arguments{
-\item{layout}{Layout object}
+\item{detector}{Detector object}
 
 \item{file_path}{Path to the tiff file}
 }

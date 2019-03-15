@@ -4,10 +4,10 @@
 \alias{pixel_dist_ctr_linf}
 \title{A function to calculate parallel maxima from the centre}
 \usage{
-pixel_dist_ctr_linf(layout)
+pixel_dist_ctr_linf(detector)
 }
 \arguments{
-\item{layout}{Layout object}
+\item{detector}{Detector object}
 }
 \value{
 Matrix containing parallel maxima from the centre for each pixel

@@ -4,10 +4,10 @@
 \alias{get_dead_pix_mask}
 \title{Creates a mask matrix of dead pixels}
 \usage{
-get_dead_pix_mask(layout)
+get_dead_pix_mask(detector)
 }
 \arguments{
-\item{layout}{Layout object}
+\item{detector}{Detector object}
 }
 \value{
 dead pixel mask

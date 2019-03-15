@@ -5,10 +5,10 @@
 \title{TODO: Better description of the function
 This is the create_ppp_edges_row function}
 \usage{
-create_ppp_edges_row(layout)
+create_ppp_edges_row(detector)
 }
 \arguments{
-\item{layout}{Layout object}
+\item{detector}{Detector object}
 }
 \value{
 Point pattern dataset

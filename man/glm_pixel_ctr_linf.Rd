@@ -4,10 +4,10 @@
 \alias{glm_pixel_ctr_linf}
 \title{Fits pixel parallel maxima from the centre}
 \usage{
-glm_pixel_ctr_linf(layout)
+glm_pixel_ctr_linf(detector)
 }
 \arguments{
-\item{layout}{Layout object}
+\item{detector}{Detector object}
 }
 \value{
 Fitted model

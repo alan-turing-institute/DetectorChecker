@@ -4,10 +4,10 @@
 \alias{plot_pixel_ctr_linf}
 \title{Calculates and plots pixel parallel maxima from the centre}
 \usage{
-plot_pixel_ctr_linf(layout, file_path = NA)
+plot_pixel_ctr_linf(detector, file_path = NA)
 }
 \arguments{
-\item{layout}{Layout object}
+\item{detector}{Detector object}
 
 \item{file_path}{Output file path}
 }

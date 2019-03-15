@@ -5,27 +5,27 @@ context("I/O functions")
 test_that("TIFF", {
   test_dir <- getwd()
 
-  # Pilatus layout unit test
-  layout <- Pilatus_Layout()
+  # Pilatus detector unit test
+  detector <- Pilatus_Detector()
 
   # TIFF file
   test_path <- file.path(test_dir, "dead_pix", "Pilatus", "badpixel_mask.tif")
 
   # pixel matrix, with dead pixels flagged
-  layout <- load_pix_matrix(layout = layout, file_path = test_path)
+  detector <- load_pix_matrix(detector = detector, file_path = test_path)
 
-  expect_equal(dim(layout$pix_matrix)[1], 2527)
-  expect_equal(dim(layout$pix_matrix)[2], 2463)
+  expect_equal(dim(detector$pix_matrix)[1], 2527)
+  expect_equal(dim(detector$pix_matrix)[2], 2463)
 
-  expect_equal(dim(layout$pix_dead)[1], 1161)
-  expect_equal(dim(layout$pix_dead)[2], 2)
+  expect_equal(dim(detector$pix_dead)[1], 1161)
+  expect_equal(dim(detector$pix_dead)[2], 2)
 })
 
 test_that("HDF", {
   test_dir <- getwd()
 
-  # Excalibur layout unit test
-  layout <- Excalibur_Layout()
+  # Excalibur detector unit test
+  detector <- Excalibur_Detector()
 
   test_path1 <- file.path(test_dir, "dead_pix", "Excalibur", "pixelmask.fem1.hdf")
   test_path2 <- file.path(test_dir, "dead_pix", "Excalibur", "pixelmask.fem2.hdf")
@@ -36,18 +36,18 @@ test_that("HDF", {
 
   test_list <- c(test_path1, test_path2, test_path3, test_path4, test_path5, test_path6)
 
-  layout <- load_pix_matrix(layout = layout, file_path = test_list)
+  detector <- load_pix_matrix(detector = detector, file_path = test_list)
 
   # width
-  expect_equal(dim(layout$pix_matrix)[1], 2048)
+  expect_equal(dim(detector$pix_matrix)[1], 2048)
 
   # height
-  expect_equal(dim(layout$pix_matrix)[2], 1536)
+  expect_equal(dim(detector$pix_matrix)[2], 1536)
 })
 
 test_that("XML", {
-  # Pilatus layout unit test
-  layout <- PerkinElmerFull_Layout()
+  # Pilatus detector unit test
+  detector <- PerkinElmerFull_Detector()
 
   test_dir <- getwd()
 
@@ -57,11 +57,11 @@ test_that("XML", {
     "BadPixelMap.bpm.xml"
   )
 
-  layout <- load_pix_matrix(layout = layout, file_path = test_path)
+  detector <- load_pix_matrix(detector = detector, file_path = test_path)
 
   # width
-  expect_equal(dim(layout$pix_matrix)[1], 2000)
+  expect_equal(dim(detector$pix_matrix)[1], 2000)
 
   # height
-  expect_equal(dim(layout$pix_matrix)[2], 2000)
+  expect_equal(dim(detector$pix_matrix)[2], 2000)
 })

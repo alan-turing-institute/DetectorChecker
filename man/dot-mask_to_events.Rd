@@ -4,10 +4,10 @@
 \alias{.mask_to_events}
 \title{Converts mask (dead pixels) to events}
 \usage{
-.mask_to_events(layout, dead_pix_mask, row = NA, col = NA)
+.mask_to_events(detector, dead_pix_mask, row = NA, col = NA)
 }
 \arguments{
-\item{layout}{Layout object}
+\item{detector}{Detector object}
 
 \item{dead_pix_mask}{Dead pixels mask}
 

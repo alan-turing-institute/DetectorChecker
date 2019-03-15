@@ -4,10 +4,10 @@
 \alias{dist_edge_col}
 \title{A function to calculate pixel distances from edges by column}
 \usage{
-dist_edge_col(layout)
+dist_edge_col(detector)
 }
 \arguments{
-\item{layout}{Layout object}
+\item{detector}{Detector object}
 }
 \value{
 dist ?
