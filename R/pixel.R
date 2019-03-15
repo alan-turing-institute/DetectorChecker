@@ -75,7 +75,7 @@ pixel_dist_ctr_linf <- function(detector) {
 # TODO: modify the description.
 #' A function to calclutate closest distance to an edge
 #'
-#' @param x something
+#' @param x 
 #' @param size something else
 #' @return what does this mean?
 #' @export
@@ -145,7 +145,7 @@ dist_edge_col <- function(detector) {
 #' A function to calculate pixel distances from edges by row
 #'
 #' @param detector Detector object
-#' @return dist ?
+#' @return dist 
 #' @export
 dist_edge_row <- function(detector) {
   dist <- matrix(NA, nrow = detector$detector_height, ncol = detector$detector_width)

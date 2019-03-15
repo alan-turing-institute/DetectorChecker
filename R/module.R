@@ -3,7 +3,7 @@
 # TODO: improve the definition of the function
 #' Which module function
 #'
-#' @param coo ?
+#' @param coo 
 #' @param me ?
 #' @return which_module what does this mean?
 #' @export
@@ -23,7 +23,7 @@ which_module <- function(coo, me) {
 #' Function returns both col and row wrt detector grid.
 #' Given xy coo of pixel and matrices with positions of edges in both directions.
 #'
-#' @param x ?
+#' @param x 
 #' @param y ?
 #' @param module_edges_col ?
 #' @param module_edges_row ?
@@ -42,7 +42,7 @@ which_module_idx <- function(x, y, module_edges_col, module_edges_row) {
 #' Function returns distance to both edges.
 #' Given xy coo of pixel and matrices with positions of edges in both directions.
 #'
-#' @param xy ?
+#' @param xy 
 #' @param module_edges ?
 #' @return tmp ?
 .dist_edge <- function(xy, module_edges) {
