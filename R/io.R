@@ -155,16 +155,16 @@ load_pix_matrix <- function(detector, file_path) {
   file_cnt <- length(file_path)
 
   if (file_cnt == 1) {
-    file_extansion <- tools::file_ext(file_path)
+    file_extension <- tools::file_ext(file_path)
 
-    if (file_extansion == "tif") {
+    if (file_extension == "tif") {
       pix_matrix <- matrix_from_tiff(detector = detector, file_path = file_path)
-    } else if (file_extansion == "xml") {
+    } else if (file_extension == "xml") {
       pix_matrix <- matrix_from_xml(detector = detector, file_path = file_path)
-    } else if (file_extansion == "hdf") {
+    } else if (file_extension == "hdf") {
       pix_matrix <- matrix_from_hdf(detector = detector, file_path = file_path)
     } else {
-      stop(c("Undefined file extension: ", file_extansion, " [", file_path, "]"))
+      stop(c("Undefined file extension: ", file_extension, " [", file_path, "]"))
     }
   } else {
     # if we have a list of files, at the moment we assume that they are in the
@@ -191,15 +191,15 @@ load_pix_matrix <- function(detector, file_path) {
 #' @export
 ini_graphics <- function(file_path) {
   # choosing output format
-  file_extansion <- tools::file_ext(file_path)
+  file_extension <- tools::file_ext(file_path)
 
-  if ((file_extansion == "jpeg") || (file_extansion == "jpg")) {
+  if ((file_extension == "jpeg") || (file_extension == "jpg")) {
     jpeg(file_path)
-  } else if (file_extansion == "pdf") {
+  } else if (file_extension == "pdf") {
     pdf(file_path)
   } else {
     stop(c(
-      "Unknown output format: ", file_extansion, " [", file_path, "]\n",
+      "Unknown output format: ", file_extension, " [", file_path, "]\n",
       "Supported formats: jpeg, pdf"
     ))
   }
