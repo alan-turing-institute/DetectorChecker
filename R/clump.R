@@ -230,7 +230,7 @@ library(igraph)
 #'
 #' @param detector Detector object
 #' @param rrc raster clumps objects
-#' @return data frame of the module relating the clump
+#' @return data frame of the modules relating the clump
 .clump_module <- function(detector, rrc) {
   xy_df_temp <- data.frame(ceiling(raster::xyFromCell(rrc, which(!is.na(raster::getValues(rrc))))))
 
