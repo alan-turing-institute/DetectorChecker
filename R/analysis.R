@@ -226,7 +226,7 @@ plot_detector_cnt_mod <- function(detector, file_path = NA, row = NA, col = NA,
 #' @param col Module column number
 #' @param caption Flag to turn on/off figure caption
 #' @export
-plot_detector_density <- function(detector, file_path = NA, adjust = 0.25,
+plot_detector_density <- function(detector, file_path = NA, adjust = 1.,
                                 row = NA, col = NA, caption = TRUE) {
   ppp_dead <- NA
   main_caption <- ""
