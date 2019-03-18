@@ -94,10 +94,10 @@ library(igraph)
   #                   and flipped.")}
 }
 
-#' Something something dark side
+#' Clasifies clumps with respect to xy coordinates.
 #'
 #' @param detector Detector object
-#' @return data frame
+#' @return data frame with clasification results
 .xyc_ply_func <- function(detector, xyc_pixel_df) {
   dataFrame <- plyr::ddply(xyc_pixel_df, "id",
     dplyr::summarise, # 1
@@ -230,6 +230,7 @@ library(igraph)
 #'
 #' @param detector Detector object
 #' @param rrc raster clumps objects
+#' @return data frame of the modules relating the clump
 .clump_module <- function(detector, rrc) {
   xy_df_temp <- data.frame(ceiling(raster::xyFromCell(rrc, which(!is.na(raster::getValues(rrc))))))
 

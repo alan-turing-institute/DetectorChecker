@@ -75,9 +75,9 @@ pixel_dist_ctr_linf <- function(detector) {
 # TODO: modify the description.
 #' A function to calclutate closest distance to an edge
 #'
-#' @param x 
-#' @param size something else
-#' @return what does this mean?
+#' @param x Coordinate of pixel
+#' @param size 
+#' @return 
 #' @export
 dist_closest_edge <- function(x, size) {
   # Why x-1? Because pixel locations start in 1, but we want both edges inside detector for symmetry
@@ -119,7 +119,7 @@ dist_corner <- function(detector) {
 #' A function to calculate pixel distances from edges by column
 #'
 #' @param detector Detector object
-#' @return dist ?
+#' @return dist 
 #' @export
 dist_edge_col <- function(detector) {
   dist <- matrix(NA, nrow = detector$detector_height, ncol = detector$detector_width)
@@ -164,7 +164,7 @@ dist_edge_row <- function(detector) {
 #' A function to calculate pixel distances from edges
 #'
 #' @param detector Detector object
-#' @return dist ?
+#' @return dist 
 #' @export
 dist_edge_min <- function(detector) {
   dist_col <- dist_edge_col(detector)
