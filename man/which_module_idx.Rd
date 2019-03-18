@@ -8,7 +8,7 @@ Given xy coo of pixel and matrices with positions of edges in both directions.}
 which_module_idx(x, y, module_edges_col, module_edges_row)
 }
 \arguments{
-\item{x}{?}
+\item{x}{}
 
 \item{y}{?}
 

@@ -5,7 +5,7 @@
 \title{Plots module
 Plots ppp object's density}
 \usage{
-plot_density(ppp_obj, caption, file_path = NA, adjust = 0.25)
+plot_density(ppp_obj, caption, file_path = NA, adjust = 1)
 }
 \arguments{
 \item{ppp_obj}{ppp object}

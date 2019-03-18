@@ -7,7 +7,7 @@
 dist_closest_edge(x, size)
 }
 \arguments{
-\item{x}{something}
+\item{x}{}
 
 \item{size}{something else}
 }
