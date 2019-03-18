@@ -2,7 +2,7 @@
 % Please edit documentation in R/plots.R
 \name{plot_counts}
 \alias{plot_counts}
-\title{A function to plot NN oriented arrrows}
+\title{Plots dead pixel counts}
 \usage{
 plot_counts(module_count_arr, caption, file_path = NA)
 }
@@ -14,5 +14,5 @@ plot_counts(module_count_arr, caption, file_path = NA)
 \item{file_path}{file path}
 }
 \description{
-A function to plot NN oriented arrrows
+Plots dead pixel counts
 }

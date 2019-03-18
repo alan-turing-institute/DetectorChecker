@@ -2,8 +2,7 @@
 % Please edit documentation in R/module.R
 \name{.dist_edge}
 \alias{.dist_edge}
-\title{Function returns distance to both edges.
-Given xy coo of pixel and matrices with positions of edges in both directions.}
+\title{Function returns distance of a pixel to module edges.}
 \usage{
 .dist_edge(xy, module_edges)
 }
@@ -16,6 +15,5 @@ Given xy coo of pixel and matrices with positions of edges in both directions.}
 tmp Distance to edges
 }
 \description{
-Function returns distance to both edges.
-Given xy coo of pixel and matrices with positions of edges in both directions.
+Function returns distance of a pixel to module edges.
 }

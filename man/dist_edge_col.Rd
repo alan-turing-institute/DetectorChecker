@@ -2,7 +2,7 @@
 % Please edit documentation in R/pixel.R
 \name{dist_edge_col}
 \alias{dist_edge_col}
-\title{A function to calculate pixel distances from edges by column}
+\title{A function to calculate pixel horizontal distance to module edge}
 \usage{
 dist_edge_col(detector)
 }
@@ -10,8 +10,8 @@ dist_edge_col(detector)
 \item{detector}{Detector object}
 }
 \value{
-dist
+distance matrix
 }
 \description{
-A function to calculate pixel distances from edges by column
+A function to calculate pixel horizontal distance to module edge
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/analysis.R
 \name{glm_pixel_ctr_linf}
 \alias{glm_pixel_ctr_linf}
-\title{Fits pixel parallel maxima from the centre}
+\title{Fits pixel parallel maxima from the centre using glm}
 \usage{
 glm_pixel_ctr_linf(detector)
 }
@@ -13,5 +13,5 @@ glm_pixel_ctr_linf(detector)
 Fitted model
 }
 \description{
-Fits pixel parallel maxima from the centre
+Fits pixel parallel maxima from the centre using glm
 }

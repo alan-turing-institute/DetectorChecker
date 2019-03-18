@@ -2,8 +2,7 @@
 % Please edit documentation in R/pixel.R
 \name{inconsist_dead_detector}
 \alias{inconsist_dead_detector}
-\title{Counts damaged pixel locations (dead_data) outside detector (detector)
-  and in gaps between modules and give warnings}
+\title{Counts dead pixels outside of detector and in gaps between modules and give warnings}
 \usage{
 inconsist_dead_detector(dead_data, detector)
 }
@@ -16,6 +15,5 @@ inconsist_dead_detector(dead_data, detector)
 Inconsistency message
 }
 \description{
-Counts damaged pixel locations (dead_data) outside detector (detector)
-  and in gaps between modules and give warnings
+Counts dead pixels outside of detector and in gaps between modules and give warnings
 }

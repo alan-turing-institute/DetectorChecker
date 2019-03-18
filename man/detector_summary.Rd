@@ -2,7 +2,7 @@
 % Please edit documentation in R/layout.R
 \name{detector_summary}
 \alias{detector_summary}
-\title{Returns a string with the detector summary}
+\title{Generates a string with the detector summary}
 \usage{
 detector_summary(detector)
 }
@@ -13,5 +13,5 @@ detector_summary(detector)
 String with the detector summary
 }
 \description{
-Returns a string with the detector summary
+Generates a string with the detector summary
 }

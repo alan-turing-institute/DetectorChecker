@@ -2,7 +2,7 @@
 % Please edit documentation in R/analysis.R
 \name{plot_detector_module_damaged}
 \alias{plot_detector_module_damaged}
-\title{Plotting a module of a detector}
+\title{A function to plot detector module with damaged pixels}
 \usage{
 plot_detector_module_damaged(detector, col, row, file_path = NA,
   caption = TRUE)
@@ -19,5 +19,5 @@ plot_detector_module_damaged(detector, col, row, file_path = NA,
 \item{caption}{Flag to turn on/off figure caption}
 }
 \description{
-Plotting a module of a detector
+A function to plot detector module with damaged pixels
 }

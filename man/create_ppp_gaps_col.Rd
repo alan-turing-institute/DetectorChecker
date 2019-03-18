@@ -2,7 +2,7 @@
 % Please edit documentation in R/layout.R
 \name{create_ppp_gaps_col}
 \alias{create_ppp_gaps_col}
-\title{This is the ppp_gaps_col creation function}
+\title{Creates ppp object of horizontal gaps}
 \usage{
 create_ppp_gaps_col(detector)
 }
@@ -13,5 +13,5 @@ create_ppp_gaps_col(detector)
 Point pattern dataset
 }
 \description{
-This is the ppp_gaps_col creation function
+Creates ppp object of horizontal gaps
 }

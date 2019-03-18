@@ -2,7 +2,9 @@
 % Please edit documentation in R/layout.R
 \name{detector_edges}
 \alias{detector_edges}
-\title{Defines the coordinates of detector's edges using module and gap sizes}
+\title{Defines the coordinates of detector's edges using module and gap sizes
+Function is in 1d context to be applied to rows and cols separately.
+Edges are inside the modules (first/last row/col of module).}
 \usage{
 detector_edges(m, g)
 }
@@ -15,6 +17,7 @@ detector_edges(m, g)
 Matrix with the information about the edges
 }
 \description{
+Defines the coordinates of detector's edges using module and gap sizes
 Function is in 1d context to be applied to rows and cols separately.
 Edges are inside the modules (first/last row/col of module).
 }

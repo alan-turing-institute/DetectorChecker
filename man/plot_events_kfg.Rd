@@ -2,7 +2,7 @@
 % Please edit documentation in R/clump.R
 \name{plot_events_kfg}
 \alias{plot_events_kfg}
-\title{Plots K, F, G functions}
+\title{Plots K, F, G functions of a detector or module}
 \usage{
 plot_events_kfg(detector, func, file_path = NA, row = NA, col = NA,
   caption = TRUE, incl_event_list = NA)
@@ -23,5 +23,5 @@ plot_events_kfg(detector, func, file_path = NA, row = NA, col = NA,
 \item{incl_event_list}{a list of events to be included}
 }
 \description{
-Plots K, F, G functions
+Plots K, F, G functions of a detector or module
 }

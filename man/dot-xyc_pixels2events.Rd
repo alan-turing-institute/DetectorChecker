@@ -2,7 +2,7 @@
 % Please edit documentation in R/clump.R
 \name{.xyc_pixels2events}
 \alias{.xyc_pixels2events}
-\title{MODIFYING CLUSTERS TO EVENTS (CONSISTING OF 1 PIXEL REPRESENTING THE CLUSTER)
+\title{Modifying clusters to events (consisting of 1 pixel representing the cluster)
 Make into a point pattern of just events rather than pixels. Using xyc_ply object.
 Collapse in one point using centres for clusters, but end points for lines, type dependend:
 type 5 (closest to upper edge): ymin
@@ -20,7 +20,7 @@ This is inspired by Perkin Elmer Detector and be replaced by other choices if de
 events
 }
 \description{
-MODIFYING CLUSTERS TO EVENTS (CONSISTING OF 1 PIXEL REPRESENTING THE CLUSTER)
+Modifying clusters to events (consisting of 1 pixel representing the cluster)
 Make into a point pattern of just events rather than pixels. Using xyc_ply object.
 Collapse in one point using centres for clusters, but end points for lines, type dependend:
 type 5 (closest to upper edge): ymin

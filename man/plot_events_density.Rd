@@ -2,7 +2,7 @@
 % Please edit documentation in R/clump.R
 \name{plot_events_density}
 \alias{plot_events_density}
-\title{Plots density graph of events}
+\title{Plots density graph of events of a detector or module}
 \usage{
 plot_events_density(detector, file_path = NA, adjust = 0.25,
   row = NA, col = NA, caption = TRUE, incl_event_list = NA)
@@ -23,5 +23,5 @@ plot_events_density(detector, file_path = NA, adjust = 0.25,
 \item{incl_event_list}{a list of events to be included}
 }
 \description{
-Plots density graph of events
+Plots density graph of events of a detector or module
 }

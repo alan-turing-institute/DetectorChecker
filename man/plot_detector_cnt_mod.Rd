@@ -2,7 +2,7 @@
 % Please edit documentation in R/analysis.R
 \name{plot_detector_cnt_mod}
 \alias{plot_detector_cnt_mod}
-\title{A function to plot detector with counts per module}
+\title{A function to plot detector with dead pixel counts per module}
 \usage{
 plot_detector_cnt_mod(detector, file_path = NA, row = NA, col = NA,
   caption = TRUE)
@@ -19,5 +19,5 @@ plot_detector_cnt_mod(detector, file_path = NA, row = NA, col = NA,
 \item{caption}{Flag to turn on/off figure caption}
 }
 \description{
-A function to plot detector with counts per module
+A function to plot detector with dead pixel counts per module
 }

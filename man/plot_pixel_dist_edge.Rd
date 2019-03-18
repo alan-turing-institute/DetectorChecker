@@ -2,7 +2,7 @@
 % Please edit documentation in R/pixel.R
 \name{plot_pixel_dist_edge}
 \alias{plot_pixel_dist_edge}
-\title{Calculates and plots minimum distances from the module edges}
+\title{Calculates and plots L-infinity distances from the module edges}
 \usage{
 plot_pixel_dist_edge(detector, file_path = NA)
 }
@@ -12,5 +12,5 @@ plot_pixel_dist_edge(detector, file_path = NA)
 \item{file_path}{Output file path}
 }
 \description{
-Calculates and plots minimum distances from the module edges
+Calculates and plots L-infinity distances from the module edges
 }

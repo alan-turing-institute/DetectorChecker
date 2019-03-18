@@ -10,7 +10,7 @@ dist_corner(detector)
 \item{detector}{Detector object}
 }
 \value{
-Matrix containing parallel maxima from the centre for each pixel
+Matrix containing pixel distances from corners
 }
 \description{
 A function to calculate pixel distances from corners

@@ -2,7 +2,7 @@
 % Please edit documentation in R/analysis.R
 \name{plot_detector_arrows}
 \alias{plot_detector_arrows}
-\title{A function to plot NN oriented arrrows}
+\title{A function to plot NN oriented arrrows of dead pixels of detector or module}
 \usage{
 plot_detector_arrows(detector, file_path = NA, row = NA, col = NA,
   caption = TRUE)
@@ -19,5 +19,5 @@ plot_detector_arrows(detector, file_path = NA, row = NA, col = NA,
 \item{caption}{Flag to turn on/off figure caption}
 }
 \description{
-A function to plot NN oriented arrrows
+A function to plot NN oriented arrrows of dead pixels of detector or module
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/pixel.R
 \name{dist_edge_row}
 \alias{dist_edge_row}
-\title{A function to calculate pixel distances from edges by row}
+\title{A function to calculate pixel vertical distance to module edge}
 \usage{
 dist_edge_row(detector)
 }
@@ -10,8 +10,8 @@ dist_edge_row(detector)
 \item{detector}{Detector object}
 }
 \value{
-dist
+distance matrix
 }
 \description{
-A function to calculate pixel distances from edges by row
+A function to calculate pixel vertical distance to module edge
 }

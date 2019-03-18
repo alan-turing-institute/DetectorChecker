@@ -2,7 +2,7 @@
 % Please edit documentation in R/pixel.R
 \name{dist_closest_edge}
 \alias{dist_closest_edge}
-\title{A function to calclutate closest distance to an edge}
+\title{A function to calculate closest distance to an edge for a pixel}
 \usage{
 dist_closest_edge(x, size)
 }
@@ -12,8 +12,8 @@ dist_closest_edge(x, size)
 \item{size}{Size of module}
 }
 \value{
-distane to closest edge
+distance to closest edge
 }
 \description{
-A function to calclutate closest distance to an edge
+A function to calculate closest distance to an edge for a pixel
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/analysis.R
 \name{plot_detector_angles}
 \alias{plot_detector_angles}
-\title{ANGLES using nnorient() from spatstat package}
+\title{A function to plot NN angles of dead pixels of detector or module}
 \usage{
 plot_detector_angles(detector, file_path = NA, row = NA, col = NA,
   caption = TRUE)
@@ -19,5 +19,5 @@ plot_detector_angles(detector, file_path = NA, row = NA, col = NA,
 \item{caption}{Flag to turn on/off figure caption}
 }
 \description{
-ANGLES using nnorient() from spatstat package
+A function to plot NN angles of dead pixels of detector or module
 }

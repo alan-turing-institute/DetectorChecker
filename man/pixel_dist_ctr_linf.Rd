@@ -2,7 +2,7 @@
 % Please edit documentation in R/pixel.R
 \name{pixel_dist_ctr_linf}
 \alias{pixel_dist_ctr_linf}
-\title{A function to calculate parallel maxima from the centre}
+\title{A function to calculate parallel maxima from the centre for each pixel}
 \usage{
 pixel_dist_ctr_linf(detector)
 }
@@ -10,8 +10,8 @@ pixel_dist_ctr_linf(detector)
 \item{detector}{Detector object}
 }
 \value{
-Matrix containing parallel maxima from the centre for each pixel
+Matrix of parallel maxima
 }
 \description{
-A function to calculate parallel maxima from the centre
+A function to calculate parallel maxima from the centre for each pixel
 }

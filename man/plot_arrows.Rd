@@ -2,7 +2,7 @@
 % Please edit documentation in R/plots.R
 \name{plot_arrows}
 \alias{plot_arrows}
-\title{A function to plot NN oriented arrrows}
+\title{Plots NN oriented arrrows}
 \usage{
 plot_arrows(ppp_obj, caption, file_path = NA)
 }
@@ -14,5 +14,5 @@ plot_arrows(ppp_obj, caption, file_path = NA)
 \item{file_path}{file path}
 }
 \description{
-A function to plot NN oriented arrrows
+Plots NN oriented arrrows
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/analysis.R
 \name{glm_pixel_dist_edge_row}
 \alias{glm_pixel_dist_edge_row}
-\title{Fits pixel istances from the module edges by row}
+\title{Fits pixel distances from module edges by row using glm}
 \usage{
 glm_pixel_dist_edge_row(detector)
 }
@@ -13,5 +13,5 @@ glm_pixel_dist_edge_row(detector)
 Fitted model
 }
 \description{
-Fits pixel istances from the module edges by row
+Fits pixel distances from module edges by row using glm
 }

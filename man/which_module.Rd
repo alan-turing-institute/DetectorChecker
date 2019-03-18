@@ -3,19 +3,19 @@
 \name{which_module}
 \alias{which_module}
 \title{Module module
-Which module function}
+Returns row or column of a module that a dead pixel belongs to}
 \usage{
 which_module(coo, me)
 }
 \arguments{
-\item{coo}{}
+\item{coo}{x or y coordinate of a dead pixel}
 
-\item{me}{}
+\item{me}{module edges}
 }
 \value{
-which_module what does this mean?
+row or column number
 }
 \description{
 Module module
-Which module function
+Returns row or column of a module that a dead pixel belongs to
 }

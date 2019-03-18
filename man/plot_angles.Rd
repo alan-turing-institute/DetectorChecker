@@ -2,7 +2,7 @@
 % Please edit documentation in R/plots.R
 \name{plot_angles}
 \alias{plot_angles}
-\title{ANGLES using nnorient() from spatstat package}
+\title{Plots NN angles}
 \usage{
 plot_angles(ppp_obj, caption, file_path = NA)
 }
@@ -14,5 +14,5 @@ plot_angles(ppp_obj, caption, file_path = NA)
 \item{file_path}{file path}
 }
 \description{
-ANGLES using nnorient() from spatstat package
+Plots NN angles
 }

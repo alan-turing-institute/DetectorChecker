@@ -3,7 +3,7 @@
 \name{plot_density}
 \alias{plot_density}
 \title{Plots module
-Plots ppp object's density}
+Plots density}
 \usage{
 plot_density(ppp_obj, caption, file_path = NA, adjust = 1)
 }
@@ -18,5 +18,5 @@ plot_density(ppp_obj, caption, file_path = NA, adjust = 1)
 }
 \description{
 Plots module
-Plots ppp object's density
+Plots density
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/pixel.R
 \name{dist_edge_min}
 \alias{dist_edge_min}
-\title{A function to calculate pixel distances from edges}
+\title{A function to calculate L-infinity distance to module edge}
 \usage{
 dist_edge_min(detector)
 }
@@ -10,8 +10,8 @@ dist_edge_min(detector)
 \item{detector}{Detector object}
 }
 \value{
-dist
+distance matrix
 }
 \description{
-A function to calculate pixel distances from edges
+A function to calculate L-infinity distance to module edge
 }

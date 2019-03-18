@@ -2,7 +2,7 @@
 % Please edit documentation in R/analysis.R
 \name{glm_pixel_ctr_eucl}
 \alias{glm_pixel_ctr_eucl}
-\title{Fits pixel distance from the centre to}
+\title{Fits pixel distance from the centre using glm}
 \usage{
 glm_pixel_ctr_eucl(detector)
 }
@@ -13,5 +13,5 @@ glm_pixel_ctr_eucl(detector)
 Fitted model
 }
 \description{
-Fits pixel distance from the centre to
+Fits pixel distance from the centre using glm
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/layout.R
 \name{plot_detector}
 \alias{plot_detector}
-\title{Plotting detector}
+\title{Plot detector}
 \usage{
 plot_detector(detector, file_path = NA, caption = TRUE)
 }
@@ -14,5 +14,5 @@ plot_detector(detector, file_path = NA, caption = TRUE)
 \item{caption}{Flag to turn on/off figure caption}
 }
 \description{
-Plotting detector
+Plot detector
 }

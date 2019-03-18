@@ -2,7 +2,7 @@
 % Please edit documentation in R/analysis.R
 \name{plot_detector_density}
 \alias{plot_detector_density}
-\title{A function to plot detector with dead pixel densities}
+\title{A function to plot densities of dead pixels of detector or module}
 \usage{
 plot_detector_density(detector, file_path = NA, adjust = 1, row = NA,
   col = NA, caption = TRUE)
@@ -21,5 +21,5 @@ plot_detector_density(detector, file_path = NA, adjust = 1, row = NA,
 \item{caption}{Flag to turn on/off figure caption}
 }
 \description{
-A function to plot detector with dead pixel densities
+A function to plot densities of dead pixels of detector or module
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/layout.R
 \name{.get_detector_ppps}
 \alias{.get_detector_ppps}
-\title{Generate detector ppps}
+\title{Generate detector ppps for edges and gaps}
 \usage{
 .get_detector_ppps(detector)
 }
@@ -13,5 +13,5 @@
 a list of ppps for edges and gaps
 }
 \description{
-Generate detector ppps
+Generate detector ppps for edges and gaps
 }

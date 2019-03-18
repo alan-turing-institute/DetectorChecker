@@ -2,7 +2,7 @@
 % Please edit documentation in R/pixel.R
 \name{plot_pixel_dist_edge_row}
 \alias{plot_pixel_dist_edge_row}
-\title{Calculates and plots distances from the module edges by row}
+\title{Calculates and plots vetical distances from the module edges}
 \usage{
 plot_pixel_dist_edge_row(detector, file_path = NA)
 }
@@ -12,5 +12,5 @@ plot_pixel_dist_edge_row(detector, file_path = NA)
 \item{file_path}{Output file path}
 }
 \description{
-Calculates and plots distances from the module edges by row
+Calculates and plots vetical distances from the module edges
 }

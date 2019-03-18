@@ -2,7 +2,7 @@
 % Please edit documentation in R/analysis.R
 \name{perform_glm}
 \alias{perform_glm}
-\title{Performs model fitting on the specified symbolic expression}
+\title{Performs glm fitting on the specified symbolic expression}
 \usage{
 perform_glm(symb_expr, family = binomial(link = logit))
 }
@@ -17,5 +17,5 @@ Fitted model
 glm_git fitted model
 }
 \description{
-Performs model fitting on the specified symbolic expression
+Performs glm fitting on the specified symbolic expression
 }

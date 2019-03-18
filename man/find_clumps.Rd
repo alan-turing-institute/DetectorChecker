@@ -2,7 +2,7 @@
 % Please edit documentation in R/clump.R
 \name{find_clumps}
 \alias{find_clumps}
-\title{Locates and clusifies clumps of a damaged detector}
+\title{Locates and clasifies clumps of a damaged detector}
 \usage{
 find_clumps(detector, row = NA, col = NA)
 }
@@ -17,5 +17,5 @@ find_clumps(detector, row = NA, col = NA)
 Detector with events matrix
 }
 \description{
-Locates and clusifies clumps of a damaged detector
+Locates and clasifies clumps of a damaged detector
 }

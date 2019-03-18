@@ -2,7 +2,7 @@
 % Please edit documentation in R/analysis.R
 \name{dead_stats_summary}
 \alias{dead_stats_summary}
-\title{Count number of damaged pixels overall and in different modules}
+\title{Summary of damaged pixels}
 \usage{
 dead_stats_summary(detector)
 }
@@ -13,5 +13,5 @@ dead_stats_summary(detector)
 A string with damaged pixels overall statitics
 }
 \description{
-Count number of damaged pixels overall and in different modules
+Summary of damaged pixels
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/clump.R
 \name{plot_events_angles}
 \alias{plot_events_angles}
-\title{Plots angles graph of events}
+\title{Plots angles graph of events of a detector or module}
 \usage{
 plot_events_angles(detector, file_path = NA, row = NA, col = NA,
   caption = TRUE, incl_event_list = NA)
@@ -21,5 +21,5 @@ plot_events_angles(detector, file_path = NA, row = NA, col = NA,
 \item{incl_event_list}{a list of events to be included}
 }
 \description{
-Plots angles graph of events
+Plots angles graph of events of a detector or module
 }
