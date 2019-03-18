@@ -8,12 +8,12 @@ Given xy coo of pixel and matrices with positions of edges in both directions.}
 .dist_edge(xy, module_edges)
 }
 \arguments{
-\item{xy}{}
+\item{xy}{Coordinate of pixel}
 
-\item{module_edges}{?}
+\item{module_edges}{vector of edges of a module}
 }
 \value{
-tmp ?
+tmp Distance to edges
 }
 \description{
 Function returns distance to both edges.

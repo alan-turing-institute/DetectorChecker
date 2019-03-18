@@ -13,6 +13,9 @@ find_clumps(detector, row = NA, col = NA)
 
 \item{col}{Module column number}
 }
+\value{
+Detector with events matrix
+}
 \description{
 Locates and clusifies clumps of a damaged detector
 }

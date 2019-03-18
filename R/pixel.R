@@ -26,11 +26,10 @@
 
 # Pixel analysis functions -----------------------------------------------------
 
-#' A function to calculate euclidean distance from the centre
+#' A function to calculate euclidean distance from the centre for each pixel
 #'
 #' @param detector Detector object
-#' @return Matrix containing euclidean distances from the centre for each
-#'   pixel
+#' @return Matrix of euclidean distances
 #' @export
 pixel_dist_ctr_eucl <- function(detector) {
   dist <- matrix(NA, nrow = detector$detector_height, ncol = detector$detector_width)
@@ -49,10 +48,10 @@ pixel_dist_ctr_eucl <- function(detector) {
   return(dist)
 }
 
-#' A function to calculate parallel maxima from the centre
+#' A function to calculate parallel maxima from the centre for each pixel
 #'
 #' @param detector Detector object
-#' @return Matrix containing parallel maxima from the centre for each pixel
+#' @return Matrix of parallel maxima
 #' @export
 pixel_dist_ctr_linf <- function(detector) {
   dist <- matrix(NA, nrow = detector$detector_height, ncol = detector$detector_width)
@@ -72,23 +71,23 @@ pixel_dist_ctr_linf <- function(detector) {
   return(dist)
 }
 
-# TODO: modify the description.
-#' A function to calclutate closest distance to an edge
+
+#' A function to calculate closest distance to an edge for a pixel
 #'
 #' @param x Coordinate of pixel
-#' @param size 
-#' @return 
+#' @param size Size of module
+#' @return distance to closest edge
 #' @export
 dist_closest_edge <- function(x, size) {
   # Why x-1? Because pixel locations start in 1, but we want both edges inside detector for symmetry
   return(min(x - 1, size - x))
 }
 
-# TODO: modify the description.
+
 #' A function to calculate pixel distances from corners
 #'
 #' @param detector Detector object
-#' @return Matrix containing parallel maxima from the centre for each pixel
+#' @return Matrix containing pixel distances from corners
 #' @export
 dist_corner <- function(detector) {
 
@@ -115,11 +114,11 @@ dist_corner <- function(detector) {
   return(dist)
 }
 
-# TODO: modify the description.
-#' A function to calculate pixel distances from edges by column
+
+#' A function to calculate pixel horizontal distance to module edge
 #'
 #' @param detector Detector object
-#' @return dist 
+#' @return distance matrix
 #' @export
 dist_edge_col <- function(detector) {
   dist <- matrix(NA, nrow = detector$detector_height, ncol = detector$detector_width)
@@ -141,11 +140,11 @@ dist_edge_col <- function(detector) {
   return(dist)
 }
 
-# TODO: modify the description.
-#' A function to calculate pixel distances from edges by row
+
+#' A function to calculate pixel vertical distance to module edge
 #'
 #' @param detector Detector object
-#' @return dist 
+#' @return distance matrix
 #' @export
 dist_edge_row <- function(detector) {
   dist <- matrix(NA, nrow = detector$detector_height, ncol = detector$detector_width)
@@ -160,11 +159,11 @@ dist_edge_row <- function(detector) {
   return(dist)
 }
 
-# TODO: modify the description.
-#' A function to calculate pixel distances from edges
+
+#' A function to calculate L-infinity distance to module edge
 #'
 #' @param detector Detector object
-#' @return dist 
+#' @return distance matrix
 #' @export
 dist_edge_min <- function(detector) {
   dist_col <- dist_edge_col(detector)
@@ -175,14 +174,13 @@ dist_edge_min <- function(detector) {
   return(dist)
 }
 
-#' Plots pixel analysis
+#' Plots pixel distance analysis
 #'
 #' @param data Matrix containing pixel analysis data
 #' @param width Plot width
 #' @param height Plot height
 #' @param file_path Output path with an extension
-#' @export
-plot_pixel <- function(data, width, height, file_path = NA) {
+.plot_pixel <- function(data, width, height, file_path = NA) {
   if (!is.na(file_path)) {
     # starts the graphics device driver
     ini_graphics(file_path = file_path)
@@ -208,7 +206,7 @@ plot_pixel <- function(data, width, height, file_path = NA) {
 plot_pixel_ctr_eucl <- function(detector, file_path = NA) {
   dist <- pixel_dist_ctr_eucl(detector)
 
-  plot_pixel(dist,
+  .plot_pixel(dist,
     width = detector$detector_width, height = detector$detector_height,
     file_path = file_path
   )
@@ -222,7 +220,7 @@ plot_pixel_ctr_eucl <- function(detector, file_path = NA) {
 plot_pixel_ctr_linf <- function(detector, file_path = NA) {
   dist <- pixel_dist_ctr_linf(detector)
 
-  plot_pixel(dist,
+  .plot_pixel(dist,
     width = detector$detector_width, height = detector$detector_height,
     file_path = file_path
   )
@@ -236,13 +234,13 @@ plot_pixel_ctr_linf <- function(detector, file_path = NA) {
 plot_pixel_dist_corner <- function(detector, file_path = NA) {
   dist <- dist_corner(detector)
 
-  plot_pixel(dist,
+  .plot_pixel(dist,
     width = detector$detector_width, height = detector$detector_height,
     file_path = file_path
   )
 }
 
-#' Calculates and plots distances from the module edges by column
+#' Calculates and plots horizontal distances from the module edges 
 #'
 #' @param detector Detector object
 #' @param file_path Output file path
@@ -250,13 +248,13 @@ plot_pixel_dist_corner <- function(detector, file_path = NA) {
 plot_pixel_dist_edge_col <- function(detector, file_path = NA) {
   dist <- dist_edge_col(detector)
 
-  plot_pixel(dist,
+  .plot_pixel(dist,
     width = detector$detector_width, height = detector$detector_height,
     file_path = file_path
   )
 }
 
-#' Calculates and plots distances from the module edges by row
+#' Calculates and plots vetical distances from the module edges
 #'
 #' @param detector Detector object
 #' @param file_path Output file path
@@ -264,13 +262,13 @@ plot_pixel_dist_edge_col <- function(detector, file_path = NA) {
 plot_pixel_dist_edge_row <- function(detector, file_path = NA) {
   dist <- dist_edge_row(detector)
 
-  plot_pixel(dist,
+  .plot_pixel(dist,
     width = detector$detector_width, height = detector$detector_height,
     file_path = file_path
   )
 }
 
-#' Calculates and plots minimum distances from the module edges
+#' Calculates and plots L-infinity distances from the module edges
 #'
 #' @param detector Detector object
 #' @param file_path Output file path
@@ -278,14 +276,13 @@ plot_pixel_dist_edge_row <- function(detector, file_path = NA) {
 plot_pixel_dist_edge <- function(detector, file_path = NA) {
   dist <- dist_edge_min(detector)
 
-  plot_pixel(dist,
+  .plot_pixel(dist,
     width = detector$detector_width, height = detector$detector_height,
     file_path = file_path
   )
 }
 
-#' Counts damaged pixel locations (dead_data) outside detector (detector)
-#'   and in gaps between modules and give warnings
+#' Counts dead pixels outside of detector and in gaps between modules and give warnings
 #'
 #' @param dead_data Dead pixel locations
 #' @param detector Detector object

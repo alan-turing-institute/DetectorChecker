@@ -29,7 +29,8 @@ Dead_Stats <- function(dead_n = NA, module_n = NA, module_count_arr = NA,
   return(dead_stats)
 }
 
-#' Plotting a module of a detector
+
+#' A function to plot detector module with damaged pixels
 #'
 #' @param detector Detector object
 #' @param col Module column number
@@ -154,7 +155,7 @@ plot_detector_damaged <- function(detector, file_path = NA, caption = TRUE) {
   }
 }
 
-#' A function to plot detector with counts per module
+#' A function to plot detector with dead pixel counts per module
 #'
 #' @param detector Detector object
 #' @param file_path Output file path
@@ -217,7 +218,7 @@ plot_detector_cnt_mod <- function(detector, file_path = NA, row = NA, col = NA,
   }
 }
 
-#' A function to plot detector with dead pixel densities
+#' A function to plot densities of dead pixels of detector or module
 #'
 #' @param detector Detector object
 #' @param file_path Output file path
@@ -252,7 +253,7 @@ plot_detector_density <- function(detector, file_path = NA, adjust = 1.,
   plot_density(ppp_dead, main_caption, file_path = file_path, adjust = adjust)
 }
 
-#' A function to plot NN oriented arrrows
+#' A function to plot NN oriented arrrows of dead pixels of detector or module
 #'
 #' @param detector Detector object
 #' @param file_path Output file path
@@ -305,7 +306,7 @@ dead_pix_coords <- function(pix_matrix) {
   return(dead_pix_coords)
 }
 
-#' Fits pixel distance from the centre to
+#' Fits pixel distance from the centre using glm
 #'
 #' @param detector Detector object
 #' @return Fitted model
@@ -319,7 +320,7 @@ glm_pixel_ctr_eucl <- function(detector) {
   return(glm_fit)
 }
 
-#' Fits pixel parallel maxima from the centre
+#' Fits pixel parallel maxima from the centre using glm
 #'
 #' @param detector Detector object
 #' @return Fitted model
@@ -333,7 +334,7 @@ glm_pixel_ctr_linf <- function(detector) {
   return(glm_fit)
 }
 
-#' Fits pixel istances from the module edges by column
+#' Fits pixel distances from the module edges by column using glm
 #'
 #' @param detector Detector object
 #' @return Fitted model
@@ -347,7 +348,7 @@ glm_pixel_dist_edge_col <- function(detector) {
   return(glm_fit)
 }
 
-#' Fits pixel istances from the module edges by row
+#' Fits pixel distances from module edges by row using glm
 #'
 #' @param detector Detector object
 #' @return Fitted model
@@ -361,7 +362,7 @@ glm_pixel_dist_edge_row <- function(detector) {
   return(glm_fit)
 }
 
-#' Performs model fitting on the specified symbolic expression
+#' Performs glm fitting on the specified symbolic expression
 #'
 #' @param symb_expr symbolic description of the linear predictor
 #' @param family a description of the error distribution
@@ -376,7 +377,7 @@ perform_glm <- function(symb_expr, family = binomial(link = logit)) {
   return(glm_result)
 }
 
-#' Count number of damaged pixels overall and in different modules
+#' Generate summary of damaged pixels
 #'
 #' @param detector Detector object
 #' @return Dead_Stats object
@@ -420,7 +421,7 @@ get_dead_stats <- function(detector) {
   return(detector)
 }
 
-#' Count number of damaged pixels overall and in different modules
+#' Summary of damaged pixels
 #'
 #' @param detector Detector object
 #' @return A string with damaged pixels overall statitics
@@ -438,7 +439,7 @@ dead_stats_summary <- function(detector) {
   return(summary)
 }
 
-#' ANGLES using nnorient() from spatstat package
+#' A function to plot NN angles of dead pixels of detector or module
 #'
 #' @param detector Detector object
 #' @param file_path Output file path
@@ -472,21 +473,21 @@ plot_detector_angles <- function(detector, file_path = NA, row = NA, col = NA,
   plot_angles(ppp_dead, main_caption, file_path = file_path)
 }
 
-# TODO: define the function
-#' Get orient nn PP
-#' @param PPPdata describe
-#' @return describe
-#' @export
-orientnnPPP <- function(PPPdata) {
-  PPPnn <- PPPdata[spatstat::nnwhich(PPPdata)]
-  # now calculate our own thing for the orientations to compare
-  A <- matrix(c(PPPdata$x, PPPdata$y), nrow = 2, ncol = length(PPPdata$x), byrow = TRUE)
-  # x,y values of original point pattern
-  Ann <- matrix(c(PPPnn$x, PPPnn$y), nrow = 2, ncol = length(PPPnn$x), byrow = TRUE)
-  # x,y values of point pattern containing nn of each of the points in original
-  # Assigns a point patters (ppp object) a vector of the orientations of the arrows pointing from nearest neighbours to its points
-  return(round(apply(rbind(A, Ann), 2, orientcolfct), digits = 3))
-}
+# # TODO: define the function
+# #' Get orient nn PP
+# #' @param PPPdata ppp object
+# #' @return describe
+# #' @export
+# orientnnPPP <- function(PPPdata) {
+#   PPPnn <- PPPdata[spatstat::nnwhich(PPPdata)]
+#   # now calculate our own thing for the orientations to compare
+#   A <- matrix(c(PPPdata$x, PPPdata$y), nrow = 2, ncol = length(PPPdata$x), byrow = TRUE)
+#   # x,y values of original point pattern
+#   Ann <- matrix(c(PPPnn$x, PPPnn$y), nrow = 2, ncol = length(PPPnn$x), byrow = TRUE)
+#   # x,y values of point pattern containing nn of each of the points in original
+#   # Assigns a point patters (ppp object) a vector of the orientations of the arrows pointing from nearest neighbours to its points
+#   return(round(apply(rbind(A, Ann), 2, orientcolfct), digits = 3))
+# }
 
 #' Estimates the norm of a vector
 #'
@@ -540,12 +541,12 @@ orient_dist_vec <- function(v, w) {
 }
 
 
-#' Calculates orientation of the oriented vector between two points
-#' in order of the second pointing to first (reflecting nearest neighbour (nn) framework)
-#' @param b vector with elements 1:2 correspoding to first point and 3:4 corresponding to the second
-#' @return orientation of the oriented vector between two points
-#' @export
-orientcolfct <- function(b) orient_dist_vec(b[1:2], b[3:4])$orient
+# #' Calculates orientation of the oriented vector between two points
+# #' in order of the second pointing to first (reflecting nearest neighbour (nn) framework)
+# #' @param b vector with elements 1:2 correspoding to first point and 3:4 corresponding to the second
+# #' @return orientation of the oriented vector between two points
+# #' @export
+# orientcolfct <- function(b) orient_dist_vec(b[1:2], b[3:4])$orient
 
 #' Generates ppp for the dead pixels
 #'

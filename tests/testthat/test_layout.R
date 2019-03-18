@@ -46,9 +46,6 @@ test_that("derive_plot", {
   # PerkinElmerFull_Detector detector as a test case
   detector <- PerkinElmerFull_Detector()
 
-  # Deriving additional elements
-  detector <- derive_detector(detector)
-
   # Test values for the PerkinElmerFull detector
   test_horiz_values <- matrix(c(
     1, 105, 233, 361, 489, 617, 745, 873, 1001,

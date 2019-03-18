@@ -11,6 +11,9 @@
 
 \item{rrc}{raster clumps objects}
 }
+\value{
+data frame of the modules relating the clump
+}
 \description{
 Identifying modules for clumps
 }

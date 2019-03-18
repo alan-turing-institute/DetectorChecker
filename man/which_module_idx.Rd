@@ -8,16 +8,16 @@ Given xy coo of pixel and matrices with positions of edges in both directions.}
 which_module_idx(x, y, module_edges_col, module_edges_row)
 }
 \arguments{
-\item{x}{}
+\item{x}{pixel x coordinate}
 
-\item{y}{?}
+\item{y}{pixel y coordinate}
 
-\item{module_edges_col}{?}
+\item{module_edges_col}{vector of columns that contain edges of modules}
 
-\item{module_edges_row}{?}
+\item{module_edges_row}{vector of rows that contain edges of modules}
 }
 \value{
-tmp ?
+tmp
 }
 \description{
 Function returns both col and row wrt detector grid.

@@ -136,7 +136,7 @@ library(igraph)
   return(dataFrame)
 }
 
-#' MODIFYING CLUSTERS TO EVENTS (CONSISTING OF 1 PIXEL REPRESENTING THE CLUSTER)
+#' Modifying clusters to events (consisting of 1 pixel representing the cluster)
 #' Make into a point pattern of just events rather than pixels. Using xyc_ply object.
 #' Collapse in one point using centres for clusters, but end points for lines, type dependend:
 #' type 5 (closest to upper edge): ymin
@@ -144,6 +144,7 @@ library(igraph)
 #' type 7 (closest to right edge): xmin
 #' type 8 (closest to left edge):  xmax
 #' This is inspired by Perkin Elmer Detector and be replaced by other choices if desired.
+#'
 #' @param xyc_ply clums data frame
 #' @return events
 .xyc_pixels2events <- function(xyc_ply) {
@@ -247,11 +248,12 @@ library(igraph)
   return(dataFrame)
 }
 
-#' Locates and clusifies clumps of a damaged detector
+#' Locates and clasifies clumps of a damaged detector
 #'
 #' @param detector Detector object
 #' @param row Module row number
 #' @param col Module column number
+#' @return Detector with events matrix
 #' @export
 find_clumps <- function(detector, row = NA, col = NA) {
   pixel_mask <- get_dead_pix_mask(detector)
@@ -270,6 +272,7 @@ find_clumps <- function(detector, row = NA, col = NA) {
 }
 
 #' Plots damaged detector events
+#'
 #' @param detector Detector object
 #' @param file_path Output file path
 #' @param caption Flag to turn on/off figure caption
@@ -316,6 +319,7 @@ plot_events <- function(detector, file_path = NA, caption = TRUE, incl_event_lis
 }
 
 #' Plots damaged detector module events
+#'
 #' @param detector Detector object
 #' @param col Module column number
 #' @param row Module row number
@@ -360,9 +364,11 @@ plot_module_events <- function(detector, col, row, file_path = NA, caption = TRU
   }
 }
 
-#' Creates ppp for damaged detector events
+#' Creates ppp object for damaged detector events
+#'
 #' @param detector Detector object
 #' @param incl_event_list a list of events to be included
+#' @return ppp object for damaged detector events
 .get_clump_event_ppp <- function(detector, incl_event_list = NA,
                                  height = NULL, width = NULL) {
   if (is.null(height)) {
@@ -384,15 +390,17 @@ plot_module_events <- function(detector, col, row, file_path = NA, caption = TRU
   } else {
     events <- detector$clumps$events
   }
-  # TODO: FIX
+ 
   event_ppp <- spatstat::ppp(events[, 1], events[, 2], c(1, nc), c(1, nr))
 
   return(event_ppp)
 }
 
-#' Creates ppp for damaged detector pixels
+#' Creates ppp object for damaged detector pixels
+#'
 #' @param detector Detector object
 #' @param incl_event_list a list of events to be included
+#' @return ppp object for damaged detector pixels
 .get_clump_pixel_ppp <- function(detector, incl_event_list = NA) {
   nr <- detector$detector_height
   nc <- detector$detector_width
@@ -410,8 +418,8 @@ plot_module_events <- function(detector, col, row, file_path = NA, caption = TRU
   return(pixel_ppp)
 }
 
-
 #' Generates events matrix (a matrix with pixels as 0 and events as 1)
+#'
 #' @param detector Detector object
 #' @return events mask
 #' @export
@@ -432,6 +440,7 @@ get_events_mask <- function(detector) {
 }
 
 #' Plots damaged detector pixels and events
+#'
 #' @param detector Detector object
 #' @param file_path Output file path
 #' @param caption Flag to turn on/off figure caption
@@ -466,7 +475,7 @@ plot_pixels_events <- function(detector, file_path = NA, caption = TRUE, incl_ev
   }
 }
 
-#' Plots density graph of events
+#' Plots density graph of events of a detector or module
 #'
 #' @param detector Detector object
 #' @param file_path Output file path
@@ -508,7 +517,7 @@ plot_events_density <- function(detector, file_path = NA, adjust = 0.25,
   plot_density(ppp_events, main_caption, file_path = file_path, adjust = adjust)
 }
 
-#' Plots arrows graph of events
+#' Plots arrows graph of events of a detector or module
 #'
 #' @param detector Detector object
 #' @param file_path Output file path
@@ -549,7 +558,7 @@ plot_events_arrows <- function(detector, file_path = NA,
   plot_arrows(ppp_events, main_caption, file_path = file_path)
 }
 
-#' Plots angles graph of events
+#' Plots angles graph of events of a detector or module
 #'
 #' @param detector Detector object
 #' @param file_path Output file path
@@ -590,7 +599,7 @@ plot_events_angles <- function(detector, file_path = NA,
   plot_angles(ppp_events, main_caption, file_path = file_path)
 }
 
-#' Plots K, F, G functions
+#' Plots K, F, G functions of a detector or module
 #'
 #' @param detector Detector object
 #' @param func Function name
@@ -622,7 +631,7 @@ plot_events_kfg <- function(detector, func, file_path = NA,
   plot_kfg(ppp_events, func, file_path = file_path, caption = caption)
 }
 
-#' A function to plot detector with counts per module
+#' Plots events count per detector or module
 #'
 #' @param detector Detector object
 #' @param file_path Output file path

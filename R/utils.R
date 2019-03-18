@@ -34,6 +34,7 @@
 }
 
 #' Checks whether a detector parameter is in the file string
+#'
 #' @param file_string String of a file context
 #' @param parameter Detector parameter
 #' @return parameter value

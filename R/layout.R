@@ -60,7 +60,7 @@ Default_Detector <- function(name = "Default", date = NA,
     clumps = clumps
   )
 
-  detector <- derive_detector(detector)
+  detector <- .derive_detector(detector)
 
   return(detector)
 }
@@ -355,9 +355,9 @@ detector_consist_check <- function(detector = NA) {
 }
 
 #' Defines the coordinates of detector's edges using module and gap sizes
-#'
 #' Function is in 1d context to be applied to rows and cols separately.
 #' Edges are inside the modules (first/last row/col of module).
+#'
 #' @param m vector of module sizes
 #' @param g vectors of gap sizes
 #' @return Matrix with the information about the edges
@@ -382,16 +382,15 @@ detector_edges <- function(m, g) {
 }
 
 #' Deriving additional detector elements
-#'
 #' Conditions additional elements of Detector object that are frequently used later
 #' They are calculated from parameters defined in examples
 #' Matrices that contains xy coordiantes of edges of modules
 #' By definition, edges are part of modules (not part of gaps)
 #' i.e. for each module two pairs: first/last col and first/last row.
+#'
 #' @param detector Detector object
 #' @return Detector object
-#' @export
-derive_detector <- function(detector) {
+.derive_detector <- function(detector) {
   module_edges_col <- detector_edges(detector$module_col_sizes, detector$gap_col_sizes)
   dimnames(module_edges_col)[[1]] <- c("left", "right")
 
@@ -444,7 +443,7 @@ create_ppp_edges_row <- function(detector) {
   return(ppp_edges_row)
 }
 
-#' This is the ppp_gaps_col creation function
+#' Creates ppp object of horizontal gaps 
 #'
 #' @param detector Detector object
 #' @return Point pattern dataset
@@ -468,8 +467,7 @@ create_ppp_gaps_col <- function(detector) {
   return(ppp_gaps_col)
 }
 
-#' This is the ppp_gaps_row creation function
-#' This is a function
+#' Creates ppp object of vertical gaps 
 #'
 #' @param detector Detector object
 #' @return Point pattern dataset
@@ -493,7 +491,7 @@ create_ppp_gaps_row <- function(detector) {
   return(ppp_gaps_row)
 }
 
-#' Generate detector ppps
+#' Generate detector ppps for edges and gaps
 #'
 #' @param detector Detector object
 #' @return a list of ppps for edges and gaps
@@ -513,7 +511,7 @@ create_ppp_gaps_row <- function(detector) {
   return(list(ppp_edges_col, ppp_edges_row, ppp_gaps_col, ppp_gaps_row))
 }
 
-#' Plotting detector
+#' Plot detector
 #'
 #' @param detector Detector object
 #' @param file_path Output file path
@@ -571,7 +569,7 @@ plot_detector <- function(detector, file_path = NA, caption = TRUE) {
   }
 }
 
-#' Returns a string with the detector summary
+#' Generates a string with the detector summary
 #'
 #' @param detector Detector object
 #' @return String with the detector summary
@@ -593,6 +591,7 @@ detector_summary <- function(detector) {
 }
 
 #' Reads in a user defined detector from a file
+#'
 #' @param file_path A path to the user defined detector file
 #' @return Detector object
 #' @export

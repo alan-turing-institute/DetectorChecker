@@ -7,12 +7,12 @@
 dist_closest_edge(x, size)
 }
 \arguments{
-\item{x}{}
+\item{x}{Coordinate of pixel}
 
-\item{size}{something else}
+\item{size}{Size of module}
 }
 \value{
-what does this mean?
+distane to closest edge
 }
 \description{
 A function to calclutate closest distance to an edge

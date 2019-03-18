@@ -1,11 +1,11 @@
 #' @title Module module
 
-# TODO: improve the definition of the function
-#' Which module function
+
+#' Returns row or column of a module that a dead pixel belongs to
 #'
-#' @param coo 
-#' @param me ?
-#' @return which_module what does this mean?
+#' @param coo x or y coordinate of a dead pixel
+#' @param me module edges
+#' @return row or column number
 #' @export
 which_module <- function(coo, me) {
   which_module <- NA
@@ -19,15 +19,14 @@ which_module <- function(coo, me) {
   return(which_module)
 }
 
-# TODO: improve the definition of the function
-#' Function returns both col and row wrt detector grid.
-#' Given xy coo of pixel and matrices with positions of edges in both directions.
+
+#' Function returns both col and row number of a dead pixel.
 #'
-#' @param x 
-#' @param y ?
-#' @param module_edges_col ?
-#' @param module_edges_row ?
-#' @return tmp ?
+#' @param x pixel x coordinate
+#' @param y pixel y coordinate
+#' @param module_edges_col vector of columns that contain edges of modules
+#' @param module_edges_row vector of rows that contain edges of modules
+#' @return tmp 
 #' @export
 which_module_idx <- function(x, y, module_edges_col, module_edges_row) {
   tmp <- list(
@@ -38,9 +37,8 @@ which_module_idx <- function(x, y, module_edges_col, module_edges_row) {
   return(tmp)
 }
 
-# TODO: improve the definition of the function
-#' Function returns distance to both edges.
-#' Given xy coo of pixel and matrices with positions of edges in both directions.
+
+#' Function returns distance of a pixel to module edges.
 #'
 #' @param xy Coordinate of pixel
 #' @param module_edges vector of edges of a module
@@ -53,7 +51,8 @@ which_module_idx <- function(x, y, module_edges_col, module_edges_row) {
   return(tmp)
 }
 
-# Checks if the selected row and column are within the boundaries of the detector
+#' Checks if the selected row and column are within the boundaries of the detector
+
 .check_select <- function(detector, row, col) {
   ok <- TRUE
 

@@ -10,7 +10,7 @@ dist_edge_col(detector)
 \item{detector}{Detector object}
 }
 \value{
-dist ?
+dist
 }
 \description{
 A function to calculate pixel distances from edges by column

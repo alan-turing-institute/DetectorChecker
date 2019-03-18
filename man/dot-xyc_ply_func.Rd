@@ -2,7 +2,7 @@
 % Please edit documentation in R/clump.R
 \name{.xyc_ply_func}
 \alias{.xyc_ply_func}
-\title{Something something dark side}
+\title{Clasifies clumps with respect to xy coordinates.}
 \usage{
 .xyc_ply_func(detector, xyc_pixel_df)
 }
@@ -10,8 +10,8 @@
 \item{detector}{Detector object}
 }
 \value{
-data frame
+data frame with clasification results
 }
 \description{
-Something something dark side
+Clasifies clumps with respect to xy coordinates.
 }
