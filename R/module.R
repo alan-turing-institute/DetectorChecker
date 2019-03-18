@@ -42,9 +42,9 @@ which_module_idx <- function(x, y, module_edges_col, module_edges_row) {
 #' Function returns distance to both edges.
 #' Given xy coo of pixel and matrices with positions of edges in both directions.
 #'
-#' @param xy 
-#' @param module_edges ?
-#' @return tmp ?
+#' @param xy Coordinate of pixel
+#' @param module_edges vector of edges of a module
+#' @return tmp Distance to edges
 .dist_edge <- function(xy, module_edges) {
   i <- which_module(xy, module_edges)
 

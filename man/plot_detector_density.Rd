@@ -4,8 +4,8 @@
 \alias{plot_detector_density}
 \title{A function to plot detector with dead pixel densities}
 \usage{
-plot_detector_density(detector, file_path = NA, adjust = 0.25,
-  row = NA, col = NA, caption = TRUE)
+plot_detector_density(detector, file_path = NA, adjust = 1, row = NA,
+  col = NA, caption = TRUE)
 }
 \arguments{
 \item{detector}{Detector object}

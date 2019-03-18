@@ -354,7 +354,6 @@ detector_consist_check <- function(detector = NA) {
   return(TRUE)
 }
 
-# TODO: improve the definition of the function
 #' Defines the coordinates of detector's edges using module and gap sizes
 #'
 #' Function is in 1d context to be applied to rows and cols separately.
@@ -382,7 +381,6 @@ detector_edges <- function(m, g) {
   return(detector_edges)
 }
 
-# TODO: improve the definition of the function
 #' Deriving additional detector elements
 #'
 #' Conditions additional elements of Detector object that are frequently used later
@@ -407,8 +405,7 @@ derive_detector <- function(detector) {
   return(detector)
 }
 
-#' TODO: Better description of the function
-#' This is the ppp_edges_col function
+#' This is the ppp_edges_col creation function
 #'
 #' @param detector Detector object
 #' @return Point pattern dataset
@@ -427,8 +424,8 @@ create_ppp_edges_col <- function(detector) {
   return(ppp_edges_col)
 }
 
-#' TODO: Better description of the function
-#' This is the create_ppp_edges_row function
+
+#' This is the create_ppp_edges_row creation function
 #'
 #' @param detector Detector object
 #' @return Point pattern dataset
@@ -447,8 +444,7 @@ create_ppp_edges_row <- function(detector) {
   return(ppp_edges_row)
 }
 
-#' TODO: Better description of the function
-#' This is a function
+#' This is the ppp_gaps_col creation function
 #'
 #' @param detector Detector object
 #' @return Point pattern dataset
@@ -472,7 +468,7 @@ create_ppp_gaps_col <- function(detector) {
   return(ppp_gaps_col)
 }
 
-#' TODO: Better description of the function
+#' This is the ppp_gaps_row creation function
 #' This is a function
 #'
 #' @param detector Detector object
