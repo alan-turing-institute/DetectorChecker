@@ -49,25 +49,25 @@ matrix_from_hdf <- function(detector, file_path) {
   if (is.vector(file_path)) {
     file_cnt <- 0
     for (file in file_path) {
-      data_file <- h5::h5file(file, mode = "r")
+      data_file <- hdf5r::h5file(file, mode = "r")
 
-      hdf_data_file <- h5::readDataSet(data_file[h5::list.datasets(data_file)])
+      hdf_data_file <- hdf5r::readDataSet(data_file[[hdf5r::list.datasets(data_file)]])
 
       if (file_cnt > 0) {
         # The data is combined by rows!
-        hdf_data <- rbind(hdf_data, hdf_data_file)
+        hdf_data <- cbind(hdf_data, hdf_data_file)
       } else {
         hdf_data <- hdf_data_file
       }
 
-      h5::h5close(data_file)
+      hdf5r::h5close(data_file)
 
       file_cnt <- file_cnt + 1
     }
   }
 
-  # transposing the matrix
-  pix_matrix <- t(hdf_data)
+  # Matrix does not need transposing with hdf5r
+  pix_matrix <- hdf_data
 
   if (detector$detector_width != dim(pix_matrix)[1]) {
     stop("Error: Number of columns in data file (hdf) incorrect.
