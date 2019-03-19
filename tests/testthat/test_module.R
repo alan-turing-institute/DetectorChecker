@@ -2,8 +2,8 @@ context("Module analysis functions")
 
 test_that("Module analysis functions", {
 
-  # PerkinElmerFull layout unit test
-  layout <- PerkinElmerFull_Layout()
+  # PerkinElmerFull detector unit test
+  detector <- PerkinElmerFull_Detector()
 
   # which_module
   # which_module_idx

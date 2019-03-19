@@ -3,24 +3,24 @@
 
 #' Reads in tiff file and returns a pixel matrix
 #'
-#' @param layout Layout object
+#' @param detector Detector object
 #' @param file_path Path to the tiff file
 #' @return Pixel matrix with dead pixels flagged with 1
 #' @export
-matrix_from_tiff <- function(layout, file_path) {
+matrix_from_tiff <- function(detector, file_path) {
 
   # reading in the data
   tiff_data <- tiff::readTIFF(file_path, as.is = TRUE)
 
   # first consistency check: Detector dimensions okay?
-  if (layout$detector_height != dim(tiff_data)[2]) {
+  if (detector$detector_height != dim(tiff_data)[2]) {
     stop("Error: Number of rows in row data file (tif) incorrect.
-         Please check the file and check if your Layout parameters match your damaged pixel data.")
+         Please check the file and check if your Detector parameters match your damaged pixel data.")
   }
 
-  if (layout$detector_width != dim(tiff_data)[1]) {
+  if (detector$detector_width != dim(tiff_data)[1]) {
     stop("Error: Number of columns in row data file (tif) incorrect.
-         Please check the file and check if your Layout parameters match your damaged pixel data.")
+         Please check the file and check if your Detector parameters match your damaged pixel data.")
   }
 
   # Check range of tiff_data
@@ -37,11 +37,11 @@ matrix_from_tiff <- function(layout, file_path) {
 
 #' Reads in hdf file(s) and returns a pixel matrix
 #'
-#' @param layout Layout object
+#' @param detector Detector object
 #' @param file_path A list of paths to hdf files. Must be in the correct order.
 #' @return Data of a combined dataset from hdf files
 #' @export
-matrix_from_hdf <- function(layout, file_path) {
+matrix_from_hdf <- function(detector, file_path) {
   data <- NA
   hdf_data <- NA
 
@@ -69,15 +69,15 @@ matrix_from_hdf <- function(layout, file_path) {
   # transposing the matrix
   pix_matrix <- t(hdf_data)
 
-  if (layout$detector_width != dim(pix_matrix)[1]) {
+  if (detector$detector_width != dim(pix_matrix)[1]) {
     stop("Error: Number of columns in data file (hdf) incorrect.
-         Please check the file and check if your Layout parameters match your damaged pixel data.")
+         Please check the file and check if your Detector parameters match your damaged pixel data.")
   }
 
   # first consistency check: Detector dimensions okay?
-  if (layout$detector_height != dim(pix_matrix)[2]) {
+  if (detector$detector_height != dim(pix_matrix)[2]) {
     stop("Error: Number of rows in data file (hdf) incorrect.
-         Please check the file and check if your Layout parameters match your damaged pixel data.")
+         Please check the file and check if your Detector parameters match your damaged pixel data.")
   }
 
   return(pix_matrix)
@@ -85,11 +85,11 @@ matrix_from_hdf <- function(layout, file_path) {
 
 #' Reads in xml file and returns a pixel matrix
 #'
-#' @param layout Layout object
+#' @param detector Detector object
 #' @param file_path Path to the xml file
 #' @return Data from an xml file
 #' @export
-matrix_from_xml <- function(layout, file_path) {
+matrix_from_xml <- function(detector, file_path) {
 
   # decode bad pixel map list from xml file (pedestrian way...)
   xml_data <- suppressWarnings(matrix(scan(file_path,
@@ -115,8 +115,8 @@ matrix_from_xml <- function(layout, file_path) {
   # TODO: This is not a good approach as we first read in pix_dead and convert it to
   #  pix_matrix. Later on pix_dead is recunstructed again from pix_matrix.
   pix_matrix <- matrix(0,
-    nrow = layout$detector_width,
-    ncol = layout$detector_height
+    nrow = detector$detector_width,
+    ncol = detector$detector_height
   )
 
   for (i in c(1:dim(pix_dead)[1])) {
@@ -143,45 +143,45 @@ matrix_from_xml <- function(layout, file_path) {
 
 #' A function to load pixel data
 #'
-#' @param layout The name of the layout to be used
+#' @param detector The name of the detector to be used
 #' @param file_path Path(s) to the file(s) containing dead pixel information
-#' @return Layout object
+#' @return Detector object
 #' @importFrom grDevices jpeg pdf
 #' @export
-load_pix_matrix <- function(layout, file_path) {
+load_pix_matrix <- function(detector, file_path) {
   pix_matrix <- NA
 
   # check the number of files
   file_cnt <- length(file_path)
 
   if (file_cnt == 1) {
-    file_extansion <- tools::file_ext(file_path)
+    file_extension <- tools::file_ext(file_path)
 
-    if (file_extansion == "tif") {
-      pix_matrix <- matrix_from_tiff(layout = layout, file_path = file_path)
-    } else if (file_extansion == "xml") {
-      pix_matrix <- matrix_from_xml(layout = layout, file_path = file_path)
-    } else if (file_extansion == "hdf") {
-      pix_matrix <- matrix_from_hdf(layout = layout, file_path = file_path)
+    if (file_extension == "tif") {
+      pix_matrix <- matrix_from_tiff(detector = detector, file_path = file_path)
+    } else if (file_extension == "xml") {
+      pix_matrix <- matrix_from_xml(detector = detector, file_path = file_path)
+    } else if (file_extension == "hdf") {
+      pix_matrix <- matrix_from_hdf(detector = detector, file_path = file_path)
     } else {
-      stop(c("Undefined file extension: ", file_extansion, " [", file_path, "]"))
+      stop(c("Undefined file extension: ", file_extension, " [", file_path, "]"))
     }
   } else {
     # if we have a list of files, at the moment we assume that they are in the
     #   hdf format.
-    pix_matrix <- matrix_from_hdf(file_path = file_path, layout = layout)
+    pix_matrix <- matrix_from_hdf(file_path = file_path, detector = detector)
   }
 
   pix_dead <- dead_pix_coords(pix_matrix)
 
-  layout$pix_matrix <- pix_matrix
-  layout$pix_dead <- pix_dead
+  detector$pix_matrix <- pix_matrix
+  detector$pix_dead <- pix_dead
 
   # assigning a module to each dead pixels
-  dead_modules <- .assign_module(layout)
-  layout$pix_dead_modules <- dead_modules
+  dead_modules <- .assign_module(detector)
+  detector$pix_dead_modules <- dead_modules
 
-  return(layout)
+  return(detector)
 }
 
 #' Starts the graphics device driver for producing graphics with respect to a
@@ -191,15 +191,15 @@ load_pix_matrix <- function(layout, file_path) {
 #' @export
 ini_graphics <- function(file_path) {
   # choosing output format
-  file_extansion <- tools::file_ext(file_path)
+  file_extension <- tools::file_ext(file_path)
 
-  if ((file_extansion == "jpeg") || (file_extansion == "jpg")) {
+  if ((file_extension == "jpeg") || (file_extension == "jpg")) {
     jpeg(file_path)
-  } else if (file_extansion == "pdf") {
+  } else if (file_extension == "pdf") {
     pdf(file_path)
   } else {
     stop(c(
-      "Unknown output format: ", file_extansion, " [", file_path, "]\n",
+      "Unknown output format: ", file_extension, " [", file_path, "]\n",
       "Supported formats: jpeg, pdf"
     ))
   }

@@ -1,13 +1,13 @@
 #' @title Plots module
 
-#' Plots ppp object's density
+#' Plots density
 #'
 #' @param ppp_obj ppp object
 #' @param caption caption of the figure
 #' @param file_path file path
 #' @param adjust Kernel density bandwidth
 #' @importFrom graphics image par
-plot_density <- function(ppp_obj, caption, file_path = NA, adjust = 0.25) {
+plot_density <- function(ppp_obj, caption, file_path = NA, adjust = 1.) {
   if (nchar(caption) > 0) {
     par(mfrow = c(1, 1), mar = c(1, 1, 3, 1))
   } else {
@@ -19,14 +19,14 @@ plot_density <- function(ppp_obj, caption, file_path = NA, adjust = 0.25) {
     ini_graphics(file_path = file_path)
   }
 
-  image(density(ppp_obj, adjust = adjust), main = caption)
+  image(density(ppp_obj, adjust = adjust, edge = TRUE, sigma = spatstat::bw.ppl), main = caption)
 
   if (!is.na(file_path)) {
     dev.off()
   }
 }
 
-#' A function to plot NN oriented arrrows
+#' Plots NN oriented arrrows
 #'
 #' @param ppp_obj ppp object
 #' @param caption caption of the figure
@@ -58,7 +58,7 @@ plot_arrows <- function(ppp_obj, caption, file_path = NA) {
   }
 }
 
-#' ANGLES using nnorient() from spatstat package
+#' Plots NN angles
 #'
 #' @param ppp_obj ppp object
 #' @param caption caption of the figure
@@ -157,7 +157,7 @@ plot_kfg <- function(ppp_obj, func, file_path = NA, caption = TRUE) {
   }
 }
 
-#' A function to plot NN oriented arrrows
+#' Plots dead pixel counts 
 #'
 #' @param module_count_arr Counts per array
 #' @param caption caption of the figure

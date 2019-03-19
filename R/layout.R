@@ -1,6 +1,6 @@
-#' @title Layout module
+#' @title Detector module
 
-#' A S3 class to represent a detector layout.
+#' A S3 class to represent a detector.
 #'
 #' @param name detector's name
 #' @param date date
@@ -10,8 +10,8 @@
 #' @param module_row_n number of rows in the grid of modules
 #' @param module_col_sizes vector with widths of the modules
 #' @param module_row_sizes vector with heights of the modules
-#' @param module_edges_col !
-#' @param module_edges_row !
+#' @param module_edges_col vector of columns that contain edges of modules
+#' @param module_edges_row vector of rows that contain edges of modules
 #' @param gap_col_sizes vector with widths of the gaps
 #' @param gap_row_sizes vector with heights of the gaps
 #' @param detector_inconsistency counts inconsistencies found in parameters entered
@@ -20,9 +20,9 @@
 #' @param dead_stats dead pixel statistics
 #' @param pix_dead_modules assigned module for each dead pixel
 #' @param clumps clumps data (xyc_df data frame with pixels and their clump ID's, xyc_events data frame with clusters (clumps) and their clump ID's and centre coordinates)
-#' @return Layout object
+#' @return Detector object
 #' @export
-Default_Layout <- function(name = "Default", date = NA,
+Default_Detector <- function(name = "Default", date = NA,
                            detector_width = NA, detector_height = NA,
                            module_col_n = NA, module_row_n = NA,
                            module_col_sizes = NA, module_row_sizes = NA,
@@ -32,7 +32,7 @@ Default_Layout <- function(name = "Default", date = NA,
                            pix_matrix = NA, pix_dead = NA,
                            dead_stats = NA, pix_dead_modules = NA,
                            clumps = NA) {
-  layout <- list(
+  detector <- list(
     name = name,
     date = date,
 
@@ -60,12 +60,12 @@ Default_Layout <- function(name = "Default", date = NA,
     clumps = clumps
   )
 
-  layout <- derive_layout(layout)
+  detector <- .derive_detector(detector)
 
-  return(layout)
+  return(detector)
 }
 
-# Available layouts ------------------------------------------------------------
+# Available detectors ------------------------------------------------------------
 
 .Excalibur_name <- "Excalibur"
 .PerkinElmerFull_name <- "PerkinElmerFull"
@@ -73,8 +73,9 @@ Default_Layout <- function(name = "Default", date = NA,
 .PerkinElmerRefurbished_name <- "PerkinElmerRefurbished"
 .Pilatus_name <- "Pilatus"
 
+#' A list of available detectors
 #' @export
-available_layouts <- c(
+available_detectors <- c(
   .Excalibur_name, .PerkinElmerFull_name,
   .PerkinElmerCropped1600_name, .PerkinElmerRefurbished_name,
   .Pilatus_name
@@ -82,14 +83,14 @@ available_layouts <- c(
 
 # ------------------------------------------------------------------------------
 
-#' A S3 class to represent the Excalibur detector layout.
+#' A S3 class to represent the Excalibur detector.
 #'
-#' @return Excalibur layout object
+#' @return Excalibur detector object
 #' @export
-Excalibur_Layout <- function() {
+Excalibur_Detector <- function() {
   name <- .Excalibur_name
 
-  layout <- Default_Layout(
+  detector <- Default_Detector(
     name = name,
     detector_width = 2048,
     detector_height = 1536,
@@ -104,17 +105,17 @@ Excalibur_Layout <- function() {
     detector_inconsistency = 0
   )
 
-  return(layout)
+  return(detector)
 }
 
-#' A S3 class to represent the PerkinElmerFull detector layout.
+#' A S3 class to represent the PerkinElmerFull detector.
 #'
-#' @return PerkinElmerFul layout object
+#' @return PerkinElmerFul detector object
 #' @export
-PerkinElmerFull_Layout <- function() {
+PerkinElmerFull_Detector <- function() {
   name <- .PerkinElmerFull_name
 
-  layout <- Default_Layout(
+  detector <- Default_Detector(
     name = name,
     detector_width = 2000,
     detector_height = 2000,
@@ -129,17 +130,17 @@ PerkinElmerFull_Layout <- function() {
     detector_inconsistency = 0
   )
 
-  return(layout)
+  return(detector)
 }
 
-#' A S3 class to represent the PerkinElmerCropped1600 detector layout.
+#' A S3 class to represent the PerkinElmerCropped1600 detector.
 #'
-#' @return PerkinElmerCropped1600 layout object
+#' @return PerkinElmerCropped1600 detector object
 #' @export
-PerkinElmerCropped1600_Layout <- function() {
+PerkinElmerCropped1600_Detector <- function() {
   name <- .PerkinElmerCropped1600_name
 
-  layout <- Default_Layout(
+  detector <- Default_Detector(
     name = name,
     detector_width = 2000,
     detector_height = 1600,
@@ -154,17 +155,17 @@ PerkinElmerCropped1600_Layout <- function() {
     detector_inconsistency = 0
   )
 
-  return(layout)
+  return(detector)
 }
 
-#' A S3 class to represent the PerkinElmerRefurbished detector layout.
+#' A S3 class to represent the PerkinElmerRefurbished detector.
 #'
-#' @return PerkinElmerRefurbished layout object
+#' @return PerkinElmerRefurbished detector object
 #' @export
-PerkinElmerRefurbished_Layout <- function() {
+PerkinElmerRefurbished_Detector <- function() {
   name <- .PerkinElmerRefurbished_name
 
-  layout <- Default_Layout(
+  detector <- Default_Detector(
     name = name,
     detector_width = 2000,
     detector_height = 2000,
@@ -179,17 +180,17 @@ PerkinElmerRefurbished_Layout <- function() {
     detector_inconsistency = 0
   )
 
-  return(layout)
+  return(detector)
 }
 
-#' A S3 class to represent the PerkinElmerRefurbished detector layout.
+#' A S3 class to represent the PerkinElmerRefurbished detector.
 #'
-#' @return Pilatus layout object
+#' @return Pilatus detector object
 #' @export
-Pilatus_Layout <- function() {
+Pilatus_Detector <- function() {
   name <- .Pilatus_name
 
-  layout <- Default_Layout(
+  detector <- Default_Detector(
     name = name,
     detector_width = 2527,
     detector_height = 2463,
@@ -204,27 +205,27 @@ Pilatus_Layout <- function() {
     detector_inconsistency = 0
   )
 
-  return(layout)
+  return(detector)
 }
 
-# Layout selection -------------------------------------------------------------
+# Detector selection -------------------------------------------------------------
 
-#' Checks whether specified layout is available
+#' Checks whether specified detector is available
 #'
-#' @param layout_name The name of the layout
+#' @param detector_name The name of the detector
 #' @return True or False
 #' @export
-check_layout_avail <- function(layout_name) {
-  avail <- layout_name %in% available_layouts
+check_detector_avail <- function(detector_name) {
+  avail <- detector_name %in% available_detectors
 
   if (!avail) {
     cnt <- 0
-    for (available_layout in available_layouts) {
+    for (available_detector in available_detectors) {
       if (cnt == 0) {
-        available_layouts_list <- available_layout
+        available_detectors_list <- available_detector
       } else {
-        available_layouts_list <- paste(available_layouts_list,
-          available_layout,
+        available_detectors_list <- paste(available_detectors_list,
+          available_detector,
           sep = ", "
         )
       }
@@ -233,58 +234,58 @@ check_layout_avail <- function(layout_name) {
     }
 
     stop(c(
-      "Layout [", layout_name, "] is not available.\n",
-      "Available layouts: ", available_layouts_list
+      "Detector [", detector_name, "] is not available.\n",
+      "Available detectors: ", available_detectors_list
     ))
   }
 
   return(avail)
 }
 
-#' Checks whether layout is available, if so, creates a Layout object
+#' Checks whether detector is available, if so, creates a Detector object
 #'
-#' @param layout_name The name of the layout
-#' @return Layout object
+#' @param detector_name The name of the detector
+#' @return Detector object
 #' @export
-create_module <- function(layout_name) {
-  layout <- NA
+create_module <- function(detector_name) {
+  detector <- NA
 
-  # Check if we know about layout_name
-  if (check_layout_avail(layout_name)) {
-    if (layout_name == .Excalibur_name) {
-      layout <- Excalibur_Layout()
-    } else if (layout_name == .PerkinElmerFull_name) {
-      layout <- PerkinElmerFull_Layout()
-    } else if (layout_name == .PerkinElmerCropped1600_name) {
-      layout <- PerkinElmerCropped1600_Layout()
-    } else if (layout_name == .PerkinElmerRefurbished_name) {
-      layout <- PerkinElmerRefurbished_Layout()
-    } else if (layout_name == .Pilatus_name) {
-      layout <- Pilatus_Layout()
+  # Check if we know about detector_name
+  if (check_detector_avail(detector_name)) {
+    if (detector_name == .Excalibur_name) {
+      detector <- Excalibur_Detector()
+    } else if (detector_name == .PerkinElmerFull_name) {
+      detector <- PerkinElmerFull_Detector()
+    } else if (detector_name == .PerkinElmerCropped1600_name) {
+      detector <- PerkinElmerCropped1600_Detector()
+    } else if (detector_name == .PerkinElmerRefurbished_name) {
+      detector <- PerkinElmerRefurbished_Detector()
+    } else if (detector_name == .Pilatus_name) {
+      detector <- Pilatus_Detector()
     } else {
-      stop(c("Layout [", layout_name, "] is available but has not been properly
+      stop(c("Detector [", detector_name, "] is available but has not been properly
              implemented."))
     }
   }
 
-  return(layout)
+  return(detector)
 }
 
-# Layout functions -------------------------------------------------------------
+# Detector functions -------------------------------------------------------------
 
 #' Basic checks if parameters entered (slightly redundant on purpose) add up
 #'
-#' @param layout Layout object
+#' @param detector Detector object
 #' @export
-layout_consist_check <- function(layout = NA) {
-  if (is.list(layout)) {
+detector_consist_check <- function(detector = NA) {
+  if (is.list(detector)) {
     error <- ""
 
     detector_inconsistency <- 0 # counts inconsistencies found
 
     # Total size of detector
-    check_value <- sum(layout$module_col_sizes) + sum(layout$gap_col_sizes)
-    if (layout$detector_width != check_value) {
+    check_value <- sum(detector$module_col_sizes) + sum(detector$gap_col_sizes)
+    if (detector$detector_width != check_value) {
 
       # This is not need for the first check, but just in case more tests will
       #   be added before it
@@ -293,21 +294,21 @@ layout_consist_check <- function(layout = NA) {
       error <- c(
         error, "Dectector width is not the sum or the widths of the
                  modules and the gaps between them. Please check if you entered
-                 the correct sizes. ", layout$detector_width, " /= ",
+                 the correct sizes. ", detector$detector_width, " /= ",
         check_value
       )
 
       detector_inconsistency <- detector_inconsistency + 1
     }
 
-    check_value <- sum(layout$module_row_sizes) + sum(layout$gap_row_sizes)
-    if (layout$detector_height != check_value) {
+    check_value <- sum(detector$module_row_sizes) + sum(detector$gap_row_sizes)
+    if (detector$detector_height != check_value) {
       if (detector_inconsistency != 0) error <- c(error, "\n")
 
       error <- c(
         error, "Dectector height is not the sum or the heights of the
                  modules and the gaps between them. Please check if you entered
-                 the correct sizes. ", layout$detector_height, " /= ",
+                 the correct sizes. ", detector$detector_height, " /= ",
         check_value
       )
 
@@ -315,26 +316,26 @@ layout_consist_check <- function(layout = NA) {
     }
 
     # Module numbers and size vectors
-    check_value <- length(layout$module_col_sizes)
-    if (layout$module_col_n != check_value) {
+    check_value <- length(detector$module_col_sizes)
+    if (detector$module_col_n != check_value) {
       if (detector_inconsistency != 0) error <- c(error, "\n")
 
       error <- c(
         error, "Number of modules per row does not match the length of
-                 the vector of their widths. ", layout$module_col_n, " /= ",
+                 the vector of their widths. ", detector$module_col_n, " /= ",
         check_value
       )
 
       detector_inconsistency <- detector_inconsistency + 1
     }
 
-    check_value <- length(layout$module_row_sizes)
-    if (layout$module_row_n != check_value) {
+    check_value <- length(detector$module_row_sizes)
+    if (detector$module_row_n != check_value) {
       if (detector_inconsistency != 0) error <- c(error, "\n")
 
       error <- c(
         error, "Number of modules per column does not match the length
-                 of the vector of their heights. ", layout$module_row_n, " /= ",
+                 of the vector of their heights. ", detector$module_row_n, " /= ",
         check_value
       )
 
@@ -343,186 +344,180 @@ layout_consist_check <- function(layout = NA) {
 
     # If inconsistencies were detected, stop
     if (detector_inconsistency > 0) {
-      layout$detector_inconsistency <- detector_inconsistency
+      detector$detector_inconsistency <- detector_inconsistency
       stop(error)
     }
   } else {
-    stop("Detector layout object has not been initialized.")
+    stop("Detector detector object has not been initialized.")
   }
 
   return(TRUE)
 }
 
-# TODO: improve the definition of the function
-#' Defines the coordinates of layout's edges using module and gap sizes
-#'
+#' Defines the coordinates of detector's edges using module and gap sizes
 #' Function is in 1d context to be applied to rows and cols separately.
 #' Edges are inside the modules (first/last row/col of module).
+#'
 #' @param m vector of module sizes
 #' @param g vectors of gap sizes
 #' @return Matrix with the information about the edges
 #' @export
-layout_edges <- function(m, g) {
+detector_edges <- function(m, g) {
   if (length(m) - 1 != length(g)) {
     # This should be picked by the consistency check too
     stop("The number of modules or gaps is incorrect.")
   } else {
-    layout_edges <- matrix(nrow = 2, ncol = length(m))
+    detector_edges <- matrix(nrow = 2, ncol = length(m))
 
-    layout_edges[1, 1] <- 1
-    layout_edges[2, 1] <- m[1]
+    detector_edges[1, 1] <- 1
+    detector_edges[2, 1] <- m[1]
 
     for (i in 2:length(m)) {
-      layout_edges[1, i] <- layout_edges[2, i - 1] + g[i - 1] + 1
-      layout_edges[2, i] <- layout_edges[1, i] - 1 + m[i]
+      detector_edges[1, i] <- detector_edges[2, i - 1] + g[i - 1] + 1
+      detector_edges[2, i] <- detector_edges[1, i] - 1 + m[i]
     }
   }
 
-  return(layout_edges)
+  return(detector_edges)
 }
 
-# TODO: improve the definition of the function
-#' Deriving additional layout elements
-#'
-#' Conditions additional elements of Layout object that are frequently used later
+#' Deriving additional detector elements
+#' Conditions additional elements of Detector object that are frequently used later
 #' They are calculated from parameters defined in examples
 #' Matrices that contains xy coordiantes of edges of modules
 #' By definition, edges are part of modules (not part of gaps)
 #' i.e. for each module two pairs: first/last col and first/last row.
-#' @param layout Layout object
-#' @return Layout object
-#' @export
-derive_layout <- function(layout) {
-  module_edges_col <- layout_edges(layout$module_col_sizes, layout$gap_col_sizes)
+#'
+#' @param detector Detector object
+#' @return Detector object
+.derive_detector <- function(detector) {
+  module_edges_col <- detector_edges(detector$module_col_sizes, detector$gap_col_sizes)
   dimnames(module_edges_col)[[1]] <- c("left", "right")
 
   # displayed in transposed (rows are listed in columns)
-  module_edges_row <- layout_edges(layout$module_row_sizes, layout$gap_row_sizes)
+  module_edges_row <- detector_edges(detector$module_row_sizes, detector$gap_row_sizes)
   dimnames(module_edges_row)[[1]] <- c("top", "bottom")
 
-  layout$module_edges_col <- module_edges_col
-  layout$module_edges_row <- module_edges_row
+  detector$module_edges_col <- module_edges_col
+  detector$module_edges_row <- module_edges_row
 
-  return(layout)
+  return(detector)
 }
 
-#' TODO: Better description of the function
-#' This is the ppp_edges_col function
+#' This is the ppp_edges_col creation function
 #'
-#' @param layout Layout object
+#' @param detector Detector object
 #' @return Point pattern dataset
 #' @export
-create_ppp_edges_col <- function(layout) {
-  vedges <- as.vector(layout$module_edges_col)
+create_ppp_edges_col <- function(detector) {
+  vedges <- as.vector(detector$module_edges_col)
 
-  ytmp <- rep(1:layout$detector_height, length(vedges))
-  xtmp <- rep(vedges, rep(layout$detector_height, length(vedges)))
+  ytmp <- rep(1:detector$detector_height, length(vedges))
+  xtmp <- rep(vedges, rep(detector$detector_height, length(vedges)))
 
   ppp_edges_col <- spatstat::ppp(
-    xtmp, ytmp, c(1, layout$detector_width),
-    c(1, layout$detector_height)
+    xtmp, ytmp, c(1, detector$detector_width),
+    c(1, detector$detector_height)
   )
 
   return(ppp_edges_col)
 }
 
-#' TODO: Better description of the function
-#' This is the create_ppp_edges_row function
+
+#' This is the create_ppp_edges_row creation function
 #'
-#' @param layout Layout object
+#' @param detector Detector object
 #' @return Point pattern dataset
 #' @export
-create_ppp_edges_row <- function(layout) {
-  vedges <- as.vector(layout$module_edges_row)
+create_ppp_edges_row <- function(detector) {
+  vedges <- as.vector(detector$module_edges_row)
 
-  xtmp <- rep(1:layout$detector_width, length(vedges))
-  ytmp <- rep(vedges, rep(layout$detector_width, length(vedges)))
+  xtmp <- rep(1:detector$detector_width, length(vedges))
+  ytmp <- rep(vedges, rep(detector$detector_width, length(vedges)))
 
   ppp_edges_row <- spatstat::ppp(
-    xtmp, ytmp, c(1, layout$detector_width),
-    c(1, layout$detector_height)
+    xtmp, ytmp, c(1, detector$detector_width),
+    c(1, detector$detector_height)
   )
 
   return(ppp_edges_row)
 }
 
-#' TODO: Better description of the function
-#' This is a function
+#' Creates ppp object of horizontal gaps 
 #'
-#' @param layout Layout object
+#' @param detector Detector object
 #' @return Point pattern dataset
 #' @export
-create_ppp_gaps_col <- function(layout) {
+create_ppp_gaps_col <- function(detector) {
   vgaps <- c()
 
-  for (i in 1:(layout$module_col_n - 1)) {
-    vgaps <- c(vgaps, ((layout$module_edges_col[2, i] + 1):
-    (layout$module_edges_col[1, i + 1] - 1)))
+  for (i in 1:(detector$module_col_n - 1)) {
+    vgaps <- c(vgaps, ((detector$module_edges_col[2, i] + 1):
+    (detector$module_edges_col[1, i + 1] - 1)))
   }
 
-  ytmp <- rep(1:layout$detector_height, length(vgaps))
-  xtmp <- rep(vgaps, rep(layout$detector_height, length(vgaps)))
+  ytmp <- rep(1:detector$detector_height, length(vgaps))
+  xtmp <- rep(vgaps, rep(detector$detector_height, length(vgaps)))
 
   ppp_gaps_col <- spatstat::ppp(
-    xtmp, ytmp, c(1, layout$detector_width),
-    c(1, layout$detector_height)
+    xtmp, ytmp, c(1, detector$detector_width),
+    c(1, detector$detector_height)
   )
 
   return(ppp_gaps_col)
 }
 
-#' TODO: Better description of the function
-#' This is a function
+#' Creates ppp object of vertical gaps 
 #'
-#' @param layout Layout object
+#' @param detector Detector object
 #' @return Point pattern dataset
 #' @export
-create_ppp_gaps_row <- function(layout) {
+create_ppp_gaps_row <- function(detector) {
   vgaps <- c()
 
-  for (i in 1:(layout$module_row_n - 1)) {
-    vgaps <- c(vgaps, ((layout$module_edges_row[2, i] + 1):
-    (layout$module_edges_row[1, i + 1] - 1)))
+  for (i in 1:(detector$module_row_n - 1)) {
+    vgaps <- c(vgaps, ((detector$module_edges_row[2, i] + 1):
+    (detector$module_edges_row[1, i + 1] - 1)))
   }
 
-  xtmp <- rep(1:layout$detector_width, length(vgaps))
-  ytmp <- rep(vgaps, rep(layout$detector_width, length(vgaps)))
+  xtmp <- rep(1:detector$detector_width, length(vgaps))
+  ytmp <- rep(vgaps, rep(detector$detector_width, length(vgaps)))
 
   ppp_gaps_row <- spatstat::ppp(
-    xtmp, ytmp, c(1, layout$detector_width),
-    c(1, layout$detector_height)
+    xtmp, ytmp, c(1, detector$detector_width),
+    c(1, detector$detector_height)
   )
 
   return(ppp_gaps_row)
 }
 
-#' Generate layout ppps
+#' Generate detector ppps for edges and gaps
 #'
-#' @param layout Layout object
+#' @param detector Detector object
 #' @return a list of ppps for edges and gaps
-.get_layout_ppps <- function(layout) {
-  ppp_edges_col <- create_ppp_edges_col(layout)
-  ppp_edges_row <- create_ppp_edges_row(layout)
+.get_detector_ppps <- function(detector) {
+  ppp_edges_col <- create_ppp_edges_col(detector)
+  ppp_edges_row <- create_ppp_edges_row(detector)
 
-  # Does the layout have gaps?
-  if (sum(layout$gap_col_sizes) + sum(layout$gap_row_sizes) != 0) {
+  # Does the detector have gaps?
+  if (sum(detector$gap_col_sizes) + sum(detector$gap_row_sizes) != 0) {
     ppp_gaps_col <- NULL
     ppp_gaps_row <- NULL
   } else {
-    ppp_gaps_col <- create_ppp_gaps_col(layout)
-    ppp_gaps_row <- create_ppp_gaps_row(layout)
+    ppp_gaps_col <- create_ppp_gaps_col(detector)
+    ppp_gaps_row <- create_ppp_gaps_row(detector)
   }
 
   return(list(ppp_edges_col, ppp_edges_row, ppp_gaps_col, ppp_gaps_row))
 }
 
-#' Plotting layout
+#' Plot detector
 #'
-#' @param layout Layout object
+#' @param detector Detector object
 #' @param file_path Output file path
 #' @param caption Flag to turn on/off figure caption
 #' @export
-plot_layout <- function(layout, file_path = NA, caption = TRUE) {
+plot_detector <- function(detector, file_path = NA, caption = TRUE) {
   if (!caption) par(mar = c(0, 0, 0, 0))
   main_caption <- ""
 
@@ -532,14 +527,14 @@ plot_layout <- function(layout, file_path = NA, caption = TRUE) {
     ini_graphics(file_path = file_path)
   }
 
-  edges_gaps <- .get_layout_ppps(layout)
+  edges_gaps <- .get_detector_ppps(detector)
 
   ppp_edges_col <- edges_gaps[[1]]
   ppp_edges_row <- edges_gaps[[2]]
 
-  if (sum(layout$gap_col_sizes) + sum(layout$gap_row_sizes) == 0) {
+  if (sum(detector$gap_col_sizes) + sum(detector$gap_row_sizes) == 0) {
     if (caption) {
-      main_caption <- paste(layout$name, "layout\n (black=module edges)")
+      main_caption <- paste(detector$name, "detector\n (black=module edges)")
     }
 
     # vertical lines in x-positions given by xlines
@@ -549,7 +544,7 @@ plot_layout <- function(layout, file_path = NA, caption = TRUE) {
     points(ppp_edges_row, pch = ".")
   } else {
     if (caption) {
-      main_caption <- paste(layout$name, "layout\n (black=module edges, grey=gaps)")
+      main_caption <- paste(detector$name, "detector\n (black=module edges, grey=gaps)")
     }
 
     # Define point patterns (spatstat) capturing gaps
@@ -574,54 +569,55 @@ plot_layout <- function(layout, file_path = NA, caption = TRUE) {
   }
 }
 
-#' Returns a string with the layout summary
+#' Generates a string with the detector summary
 #'
-#' @param layout Layout object
-#' @return String with the layout summary
+#' @param detector Detector object
+#' @return String with the detector summary
 #' @export
-layout_summary <- function(layout) {
+detector_summary <- function(detector) {
   summary <- paste("Detector:", "\n", "")
-  summary <- paste(summary, "Name: ", layout$name, "\n", "")
-  summary <- paste(summary, "Date: ", layout$date, "\n", "")
-  summary <- paste(summary, "Width: ", layout$detector_width, "\n", "")
-  summary <- paste(summary, "Height: ", layout$detector_height, "\n", "")
-  summary <- paste(summary, "Number of columns in array of module (= number of modules per row): ", layout$module_col_n, "\n", "")
-  summary <- paste(summary, "Number of rows in array of module (= number of modules per column): ", layout$module_row_n, "\n", "")
-  summary <- paste(summary, "Widths of modules: ", paste(layout$module_col_sizes, collapse = " "), "\n", "")
-  summary <- paste(summary, "Heights of modules: ", paste(layout$module_row_sizes, collapse = " "), "\n", "")
-  summary <- paste(summary, "Widths of gaps between modules: ", paste(layout$gap_col_sizes, collapse = " "), "\n", "")
-  summary <- paste(summary, "Heights of gaps between modules: ", paste(layout$gap_row_sizes, collapse = " "), "\n", "")
+  summary <- paste(summary, "Name: ", detector$name, "\n", "")
+  summary <- paste(summary, "Date: ", detector$date, "\n", "")
+  summary <- paste(summary, "Width: ", detector$detector_width, "\n", "")
+  summary <- paste(summary, "Height: ", detector$detector_height, "\n", "")
+  summary <- paste(summary, "Number of columns in array of module (= number of modules per row): ", detector$module_col_n, "\n", "")
+  summary <- paste(summary, "Number of rows in array of module (= number of modules per column): ", detector$module_row_n, "\n", "")
+  summary <- paste(summary, "Widths of modules: ", paste(detector$module_col_sizes, collapse = " "), "\n", "")
+  summary <- paste(summary, "Heights of modules: ", paste(detector$module_row_sizes, collapse = " "), "\n", "")
+  summary <- paste(summary, "Widths of gaps between modules: ", paste(detector$gap_col_sizes, collapse = " "), "\n", "")
+  summary <- paste(summary, "Heights of gaps between modules: ", paste(detector$gap_row_sizes, collapse = " "), "\n", "")
 
   return(summary)
 }
 
-#' Reads in a user defined layout from a file
-#' @param file_path A path to the user defined layout file
-#' @return Layout object
+#' Reads in a user defined detector from a file
+#'
+#' @param file_path A path to the user defined detector file
+#' @return Detector object
 #' @export
-readin_layout <- function(file_path) {
+readin_detector <- function(file_path) {
   name <- "user-defined"
 
   # reads file as a string line
   file_string <- readr::read_file(file_path)
 
-  detector_width <- .extract_layout_parameter(file_string, "detector_width")
-  detector_height <- .extract_layout_parameter(file_string, "detector_height")
+  detector_width <- .extract_detector_parameter(file_string, "detector_width")
+  detector_height <- .extract_detector_parameter(file_string, "detector_height")
 
   if (is.na(detector_width) || is.na(detector_height)) {
     stop("Cannot determine detector's width/height. Is the file format correct?")
   }
 
-  module_col_n <- .extract_layout_parameter(file_string, "module_col_n")
-  module_row_n <- .extract_layout_parameter(file_string, "module_row_n")
-  module_col_sizes <- .extract_layout_parameter(file_string, "module_col_sizes")
-  module_row_sizes <- .extract_layout_parameter(file_string, "module_row_sizes")
-  gap_col_sizes <- .extract_layout_parameter(file_string, "gap_col_sizes")
-  gap_row_sizes <- .extract_layout_parameter(file_string, "gap_row_sizes")
-  module_edges_col <- .extract_layout_parameter(file_string, "module_edges_col")
-  module_edges_row <- .extract_layout_parameter(file_string, "module_edges_row")
+  module_col_n <- .extract_detector_parameter(file_string, "module_col_n")
+  module_row_n <- .extract_detector_parameter(file_string, "module_row_n")
+  module_col_sizes <- .extract_detector_parameter(file_string, "module_col_sizes")
+  module_row_sizes <- .extract_detector_parameter(file_string, "module_row_sizes")
+  gap_col_sizes <- .extract_detector_parameter(file_string, "gap_col_sizes")
+  gap_row_sizes <- .extract_detector_parameter(file_string, "gap_row_sizes")
+  module_edges_col <- .extract_detector_parameter(file_string, "module_edges_col")
+  module_edges_row <- .extract_detector_parameter(file_string, "module_edges_row")
 
-  layout <- Default_Layout(
+  detector <- Default_Detector(
     name = name,
     detector_width = detector_width,
     detector_height = detector_height,
@@ -636,8 +632,8 @@ readin_layout <- function(file_path) {
     detector_inconsistency = 0
   )
 
-  if (layout_consist_check(layout)) {
-    return(layout)
+  if (detector_consist_check(detector)) {
+    return(detector)
   } else {
     return(NA)
   }
