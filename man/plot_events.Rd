@@ -15,6 +15,8 @@ plot_events(detector, file_path = NA, caption = TRUE,
 \item{caption}{Flag to turn on/off figure caption}
 
 \item{incl_event_list}{a list of events to be included}
+
+\item{plot_edges_gaps}{Plot edgees gaps}
 }
 \description{
 Plots damaged detector events

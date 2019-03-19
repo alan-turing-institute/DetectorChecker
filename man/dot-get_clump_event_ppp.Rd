@@ -11,6 +11,10 @@
 \item{detector}{Detector object}
 
 \item{incl_event_list}{a list of events to be included}
+
+\item{height}{Detector height}
+
+\item{width}{Detector width}
 }
 \value{
 ppp object for damaged detector events
