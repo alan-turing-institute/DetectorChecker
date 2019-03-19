@@ -6,6 +6,16 @@
 \usage{
 .check_select(detector, row, col)
 }
+\arguments{
+\item{detector}{Detector object}
+
+\item{row}{module row}
+
+\item{col}{module col}
+}
+\value{
+Boolean
+}
 \description{
 Checks if the selected row and column are within the boundaries of the detector
 }

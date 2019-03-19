@@ -97,6 +97,7 @@ library(igraph)
 #' Clasifies clumps with respect to xy coordinates.
 #'
 #' @param detector Detector object
+#' @param xyc_pixel_df xyc_pixel_df
 #' @return data frame with clasification results
 .xyc_ply_func <- function(detector, xyc_pixel_df) {
   dataFrame <- plyr::ddply(xyc_pixel_df, "id",
@@ -277,6 +278,7 @@ find_clumps <- function(detector, row = NA, col = NA) {
 #' @param file_path Output file path
 #' @param caption Flag to turn on/off figure caption
 #' @param incl_event_list a list of events to be included
+#' @param plot_edges_gaps Plot edgees gaps
 #' @export
 plot_events <- function(detector, file_path = NA, caption = TRUE, incl_event_list = NA,
                         plot_edges_gaps = TRUE) {
@@ -368,6 +370,8 @@ plot_module_events <- function(detector, col, row, file_path = NA, caption = TRU
 #'
 #' @param detector Detector object
 #' @param incl_event_list a list of events to be included
+#' @param height Detector height
+#' @param width Detector width
 #' @return ppp object for damaged detector events
 .get_clump_event_ppp <- function(detector, incl_event_list = NA,
                                  height = NULL, width = NULL) {

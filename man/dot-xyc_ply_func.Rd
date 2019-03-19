@@ -8,6 +8,8 @@
 }
 \arguments{
 \item{detector}{Detector object}
+
+\item{xyc_pixel_df}{xyc_pixel_df}
 }
 \value{
 data frame with clasification results

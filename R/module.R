@@ -52,7 +52,11 @@ which_module_idx <- function(x, y, module_edges_col, module_edges_row) {
 }
 
 #' Checks if the selected row and column are within the boundaries of the detector
-
+#'
+#' @param detector Detector object
+#' @param row module row
+#' @param col module col
+#' @return Boolean
 .check_select <- function(detector, row, col) {
   ok <- TRUE
 
