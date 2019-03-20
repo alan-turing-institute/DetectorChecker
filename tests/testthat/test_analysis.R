@@ -8,7 +8,7 @@ test_that("Pilatus", {
   pilatus_detector <- create_module(detector_name)
 
   # getting the dead (damaged) pixel data
-  dead_path <- system.file("inst", "extdata", "Pilatus", "badpixel_mask.tif", package = "DetectorChecker")
+  dead_path <- system.file(  "extdata", "Pilatus", "badpixel_mask.tif", package = "detectorchecker")
   
   # file.path(
   #   test_dir, "dead_pix", "Pilatus",
@@ -40,7 +40,7 @@ test_that("Perkin Elmer", {
   perkinelmerfull_detector <- create_module(detector_name)
 
   # getting the dead (damaged) pixel data
-  dead_path <- system.file("inst", "extdata", "PerkinElmer", "BadPixelMap_0.bpm", "BadPixelMap.bpm.xml", package = "DetectorChecker")
+  dead_path <- system.file(  "extdata", "PerkinElmer", "BadPixelMap_0.bpm", "BadPixelMap.bpm.xml", package = "detectorchecker")
   
   # file.path(
   #   test_dir, "dead_pix", "PerkinElmer",
@@ -103,12 +103,12 @@ test_that("Excalibur - mutiple files", {
   excalibur_detector <- create_module(detector_name)
 
   # getting the dead (damaged) pixel data
-  dead_paths <- c(  system.file("inst", "extdata",  "Excalibur", "pixelmask.fem1.hdf", package = "DetectorChecker"), 
-                    system.file("inst", "extdata",  "Excalibur", "pixelmask.fem2.hdf", package = "DetectorChecker"),
-                    system.file("inst", "extdata",  "Excalibur", "pixelmask.fem3.hdf", package = "DetectorChecker"),
-                    system.file("inst", "extdata",  "Excalibur", "pixelmask.fem4.hdf", package = "DetectorChecker"),
-                    system.file("inst", "extdata",  "Excalibur", "pixelmask.fem5.hdf", package = "DetectorChecker"),
-                    system.file("inst", "extdata",  "Excalibur", "pixelmask.fem6.hdf", package = "DetectorChecker"))
+  dead_paths <- c(  system.file(  "extdata",  "Excalibur", "pixelmask.fem1.hdf", package = "detectorchecker"), 
+                    system.file(  "extdata",  "Excalibur", "pixelmask.fem2.hdf", package = "detectorchecker"),
+                    system.file(  "extdata",  "Excalibur", "pixelmask.fem3.hdf", package = "detectorchecker"),
+                    system.file(  "extdata",  "Excalibur", "pixelmask.fem4.hdf", package = "detectorchecker"),
+                    system.file(  "extdata",  "Excalibur", "pixelmask.fem5.hdf", package = "detectorchecker"),
+                    system.file(  "extdata",  "Excalibur", "pixelmask.fem6.hdf", package = "detectorchecker"))
   
 
   excalibur_detector <- load_pix_matrix(detector = excalibur_detector, file_path = dead_paths)
@@ -134,7 +134,7 @@ test_that("Pilatus", {
   detector <- create_module("Pilatus")
 
   # getting the dead (damaged) pixel data
-  dead_path <- system.file("inst", "extdata",  "Pilatus", "badpixel_mask.tif", package = "DetectorChecker")
+  dead_path <- system.file(  "extdata",  "Pilatus", "badpixel_mask.tif", package = "detectorchecker")
 
 
   detector <- load_pix_matrix(detector = detector, file_path = dead_path)
@@ -168,7 +168,7 @@ test_that("PerkinElmerFull", {
   detector <- create_module("PerkinElmerFull")
 
   # getting the dead (damaged) pixel data
-  test_path <- system.file("inst", "extdata",  "PerkinElmer", "BadPixelMap_0.bpm", "BadPixelMap.bpm.xml", package = "DetectorChecker")
+  test_path <- system.file(  "extdata",  "PerkinElmer", "BadPixelMap_0.bpm", "BadPixelMap.bpm.xml", package = "detectorchecker")
   
   detector <- load_pix_matrix(detector = detector, file_path = test_path)
 
@@ -190,7 +190,7 @@ test_that("Perkin Elmer", {
   perkinelmerfull_detector <- create_module(detector_name)
 
   # getting the dead (damaged) pixel data
-  dead_path <- system.file("inst", "extdata",  "PerkinElmer", "BadPixelMap_0.bpm", "BadPixelMap.bpm.xml", package = "DetectorChecker")
+  dead_path <- system.file(  "extdata",  "PerkinElmer", "BadPixelMap_0.bpm", "BadPixelMap.bpm.xml", package = "detectorchecker")
   
 
   perkinelmerfull_detector <- load_pix_matrix(detector = perkinelmerfull_detector, file_path = dead_path)
@@ -268,7 +268,7 @@ test_that("Perkin Elmer", {
   detector <- create_module(detector_name)
 
   # getting the dead (damaged) pixel data
-  dead_path <- system.file("inst", "extdata",  "PerkinElmer", "BadPixelMap_0.bpm", "BadPixelMap.bpm.xml", package = "DetectorChecker")
+  dead_path <- system.file(  "extdata",  "PerkinElmer", "BadPixelMap_0.bpm", "BadPixelMap.bpm.xml", package = "detectorchecker")
    
   detector <- load_pix_matrix(detector = detector, file_path = dead_path)
 
