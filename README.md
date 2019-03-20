@@ -1,6 +1,6 @@
 # DetectorChecker
 
-R package to assess developing detector screen damage
+DetectorChecker is an R package to aid in the assessment of damage to CT scanners arising from exposure to high energy radiation.
 
 
 
