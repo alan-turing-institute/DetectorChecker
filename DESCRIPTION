@@ -1,4 +1,4 @@
-Package: DetectorChecker
+Package: detectorchecker
 Type: Package
 Title: An package for analysing pixel damage in CT Scanners
 Version: 0.1.10
