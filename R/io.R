@@ -133,7 +133,6 @@ matrix_from_xml <- function(detector, file_path) {
 #'
 #' @param s String expression?
 #' @return Numeric value
-#' @export
 .extract_number <- function(s) {
   v <- substring(s, 4, 4 + nchar(s) - 5)
   v <- as.numeric(v)
