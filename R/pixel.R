@@ -361,7 +361,7 @@ get_dead_pix_mask <- function(detector) {
 #' 
 #' @param detector Detector object
 #' @param min_pts minimum points argument of dbscan function
-#' @param eps_adjust 
+#' @param eps_adjust adjust eps
 #' @return detector object with high density cluster of pixels removed 
 #' @export  
 remove_high_density_cluster <- function(detector, min_pts = 30, eps_adjust = 0.05){
