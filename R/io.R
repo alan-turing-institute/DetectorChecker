@@ -171,6 +171,18 @@ load_pix_matrix <- function(detector, file_path) {
     pix_matrix <- matrix_from_hdf(file_path = file_path, detector = detector)
   }
 
+
+  detector <- .assign_pixel_matrix(detector, pix_matrix)  
+
+  return(detector)
+}
+
+#' Assign dead pixels to a detector
+#'
+#' @param detector Detector object
+#' @param pix_matrix A pixel matrix
+.assign_pixel_matrix <- function(detector, pix_matrix){
+
   pix_dead <- dead_pix_coords(pix_matrix)
 
   detector$pix_matrix <- pix_matrix

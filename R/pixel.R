@@ -354,3 +354,47 @@ get_dead_pix_mask <- function(detector) {
 
   return(mask)
 }
+
+
+#' Remove high density cluster of dead pixels
+#' Recalculates dead statistics and clumps if they were present in the Detector object
+#' 
+#' @param detector Detector object
+#' @param min_pts minimum points argument of dbscan function
+#' @param eps_adjust adjust eps
+#' @return detector object with high density cluster of pixels removed 
+#' @export  
+remove_high_density_cluster <- function(detector, min_pts = 30, eps_adjust = 0.05){
+
+  ppp <- get_ppp_dead(detector)
+
+  # Find clusters
+  A <- cbind(ppp$x, ppp$y)
+  epsLayout <- min(detector$detector_width, detector$detector_height) * eps_adjust
+  res <- dbscan::dbscan(A, eps = epsLayout, min_pts)    #border points are included, not noise in this context 
+  Nclusters <- length(unique(res$cluster))
+
+  # Remove clusters
+  A0 <- A[res$cluster == 0, ]
+
+  # Create a new pix_matrix without clusters
+  pix_matrix <- matrix(0, nrow = detector$detector_width, ncol = detector$detector_height)
+  pix_matrix[ cbind( A0[, 1], A0[, 2] ) ] = 1
+
+  #Reassign matrix to detector  
+  mod_detector <- .assign_pixel_matrix(detector, pix_matrix)
+
+  # Check if any detector variables need updating
+
+  if (!is.na(mod_detector$dead_stats)){
+    mod_detector <- get_dead_stats(mod_detector)
+  }
+
+  if (!is.na(mod_detector$clumps)){
+    mod_detector <- find_clumps(mod_detector) 
+  }
+
+  return(mod_detector)
+
+
+}
