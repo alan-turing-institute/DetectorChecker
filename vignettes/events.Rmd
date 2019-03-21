@@ -11,7 +11,7 @@ Damaged detector
 ```{r}
 pilatus_detector <- create_module("Pilatus")
 
-file_path <- "../tests/testthat/dead_pix/Pilatus/badpixel_mask.tif"
+file_path <- "../inst/extdata/Pilatus/badpixel_mask.tif"
 
 pilatus_detector <- load_pix_matrix(detector = pilatus_detector, file_path = file_path)
 

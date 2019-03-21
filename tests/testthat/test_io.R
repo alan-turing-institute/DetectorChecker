@@ -9,7 +9,7 @@ test_that("TIFF", {
   detector <- Pilatus_Detector()
 
   # TIFF file
-  test_path <- file.path(test_dir, "dead_pix", "Pilatus", "badpixel_mask.tif")
+  test_path <- system.file(  "extdata", "Pilatus", "badpixel_mask.tif", package = "detectorchecker")  
 
   # pixel matrix, with dead pixels flagged
   detector <- load_pix_matrix(detector = detector, file_path = test_path)
@@ -23,16 +23,16 @@ test_that("TIFF", {
 
 test_that("HDF", {
   test_dir <- getwd()
-
+  
   # Excalibur detector unit test
   detector <- Excalibur_Detector()
 
-  test_path1 <- file.path(test_dir, "dead_pix", "Excalibur", "pixelmask.fem1.hdf")
-  test_path2 <- file.path(test_dir, "dead_pix", "Excalibur", "pixelmask.fem2.hdf")
-  test_path3 <- file.path(test_dir, "dead_pix", "Excalibur", "pixelmask.fem3.hdf")
-  test_path4 <- file.path(test_dir, "dead_pix", "Excalibur", "pixelmask.fem4.hdf")
-  test_path5 <- file.path(test_dir, "dead_pix", "Excalibur", "pixelmask.fem5.hdf")
-  test_path6 <- file.path(test_dir, "dead_pix", "Excalibur", "pixelmask.fem6.hdf")
+  test_path1 <- system.file(  "extdata", "Excalibur", "pixelmask.fem1.hdf", package = "detectorchecker")  
+  test_path2 <- system.file(  "extdata", "Excalibur", "pixelmask.fem2.hdf", package = "detectorchecker")
+  test_path3 <- system.file(  "extdata", "Excalibur", "pixelmask.fem3.hdf", package = "detectorchecker")
+  test_path4 <- system.file(  "extdata", "Excalibur", "pixelmask.fem4.hdf", package = "detectorchecker")
+  test_path5 <- system.file(  "extdata", "Excalibur", "pixelmask.fem5.hdf", package = "detectorchecker")
+  test_path6 <- system.file(  "extdata", "Excalibur", "pixelmask.fem6.hdf", package = "detectorchecker")
 
   test_list <- c(test_path1, test_path2, test_path3, test_path4, test_path5, test_path6)
 
@@ -51,11 +51,13 @@ test_that("XML", {
 
   test_dir <- getwd()
 
-  test_path <- file.path(
-    test_dir, "dead_pix", "PerkinElmer",
-    "BadPixelMap_0.bpm",
-    "BadPixelMap.bpm.xml"
-  )
+  test_path <- system.file(  "extdata", "PerkinElmer", "BadPixelMap_0.bpm", "BadPixelMap.bpm.xml", package = "detectorchecker")
+  
+  # file.path(
+  #   test_dir, "dead_pix", "PerkinElmer",
+  #   "BadPixelMap_0.bpm",
+  #   "BadPixelMap.bpm.xml"
+  # )
 
   detector <- load_pix_matrix(detector = detector, file_path = test_path)
 

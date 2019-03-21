@@ -1,9 +1,12 @@
-Package: DetectorChecker
+Package: detectorchecker
 Type: Package
 Title: An package for analysing pixel damage in CT Scanners
 Version: 0.1.10
-Authors@R: person("First", "Last", email = "first.last@example.com",
-                  role = c("aut", "cre"))
+Authors@R: c(
+        person("Oscar", "Giles", email = "ogiles@turing.ac.uk", role = c("aut", "cre")),
+        person("Tomas", "Lazauskas", email = "tlazauskas@turing.ac.uk", role = c("aut")),
+        person("Wilfrid", "Kendall", email = "W.S.Kendall@warwick.ac.uk", role = c("aut")),
+        person("Julia", "Brettschneider", email = "jabrettschneider@me.com", role = c("aut")))
 Description: The description of a package is usually long,
     spanning multiple lines. The second and subsequent lines
     should be indented, usually with four spaces.
