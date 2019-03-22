@@ -85,75 +85,7 @@ plot_detector_module_damaged <- function(detector, col, row, file_path = NA,
   }
 }
 
-#' A function to plot detector with damaged pixels
-#'
-#' @param detector Detector object
-#' @param file_path Output file path
-#' @param caption Flag to turn on/off figure caption
-#' @importFrom graphics points
-#' @export
-plot_detector_damaged <- function(detector, file_path = NA, caption = TRUE) {
-  main_caption <- ""
-  if (!caption) par(mar = c(0, 0, 0, 0))
 
-  ppp_dead <- get_ppp_dead(detector)
-
-  ppp_edges_col <- create_ppp_edges_col(detector)
-  ppp_edges_row <- create_ppp_edges_row(detector)
-
-  if (!is.na(file_path)) {
-    # starts the graphics device driver
-    ini_graphics(file_path = file_path)
-  }
-
-  if (sum(detector$gap_col_sizes) + sum(detector$gap_row_sizes) == 0) {
-    if (caption) {
-      main_caption <- paste(detector$name, "with damaged pixels\n (black=module edges)")
-    }
-
-    # vertical lines in x-positions given by xlines
-    plot(ppp_edges_col, pch = ".", cex.main = 0.7, main = main_caption)
-
-    # horizontal lines in y-positions given by ylines
-    points(ppp_edges_row, pch = ".")
-  } else {
-
-    # Define point patterns (spatstat) capturing gaps
-    ppp_gaps_col <- create_ppp_gaps_col(detector)
-    ppp_gaps_row <- create_ppp_gaps_row(detector)
-
-    if (caption) {
-      main_caption <- paste(detector$name, "with damaged pixels\n (black=module edges, grey=gaps)")
-    }
-
-    # vertical lines in x-positions given by xlines
-    plot(ppp_edges_col, pch = ".", cex.main = 0.7, main = main_caption)
-
-    # horizontal lines in y-positions given by ylines
-    points(ppp_edges_row, pch = ".")
-
-    # cols without pixels (gaps)
-    points(ppp_gaps_col, pch = ".", col = "grey")
-
-    # rows without pixels (gaps)
-    points(ppp_gaps_row, pch = ".", col = "grey")
-  }
-
-  # Question:
-  # Instead of pch=22 (empty square) would like dead pixels
-  # in full but opaque squares (pch=15)like below (works!)
-  # plot(ppp.dead, pch=15,  cex=0.7, transparent=TRUE)
-  # Tried using par transparent and alpha also in points(), but but there is does not work
-  # Changing order of plot() and points() above is not a way out,
-  # because of the titles and because they detector should be printed under the
-  # damaged pixels rather than cover them up.
-
-  points(ppp_dead, pch = 22, col = "brown", cex = 0.7)
-
-  if (!is.na(file_path)) {
-    dev.off()
-  }
-}
 
 #' A function to plot detector with dead pixel counts per module
 #'
@@ -493,52 +425,51 @@ plot_detector_angles <- function(detector, file_path = NA, row = NA, col = NA,
 #'
 #' @param v vector
 #' @return norm of the vector v
-#' @export
-norm_vec <- function(v) {
+.norm_vec <- function(v) {
   norm <- sqrt(sum(v^2))
   return(norm)
 }
 
-#' Estimates the distance between vectors v and w
-#'
-#' @param v vector
-#' @param w vector
-#' @return distance between vectors v and w
-#' @export
-dist_vec <- function(v, w) {
-  norm_vec(v - w)
-}
+# #' Estimates the distance between vectors v and w
+# #'
+# #' @param v vector
+# #' @param w vector
+# #' @return distance between vectors v and w
+# #' @export
+# dist_vec <- function(v, w) {
+#   .norm_vec(v - w)
+# }
 
-#' Calculates distance and orientation of the oriented vector between two points
-#' in order of the second pointing to first (reflecting nearest neighbour (nn) framework)
-#' v, w point coordinates indicating vectors wrt to the origin.
-#' Values: distance and orientation (in [0,360) degrees) of w pointing towards v.
-#' @param v vector
-#' @param w vector
-#' @return distance and orientation of the oriented vector between two points
-#' @export
-orient_dist_vec <- function(v, w) {
-  v <- v - w
-  w <- c(0, 0)
-  tmp1 <- norm_vec(v)
-  v <- v / tmp1
-  x <- v[1]
-  y <- v[2]
-  tmp2 <- asin(abs(y)) * 180 / pi
+# #' Calculates distance and orientation of the oriented vector between two points
+# #' in order of the second pointing to first (reflecting nearest neighbour (nn) framework)
+# #' v, w point coordinates indicating vectors wrt to the origin.
+# #' Values: distance and orientation (in [0,360) degrees) of w pointing towards v.
+# #' @param v vector
+# #' @param w vector
+# #' @return distance and orientation of the oriented vector between two points
+# #' @export
+# orient_dist_vec <- function(v, w) {
+#   v <- v - w
+#   w <- c(0, 0)
+#   tmp1 <- .norm_vec(v)
+#   v <- v / tmp1
+#   x <- v[1]
+#   y <- v[2]
+#   tmp2 <- asin(abs(y)) * 180 / pi
 
-  if (x >= 0) {
-    if (y < 0) {
-      tmp2 <- 360 - tmp2
-    }
-  } else {
-    tmp2 <- 180 - sign(y) * tmp2
-  }
+#   if (x >= 0) {
+#     if (y < 0) {
+#       tmp2 <- 360 - tmp2
+#     }
+#   } else {
+#     tmp2 <- 180 - sign(y) * tmp2
+#   }
 
-  orient_dist_vec <- list(tmp2, tmp1)
-  names(orient_dist_vec) <- c("orient", "dist")
+#   orient_dist_vec <- list(tmp2, tmp1)
+#   names(orient_dist_vec) <- c("orient", "dist")
 
-  return(orient_dist_vec)
-}
+#   return(orient_dist_vec)
+# }
 
 
 # #' Calculates orientation of the oriented vector between two points

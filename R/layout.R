@@ -21,8 +21,7 @@
 #' @param pix_dead_modules assigned module for each dead pixel
 #' @param clumps clumps data (xyc_df data frame with pixels and their clump ID's, xyc_events data frame with clusters (clumps) and their clump ID's and centre coordinates)
 #' @return Detector object
-#' @export
-Default_Detector <- function(name = "Default", date = NA,
+.Default_Detector <- function(name = "Default", date = NA,
                            detector_width = NA, detector_height = NA,
                            module_col_n = NA, module_row_n = NA,
                            module_col_sizes = NA, module_row_sizes = NA,
@@ -90,7 +89,7 @@ available_detectors <- c(
 Excalibur_Detector <- function() {
   name <- .Excalibur_name
 
-  detector <- Default_Detector(
+  detector <- .Default_Detector(
     name = name,
     detector_width = 2048,
     detector_height = 1536,
@@ -115,7 +114,7 @@ Excalibur_Detector <- function() {
 PerkinElmerFull_Detector <- function() {
   name <- .PerkinElmerFull_name
 
-  detector <- Default_Detector(
+  detector <- .Default_Detector(
     name = name,
     detector_width = 2000,
     detector_height = 2000,
@@ -140,7 +139,7 @@ PerkinElmerFull_Detector <- function() {
 PerkinElmerCropped1600_Detector <- function() {
   name <- .PerkinElmerCropped1600_name
 
-  detector <- Default_Detector(
+  detector <- .Default_Detector(
     name = name,
     detector_width = 2000,
     detector_height = 1600,
@@ -165,7 +164,7 @@ PerkinElmerCropped1600_Detector <- function() {
 PerkinElmerRefurbished_Detector <- function() {
   name <- .PerkinElmerRefurbished_name
 
-  detector <- Default_Detector(
+  detector <- .Default_Detector(
     name = name,
     detector_width = 2000,
     detector_height = 2000,
@@ -190,7 +189,7 @@ PerkinElmerRefurbished_Detector <- function() {
 Pilatus_Detector <- function() {
   name <- .Pilatus_name
 
-  detector <- Default_Detector(
+  detector <- .Default_Detector(
     name = name,
     detector_width = 2527,
     detector_height = 2463,
@@ -361,8 +360,7 @@ detector_consist_check <- function(detector = NA) {
 #' @param m vector of module sizes
 #' @param g vectors of gap sizes
 #' @return Matrix with the information about the edges
-#' @export
-detector_edges <- function(m, g) {
+.detector_edges <- function(m, g) {
   if (length(m) - 1 != length(g)) {
     # This should be picked by the consistency check too
     stop("The number of modules or gaps is incorrect.")
@@ -391,11 +389,11 @@ detector_edges <- function(m, g) {
 #' @param detector Detector object
 #' @return Detector object
 .derive_detector <- function(detector) {
-  module_edges_col <- detector_edges(detector$module_col_sizes, detector$gap_col_sizes)
+  module_edges_col <- .detector_edges(detector$module_col_sizes, detector$gap_col_sizes)
   dimnames(module_edges_col)[[1]] <- c("left", "right")
 
   # displayed in transposed (rows are listed in columns)
-  module_edges_row <- detector_edges(detector$module_row_sizes, detector$gap_row_sizes)
+  module_edges_row <- .detector_edges(detector$module_row_sizes, detector$gap_row_sizes)
   dimnames(module_edges_row)[[1]] <- c("top", "bottom")
 
   detector$module_edges_col <- module_edges_col
@@ -408,8 +406,7 @@ detector_edges <- function(m, g) {
 #'
 #' @param detector Detector object
 #' @return Point pattern dataset
-#' @export
-create_ppp_edges_col <- function(detector) {
+.create_ppp_edges_col <- function(detector) {
   vedges <- as.vector(detector$module_edges_col)
 
   ytmp <- rep(1:detector$detector_height, length(vedges))
@@ -428,8 +425,7 @@ create_ppp_edges_col <- function(detector) {
 #'
 #' @param detector Detector object
 #' @return Point pattern dataset
-#' @export
-create_ppp_edges_row <- function(detector) {
+.create_ppp_edges_row <- function(detector) {
   vedges <- as.vector(detector$module_edges_row)
 
   xtmp <- rep(1:detector$detector_width, length(vedges))
@@ -447,8 +443,7 @@ create_ppp_edges_row <- function(detector) {
 #'
 #' @param detector Detector object
 #' @return Point pattern dataset
-#' @export
-create_ppp_gaps_col <- function(detector) {
+.create_ppp_gaps_col <- function(detector) {
   vgaps <- c()
 
   for (i in 1:(detector$module_col_n - 1)) {
@@ -471,8 +466,7 @@ create_ppp_gaps_col <- function(detector) {
 #'
 #' @param detector Detector object
 #' @return Point pattern dataset
-#' @export
-create_ppp_gaps_row <- function(detector) {
+.create_ppp_gaps_row <- function(detector) {
   vgaps <- c()
 
   for (i in 1:(detector$module_row_n - 1)) {
@@ -496,20 +490,91 @@ create_ppp_gaps_row <- function(detector) {
 #' @param detector Detector object
 #' @return a list of ppps for edges and gaps
 .get_detector_ppps <- function(detector) {
-  ppp_edges_col <- create_ppp_edges_col(detector)
-  ppp_edges_row <- create_ppp_edges_row(detector)
+  ppp_edges_col <- .create_ppp_edges_col(detector)
+  ppp_edges_row <- .create_ppp_edges_row(detector)
 
   # Does the detector have gaps?
   if (sum(detector$gap_col_sizes) + sum(detector$gap_row_sizes) != 0) {
     ppp_gaps_col <- NULL
     ppp_gaps_row <- NULL
   } else {
-    ppp_gaps_col <- create_ppp_gaps_col(detector)
-    ppp_gaps_row <- create_ppp_gaps_row(detector)
+    ppp_gaps_col <- .create_ppp_gaps_col(detector)
+    ppp_gaps_row <- .create_ppp_gaps_row(detector)
   }
 
   return(list(ppp_edges_col, ppp_edges_row, ppp_gaps_col, ppp_gaps_row))
 }
+
+#' A function to plot detector with damaged pixels
+#'
+#' @param detector Detector object
+#' @param file_path Output file path
+#' @param caption Flag to turn on/off figure caption
+#' @importFrom graphics points
+#' @export
+plot_detector_damaged <- function(detector, file_path = NA, caption = TRUE) {
+  main_caption <- ""
+  if (!caption) par(mar = c(0, 0, 0, 0))
+
+  ppp_dead <- get_ppp_dead(detector)
+
+  ppp_edges_col <- .create_ppp_edges_col(detector)
+  ppp_edges_row <- .create_ppp_edges_row(detector)
+
+  if (!is.na(file_path)) {
+    # starts the graphics device driver
+    ini_graphics(file_path = file_path)
+  }
+
+  if (sum(detector$gap_col_sizes) + sum(detector$gap_row_sizes) == 0) {
+    if (caption) {
+      main_caption <- paste(detector$name, "with damaged pixels\n (black=module edges)")
+    }
+
+    # vertical lines in x-positions given by xlines
+    plot(ppp_edges_col, pch = ".", cex.main = 0.7, main = main_caption)
+
+    # horizontal lines in y-positions given by ylines
+    points(ppp_edges_row, pch = ".")
+  } else {
+
+    # Define point patterns (spatstat) capturing gaps
+    ppp_gaps_col <- .create_ppp_gaps_col(detector)
+    ppp_gaps_row <- .create_ppp_gaps_row(detector)
+
+    if (caption) {
+      main_caption <- paste(detector$name, "with damaged pixels\n (black=module edges, grey=gaps)")
+    }
+
+    # vertical lines in x-positions given by xlines
+    plot(ppp_edges_col, pch = ".", cex.main = 0.7, main = main_caption)
+
+    # horizontal lines in y-positions given by ylines
+    points(ppp_edges_row, pch = ".")
+
+    # cols without pixels (gaps)
+    points(ppp_gaps_col, pch = ".", col = "grey")
+
+    # rows without pixels (gaps)
+    points(ppp_gaps_row, pch = ".", col = "grey")
+  }
+
+  # Question:
+  # Instead of pch=22 (empty square) would like dead pixels
+  # in full but opaque squares (pch=15)like below (works!)
+  # plot(ppp.dead, pch=15,  cex=0.7, transparent=TRUE)
+  # Tried using par transparent and alpha also in points(), but but there is does not work
+  # Changing order of plot() and points() above is not a way out,
+  # because of the titles and because they detector should be printed under the
+  # damaged pixels rather than cover them up.
+
+  points(ppp_dead, pch = 22, col = "brown", cex = 0.7)
+
+  if (!is.na(file_path)) {
+    dev.off()
+  }
+}
+
 
 #' Plot detector
 #'
@@ -617,7 +682,7 @@ readin_detector <- function(file_path) {
   module_edges_col <- .extract_detector_parameter(file_string, "module_edges_col")
   module_edges_row <- .extract_detector_parameter(file_string, "module_edges_row")
 
-  detector <- Default_Detector(
+  detector <- .Default_Detector(
     name = name,
     detector_width = detector_width,
     detector_height = detector_height,

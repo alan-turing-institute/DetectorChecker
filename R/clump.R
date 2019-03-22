@@ -443,41 +443,41 @@ get_events_mask <- function(detector) {
   return(mask)
 }
 
-#' Plots damaged detector pixels and events
-#'
-#' @param detector Detector object
-#' @param file_path Output file path
-#' @param caption Flag to turn on/off figure caption
-#' @param incl_event_list a list of events to be included
-#' @export
-plot_pixels_events <- function(detector, file_path = NA, caption = TRUE, incl_event_list = NA) {
-  if (!caption) {
-    main_caption <- ""
-    par(mar = c(0, 0, 0, 0))
-  } else {
-    main_caption <- "Defective pixels (black) and events (red)"
-    par(mfrow = c(1, 1), mar = c(0, 0, 4, 0) + 0.1, oma = c(0, 0, 0, 0))
-  }
+# #' Plots damaged detector pixels and events
+# #'
+# #' @param detector Detector object
+# #' @param file_path Output file path
+# #' @param caption Flag to turn on/off figure caption
+# #' @param incl_event_list a list of events to be included
+# #' @export
+# plot_pixels_events <- function(detector, file_path = NA, caption = TRUE, incl_event_list = NA) {
+#   if (!caption) {
+#     main_caption <- ""
+#     par(mar = c(0, 0, 0, 0))
+#   } else {
+#     main_caption <- "Defective pixels (black) and events (red)"
+#     par(mfrow = c(1, 1), mar = c(0, 0, 4, 0) + 0.1, oma = c(0, 0, 0, 0))
+#   }
 
-  if (!is.na(file_path)) {
-    # starts the graphics device driver
-    ini_graphics(file_path = file_path)
-  }
+#   if (!is.na(file_path)) {
+#     # starts the graphics device driver
+#     ini_graphics(file_path = file_path)
+#   }
 
-  ppp_pixels <- .get_clump_pixel_ppp(detector, incl_event_list = incl_event_list)
-  ppp_events <- .get_clump_event_ppp(detector, incl_event_list = incl_event_list)
+#   ppp_pixels <- .get_clump_pixel_ppp(detector, incl_event_list = incl_event_list)
+#   ppp_events <- .get_clump_event_ppp(detector, incl_event_list = incl_event_list)
 
-  # Defective pixels
-  plot(ppp_pixels, pch = 22, main = main_caption)
+#   # Defective pixels
+#   plot(ppp_pixels, pch = 22, main = main_caption)
 
-  # Defective events
-  # plot(ppp_events, pch=22, col=2, main="Defective events") doesn't work, hense, cheat:
-  points(ppp_events, pch = 22, col = 2)
+#   # Defective events
+#   # plot(ppp_events, pch=22, col=2, main="Defective events") doesn't work, hense, cheat:
+#   points(ppp_events, pch = 22, col = 2)
 
-  if (!is.na(file_path)) {
-    dev.off()
-  }
-}
+#   if (!is.na(file_path)) {
+#     dev.off()
+#   }
+# }
 
 #' Plots density graph of events of a detector or module
 #'

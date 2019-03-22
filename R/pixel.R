@@ -77,8 +77,7 @@ pixel_dist_ctr_linf <- function(detector) {
 #' @param x Coordinate of pixel
 #' @param size Size of module
 #' @return distance to closest edge
-#' @export
-dist_closest_edge <- function(x, size) {
+.dist_closest_edge <- function(x, size) {
   # Why x-1? Because pixel locations start in 1, but we want both edges inside detector for symmetry
   return(min(x - 1, size - x))
 }
@@ -95,7 +94,7 @@ dist_corner <- function(detector) {
 
   xx <- matrix(sapply(
     c(1:detector$detector_width),
-    function(x) dist_closest_edge(x, detector$detector_width)
+    function(x) .dist_closest_edge(x, detector$detector_width)
   ),
   nrow = detector$detector_height,
   ncol = detector$detector_width, byrow = TRUE
@@ -103,7 +102,7 @@ dist_corner <- function(detector) {
 
   yy <- matrix(sapply(
     c(1:detector$detector_height),
-    function(x) dist_closest_edge(x, detector$detector_height)
+    function(x) .dist_closest_edge(x, detector$detector_height)
   ),
   nrow = detector$detector_height,
   ncol = detector$detector_width
@@ -282,58 +281,58 @@ plot_pixel_dist_edge <- function(detector, file_path = NA) {
   )
 }
 
-#' Counts dead pixels outside of detector and in gaps between modules and give warnings
-#'
-#' @param dead_data Dead pixel locations
-#' @param detector Detector object
-#' @return Inconsistency message
-#' @export
-inconsist_dead_detector <- function(dead_data, detector) {
-  error <- ""
+# #' Counts dead pixels outside of detector and in gaps between modules and give warnings
+# #'
+# #' @param dead_data Dead pixel locations
+# #' @param detector Detector object
+# #' @return Inconsistency message
+# #' @export
+# inconsist_dead_detector <- function(dead_data, detector) {
+#   error <- ""
 
-  outleft <- sum(dead_data[, 1] < 1)
-  outright <- sum(dead_data[, 1] > detector$detector_width)
+#   outleft <- sum(dead_data[, 1] < 1)
+#   outright <- sum(dead_data[, 1] > detector$detector_width)
 
-  outtop <- sum(dead_data[, 2] < 1)
-  outbottom <- sum(dead_data[, 2] > detector$detector_height)
+#   outtop <- sum(dead_data[, 2] < 1)
+#   outbottom <- sum(dead_data[, 2] > detector$detector_height)
 
-  colgaps <- c()
-  if (sum(detector$gap_col_sizes) != 0) {
-    for (i in 1:(detector$module_col_n - 1)) {
-      colgaps <- c(colgaps, (detector$module_edges_col[2, i] + 1):(detector$module_edges_col[1, i + 1] - 1))
-    }
-  }
+#   colgaps <- c()
+#   if (sum(detector$gap_col_sizes) != 0) {
+#     for (i in 1:(detector$module_col_n - 1)) {
+#       colgaps <- c(colgaps, (detector$module_edges_col[2, i] + 1):(detector$module_edges_col[1, i + 1] - 1))
+#     }
+#   }
 
-  rowgaps <- c()
-  if (sum(detector$gap_row_sizes) != 0) {
-    for (i in 1:(detector$module_row_n - 1)) {
-      rowgaps <- c(rowgaps, (detector$module_edges_row[2, i] + 1):(detector$module_edges_row[1, i + 1] - 1))
-    }
-  }
+#   rowgaps <- c()
+#   if (sum(detector$gap_row_sizes) != 0) {
+#     for (i in 1:(detector$module_row_n - 1)) {
+#       rowgaps <- c(rowgaps, (detector$module_edges_row[2, i] + 1):(detector$module_edges_row[1, i + 1] - 1))
+#     }
+#   }
 
-  in_gaps_dead <- c()
+#   in_gaps_dead <- c()
 
-  in_gaps <- function(i, coo) {
-    return((coo[i, 1] %in% colgaps) | (coo[i, 2] %in% rowgaps))
-  }
+#   in_gaps <- function(i, coo) {
+#     return((coo[i, 1] %in% colgaps) | (coo[i, 2] %in% rowgaps))
+#   }
 
-  in_gaps_dead <- vector(length = dim(dead_data)[1])
+#   in_gaps_dead <- vector(length = dim(dead_data)[1])
 
-  for (i in 1:length(in_gaps_dead)) {
-    in_gaps_dead[i] <- in_gaps(i, dead_data)
-  }
+#   for (i in 1:length(in_gaps_dead)) {
+#     in_gaps_dead[i] <- in_gaps(i, dead_data)
+#   }
 
-  if (sum(in_gaps_dead) != 0) {
-    cat(paste("Warning: ", sum(in_gaps_dead),
-      " of the coordinates of damaged pixels correspond to locations in gaps between modules of the detector.\n",
-      sep = ""
-    ))
-  }
+#   if (sum(in_gaps_dead) != 0) {
+#     cat(paste("Warning: ", sum(in_gaps_dead),
+#       " of the coordinates of damaged pixels correspond to locations in gaps between modules of the detector.\n",
+#       sep = ""
+#     ))
+#   }
 
-  inconsistency <- list(outleft, outtop, outright, outbottom, sum(in_gaps_dead))
-  names(inconsistency) <- c("left", "top", "right", "bottom", "gaps")
-  return(inconsistency)
-}
+#   inconsistency <- list(outleft, outtop, outright, outbottom, sum(in_gaps_dead))
+#   names(inconsistency) <- c("left", "top", "right", "bottom", "gaps")
+#   return(inconsistency)
+# }
 
 #' Creates a mask matrix of dead pixels
 #'

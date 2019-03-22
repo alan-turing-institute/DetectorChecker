@@ -6,8 +6,7 @@
 #' @param detector Detector object
 #' @param file_path Path to the tiff file
 #' @return Pixel matrix with dead pixels flagged with 1
-#' @export
-matrix_from_tiff <- function(detector, file_path) {
+.matrix_from_tiff <- function(detector, file_path) {
 
   # reading in the data
   tiff_data <- tiff::readTIFF(file_path, as.is = TRUE)
@@ -40,8 +39,7 @@ matrix_from_tiff <- function(detector, file_path) {
 #' @param detector Detector object
 #' @param file_path A list of paths to hdf files. Must be in the correct order.
 #' @return Data of a combined dataset from hdf files
-#' @export
-matrix_from_hdf <- function(detector, file_path) {
+.matrix_from_hdf <- function(detector, file_path) {
   data <- NA
   hdf_data <- NA
 
@@ -88,8 +86,7 @@ matrix_from_hdf <- function(detector, file_path) {
 #' @param detector Detector object
 #' @param file_path Path to the xml file
 #' @return Data from an xml file
-#' @export
-matrix_from_xml <- function(detector, file_path) {
+.matrix_from_xml <- function(detector, file_path) {
 
   # decode bad pixel map list from xml file (pedestrian way...)
   xml_data <- suppressWarnings(matrix(scan(file_path,
@@ -157,18 +154,18 @@ load_pix_matrix <- function(detector, file_path) {
     file_extension <- tools::file_ext(file_path)
 
     if (file_extension == "tif") {
-      pix_matrix <- matrix_from_tiff(detector = detector, file_path = file_path)
+      pix_matrix <- .matrix_from_tiff(detector = detector, file_path = file_path)
     } else if (file_extension == "xml") {
-      pix_matrix <- matrix_from_xml(detector = detector, file_path = file_path)
+      pix_matrix <- .matrix_from_xml(detector = detector, file_path = file_path)
     } else if (file_extension == "hdf") {
-      pix_matrix <- matrix_from_hdf(detector = detector, file_path = file_path)
+      pix_matrix <- .matrix_from_hdf(detector = detector, file_path = file_path)
     } else {
       stop(c("Undefined file extension: ", file_extension, " [", file_path, "]"))
     }
   } else {
     # if we have a list of files, at the moment we assume that they are in the
     #   hdf format.
-    pix_matrix <- matrix_from_hdf(file_path = file_path, detector = detector)
+    pix_matrix <- .matrix_from_hdf(file_path = file_path, detector = detector)
   }
 
 

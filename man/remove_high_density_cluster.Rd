@@ -12,7 +12,7 @@ remove_high_density_cluster(detector, min_pts = 30, eps_adjust = 0.05)
 
 \item{min_pts}{minimum points argument of dbscan function}
 
-\item{eps_adjust}{}
+\item{eps_adjust}{adjust eps}
 }
 \value{
 detector object with high density cluster of pixels removed
