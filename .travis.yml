@@ -1,0 +1,21 @@
+# R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
+
+      
+language: R
+sudo: required
+cache: packages
+
+warnings_are_errors: false
+
+# Using xenial dist as default (trusty) has older version of hdf5 which isn't supported by hdf5r package. 
+dist: xenial
+
+branches:
+  only:
+    - develop
+    - master
+
+apt_packages:
+  - libhdf5-dev
+
+
