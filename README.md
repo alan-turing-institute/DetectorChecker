@@ -1,15 +1,20 @@
 # DetectorChecker
 
+
+## Overview
+
 DetectorChecker is an R package to aid in the assessment of damage to CT scanners arising from exposure to high energy radiation.
 
 
+## Installation 
 
-## Directory structure
+```
+install_github("alan-turing-institute/DetectorChecker/")
+```
 
-`Documentation` - The DetectorChecker documentation
+### Development version
 
-`examples` - Example datasets
-
-
-`Original_code` - original R source code given by Wilfrid Kendall
-
+```
+# install.packages("devtools")
+devtools::install_github("alan-turing-institute/DetectorChecker/", ref = "develop")
+```
