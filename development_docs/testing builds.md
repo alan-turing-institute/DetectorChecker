@@ -2,6 +2,8 @@
 
 We want to test the package on Mac OS, Linux and Windows. The following instructions details how to run tests on all these machines, assuming you are testing on a Mac OS machine without access to Windows or Linux.
 
+It is **very important** to test the build on Windows before merging into the Master branch, as we are not using continuous integration for Windows at the moment.
+
 
 ## Testing on Mac
 
