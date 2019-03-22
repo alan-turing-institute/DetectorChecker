@@ -110,8 +110,8 @@ test_that("plot module events by type", {
     if (file.exists(test_out_path)) file.remove(test_out_path)
 
     # output file
-    test_out_path <- "perkin_events_kfgj.png"
-    plot_events_kfg(detector_events, file_path = test_out_path, func = "Kinhom", row = row_, col = col_, caption = FALSE, incl_event_list = incl_event_list)
+    test_out_path <- "perkin_events_kfg.jpg"
+    plot_events_kfg(detector_events, file_path = test_out_path, func = "K", row = row_, col = col_, caption = FALSE, incl_event_list = incl_event_list)
     # Check whether the file was created
     expect_that(file.exists(test_out_path), is_true())
     # Removing the test output file
