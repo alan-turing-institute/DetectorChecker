@@ -54,5 +54,3 @@ rsconnect/
 # Files used in generating the pdf documentation
 .Rd2pdf*/
 
-# Development doc files
-/development_docs/
