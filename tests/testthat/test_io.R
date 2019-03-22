@@ -51,7 +51,7 @@ test_that("XML", {
 
   test_dir <- getwd()
 
-  test_path <- system.file(  "extdata", "PerkinElmer", "BadPixelMap_0.bpm", "BadPixelMap.bpm.xml", package = "detectorchecker")
+  test_path <- system.file(  "extdata", "PerkinElmer_Full", "BadPixelMap.bpm", "BadPixelMap_t1.bpm.xml", package = "detectorchecker")
   
   # file.path(
   #   test_dir, "dead_pix", "PerkinElmer",
