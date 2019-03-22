@@ -196,37 +196,6 @@ plot_detector_angles(detector = detector_perkin, row = 1, col = 5)
 
 ```
 
-## Model fitting
-
-```{r}
-detector_pilatus <- create_module("Pilatus")
-
-file_path <- "../inst/extdata/Pilatus/badpixel_mask.tif"
-
-detector_pilatus <- load_pix_matrix(detector = detector_pilatus, file_path = file_path)
-
-glm_fit <- glm_pixel_ctr_eucl(detector = detector_pilatus)
-
-summary(glm_fit)
-```
-
-#### Similarly:
-```{r}
-detector_pilatus <- create_module("Pilatus")
-
-file_path <- "../inst/extdata/Pilatus/badpixel_mask.tif"
-
-detector_pilatus <- load_pix_matrix(detector = detector_pilatus, file_path = file_path)
-
-dist_col <- dist_edge_col(detector_pilatus)
-dist_row <- dist_edge_row(detector_pilatus)
-
-glm_fit <- perform_glm(as.vector(detector_pilatus$pix_matrix) ~ as.vector(dist_col) + as.vector(dist_row))
-
-summary(glm_fit)
-
-```
-
 ## KFG Analysis
 
 ### K, F, G plots
