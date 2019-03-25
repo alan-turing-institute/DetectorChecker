@@ -14,7 +14,7 @@ DetectorChecker is a project aimed at developing software in R to enable assessm
 - apply multivariate regression models for damage analysis,
 - perform individual panel analysis.
 
-More detailed description of the package can be
+The instruction manual of the package can be found here (ADD LINK).
 
 ## WebApp
 
