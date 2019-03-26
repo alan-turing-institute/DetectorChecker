@@ -26,15 +26,15 @@ devtools::install_github("alan-turing-institute/DetectorChecker/", ref = "develo
 ## Examples
 DetectorChecker includes a number of example datasets for five detector types:
 
-1. PerkinElmer $\times$ 2
+1. PerkinElmer
  
-2. PerkinElmer Refurbished $\times$ 2
+2. PerkinElmer Refurbished 
 
-3. PerkinElmer Cropped $\times$ 2
+3. PerkinElmer Cropped 
 
-4. Pilatus $\times$ 1
+4. Pilatus 
 
-5. Excalibur $\times$ 1
+5. Excalibur 
 
 
 The user guide vignette provides detailed instructions for using the package and loading specific examples:
