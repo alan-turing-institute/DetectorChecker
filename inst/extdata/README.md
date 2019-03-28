@@ -19,8 +19,14 @@ Examples are provided for five detector types:
         - BadPixelMap_t2.bmp.xml
 
 4. Excalibur
-    - One example dataset:
+    - One example dataset, split across 5 files (load them all in to the DetectorChecker WebApp):
         - pixelmask.fem1.hdf
+        - pixelmask.fem2.hdf
+        - pixelmask.fem3.hdf
+        - pixelmask.fem4.hdf
+        - pixelmask.fem5.hdf
+        - pixelmask.fem6.hdf
+        
 
 5. Pilatus
     - One example dataset:
