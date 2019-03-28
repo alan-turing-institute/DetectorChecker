@@ -57,12 +57,11 @@ test_that("Distance analysis functions", {
 })
 
 test_that("Removing high density clusters", {
-
   detector_name <- "Pilatus"
   pilatus_detector <- create_module(detector_name)
-  
-  dead_path <- system.file(  "extdata", "Pilatus", "badpixel_mask.tif", package = "detectorchecker")
-  
+
+  dead_path <- system.file("extdata", "Pilatus", "badpixel_mask.tif", package = "detectorchecker")
+
   # Load pixel matrix
   pilatus_detector <- load_pix_matrix(detector = pilatus_detector, file_path = dead_path)
 
@@ -73,16 +72,15 @@ test_that("Removing high density clusters", {
   pilatus_detector_detector_labs <- labels(pilatus_detector)
 
   # Attributes of the detector that may have changed
-  potential_change_labs <- c("pix_matrix", "pix_dead", "dead_stats", "pix_dead_modules", "clumps" )
-               
+  potential_change_labs <- c("pix_matrix", "pix_dead", "dead_stats", "pix_dead_modules", "clumps")
+
   # Attributes that should be identical
   matching_labs <- pilatus_detector_detector_labs[!(pilatus_detector_detector_labs %in% potential_change_labs)]
-  
+
   # Check identical attributes
-  for (lab in matching_labs){
+  for (lab in matching_labs) {
     expect_equal(pilatus_detector[lab], pilatus_detector_modified[lab])
   }
-
 })
 
 context("Plotting pixel analysis")

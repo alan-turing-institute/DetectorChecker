@@ -39,7 +39,7 @@ Dead_Stats <- function(dead_n = NA, module_n = NA, module_count_arr = NA,
 #' @param caption Flag to turn on/off figure caption
 #' @export
 plot_detector_module_damaged <- function(detector, col, row, file_path = NA,
-                                       caption = TRUE) {
+                                         caption = TRUE) {
   if (!caption) par(mar = c(0, 0, 0, 0))
 
   # check whether the row and col numbers are correct
@@ -96,7 +96,7 @@ plot_detector_module_damaged <- function(detector, col, row, file_path = NA,
 #' @param caption Flag to turn on/off figure caption
 #' @export
 plot_detector_cnt_mod <- function(detector, file_path = NA, row = NA, col = NA,
-                                caption = TRUE) {
+                                  caption = TRUE) {
   main_caption <- ""
 
   if (any(is.na(detector$dead_stats))) {
@@ -160,7 +160,7 @@ plot_detector_cnt_mod <- function(detector, file_path = NA, row = NA, col = NA,
 #' @param caption Flag to turn on/off figure caption
 #' @export
 plot_detector_density <- function(detector, file_path = NA, adjust = 1.,
-                                row = NA, col = NA, caption = TRUE) {
+                                  row = NA, col = NA, caption = TRUE) {
   ppp_dead <- NA
   main_caption <- ""
 
@@ -195,7 +195,7 @@ plot_detector_density <- function(detector, file_path = NA, adjust = 1.,
 #' @importFrom graphics arrows plot
 #' @export
 plot_detector_arrows <- function(detector, file_path = NA, row = NA, col = NA,
-                               caption = TRUE) {
+                                 caption = TRUE) {
   ppp_dead <- NA
   main_caption <- ""
 
@@ -380,7 +380,7 @@ dead_stats_summary <- function(detector) {
 #' @param caption Flag to turn on/off figure caption
 #' @export
 plot_detector_angles <- function(detector, file_path = NA, row = NA, col = NA,
-                               caption = TRUE) {
+                                 caption = TRUE) {
   ppp_dead <- NA
   main_caption <- ""
 
@@ -534,7 +534,7 @@ get_ppp_dead <- function(detector) {
 #' @param caption Flag to turn on/off figure caption
 #' @export
 plot_detector_kfg <- function(detector, func, file_path = NA, row = NA, col = NA,
-                            caption = TRUE) {
+                              caption = TRUE) {
   ppp_dead <- get_ppp_dead(detector)
 
   if (!is.na(row) && !is.na(col)) {

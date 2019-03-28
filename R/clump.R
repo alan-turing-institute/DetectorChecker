@@ -394,7 +394,7 @@ plot_module_events <- function(detector, col, row, file_path = NA, caption = TRU
   } else {
     events <- detector$clumps$events
   }
- 
+
   event_ppp <- spatstat::ppp(events[, 1], events[, 2], c(1, nc), c(1, nr))
 
   return(event_ppp)
