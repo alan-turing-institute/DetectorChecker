@@ -157,7 +157,7 @@ plot_kfg <- function(ppp_obj, func, file_path = NA, caption = TRUE) {
   }
 }
 
-#' Plots dead pixel counts 
+#' Plots dead pixel counts
 #'
 #' @param module_count_arr Counts per array
 #' @param caption caption of the figure

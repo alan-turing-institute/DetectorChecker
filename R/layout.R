@@ -22,15 +22,15 @@
 #' @param clumps clumps data (xyc_df data frame with pixels and their clump ID's, xyc_events data frame with clusters (clumps) and their clump ID's and centre coordinates)
 #' @return Detector object
 .Default_Detector <- function(name = "Default", date = NA,
-                           detector_width = NA, detector_height = NA,
-                           module_col_n = NA, module_row_n = NA,
-                           module_col_sizes = NA, module_row_sizes = NA,
-                           gap_col_sizes = NA, gap_row_sizes = NA,
-                           module_edges_col = NA, module_edges_row = NA,
-                           detector_inconsistency = NA,
-                           pix_matrix = NA, pix_dead = NA,
-                           dead_stats = NA, pix_dead_modules = NA,
-                           clumps = NA) {
+                              detector_width = NA, detector_height = NA,
+                              module_col_n = NA, module_row_n = NA,
+                              module_col_sizes = NA, module_row_sizes = NA,
+                              gap_col_sizes = NA, gap_row_sizes = NA,
+                              module_edges_col = NA, module_edges_row = NA,
+                              detector_inconsistency = NA,
+                              pix_matrix = NA, pix_dead = NA,
+                              dead_stats = NA, pix_dead_modules = NA,
+                              clumps = NA) {
   detector <- list(
     name = name,
     date = date,
@@ -439,7 +439,7 @@ detector_consist_check <- function(detector = NA) {
   return(ppp_edges_row)
 }
 
-#' Creates ppp object of horizontal gaps 
+#' Creates ppp object of horizontal gaps
 #'
 #' @param detector Detector object
 #' @return Point pattern dataset
@@ -462,7 +462,7 @@ detector_consist_check <- function(detector = NA) {
   return(ppp_gaps_col)
 }
 
-#' Creates ppp object of vertical gaps 
+#' Creates ppp object of vertical gaps
 #'
 #' @param detector Detector object
 #' @return Point pattern dataset

@@ -26,7 +26,7 @@ which_module <- function(coo, me) {
 #' @param y pixel y coordinate
 #' @param module_edges_col vector of columns that contain edges of modules
 #' @param module_edges_row vector of rows that contain edges of modules
-#' @return tmp 
+#' @return tmp
 #' @export
 which_module_idx <- function(x, y, module_edges_col, module_edges_row) {
   tmp <- list(

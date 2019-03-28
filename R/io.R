@@ -169,7 +169,7 @@ load_pix_matrix <- function(detector, file_path) {
   }
 
 
-  detector <- .assign_pixel_matrix(detector, pix_matrix)  
+  detector <- .assign_pixel_matrix(detector, pix_matrix)
 
   return(detector)
 }
@@ -178,8 +178,7 @@ load_pix_matrix <- function(detector, file_path) {
 #'
 #' @param detector Detector object
 #' @param pix_matrix A pixel matrix
-.assign_pixel_matrix <- function(detector, pix_matrix){
-
+.assign_pixel_matrix <- function(detector, pix_matrix) {
   pix_dead <- dead_pix_coords(pix_matrix)
 
   detector$pix_matrix <- pix_matrix
