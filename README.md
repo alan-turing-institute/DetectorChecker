@@ -26,7 +26,7 @@ install_github("alan-turing-institute/DetectorChecker/")
 devtools::install_github("alan-turing-institute/DetectorChecker/", ref = "develop")
 ```
 
-## Vignettes 
+## Vignette
 
 The user guide vignette provides detailed instructions for using the package and loading specific examples:
 ```
