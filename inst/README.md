@@ -1,2 +1,0 @@
-# DetectorChecker
-DetectorChecker files
