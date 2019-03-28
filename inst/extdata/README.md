@@ -1,5 +1,8 @@
-# DetectorChecker
-DetectorChecker example data files.
+# Example files
+
+DetectorChecker example data files. 
+
+## Files by detector type
 
 Examples are provided for five detector types:
 
