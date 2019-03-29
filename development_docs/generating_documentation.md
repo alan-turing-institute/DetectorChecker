@@ -21,8 +21,9 @@ To build the documentation you need to have a working latex installation.
 
 3. Make sure R's current working directory is set to the DetectorChecker folder. Then in the console run:
 
-```system("R CMD Rd2pdf . --title=Package yourpackagename --output=./manual.pdf --force --no-clean --internals")```
+```
+devtools::build_manual()
+```
 
 This will create a pdf of the documentation. 
 
-4. This will also create a hidden folder called `.Rd2pdf...`. You can delete this folder. 
