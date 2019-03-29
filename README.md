@@ -48,6 +48,8 @@ library(detectorchecker)
 vignette("user_guide", package = "detectorchecker")
 ```
 
+## Manual 
+Documentation is provided as a [pdf](docs/detectorchecker_0.1.10.pdf)
 
 ## Examples
 DetectorChecker includes a number of example datasets for five detector types:
