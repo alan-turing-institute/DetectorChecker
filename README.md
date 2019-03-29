@@ -103,3 +103,7 @@ For full citation and bibtex details you can call this in R:
 ```
 citation("detectorchecker")
 ```
+
+## Getting help
+
+Users are encouraged to report issues on the project's GitHub issue [page](https://github.com/alan-turing-institute/DetectorChecker/issues).
