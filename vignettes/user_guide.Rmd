@@ -1,4 +1,3 @@
-
 title: "DetectorChecker Usage"
 # author: "Vignette Author"
 date: "`r Sys.Date()`"
