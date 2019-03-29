@@ -1,10 +1,16 @@
 # Example files
 
-DetectorChecker example data files. 
+This folder contains a set of example datasets, which can be used with the DetectorCheckerWebApp and are used internally by DetectorChecker.
+
+## How to download
+
+Please download the full repository by going to https://github.com/alan-turing-institute/DetectorChecker and clicking `clone or download`. Download as a zip file and then navigate to the `inst/extdata` folder.
+
+You can then use these files with the DectorCheckerWebApp (https://github.com/alan-turing-institute/DetectorCheckerWebApp).
 
 ## Files by detector type
 
-Examples are provided for five detector types:
+Examples are provided for five detector types. It is possible to load datasets as a single file, or split across multiple files. All examples, except Excalibur, use a single file. For Excalibur you will need to load all examples into the WebApp simultaneously:
 
 1. PerkinElmer_Full
     - Two example datasets:

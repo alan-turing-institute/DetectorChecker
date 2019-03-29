@@ -20,7 +20,7 @@ In R run one of the following, depending on whether you want to build the packag
 
 ```
 # install.packages("devtools")
-install_github("alan-turing-institute/DetectorChecker")
+devtools::install_github("alan-turing-institute/DetectorChecker")
 ```
 
 
@@ -28,7 +28,7 @@ If you want to be able to view the user_guide Vignette you need to install with:
 ```
 devtools::install_github("alan-turing-institute/DetectorChecker", build_vignettes = TRUE, build_opts = c("--no-resave-data", "--no-manual"))
 ```
-
+Installing with the vignettes may be slow (~10 min)
 
 
 ### Development version
@@ -103,3 +103,7 @@ For full citation and bibtex details you can call this in R:
 ```
 citation("detectorchecker")
 ```
+
+## Getting help
+
+Users are encouraged to report issues on the project's GitHub issue [page](https://github.com/alan-turing-institute/DetectorChecker/issues).
