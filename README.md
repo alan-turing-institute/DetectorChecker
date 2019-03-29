@@ -28,7 +28,7 @@ If you want to be able to view the user_guide Vignette you need to install with:
 ```
 devtools::install_github("alan-turing-institute/DetectorChecker", build_vignettes = TRUE, build_opts = c("--no-resave-data", "--no-manual"))
 ```
-
+Installing with the vignettes may be slow (~10 min)
 
 
 ### Development version
