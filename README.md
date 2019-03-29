@@ -16,14 +16,14 @@ In R run the following, removing the # if you do not have devtools installed:
 
 ```
 # install.packages("devtools")
-install_github("alan-turing-institute/DetectorChecker/")
+install_github("alan-turing-institute/DetectorChecker")
 ```
 
 ### Development version
 
 ```
 # install.packages("devtools")
-devtools::install_github("alan-turing-institute/DetectorChecker/", ref = "develop")
+devtools::install_github("alan-turing-institute/DetectorChecker", ref = "develop")
 ```
 
 ## Vignette
