@@ -20,7 +20,7 @@ In R run one of the following, depending on whether you want to build the packag
 
 ```
 # install.packages("devtools")
-install_github("alan-turing-institute/DetectorChecker")
+devtools::install_github("alan-turing-institute/DetectorChecker")
 ```
 
 
