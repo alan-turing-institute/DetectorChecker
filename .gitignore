@@ -1,6 +1,6 @@
 Meta
-doc/*.R 
-doc/*.Rmd
+docs/*.R 
+docs/*.Rmd
 
 *.tar.gz
 .DS_Store
