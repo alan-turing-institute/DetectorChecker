@@ -3,6 +3,10 @@
 Master: [![Build Status](https://travis-ci.com/alan-turing-institute/DetectorChecker.svg?token=zxQwzfsqCyEouTqXAVUn&branch=master)](https://travis-ci.com/alan-turing-institute/DetectorChecker) Develop: [![Build Status](https://travis-ci.com/alan-turing-institute/DetectorChecker.svg?token=zxQwzfsqCyEouTqXAVUn&branch=develop)](https://travis-ci.com/alan-turing-institute/DetectorChecker)
 
 
+
+Created by: [Julia Brettschneider](https://github.com/ejulia17) (original R code), [Wilfrid Kendall](https://github.com/WilfridSKendall) (testing and editing),
+[Tomas Lazauskas](https://github.com/tomaslaz) (R package engineering) and [Oscar Giles](https://github.com/OscartGiles) (package development)
+
 ## Overview
 
 DetectorChecker is an R package to aid in the assessment of damage to CT scanners arising from exposure to high energy radiation.
@@ -25,6 +29,7 @@ install_github("alan-turing-institute/DetectorChecker")
 # install.packages("devtools")
 devtools::install_github("alan-turing-institute/DetectorChecker", ref = "develop")
 ```
+
 
 ## Vignette
 
@@ -75,4 +80,15 @@ For see the full list of example datasets call
 
 ```
 data(package = "detectorchecker")
+```
+
+## Citation
+If you use DetectorChecker in your work please cite our package:
+
+`Julia Brettschneider, Oscar Giles, Wilfrid Kendall and Tomas Lazauskas (2019). DetectorChecker: Assessment of damage to CT scanners. URL https://github.com/alan-turing-institute/DetectorChecker`
+
+For full citation and bibtex details you can call this in R:
+
+```
+citation("detectorchecker")
 ```
