@@ -1,0 +1,16 @@
+citHeader("To cite detectorchecker in publications use:")
+
+citEntry(entry = "misc",
+  title        = "{DetectorChecker}: Assessment of damage to CT scanners",
+  author       = personList(as.person("Julia Brettschneider"),
+                   as.person("Oscar Giles"),
+                   as.person("Wilfrid Kendall"),
+                   as.person("Tomas Lazauskas")),
+
+  url          = "https://github.com/alan-turing-institute/DetectorChecker",
+
+  textVersion  =
+  paste("Julia Brettschneider, Oscar Giles, Wilfrid Kendall and Tomas Lazauskas (2019).",
+        "DetectorChecker: Assessment of damage to CT scanners.",        
+        "URL https://github.com/alan-turing-institute/DetectorChecker")
+)

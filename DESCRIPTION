@@ -1,0 +1,22 @@
+Package: detectorchecker
+Type: Package
+Title: An package for analysing pixel damage in CT Scanners
+Version: 0.1.10
+Authors@R: c(
+        person("Oscar", "Giles", email = "ogiles@turing.ac.uk", role = c("aut", "cre")),
+        person("Tomas", "Lazauskas", email = "tlazauskas@turing.ac.uk", role = c("aut")),
+        person("Wilfrid", "Kendall", email = "W.S.Kendall@warwick.ac.uk", role = c("aut")),
+        person("Julia", "Brettschneider", email = "jabrettschneider@me.com", role = c("aut")))
+Description: The description of a package is usually long,
+    spanning multiple lines. The second and subsequent lines
+    should be indented, usually with four spaces.
+Depends: R (>= 3.5.0)
+Imports:
+    spatstat, tools, tiff, hdf5r, raster, igraph, plyr, dplyr, readr, dbscan
+Suggests:
+    testthat, knitr, rmarkdown, roxygen2, devtools
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.1.1
+VignetteBuilder: knitr
