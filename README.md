@@ -16,12 +16,20 @@ DetectorChecker is an R package to aid in the assessment of damage to CT scanner
 
 To install from github you will need to have the [devtools](https://github.com/r-lib/devtools) package installed.
 
-In R run the following, removing the # if you do not have devtools installed:
+In R run one of the following, depending on whether you want to build the package Vignettes, removing the # if you do not have devtools installed:
 
 ```
 # install.packages("devtools")
 install_github("alan-turing-institute/DetectorChecker")
 ```
+
+
+If you want to be able to view the user_guide Vignette you need to install with:
+```
+devtools::install_github("alan-turing-institute/DetectorChecker", build_vignettes = TRUE, build_opts = c("--no-resave-data", "--no-manual"))
+```
+
+
 
 ### Development version
 
@@ -33,12 +41,15 @@ devtools::install_github("alan-turing-institute/DetectorChecker", ref = "develop
 
 ## Vignette
 
-The user guide vignette provides detailed instructions for using the package and loading specific examples:
+The user guide vignette provides detailed instructions for using the package and loading specific examples. Make sure you installed following the `with vignette` instructions:
+
 ```
 library(detectorchecker)
 vignette("user_guide", package = "detectorchecker")
 ```
 
+## Manual 
+Documentation is provided as a [pdf](docs/detectorchecker_0.1.10.pdf)
 
 ## Examples
 DetectorChecker includes a number of example datasets for five detector types:
