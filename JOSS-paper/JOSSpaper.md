@@ -27,8 +27,8 @@ bibliography: JOSSpaper.bib
 ---
 
 ```
-Version: 1.1.2
-Revision based on suggestions at meeting of 15 January 2020.
+Version: 1.1.3
+Some minor edits.
 ```
 
 We have made available software and a web application aimed primarily to benefit 
@@ -53,7 +53,7 @@ while the @FDA-2018 advises to replace XCT detector screens after order of 10 ye
 Screen replacement or refurbishment is expensive;
 regular checks of screen pixels are needed (a) to quantify screen quality
 and (b) to assess possible _special causes_ of defective pixels,
-using the terminology of classic quality control established by @ShewhartDeming-1939.
+using the terminology of classic quality control established by @Shewhart-1939.
 This is best done by means of considerations of spatial statistics, 
 both to determine the extent to which spatial patterns of defective pixels
 can be accounted for by quantifiable independent random variation
@@ -72,10 +72,10 @@ Defects are modelled as points in an image rectangle based on screen dimensions.
 
 1. The software enables the user to specify the exact sub-panel architecture. 
 
-1. Intensity maps can be produced _via_ kernel smoothing applied to the point pattern
+2. Intensity maps can be produced _via_ kernel smoothing applied to the point pattern
 (replacing each defect point by the corresponjding translate of a fixed kernel function).
 
-2. Departure from completed randomness can be assessed using visual inspection of graphs
+3. Departure from completed randomness can be assessed using visual inspection of graphs
 of $F$, $G$ and $K$ functions;
 the $F$ function or "empty space function"
 computes the empirical distribution of the nearest distance to a defect point from a typical location
@@ -86,9 +86,9 @@ the $K$ function (Ripley's $K$ function)
 computes the empirical mean number of defect points within a distance $r$ of a typical defect point,
 viewed as a function of $R$.
 
-3. Finally the relationship of the defect points to sub-panel boundaries can be studied by means of various logistic regre4ssion options.
+4. Finally the relationship of the defect points to sub-panel boundaries can be studied by means of various logistic regression options.
 
-The softweare also provides for further graphical options, 
+The software also provides for further graphical options, 
 such as the study of direction from a typical defect point to
 its nearest neighbour within the panel, 
 analysing at the level of "events" (appropriately defined grouping of clumps of defect pixels) rather than individual defect points,
@@ -96,9 +96,8 @@ and exclusion of regions of the image rectangle for which the defect intensity i
 (this often arises in XCT, where corners of the image exhibit high defect intensity deriving presumably from mechanical
 stress due to supports of the screen).
 
-The R package _DetectorChecker_ is made avaibale under MIT licence to facilitate investigations using these methods,
-and similarly (for the benefit particularly of XCT users who otherwise have no need to get involved in R)
-an associated but self-contained web application providing a graphical interface to the major aspects of the package.
+The R package _DetectorChecker_ is made available under MIT licence to facilitate investigations using these methodas is
+an associated but self-contained web application providing a graphical interface to the major aspects of the package (for the benefit particularly of XCT users who otherwise have no need to get involved in R).
 _DetectorChecker_  is an R package based on _spatstat_, with source
 available at public github repository <https://github.com/alan-turing-institute/DetectorChecker>); 
 the web application
