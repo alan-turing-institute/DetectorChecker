@@ -1,29 +1,30 @@
 ---
 title: 'DetectorChecker: analyzing patterns of defects in detector screens'
-tags:
-  - R
-  - XCT
-  - bad pixel map
-  - defective pixels
-  - spatial statistics
 authors:
-  - name: Julia A. Brettschneider
-    orcid: 0000-0003-1763-466X
-    affiliation: "1, 2" 
-  - name: Oscar Giles
-    affiliation: 2
-  - name: Wilfrid S. Kendall
-    orcid: 0000-0001-9799-3480
-    affiliation: "1, 2"
-  - name: Tomas Lazcauskas
-    affiliation: 2
-affiliations:
- - name: Department of Statistics, University of Warwick, UK
-   index: 1
- - name: The Alan Turing Institute, UK
-   index: 2
-date: 13 January 2020, revised 16 January 2020
+- affiliation: 1, 2
+  name: Julia A. Brettschneider
+  orcid: 0000-0003-1763-466X
+- affiliation: 2
+  name: Oscar Giles
+- affiliation: 1, 2
+  name: Wilfrid S. Kendall
+  orcid: 0000-0001-9799-3480
+- affiliation: 2
+  name: Tomas Lazcauskas
+date: "13 January 2020, revised 16 January 2020"
+output: pdf_document
 bibliography: JOSSpaper.bib
+tags:
+- R
+- XCT
+- bad pixel map
+- defective pixels
+- spatial statistics
+affiliations:
+- index: 1
+  name: Department of Statistics, University of Warwick, UK
+- index: 2
+  name: The Alan Turing Institute, UK
 ---
 
 ```
