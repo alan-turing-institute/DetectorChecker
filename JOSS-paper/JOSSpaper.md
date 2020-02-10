@@ -11,7 +11,7 @@ authors:
   orcid: 0000-0001-9799-3480
 - affiliation: 2
   name: Tomas Lazcauskas
-date: "13 January 2020, revised 16 January 2020"
+date: "13 January 2020, revised 10 February 2020"
 output: pdf_document
 bibliography: JOSSpaper.bib
 tags:
@@ -28,30 +28,26 @@ affiliations:
 ---
 
 ```
-Version: 1.1.4
-Cleaned up references, noted some issues for further work.
+Version: 1.1.6
+Edited to include figures and a bit more detail on plots / workflow 10.02.20.
 ```
 
-We have made available software and a web application aimed primarily to benefit 
-users who need to analyze spatial patterns of defects in panel-structured images
-formed out of sub-panels arranged in an architecture which can vary from one site
-to another.[^1]
-The primary use-case concerns people who are responsible for 
+_DetectorChecker_ is an R package and a web application for
+users who need to analyze spatial patterns of defects in images.
+These images can be _panel-structured_, which is to say,
+composed of sub-panels arranged in an architecture which can be
+specified by the user.
+Primary intended beneficiaries are people responsible for 
 high-value digital detector screens used in X-ray computerised tomography (XCT),
-where defects arise due to high radiation flux;
-more generally the sotware will be useful for analysis of defects in other
-panel-structured arrays, for example solar panels or very large display screens.[^2] 
+where defects arise due to high radiation flux.
+More generally the software can be used to analyse defects in other
+panel-structured arrays, for example solar panels or very large display screens.
 To maximize accessibility and to avoid any requirement to engage with a specific software environment, 
 we have created a web application which provides
 the principal features of the software in standalone form.
 The web application also affords the possibility of engaging with our team in extended analysis 
 of defect patterns as they evolve over time.
 
-[^1]:
-  USE A MORE ACTIVE VOICE IN STARTING PARAGRAPH!
-
-[^2]:
-  *DESCRIBE PANEL-STRUCTURED ARRAYS BETTER, AND BE MORE SYSTEMATIC IN HOW TO REFER TO THEM LATER.
   
 Digital detector screens are crucial high-value components of imaging systems used throughout 
 modern science  and engineering systems, particularly in X-ray computerised tomography (XCT).
@@ -73,64 +69,10 @@ discuss some theoretical foundations
 while
 @BaddeleyRubakTurner-2015 describe an implementation of spatial statistics methods as the _spatstat_ package in the
 R statistical computing environment [@RFoundation-2019].
-_DetectorChecker_ makes available methods from _spatstat_ adapted for images based
-on sub-panels of arbitrary architecture, and point patterns arising either from 
-individual defects or from "clumps" of defects (determined in a manner specified by the user).[^4]
-
-[^3]:
-  (VERIFY @FDA-2018 REFERENCE!)
-  
-[^4]:
-  CHECK DESCRIPTION OF DETECTORCHECKER AGAINST WHAT IS ACTUALLY ON OFFER.
-
-Defects are modelled as points in an image rectangle based on screen dimensions.
-
-1. The software enables the user to specify the exact sub-panel architecture, using a drop-down menu to specify an option
-or alternatively uploading their own specification. 
-
-2. Intensity maps can be produced _via_ kernel smoothing applied to the point pattern
-(replacing each defect point by the corresponjding translate of a fixed kernel function).[^5]
-
-3. Departure from completed randomness can be assessed using visual inspection of graphs
-of $F$, $G$ and $K$ functions;
-the $F$ function or "empty space function"
-computes the empirical distribution of the nearest distance to a defect point from a typical location
-chosen uniformly from the image rectangle;
-the $G$ function
-computes the empirical distribution of nearest-neighbour distances between defect points;
-the $K$ function (Ripley's $K$ function) 
-computes the empirical mean number of defect points within a distance $r$ of a typical defect point,
-viewed as a function of $R$.[^6]
-
-4. Finally the relationship of the defect points to sub-panel boundaries can be studied by means of various logistic regression options.[^7][^8]
-
-[^5]:
-  ADD EQUATION AND SOME COMMENTARY FOR SMOOTHING.
-
-[^6]:
-  ADD THREE EQUATIONS FOR $F$, $G$, $K$ AND SUPPLY SOME COMMENTARY.
-
-[^7]:
-  ADD EQUATION AND SOME COMMENTARY FOR LOGISTIC REGRESSION.
-
-[^8]: Figures?
-  (To be discussed and supplied: envisage order of three figures demonstrating use of web application. restrict to vignette?)
-
-
-The software also provides for further graphical options, 
-such as the study of direction from a typical defect point to
-its nearest neighbour within the panel, 
-analysing at the level of "events" (appropriately defined grouping of clumps of defect pixels) rather than individual defect points,
-and exclusion of regions of the image rectangle for which the defect intensity is clearly different
-(this often arises in XCT, where corners of the image exhibit high defect intensity deriving presumably from mechanical
-stress due to supports of the screen).
-
-The R package _DetectorChecker_ is made available under MIT licence to facilitate investigations using these methodas is
-an associated but self-contained web application providing a graphical interface to the major aspects of the package (for the benefit particularly of XCT users who otherwise have no need to get involved in R).
-_DetectorChecker_  
-[@BrettschneiderGilesKendallLazcauskas-2019a]
-is an R package based on _spatstat_; 
-the web application
+_DetectorChecker_ [@BrettschneiderGilesKendallLazcauskas-2019a] is an R package which adapts methods from _spatstat_ to the case of panel-structured images, 
+and analyses point patterns which may arise either from 
+individual defects or from "clumps" of defects (determined in a manner specified by the user).
+The associated web application 
 [DetectorCheckerWebApp](https://detectorchecker.azurewebsites.net/)
 [@BrettschneiderGilesKendallLazcauskas-2019b]
 is based on a self-contained R environment together 
@@ -143,8 +85,63 @@ to upload the spatial arrangement of the defective pixels either
 directly by means of "bad pixel maps" (XML format) or inferred from test images (formats including TIFF),
 and then to inspect the results using the facilities offered 
 by the package.
+The software is freely available under MIT licence, accessible from the two github repositories
+referenced above.
 To the best of our knowledge, there is no other comparable package or web application
 making methods of spatial statistics available for panel-based image data of arbitrary architecture.
+
+[^3]:
+  JAB to verify @FDA-2018!
+
+
+Defects are modelled as points in an image rectangle based on screen dimensions. 
+The pattern of defects can be modelled using the web application: the workflow is
+summarised in Figure \ref{fig:figure1}.
+
+1. The user specifies the exact architecture 
+of the sub-panels of the panel-structured image.
+This can be done either by using a drop-down menu to specify a predetermined option,
+or by uploading a file giving the specific structure of sub-panels. 
+The data is then uploaded.
+2. Intensity maps can be visualized _via_ kernel smoothing applied to the point pattern
+(replacing each defect point by the corresponding translate of a fixed kernel function).
+For example,[^4] the point pattern in Figure \ref{fig:figure2} yields the intensity map given in Figure \ref{fig:figure3}.
+3. Departure from completed randomness can be assessed using visual inspection of graphs
+of $F$, $G$ and $K$ functions as described in @ChiuStoyanKendallMecke-2013. It is clear that the
+point pattern of Figure \ref{fig:figure3} is definitely inhomogeneous and therefore it is
+not surprising that the following graphical plots 
+indicate clear evidence of deviation from CSR:  
+    + the $F$ function or "empty space function"
+    computes the empirical distribution of the nearest distance to a defect point from a typical location
+    chosen uniformly from the image rectangle; if the point pattern was in fact 
+    generated by a homogeneous Poisson
+    point process of intensity $\lambda$ (_complete spatial randomness_, or CSR), then
+    the $F$ function would be a random perturbation of $F(r)=1-\exp(-\lambda \pi r^2)$. See Figure \ref{fig:figure4},
+    which presents different 
+    variants accounting in various ways for edge-effects.
+    Note the clear deviation of the empirical $\hat{F}$ functions from what would be expected under CSR, namely  $F_\text{pois}$.
+    + the $G$ function computes the empirical distribution of nearest-neighbour distances between defect points; if the point pattern was in fact CSR with intensity $\lambda$, then the $G$ function would also be a random perturbation of $F(r)=1-\exp(-\lambda \pi r^2)$. See Figure \ref{fig:figure5}, and note the clear deviation of the empirical $\hat{G}$ functions from $G_\text{pois}$, hence again suggesting deviation from CSR.
+    + the $K$ function (Ripley's $K$ function) computes the empirical mean number of defect points within a distance $r$ of a typical defect point, viewed as a function of $R$; if the point pattern was in fact CSR with intensity $\lambda$, then the $K$ function would be a random perturbation of $K(r)=\pi r^2$. See Figure \ref{fig:figure6}, and note the clear deviation of the empirical $\hat{K}$ functions from $K_\text{pois}$, once more suggesting deviation from CSR.
+    + Plots are also available which compute these functions in a way which accounts for inhomogeneity: 
+    Figure \ref{fig:figure7} gives an example of this in the case of the $K$ function. The plots of the empirical inhomogeneity-adjusted $\hat{K}_\text{inhom}$ functions agree much more closely with 
+    $K^\text{pois}_\text{inhom}$, supporting the hypothesis that the pattern of defects is what
+    might be expected to arise from an _inhomogeneous_ Poisson process of defects.
+4. Finally the relationship of the defect points to sub-panel boundaries can be studied by means of various logistic regression options, which assess whether damage intensity appears to depend on distance from the centre of the image or horizontal or vertical distance from sub-panel edges.
+
+[^4]:
+Many figures would be best presented in pairs, side-by-side. But it appears PanDoc is not that flexible: when I try to arrange something like this (by removing blank lines between figures) then the captions disappear and the figure references are not resolved.
+
+
+The web application also provides for further graphical options, 
+such as the study of direction from a typical defect point to
+its nearest neighbour within the panel, 
+analysis at the level of "events" (appropriately defined grouping of clumps of defect pixels) rather than individual defect points (actually Figure \ref{fig:figure2} does in fact refer to an event-level analysis),
+and exclusion of regions of the image rectangle for which the defect intensity is clearly different
+(this often arises in XCT, where corners of the image exhibit high defect intensity deriving presumably from mechanical
+stress due to supports of the screen).
+
+
+
 
 An extended example of use of the R package, paralleled by corresponding use of the web application,
 is available as a vignette in both github repositories. 
@@ -160,10 +157,26 @@ of deterioration over time, using latent Markov models
 of the life and death of defective pixels which we are currently developing.
 Such analysis requires sustained and regular monitoring of a diversity
 of screens from various devices.
-Users are encouraged to get in touch with us to discuss these possibilities,
+Interested users are encouraged to make contact to discuss these possibilities,
 which promise to deliver evidence-based analysis 
 to support decisions on refurbishment and / or replacement 
 strategies.
+ 
+![Work flow for DetectorChecker web application.\label{fig:figure1}](figure1.png){ width=75% }
+
+![Example of point pattern of defects.\label{fig:figure2}](figure2.png){ width=50% }
+
+![Intensity map resulting from point pattern of defects.\label{fig:figure3}](figure3.png){ width=50% }
+
+![$F$ plot resulting from point pattern of defects.\label{fig:figure4}](figure4.png){ width=50% }
+
+![$G$ plot resulting from point pattern of defects.\label{fig:figure5}](figure5.png){ width=50% }
+
+![$K$ plot resulting from point pattern of defects.\label{fig:figure6}](figure6.png){ width=50% }
+
+![$K$ plot resulting from point pattern of defects, corrected for inhomogeneity.\label{fig:figure7}](figure7.png){ width=50% }
+
+
 
 # Acknowledgements
 
@@ -174,3 +187,5 @@ grant EP/N510129/1) during this project.
 
 
 # References 
+ 
+
