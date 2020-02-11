@@ -107,4 +107,8 @@ citation("detectorchecker")
 
 ## Getting help
 
-Users are encouraged to report issues on the project's GitHub issue [page](https://github.com/alan-turing-institute/DetectorChecker/issues).
+If you found a bug or need support, please submit an issue [here](https://github.com/alan-turing-institute/DetectorChecker/issues/new).
+
+## How to contribute
+
+We welcome contributions! If you are willing to propose new features or have bug fixes to contribute, please submit a pull request [here](https://github.com/alan-turing-institute/DetectorChecker/pulls).
