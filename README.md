@@ -2,7 +2,8 @@
 
 Master: [![Build Status](https://travis-ci.com/alan-turing-institute/DetectorChecker.svg?token=zxQwzfsqCyEouTqXAVUn&branch=master)](https://travis-ci.com/alan-turing-institute/DetectorChecker) Develop: [![Build Status](https://travis-ci.com/alan-turing-institute/DetectorChecker.svg?token=zxQwzfsqCyEouTqXAVUn&branch=develop)](https://travis-ci.com/alan-turing-institute/DetectorChecker)
 
-
+[![DOI](https://zenodo.org/badge/144782935.svg)](https://zenodo.org/badge/latestdoi/144782935)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 Created by: [Julia Brettschneider](https://github.com/ejulia17) (original R code), [Wilfrid Kendall](https://github.com/WilfridSKendall) (testing and editing),
 [Tomas Lazauskas](https://github.com/tomaslaz) (R package engineering) and [Oscar Giles](https://github.com/OscartGiles) (package development)
@@ -12,7 +13,7 @@ Created by: [Julia Brettschneider](https://github.com/ejulia17) (original R code
 DetectorChecker is an R package to aid in the assessment of damage to CT scanners arising from exposure to high energy radiation.
 
 
-## Installation 
+## Installation
 
 To install from github you will need to have the [devtools](https://github.com/r-lib/devtools) package installed.
 
@@ -48,34 +49,34 @@ library(detectorchecker)
 vignette("user_guide", package = "detectorchecker")
 ```
 
-## Manual 
+## Manual
 Documentation is provided as a [pdf](docs/detectorchecker_0.1.10.pdf)
 
 ## Examples
 DetectorChecker includes a number of example datasets for five detector types:
 
 1. PerkinElmer
- 
-2. PerkinElmer Refurbished 
 
-3. PerkinElmer Cropped 
+2. PerkinElmer Refurbished
 
-4. Pilatus 
+3. PerkinElmer Cropped
 
-5. Excalibur 
+4. Pilatus
+
+5. Excalibur
 
 To load an example dataset you can either call:
 ```
 library(detectorchecker)
 
 #Inititate a PerkinElmerFull detector object
-detector <-  create_module("PerkinElmerFull") 
+detector <-  create_module("PerkinElmerFull")
 
 # Path of dataset
 path <- system.file("extdata", "PerkinElmer_Full", "BadPixelMap.bpm", "BadPixelMap_t1.bpm.xml", package = "detectorchecker")
 
 # Load a pixel matrix into the detector object
-detector <- load_pix_matrix(detector = detector, file_path = file_path) 
+detector <- load_pix_matrix(detector = detector, file_path = file_path)
 ```
 
 or you can load one of the examples by calling:
