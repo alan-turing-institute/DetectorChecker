@@ -95,14 +95,25 @@ data(package = "detectorchecker")
 ```
 
 ## Citation
-If you use DetectorChecker in your work please cite our package:
+If you use DetectorChecker in your work please cite our package.
 
-`Julia Brettschneider, Oscar Giles, Wilfrid Kendall and Tomas Lazauskas (2019). DetectorChecker: Assessment of damage to CT scanners. URL https://github.com/alan-turing-institute/DetectorChecker`
-
-For full citation and bibtex details you can call this in R:
+BibTeX:
 
 ```
-citation("detectorchecker")
+@software{tomas_lazauskas_2020_3662233,
+  author       = {Tomas Lazauskas and
+                  Oscar T Giles and
+                  Martin O'Reilly and
+                  Wilfrid Kendall and
+                  Julia Brettschneider},
+  title        = {{alan-turing-institute/DetectorChecker}},
+  month        = feb,
+  year         = 2020,
+  publisher    = {Zenodo},
+  version      = {1.0.0},
+  doi          = {10.5281/zenodo.3662233},
+  url          = {https://doi.org/10.5281/zenodo.3662233}
+}
 ```
 
 ## Getting help
