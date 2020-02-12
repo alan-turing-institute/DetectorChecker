@@ -13,7 +13,7 @@ authors:
   name: Tomas Lazauskas
 - affiliation: 2
   name: Martin O'Reilly
-date: "13 January 2020, revised 10 February 2020"
+date: "13 January 2020, revised 12 February 2020"
 output: pdf_document
 bibliography: JOSSpaper.bib
 tags:
@@ -30,8 +30,8 @@ affiliations:
 ---
 
 ```
-Version: 1.1.7
-Replaced last 6 figures by JAB's combined plots. Need to amend text! 12.02.20.
+Version: 1.1.11
+Added remarks on interpretation of K functions 12.02.20.
 ```
 
 _DetectorChecker_ is an R package and a web application for
@@ -81,7 +81,7 @@ is based on a self-contained R environment together
 with a _Shiny_ gui, implemented and made available _via_ _Azure_, so as to expose the
 basic functionality of the R package without the need for users to install R.
 In particular the web application  can be used
-to define the geometry of the panels of the detector screen
+to define the geometry of the sub-panels of the detector screen
 (which is to say, the arrangement and size of the component sub-panels),
 to upload the spatial arrangement of the defective pixels either
 directly by means of "bad pixel maps" (XML format) or inferred from test images (formats including TIFF),
@@ -90,7 +90,7 @@ by the package.
 The software is freely available under MIT licence, accessible from the two Zenodo repositories
 referenced above.
 To the best of our knowledge, there is no other comparable package or web application
-making methods of spatial statistics available for panel-based image data of arbitrary architecture.
+making methods of spatial statistics available for panel-structured image data of arbitrary architecture.
 
 [^3]:
   JAB to verify @FDA-2018!
@@ -123,6 +123,8 @@ indicate clear evidence of deviation from CSR:
     Note the clear deviation of the empirical $\hat{F}$ functions from what would be expected under CSR, namely  $F_\text{pois}$.
     + the $G$ function computes the empirical distribution of nearest-neighbour distances between defect points; if the point pattern was in fact CSR with intensity $\lambda$, then the $G$ function would also be a random perturbation of $F(r)=1-\exp(-\lambda \pi r^2)$. See Figure \ref{fig:figure3}(b), and note the clear deviation of the empirical $\hat{G}$ functions from $G_\text{pois}$, hence again suggesting deviation from CSR.
     + the $K$ function (Ripley's $K$ function) computes the empirical mean number of defect points within a distance $r$ of a typical defect point, viewed as a function of $R$; if the point pattern was in fact CSR with intensity $\lambda$, then the $K$ function would be a random perturbation of $K(r)=\pi r^2$. See Figure \ref{fig:figure4}(a), and note the deviation of the empirical $\hat{K}$ functions from $K_\text{pois}$, especially at short distances, once more suggesting deviation from CSR.
+    Note that for geometrical reasons the empirical $\hat{K}$ functions will exhibit more variation at large distances;
+    it is therefore appropriate to confine attention to the left-hand third of the $x$-axis.
     The excess over $K_\text{pois}$ at short distances, particularly for $\hat{K}_\text{iso}$, indicates that defects are more clustered than would be expected from CSR. 
     + Plots are also available which compute these functions in a way which accounts for inhomogeneity: 
     Figure \ref{fig:figure4}(b) gives an example of this in the case of the $K$ function. The plots of the empirical inhomogeneity-adjusted $\hat{K}_\text{inhom}$ functions agree much more closely with 
@@ -133,8 +135,8 @@ indicate clear evidence of deviation from CSR:
 
 The web application also provides for further graphical options,
 such as the study of direction from a typical defect point to
-its nearest neighbour within the panel,
-analysis at the level of "events" (appropriately defined grouping of clumps of defect pixels) rather than individual defect points (actually Figure \ref{fig:figure2} does in fact refer to an event-level analysis),
+its nearest neighbour within the relevant sub-panel,
+analysis at the level of "events" (appropriately defined grouping of clumps of defect pixels) rather than individual defect points,
 and exclusion of regions of the image rectangle for which the defect intensity is clearly different
 (this often arises in XCT, where corners of the image exhibit high defect intensity deriving presumably from mechanical
 stress due to supports of the screen).
