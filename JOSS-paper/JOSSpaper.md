@@ -11,6 +11,8 @@ authors:
   orcid: 0000-0001-9799-3480
 - affiliation: 2
   name: Tomas Lazauskas
+- affiliation: 2
+  name: Martin O'Reilly
 date: "13 January 2020, revised 10 February 2020"
 output: pdf_document
 bibliography: JOSSpaper.bib
@@ -73,7 +75,7 @@ _DetectorChecker_ [@tomas_lazauskas_2020_3662233] is an R package which adapts m
 and analyses point patterns which may arise either from
 individual defects or from "clumps" of defects (determined in a manner specified by the user).
 The associated web application
-[DetectorCheckerWebApp](https://detectorchecker.azurewebsites.net/)
+[_DetectorCheckerWebApp_](https://detectorchecker.azurewebsites.net/)
 [@tomas_lazauskas_2020_3662235]
 is based on a self-contained R environment together
 with a _Shiny_ gui, implemented and made available _via_ _Azure_, so as to expose the
@@ -85,7 +87,7 @@ to upload the spatial arrangement of the defective pixels either
 directly by means of "bad pixel maps" (XML format) or inferred from test images (formats including TIFF),
 and then to inspect the results using the facilities offered
 by the package.
-The software is freely available under MIT licence, accessible from the two github repositories
+The software is freely available under MIT licence, accessible from the two Zenodo repositories
 referenced above.
 To the best of our knowledge, there is no other comparable package or web application
 making methods of spatial statistics available for panel-based image data of arbitrary architecture.
@@ -121,7 +123,7 @@ indicate clear evidence of deviation from CSR:
     Note the clear deviation of the empirical $\hat{F}$ functions from what would be expected under CSR, namely  $F_\text{pois}$.
     + the $G$ function computes the empirical distribution of nearest-neighbour distances between defect points; if the point pattern was in fact CSR with intensity $\lambda$, then the $G$ function would also be a random perturbation of $F(r)=1-\exp(-\lambda \pi r^2)$. See Figure \ref{fig:figure3}(b), and note the clear deviation of the empirical $\hat{G}$ functions from $G_\text{pois}$, hence again suggesting deviation from CSR.
     + the $K$ function (Ripley's $K$ function) computes the empirical mean number of defect points within a distance $r$ of a typical defect point, viewed as a function of $R$; if the point pattern was in fact CSR with intensity $\lambda$, then the $K$ function would be a random perturbation of $K(r)=\pi r^2$. See Figure \ref{fig:figure4}(a), and note the deviation of the empirical $\hat{K}$ functions from $K_\text{pois}$, especially at short distances, once more suggesting deviation from CSR.
-    The excess over $K_\text{pois}$ at short distances, particularly for $\hat{K}_text{iso}$, indicates that defects are more clustered than would be expected from CSR. 
+    The excess over $K_\text{pois}$ at short distances, particularly for $\hat{K}_\text{iso}$, indicates that defects are more clustered than would be expected from CSR. 
     + Plots are also available which compute these functions in a way which accounts for inhomogeneity: 
     Figure \ref{fig:figure4}(b) gives an example of this in the case of the $K$ function. The plots of the empirical inhomogeneity-adjusted $\hat{K}_\text{inhom}$ functions agree much more closely with 
     $K^\text{pois}_\text{inhom}$ at short distances, supporting the hypothesis that the pattern of defects is what
@@ -141,7 +143,7 @@ stress due to supports of the screen).
 
 
 An extended example of use of the R package, paralleled by corresponding use of the web application,
-is available as a vignette in both github repositories.
+is available as a vignette in both Zenodo repositories.
 
 The R package and web application together offer significant
 opportunities to address interesting and important challenges for the data analysis of defective pixel patterns.
