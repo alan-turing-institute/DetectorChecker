@@ -13,7 +13,7 @@ authors:
   name: Tomas Lazauskas
 - affiliation: 2
   name: Martin O'Reilly
-date: "13 January 2020, revised 12 February 2020"
+date: "13 January 2020, revised 13 February 2020"
 output: pdf_document
 bibliography: JOSSpaper.bib
 tags:
@@ -30,11 +30,12 @@ affiliations:
 ---
 
 ```
-Version: 1.1.11
-Added remarks on interpretation of K functions 12.02.20.
+Version: 1.1.12
+Revised for style, added glm output. 13.02.20.
 ```
 
-_DetectorChecker_ is an R package and a web application for
+_DetectorChecker_ is an R package and an associated web application 
+which are intended to help
 users who need to analyze spatial patterns of defects in images.
 These images can be _panel-structured_, which is to say,
 composed of sub-panels arranged in an architecture which can be
@@ -44,11 +45,12 @@ high-value digital detector screens used in X-ray computerised tomography (XCT),
 where defects arise due to high radiation flux.
 More generally the software can be used to analyse defects in other
 panel-structured arrays, for example solar panels or very large display screens.
-To maximize accessibility and to avoid any requirement to engage with a specific software environment,
+To maximize accessibility, and to avoid any issues arising from specific software environments,
 we have created a web application which provides
 the principal features of the software in standalone form.
-The web application also affords the possibility of engaging with our team in extended analysis
-of defect patterns as they evolve over time.
+The web application also affords the possibility of engaging with our team in analysis
+of time-evolving
+defect patterns.
 
 
 Digital detector screens are crucial high-value components of imaging systems used throughout
@@ -63,7 +65,7 @@ using the terminology of classic quality control established by @Shewhart-1939.
 This is best done by means of considerations of spatial statistics,
 both to determine the extent to which spatial patterns of defective pixels
 can be accounted for by quantifiable independent random variation
-and also in describing departures from spatial randomness in ways
+and also by describing departures from spatial randomness in ways
 which are suggestive of possible explanations (for example, stress due
 to screen attachment, or failure at pixel level of data readout).
 Methods of spatial statistics are crucial for this task: @ChiuStoyanKendallMecke-2013
@@ -93,24 +95,24 @@ To the best of our knowledge, there is no other comparable package or web applic
 making methods of spatial statistics available for panel-structured image data of arbitrary architecture.
 
 [^3]:
-  JAB to verify @FDA-2018!
+ JAB to supply reference to replace @FDA-2018!
 
 Defects are modelled as points in an image rectangle based on screen dimensions. 
-The pattern of defects can be modelled using the web application: the workflow is
-summarised in Figure \ref{fig:figure1}.
+The pattern of defects can be modelled using the web application (workflow is
+summarised in Figure \ref{fig:figure1}):
 
 1. The user specifies the exact architecture
 of the sub-panels of the panel-structured image.
 This can be done either by using a drop-down menu to specify a predetermined option,
 or by uploading a file giving the specific structure of sub-panels.
-The data is then uploaded.
+The data can then be uploaded.
 2. Intensity maps can be visualized _via_ kernel smoothing applied to the point pattern
 (replacing each defect point by the corresponding translate of a fixed kernel function).
 For example, the point pattern in Figure \ref{fig:figure2}(a) yields the intensity map given in Figure \ref{fig:figure2}(b).
 3. Departure from completed randomness can be assessed using visual inspection of graphs
 of $F$, $G$ and $K$ functions as described in @ChiuStoyanKendallMecke-2013. It is clear that the
 point pattern of Figure \ref{fig:figure2}(a) is definitely inhomogeneous and therefore it is
-not surprising that the following graphical plots 
+not surprising that the corresponding graphical plots 
 indicate clear evidence of deviation from CSR:  
     + the $F$ function or "empty space function"
     computes the empirical distribution of the nearest distance to a defect point from a typical location
@@ -121,16 +123,53 @@ indicate clear evidence of deviation from CSR:
     which presents different 
     variants accounting in various ways for edge-effects.
     Note the clear deviation of the empirical $\hat{F}$ functions from what would be expected under CSR, namely  $F_\text{pois}$.
-    + the $G$ function computes the empirical distribution of nearest-neighbour distances between defect points; if the point pattern was in fact CSR with intensity $\lambda$, then the $G$ function would also be a random perturbation of $F(r)=1-\exp(-\lambda \pi r^2)$. See Figure \ref{fig:figure3}(b), and note the clear deviation of the empirical $\hat{G}$ functions from $G_\text{pois}$, hence again suggesting deviation from CSR.
-    + the $K$ function (Ripley's $K$ function) computes the empirical mean number of defect points within a distance $r$ of a typical defect point, viewed as a function of $R$; if the point pattern was in fact CSR with intensity $\lambda$, then the $K$ function would be a random perturbation of $K(r)=\pi r^2$. See Figure \ref{fig:figure4}(a), and note the deviation of the empirical $\hat{K}$ functions from $K_\text{pois}$, especially at short distances, once more suggesting deviation from CSR.
-    Note that for geometrical reasons the empirical $\hat{K}$ functions will exhibit more variation at large distances;
+    + the $G$ function computes the empirical distribution of nearest-neighbour distances between defect points; if the point pattern was in fact CSR with intensity $\lambda$, then the $G$ function would also be a random perturbation of $F(r)=1-\exp(-\lambda \pi r^2)$. See Figure \ref{fig:figure3}(b), and note the clear deviation from $G_\text{pois}$ of the empirical $\hat{G}$ functions (which again account in various ways for edge-effects), 
+    hence again suggesting deviation from CSR.
+    + the $K$ function (Ripley's $K$ function) computes the empirical mean number of defect points within a distance $r$ of a typical defect point, viewed as a function of $R$; if the point pattern was in fact CSR with intensity $\lambda$, then the $K$ function would be a random perturbation of $K(r)=\pi r^2$. See Figure \ref{fig:figure4}(a), and note the deviation from $K_\text{pois}$ of the empirical $\hat{K}$ functions (once more accounting for edge-effects in different ways), especially at short distances, once more suggesting deviation from CSR.
+    Note that for geometrical reasons the empirical $\hat{K}$ functions will exhibit substantially greater variation at large distances;
     it is therefore appropriate to confine attention to the left-hand third of the $x$-axis.
     The excess over $K_\text{pois}$ at short distances, particularly for $\hat{K}_\text{iso}$, indicates that defects are more clustered than would be expected from CSR. 
     + Plots are also available which compute these functions in a way which accounts for inhomogeneity: 
     Figure \ref{fig:figure4}(b) gives an example of this in the case of the $K$ function. The plots of the empirical inhomogeneity-adjusted $\hat{K}_\text{inhom}$ functions agree much more closely with 
     $K^\text{pois}_\text{inhom}$ at short distances, supporting the hypothesis that the pattern of defects is what
     might be expected to arise from an _inhomogeneous_ Poisson process of defects.
-4. Finally the relationship of the defect points to sub-panel boundaries can be studied by means of various logistic regression options, which assess whether damage intensity appears to depend on distance from the centre of the image or horizontal or vertical distance from sub-panel edges.
+4. Finally the relationship of the defect points to sub-panel boundaries can be studied by means of various logistic regression options, which assess whether damage intensity appears to depend on distance from the centre of the image or horizontal or vertical distance from sub-panel edges. When this data set is modelled in terms of Euclidean distance from the centre, the web application reports substantial evidence for positive dependence of defect intensity on distance from the centre (see `as.vector(dist)` in the web application output below), conforming with the visual impression given by Figure \ref{fig:figure2}(a).
+
+```
+Call:
+glm(formula = as.vector(pix_matrix) ~ as.vector(dist), family = binomial(link = logit))
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-0.0262  -0.0211  -0.0193  -0.0171   4.3297  
+
+Coefficients:
+                  Estimate Std. Error z value Pr(>|z|)    
+(Intercept)     -9.392e+00  9.628e-02 -97.545   <2e-16 ***
+as.vector(dist)  8.021e-04  8.726e-05   9.192   <2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 22261  on 6224000  degrees of freedom
+Residual deviance: 22173  on 6223999  degrees of freedom
+AIC: 22177
+
+Number of Fisher Scoring iterations: 11
+```
+
+
+
+![Work flow for DetectorChecker web application.\label{fig:figure1}](figure1.png){ width=75% }
+
+![(a) Example of point pattern of defects. (b) Intensity map resulting from point pattern of defects. \label{fig:figure2}](combined1.png)
+
+![(a) $F$ plot resulting from point pattern of defects. (b) $G$ plot resulting from point pattern of defects. \label{fig:figure3}](combined2.png)
+
+![(a) $K$ plot resulting from point pattern of defects. (b) $K$ plot resulting from point pattern of defects, corrected for inhomogeneity. \label{fig:figure4}](combined3.png)
+
+
 
 
 The web application also provides for further graphical options,
@@ -138,7 +177,7 @@ such as the study of direction from a typical defect point to
 its nearest neighbour within the relevant sub-panel,
 analysis at the level of "events" (appropriately defined grouping of clumps of defect pixels) rather than individual defect points,
 and exclusion of regions of the image rectangle for which the defect intensity is clearly different
-(this often arises in XCT, where corners of the image exhibit high defect intensity deriving presumably from mechanical
+(this often arises in XCT, where corners of the image exhibit high defect intensity, presumably deriving from mechanical
 stress due to supports of the screen).
 
 
@@ -163,16 +202,6 @@ which promise to deliver evidence-based analysis
 to support decisions on refurbishment and / or replacement
 strategies.
 
-![Work flow for DetectorChecker web application.\label{fig:figure1}](figure1.png){ width=75% }
-
-![(a) Example of point pattern of defects. (b) Intensity map resulting from point pattern of defects. \label{fig:figure2}](combined1.png)
-
-![(a) $F$ plot resulting from point pattern of defects. (b) $G$ plot resulting from point pattern of defects. \label{fig:figure3}](combined2.png)
-
-![(a) $K$ plot resulting from point pattern of defects. (b) $K$ plot resulting from point pattern of defects, corrected for inhomogeneity. \label{fig:figure4}](combined3.png)
-
-
-
 # Acknowledgements
 
 We gratefully acknowledge support from the UK EPSRC (grant EP/K031066/1)
@@ -182,3 +211,5 @@ grant EP/N510129/1) during this project.
 
 
 # References
+
+
