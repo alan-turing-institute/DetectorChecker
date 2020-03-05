@@ -30,8 +30,8 @@ affiliations:
 ---
 
 ```
-Version: 1.1.12
-Revised for style, added glm output. 13.02.20.
+Version: 1.1.13
+Minor stylistic amendments. 05.03.20.
 ```
 
 _DetectorChecker_ is an R package and an associated web application 
@@ -40,7 +40,7 @@ users who need to analyze spatial patterns of defects in images.
 These images can be _panel-structured_, which is to say,
 composed of sub-panels arranged in an architecture which can be
 specified by the user.
-Primary intended beneficiaries are people responsible for
+Primary intended beneficiaries are individuals responsible for
 high-value digital detector screens used in X-ray computerised tomography (XCT),
 where defects arise due to high radiation flux.
 More generally the software can be used to analyse defects in other
@@ -61,37 +61,38 @@ while the @FDA-2018[^3] advises to replace XCT detector screens after order of 1
 Screen replacement or refurbishment is expensive;
 regular checks of screen pixels are needed (a) to quantify screen quality
 and (b) to assess possible _special causes_ of defective pixels,
-using the terminology of classic quality control established by @Shewhart-1939.
-This is best done by means of considerations of spatial statistics,
+using Shewhart's terminology of classic quality control [see @Shewhart-1939].
+This is best done using spatial statistics,
 both to determine the extent to which spatial patterns of defective pixels
 can be accounted for by quantifiable independent random variation
 and also by describing departures from spatial randomness in ways
 which are suggestive of possible explanations (for example, stress due
 to screen attachment, or failure at pixel level of data readout).
-Methods of spatial statistics are crucial for this task: @ChiuStoyanKendallMecke-2013
-discuss some theoretical foundations
+Theoretical spatial statistics methodology is crucial: foundations are discussed in @ChiuStoyanKendallMecke-2013
 while
-@BaddeleyRubakTurner-2015 describe an implementation of spatial statistics methods as the _spatstat_ package in the
+@BaddeleyRubakTurner-2015 describe the _spatstat_ package, an implementation of spatial statistics methods in the
 R statistical computing environment [@RFoundation-2019].
 _DetectorChecker_ [@tomas_lazauskas_2020_3662233] is an R package which adapts methods from _spatstat_ to the case of panel-structured images,
-and analyses point patterns which may arise either from
+and analyses point patterns arising either from
 individual defects or from "clumps" of defects (determined in a manner specified by the user).
 The associated web application
 [_DetectorCheckerWebApp_](https://detectorchecker.azurewebsites.net/)
 [@tomas_lazauskas_2020_3662235]
 is based on a self-contained R environment together
-with a _Shiny_ gui, implemented and made available _via_ _Azure_, so as to expose the
-basic functionality of the R package without the need for users to install R.
+with a _Shiny_ gui, implemented and made available _via_ _Azure_.
+The application exposes the
+basic functionality of the _DetectorChecker_ package without the need for users to install R.
 In particular the web application  can be used
 to define the geometry of the sub-panels of the detector screen
 (which is to say, the arrangement and size of the component sub-panels),
-to upload the spatial arrangement of the defective pixels either
-directly by means of "bad pixel maps" (XML format) or inferred from test images (formats including TIFF),
+to upload the spatial arrangement of the defective pixels 
+(either
+directly by means of "bad pixel maps" in XML format or inferred from test images in formats including TIFF),
 and then to inspect the results using the facilities offered
 by the package.
 The software is freely available under MIT licence, accessible from the two Zenodo repositories
 referenced above.
-To the best of our knowledge, there is no other comparable package or web application
+To the best of our knowledge, there is no comparable package or web application
 making methods of spatial statistics available for panel-structured image data of arbitrary architecture.
 
 [^3]:
@@ -111,7 +112,7 @@ The data can then be uploaded.
 For example, the point pattern in Figure \ref{fig:figure2}(a) yields the intensity map given in Figure \ref{fig:figure2}(b).
 3. Departure from completed randomness can be assessed using visual inspection of graphs
 of $F$, $G$ and $K$ functions as described in @ChiuStoyanKendallMecke-2013. It is clear that the
-point pattern of Figure \ref{fig:figure2}(a) is definitely inhomogeneous and therefore it is
+point pattern of Figure \ref{fig:figure2}(a) is strongly inhomogeneous and therefore it is
 not surprising that the corresponding graphical plots 
 indicate clear evidence of deviation from CSR:  
     + the $F$ function or "empty space function"
@@ -122,20 +123,22 @@ indicate clear evidence of deviation from CSR:
     the $F$ function would be a random perturbation of $F(r)=1-\exp(-\lambda \pi r^2)$. See Figure \ref{fig:figure3}(a),
     which presents different 
     variants accounting in various ways for edge-effects.
-    Note the clear deviation of the empirical $\hat{F}$ functions from what would be expected under CSR, namely  $F_\text{pois}$.
-    + the $G$ function computes the empirical distribution of nearest-neighbour distances between defect points; if the point pattern was in fact CSR with intensity $\lambda$, then the $G$ function would also be a random perturbation of $F(r)=1-\exp(-\lambda \pi r^2)$. See Figure \ref{fig:figure3}(b), and note the clear deviation from $G_\text{pois}$ of the empirical $\hat{G}$ functions (which again account in various ways for edge-effects), 
+    Note the clear deviation of the empirical $\hat{F}$ functions from what would be expected under CSR, namely the theoretical $F_\text{pois}$.
+    + the $G$ function computes the empirical distribution of nearest-neighbour distances between defect points; if the point pattern was in fact CSR with intensity $\lambda$, then the $G$ function would also be a random perturbation of $F(r)=1-\exp(-\lambda \pi r^2)$. See Figure \ref{fig:figure3}(b), and note the clear deviation from the theoretical $G_\text{pois}$ of the empirical $\hat{G}$ functions (which again account in various ways for edge-effects), 
     hence again suggesting deviation from CSR.
     + the $K$ function (Ripley's $K$ function) computes the empirical mean number of defect points within a distance $r$ of a typical defect point, viewed as a function of $R$; if the point pattern was in fact CSR with intensity $\lambda$, then the $K$ function would be a random perturbation of $K(r)=\pi r^2$. See Figure \ref{fig:figure4}(a), and note the deviation from $K_\text{pois}$ of the empirical $\hat{K}$ functions (once more accounting for edge-effects in different ways), especially at short distances, once more suggesting deviation from CSR.
     Note that for geometrical reasons the empirical $\hat{K}$ functions will exhibit substantially greater variation at large distances;
     it is therefore appropriate to confine attention to the left-hand third of the $x$-axis.
-    The excess over $K_\text{pois}$ at short distances, particularly for $\hat{K}_\text{iso}$, indicates that defects are more clustered than would be expected from CSR. 
+    The excess over the theoretical $K_\text{pois}$ at short distances, particularly for $\hat{K}_\text{iso}$, indicates that defects are more clustered than would be expected from CSR. 
     + Plots are also available which compute these functions in a way which accounts for inhomogeneity: 
     Figure \ref{fig:figure4}(b) gives an example of this in the case of the $K$ function. The plots of the empirical inhomogeneity-adjusted $\hat{K}_\text{inhom}$ functions agree much more closely with 
-    $K^\text{pois}_\text{inhom}$ at short distances, supporting the hypothesis that the pattern of defects is what
+    the theoretical $K^\text{pois}_\text{inhom}$ at short distances, supporting the hypothesis that the pattern of defects is what
     might be expected to arise from an _inhomogeneous_ Poisson process of defects.
-4. Finally the relationship of the defect points to sub-panel boundaries can be studied by means of various logistic regression options, which assess whether damage intensity appears to depend on distance from the centre of the image or horizontal or vertical distance from sub-panel edges. When this data set is modelled in terms of Euclidean distance from the centre, the web application reports substantial evidence for positive dependence of defect intensity on distance from the centre (see `as.vector(dist)` in the web application output below), conforming with the visual impression given by Figure \ref{fig:figure2}(a).
+4. Finally the relationship of the defect points to sub-panel boundaries can be studied by means of various logistic regression options, which assess whether damage intensity appears to depend on distance from the centre of the image or horizontal or vertical distance from sub-panel edges. When this data set is modelled in terms of Euclidean distance from the centre, the web application reports substantial evidence for positive dependence of defect intensity on distance from the centre (see `as.vector(dist)` in the following web application output), conforming with the visual impression given by Figure \ref{fig:figure2}(a).
 
 ```
+Output from web application:
+
 Call:
 glm(formula = as.vector(pix_matrix) ~ as.vector(dist), family = binomial(link = logit))
 
@@ -192,13 +195,13 @@ The web application offers the possibility of uploading users' data to
 a data repository, thus permitting the possibility of organizing cooperative
 statistical investigations comparing patterns across different machines and
 different modes of usage. In particular we envisage its use to collect
-time sequences of images, to permit statistical investigation at Warwick
+time sequences of images, to permit statistical investigation by the Warwick team
 of deterioration over time, using latent Markov models
-of the life and death of defective pixels which we are currently developing.
+of the life and death of defective pixels which are currently being developed.
 Such analysis requires sustained and regular monitoring of a diversity
 of screens from various devices.
 Interested users are encouraged to make contact to discuss these possibilities,
-which promise to deliver evidence-based analysis
+which will permit evidence-based analysis
 to support decisions on refurbishment and / or replacement
 strategies.
 
