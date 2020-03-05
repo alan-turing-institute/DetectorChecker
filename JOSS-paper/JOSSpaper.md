@@ -13,7 +13,7 @@ authors:
   name: Tomas Lazauskas
 - affiliation: 2
   name: Martin O'Reilly
-date: "13 January 2020, revised 13 February 2020"
+date: "13 January 2020, revised 5 March 2020"
 output: pdf_document
 bibliography: JOSSpaper.bib
 tags:
