@@ -30,8 +30,8 @@ affiliations:
 ---
 
 ```
-Version: 1.1.15
-Added some references and acknowledgements 1. 1.03.20.
+Version: 1.1.17
+Added some references and acknowledgements 11.03.20.
 ```
 
 _DetectorChecker_ is an R package and an associated web application 
@@ -57,9 +57,10 @@ Digital detector screens are crucial high-value components of imaging systems us
 modern science  and engineering systems, particularly in X-ray computerised tomography (XCT).
 Screen quality is typically strongly linked to system performance:
 in the case of XCT this is noted by @YaffeRowlands-1997.
-The FDA provides information for industry on X-ray imaging devices listing common laboratory tests for evaluation of general-use x-ray imaging devices and the applicable standard for each modality that can form the basis for a maintenance schedule [@FDA].
+The FDA provides information for industry on X-ray imaging devices listing common laboratory tests for evaluation of general-use X-ray imaging devices and the applicable standard for each modality that can form the basis for a maintenance schedule [@FDA].
 The Institute of Physics and Engineering in Medicine (IPEM) proposes a framework of tests [@IPEM1] which are used for quality assurance by practitioners [@IPEM2].
-In September 2019 the UK NHS announced a major investment of £200m to overcome outdated equipment, with a significant proportion of CT, MRI and general X-ray equipment more than 10 years old [@UK-NHS].
+In September 2019 the UK National Health Service 
+(NHS) announced a major investment of £200m to overcome outdated equipment, with a significant proportion of CT, MRI and general X-ray equipment more than 10 years old [@UK-NHS].
 Screen replacement or refurbishment is expensive;
 regular checks of screen pixels are needed (a) to quantify screen quality
 and (b) to assess possible _special causes_ of defective pixels,
@@ -136,7 +137,9 @@ indicate clear evidence of deviation from CSR:
     Figure \ref{fig:figure4}(b) gives an example of this in the case of the $K$ function. The plots of the empirical inhomogeneity-adjusted $\hat{K}_\text{inhom}$ functions agree much more closely with 
     the theoretical $K^\text{pois}_\text{inhom}$ at short distances, supporting the hypothesis that the pattern of defects is what
     might be expected to arise from an _inhomogeneous_ Poisson process of defects.
-4. Finally the relationship of the defect points to sub-panel boundaries can be studied by means of various logistic regression options, which assess whether damage intensity appears to depend on distance from the centre of the image or horizontal or vertical distance from sub-panel edges. When this data set is modelled in terms of Euclidean distance from the centre, the web application reports substantial evidence for positive dependence of defect intensity on distance from the centre (see `as.vector(dist)` in the following web application output), conforming with the visual impression given by Figure \ref{fig:figure2}(a). In fact this is a reflection of this particular screen design: Diamond inform us that panels are tested before installation, and better planels are placed in the centre of the structured display.
+4. Finally the relationship of the defect points to sub-panel boundaries can be studied by means of various logistic regression options, which assess whether damage intensity appears to depend on distance from the centre of the image or horizontal or vertical distance from sub-panel edges. When this data set is modelled in terms of Euclidean distance from the centre, the web application reports substantial evidence for positive dependence of defect intensity on distance from the centre (see `as.vector(dist)` in the following web application output), conforming with the visual impression given by Figure \ref{fig:figure2}(a). In fact this reflects 
+manufacturing details of
+this particular screen design: Diamond inform us that panels are tested before installation, and better planels are placed in the centre of the structured display.
 
 ```
 Output from web application:
@@ -213,7 +216,7 @@ We gratefully acknowledge support from the UK EPSRC (grant EP/K031066/1)
 and the Alan Turing Institute (under the EPSRC
 grant EP/N510129/1) during this project.
 
-We also wish to thank Nicola Tartoni and Ian Horswell (Diamond Lightsource, UK) for guidance on detector types and sample data sets
+We also wish to thank Nicola Tartoni and Ian Horswell (Diamond Lightsource, UK) for guidance on detector types and sample data sets.
 
 # References
 

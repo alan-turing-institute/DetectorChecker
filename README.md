@@ -11,6 +11,7 @@ Created by: [Julia Brettschneider](https://github.com/ejulia17) (original R code
 ## Overview
 
 DetectorChecker is an R package to aid in the assessment of damage to CT scanners arising from exposure to high energy radiation.
+While the target application concerns CT scanners, this package can also be used to analyze screen damage arising from other sources.
 
 
 ## Installation
