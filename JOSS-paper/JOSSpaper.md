@@ -13,7 +13,7 @@ authors:
   name: Tomas Lazauskas
 - affiliation: 2
   name: Martin O'Reilly
-date: "13 January 2020, revised 5 March 2020"
+date: "13 January 2020, revised 11 March 2020"
 output: pdf_document
 bibliography: JOSSpaper.bib
 tags:
@@ -30,8 +30,8 @@ affiliations:
 ---
 
 ```
-Version: 1.1.13
-Minor stylistic amendments. 05.03.20.
+Version: 1.1.14
+New figure 1. 1.03.20.
 ```
 
 _DetectorChecker_ is an R package and an associated web application 
@@ -143,7 +143,7 @@ Call:
 glm(formula = as.vector(pix_matrix) ~ as.vector(dist), family = binomial(link = logit))
 
 Deviance Residuals: 
-    Min       1Q   Median       3Q      Max  
+<!--     Min       1Q   Median       3Q      Max   -->
 -0.0262  -0.0211  -0.0193  -0.0171   4.3297  
 
 Coefficients:
@@ -164,7 +164,7 @@ Number of Fisher Scoring iterations: 11
 
 
 
-![Work flow for DetectorChecker web application.\label{fig:figure1}](figure1.png){ width=75% }
+![Work flow for DetectorChecker web application.\label{fig:figure1}](flowchartDCshort.pdf){ width=75% }
 
 ![(a) Example of point pattern of defects. (b) Intensity map resulting from point pattern of defects. \label{fig:figure2}](combined1.png)
 
