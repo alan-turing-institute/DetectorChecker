@@ -13,7 +13,7 @@ authors:
   name: Tomas Lazauskas
 - affiliation: 2
   name: Martin O'Reilly
-date: "13 January 2020, revised 11 March 2020"
+date: "13 January 2020, revised 13 March 2020"
 output: pdf_document
 bibliography: JOSSpaper.bib
 tags:
@@ -30,11 +30,11 @@ affiliations:
 ---
 
 ```
-Version: 1.1.17
-Added some references and acknowledgements 11.03.20.
+Version: 1.1.18
+Edited references substantiating XCT quality concerns 13.03.20.
 ```
 
-_DetectorChecker_ is an R package and an associated web application 
+[_DetectorChecker_](https://doi.org/10.5281/zenodo.3662233) is an R package and an associated web application 
 which are intended to help
 users who need to analyze spatial patterns of defects in images.
 These images can be _panel-structured_, which is to say,
@@ -54,14 +54,21 @@ defect patterns.
 
 
 Digital detector screens are crucial high-value components of imaging systems used throughout
-modern science  and engineering systems, particularly in X-ray computerised tomography (XCT).
-Screen quality is typically strongly linked to system performance:
-in the case of XCT this is noted by @YaffeRowlands-1997.
-The FDA provides information for industry on X-ray imaging devices listing common laboratory tests for evaluation of general-use X-ray imaging devices and the applicable standard for each modality that can form the basis for a maintenance schedule [@FDA].
-The Institute of Physics and Engineering in Medicine (IPEM) proposes a framework of tests [@IPEM1] which are used for quality assurance by practitioners [@IPEM2].
+modern science, medicine, and engineering systems, particularly in XCT.
+The US @FDA provides information for industry on X-ray imaging devices
+and lists some common laboratory tests for 
+evaluation of general-use X-ray imaging devices.
+It also notes the applicable standard 
+for each modality, thus forming the basis for a maintenance schedule.
+Additionally a scheduled testing framework has been proposed by the Institute of Physics and Engineering in Medicine [@IPEM2].
 In September 2019 the UK National Health Service 
-(NHS) announced a major investment of £200m to overcome outdated equipment, with a significant proportion of CT, MRI and general X-ray equipment more than 10 years old [@UK-NHS].
-Screen replacement or refurbishment is expensive;
+(NHS) announced a major investment of £200m to overcome outdated equipment, 
+noting that a significant proportion of CT, MRI and general X-ray equipment more than 10 years old [@UK-NHS].
+Thus XCT system quality concerns are highly topical.
+
+@YaffeRowlands-1997 point out that XCT screen quality is typically strongly linked to system performance:
+[_DetectorChecker_](https://doi.org/10.5281/zenodo.3662233) facilitates the inclusion of screen pixel tests in a testing framework.
+Note that screen replacement or refurbishment is expensive;
 regular checks of screen pixels are needed (a) to quantify screen quality
 and (b) to assess possible _special causes_ of defective pixels,
 using Shewhart's terminology of classic quality control [see @Shewhart-1939].
@@ -75,7 +82,8 @@ Theoretical spatial statistics methodology is crucial: foundations are discussed
 while
 @BaddeleyRubakTurner-2015 describe the _spatstat_ package, an implementation of spatial statistics methods in the
 R statistical computing environment [@RFoundation-2019].
-_DetectorChecker_ [@tomas_lazauskas_2020_3662233] is an R package which adapts methods from _spatstat_ to the case of panel-structured images,
+[_DetectorChecker_](https://doi.org/10.5281/zenodo.3662233)
+[@tomas_lazauskas_2020_3662233] is an R package which adapts methods from _spatstat_ to the case of panel-structured images,
 and analyses point patterns arising either from
 individual defects or from "clumps" of defects (determined in a manner specified by the user).
 The associated web application
@@ -84,7 +92,7 @@ The associated web application
 is based on a self-contained R environment together
 with a _Shiny_ gui, implemented and made available _via_ _Azure_.
 The application exposes the
-basic functionality of the _DetectorChecker_ package without the need for users to install R.
+basic functionality of the [_DetectorChecker_](https://doi.org/10.5281/zenodo.3662233) package without the need for users to install R.
 In particular the web application  can be used
 to define the geometry of the sub-panels of the detector screen
 (which is to say, the arrangement and size of the component sub-panels),
