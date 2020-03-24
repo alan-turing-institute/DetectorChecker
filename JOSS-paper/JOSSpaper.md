@@ -13,7 +13,7 @@ authors:
   name: Tomas Lazauskas
 - affiliation: 2
   name: Martin O'Reilly
-date: "13 January 2020, revised 17 March 2020"
+date: "13 January 2020, revised 24 March 2020"
 output: pdf_document
 bibliography: JOSSpaper.bib
 tags:
@@ -30,8 +30,10 @@ affiliations:
 ---
 
 ```
-Version: 1.1.19
-Corrected minor typos, added subscript "pois" to theoretical F, K, G functions 17.03.20.
+Version: 1.1.20
+Corrected phraseology for estimates of F, K, G functions.
+Added hyperlinks for Shiny and spatstat. 24.03.20.
+Note that Figure 2(b) still needs to be replaced by a re-coloured version!
 ```
 
 [_DetectorChecker_](https://doi.org/10.5281/zenodo.3662233) 
@@ -49,7 +51,7 @@ panel-structured arrays, for example solar panels or very large display screens.
 To maximize accessibility, and to avoid any issues arising from specific software environments,
 we have created a web application which provides
 the principal features of the software in standalone form.
-The web application also affords the possibility of engaging with our team in analysis
+The web application also affords the possibility of engaging with our team in the analysis
 of time-evolving
 defect patterns.
 
@@ -65,9 +67,9 @@ Additionally a scheduled testing framework has been proposed by the Institute of
 In September 2019 the UK National Health Service 
 (NHS) announced a major investment of £200m to overcome outdated equipment, 
 noting that a significant proportion of CT, MRI and general X-ray equipment more than 10 years old [@UK-NHS].
-Thus XCT system quality concerns are highly topical.
+Thus XCT system quality concerns are very topical.
 
-@YaffeRowlands-1997 point out that XCT screen quality is typically strongly linked to system performance:
+@YaffeRowlands-1997 point out that XCT screen quality is typically strongly linked to system performance.
 [_DetectorChecker_](https://doi.org/10.5281/zenodo.3662233) facilitates the inclusion of screen pixel tests in a testing framework.
 Note that screen replacement or refurbishment is expensive;
 regular checks of screen pixels are needed (a) to quantify screen quality
@@ -81,17 +83,18 @@ which are suggestive of possible explanations (for example, stress due
 to screen attachment, or failure at pixel level of data readout).
 Theoretical spatial statistics methodology is crucial: foundations are discussed in @ChiuStoyanKendallMecke-2013
 while
-@BaddeleyRubakTurner-2015 describe the _spatstat_ package, an implementation of spatial statistics methods in the
+@BaddeleyRubakTurner-2015 describe the [_spatstat_](https://spatstat.org/) package, an implementation of spatial statistics methods in the
 R statistical computing environment [@RFoundation-2019].
 [_DetectorChecker_](https://doi.org/10.5281/zenodo.3662233)
-[@tomas_lazauskas_2020_3662233] is an R package which adapts methods from _spatstat_ to the case of panel-structured images,
+[@tomas_lazauskas_2020_3662233] is an R package which adapts methods from [_spatstat_](https://spatstat.org/) to the case of panel-structured images,
 and analyses point patterns arising either from
 individual defects or from "clumps" of defects (determined in a manner specified by the user).
 The associated web application
 [_DetectorCheckerWebApp_](https://detectorchecker.azurewebsites.net/)
 [@tomas_lazauskas_2020_3662235]
 is based on a self-contained R environment together
-with a _Shiny_ gui, implemented and made available _via_ _Azure_.
+with a [_Shiny_](https://cran.r-project.org/web/packages/shiny/index.html) gui, 
+implemented and made available _via_ _Azure_.
 The application exposes the
 basic functionality of the [_DetectorChecker_](https://doi.org/10.5281/zenodo.3662233) package without the need for users to install R.
 In particular the web application  can be used
@@ -105,12 +108,10 @@ by the package.
 The software is freely available under MIT licence, accessible from the two Zenodo repositories
 referenced above.
 To the best of our knowledge, there is no comparable package or web application
-making methods of spatial statistics available for panel-structured image data of arbitrary architecture.
+making methods of spatial statistics available for panel-structured image data of arbitrary structure architecture.
 
-[^3]:
- JAB to supply reference to replace @FDA-2018!
 
-Defects are modelled as points in an image rectangle based on screen dimensions. 
+Defects are modelled as points in an image rectangle based on overall screen dimensions. 
 The pattern of defects can be modelled using the web application (workflow is
 summarised in Figure \ref{fig:figure1}):
 
@@ -120,31 +121,50 @@ This can be done either by using a drop-down menu to specify a predetermined opt
 or by uploading a file giving the specific structure of sub-panels.
 The data can then be uploaded.
 2. Intensity maps can be visualized _via_ kernel smoothing applied to the point pattern
-(replacing each defect point by the corresponding translate of a fixed kernel function).
+(replacing each defect point by the corresponding translate of a fixed kernel function and then summing).
 For example, the point pattern in Figure \ref{fig:figure2}(a) yields the intensity map given in Figure \ref{fig:figure2}(b).
-3. Departure from completed randomness can be assessed using visual inspection of graphs
-of $F$, $G$ and $K$ functions as described in @ChiuStoyanKendallMecke-2013. It is clear that the
+3. Departure from _complete spatial randomness_ (CSR),
+which is to say what would be expected if the point pattern was in fact
+    generated by a homogeneous Poisson
+    point process of constant intensity $\lambda$,
+can be assessed using visual inspection of graphs
+of empirical estimates of $F$, $G$ and $K$ functions as described in @ChiuStoyanKendallMecke-2013. It is clear that the
 point pattern of Figure \ref{fig:figure2}(a) is strongly inhomogeneous and therefore it is
 not surprising that the corresponding graphical plots 
 indicate clear evidence of deviation from CSR:  
     + the $F$ function or "empty space function"
-    computes the empirical distribution of the nearest distance to a defect point from a typical location
-    chosen uniformly from the image rectangle; if the point pattern was in fact
-    generated by a homogeneous Poisson
-    point process of intensity $\lambda$ (_complete spatial randomness_, or CSR), then
-    the $F$ function would be a random perturbation of $F_\text{pois}(r)=1-\exp(-\lambda \pi r^2)$. See Figure \ref{fig:figure3}(a),
+    computes the distribution of the nearest distance to a defect point from a typical location
+    chosen uniformly from the image rectangle; if the point pattern did in fact satisfy CSR then
+    an empirical estimate of the $F$ function could be viewed as a random perturbation of 
+    the theoretical $F$ function under CSR, namely
+    $F_\text{pois}(r)=1-\exp(-\lambda \pi r^2)$. See Figure \ref{fig:figure3}(a),
     which presents different 
-    variants accounting in various ways for edge-effects.
-    Note the clear deviation of the empirical $\hat{F}$ functions from what would be expected under CSR, namely the theoretical $F_\text{pois}$.
-    + the $G$ function computes the empirical distribution of nearest-neighbour distances between defect points; if the point pattern was in fact CSR with intensity $\lambda$, then a conditional probability argument shows that the $G$ function would also be a random perturbation of $G_\text{pois}(r)=F_\text{pois}(r)=1-\exp(-\lambda \pi r^2)$. See Figure \ref{fig:figure3}(b), and note the clear deviation from the theoretical $G_\text{pois}$ of the empirical $\hat{G}$ functions (which again account in various ways for edge-effects), 
+    variants of $\hat{F}$ accounting in various ways for edge-effects.
+    Note the clear deviation of the $\hat{F}$ empirical estimates from what would be expected under CSR, 
+    namely the theoretical $F_\text{pois}$.
+    + the $G$ function computes the distribution of nearest-neighbour distances between defect points; if the point pattern did in fact satisfy CSR then
+    an empirical estimate of the $G$ function could be viewed as a random perturbation of
+    the theoretical $G$ function under CSR, namely
+    (by a conditional probability argument)
+    $G_\text{pois}(r)=F_\text{pois}(r)=1-\exp(-\lambda \pi r^2)$. See Figure \ref{fig:figure3}(b), and note the clear deviation
+    from the theoretical $G_\text{pois}$
+    of the $\hat{G}$ empirical estimates (which again account in various ways for edge-effects), 
     hence again suggesting deviation from CSR.
-    + the $K$ function (Ripley's $K$ function) computes the empirical mean number of defect points within a distance $r$ of a typical defect point, viewed as a function of $R$; if the point pattern was in fact CSR with intensity $\lambda$, then the $K$ function would be a random perturbation of $K_\text{pois}(r)=\pi r^2$. See Figure \ref{fig:figure4}(a), and note the deviation from $K_\text{pois}$ of the empirical $\hat{K}$ functions (once more accounting for edge-effects in different ways), especially at short distances, once more suggesting deviation from CSR.
-    Note that for geometrical reasons the empirical $\hat{K}$ functions will exhibit substantially greater variation at large distances;
+    + the $K$ function (Ripley's $K$ function) computes the mean number of defect points within a distance $r$ of a typical defect point, viewed as a function of $R$; if the point pattern did in fact satisfy CSR then
+    an empirical estimate of the $K$ function could be viewed as a random perturbation of the theoretical $K$ function
+    under CSR, namely
+    $K_\text{pois}(r)=\pi r^2$. See Figure \ref{fig:figure4}(a), and note the deviation from $K_\text{pois}$ 
+    of the $\hat{K}$ empirical estimates (once more accounting for edge-effects in different ways), especially at short distances, once more suggesting deviation from CSR.
+    Note that for geometrical reasons the
+    $\hat{K}$ empirical estimates will exhibit substantially greater variation at large distances;
     it is therefore appropriate to confine attention to the left-hand third of the $x$-axis.
-    The excess over the theoretical $K_\text{pois}$ at short distances, particularly for $\hat{K}_\text{iso}$, indicates that defects are more clustered than would be expected from CSR. 
-    + Plots are also available which compute these functions in a way which accounts for inhomogeneity: 
-    Figure \ref{fig:figure4}(b) gives an example of this in the case of the $K$ function. The plots of the empirical inhomogeneity-adjusted $\hat{K}_\text{inhom}$ functions agree much more closely with 
-    the theoretical $K^\text{pois}_\text{inhom}$ at short distances, supporting the hypothesis that the pattern of defects is what
+    The excess over the theoretical $K_\text{pois}$ at short distances, particularly for the estimate $\hat{K}_\text{iso}$, indicates that defects are more clustered than would be expected from CSR. 
+    + Plots are also available which take account of inhomogeneity and compare these estimates to theoretical functions
+    computed for inhomogeneous Poisson point processes: 
+    Figure \ref{fig:figure4}(b) gives an example of this in the case of the $K$ function. The plots of the $\hat{K}_\text{inhom}$
+    empirical inhomogeneity-adjusted estimates agree much more closely with 
+    the theoretical $K^\text{pois}_\text{inhom}$ function 
+    at short distances, supporting the hypothesis that the pattern of defects is what
     might be expected to arise from an _inhomogeneous_ Poisson process of defects.
 4. Finally the relationship of the defect points to sub-panel boundaries can be studied by means of various logistic regression options, which assess whether damage intensity appears to depend on distance from the centre of the image or horizontal or vertical distance from sub-panel edges. When this data set is modelled in terms of Euclidean distance from the centre, the web application reports substantial evidence for positive dependence of defect intensity on distance from the centre (see `as.vector(dist)` in the following web application output), conforming with the visual impression given by Figure \ref{fig:figure2}(a). In fact this reflects 
 manufacturing details of
