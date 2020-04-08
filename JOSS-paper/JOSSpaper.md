@@ -30,20 +30,19 @@ affiliations:
 ---
 
 ```
-Version: 1.1.20
-Corrected phraseology for estimates of F, K, G functions.
-Added hyperlinks for Shiny and spatstat. 24.03.20.
+Version: 1.1.21
+Minor tweaks, also removed `RMarkdown` comments from web application output. 08.04.20.
 Note that Figure 2(b) still needs to be replaced by a re-coloured version!
 ```
 
 [_DetectorChecker_](https://doi.org/10.5281/zenodo.3662233) 
-refers to an R package and an associated web application 
-which are intended to help
+refers to an R package and an associated web application, 
+intended to help
 users who need to analyze spatial patterns of defects in images.
 These images can be _panel-structured_, which is to say,
-composed of sub-panels arranged in an architecture which can be
-specified by the user.
-Primary intended beneficiaries are individuals responsible for
+composed of sub-panels arranged in an architecture which
+the user can specifiy in the package or in the web application.
+Primary beneficiaries are intended to be individuals responsible for
 high-value digital detector screens used in X-ray computerised tomography (XCT),
 where defects arise due to high radiation flux.
 More generally the software can be used to analyse defects in other
@@ -69,14 +68,15 @@ In September 2019 the UK National Health Service
 noting that a significant proportion of CT, MRI and general X-ray equipment more than 10 years old [@UK-NHS].
 Thus XCT system quality concerns are very topical.
 
-@YaffeRowlands-1997 point out that XCT screen quality is typically strongly linked to system performance.
+Yaffe and Rowlands [-@YaffeRowlands-1997, especially section 3.8]
+point out that XCT screen quality is linked to system performance.
 [_DetectorChecker_](https://doi.org/10.5281/zenodo.3662233) facilitates the inclusion of screen pixel tests in a testing framework.
 Note that screen replacement or refurbishment is expensive;
 regular checks of screen pixels are needed (a) to quantify screen quality
 and (b) to assess possible _special causes_ of defective pixels,
-using Shewhart's terminology of classic quality control [see @Shewhart-1939].
+using Shewhart's [-@Shewhart-1939] terminology from classic quality control.
 This is best done using spatial statistics,
-both to determine the extent to which spatial patterns of defective pixels
+both in order to determine the extent to which spatial patterns of defective pixels
 can be accounted for by quantifiable independent random variation
 and also by describing departures from spatial randomness in ways
 which are suggestive of possible explanations (for example, stress due
@@ -94,7 +94,7 @@ The associated web application
 [@tomas_lazauskas_2020_3662235]
 is based on a self-contained R environment together
 with a [_Shiny_](https://cran.r-project.org/web/packages/shiny/index.html) gui, 
-implemented and made available _via_ _Azure_.
+implemented and made available _via_ _Azure_ at https://detectorchecker.azurewebsites.net/.
 The application exposes the
 basic functionality of the [_DetectorChecker_](https://doi.org/10.5281/zenodo.3662233) package without the need for users to install R.
 In particular the web application  can be used
@@ -166,9 +166,10 @@ indicate clear evidence of deviation from CSR:
     the theoretical $K^\text{pois}_\text{inhom}$ function 
     at short distances, supporting the hypothesis that the pattern of defects is what
     might be expected to arise from an _inhomogeneous_ Poisson process of defects.
-4. Finally the relationship of the defect points to sub-panel boundaries can be studied by means of various logistic regression options, which assess whether damage intensity appears to depend on distance from the centre of the image or horizontal or vertical distance from sub-panel edges. When this data set is modelled in terms of Euclidean distance from the centre, the web application reports substantial evidence for positive dependence of defect intensity on distance from the centre (see `as.vector(dist)` in the following web application output), conforming with the visual impression given by Figure \ref{fig:figure2}(a). In fact this reflects 
+4. Finally the relationship of the defect points to sub-panel boundaries can be studied by means of various logistic regression options, which assess whether damage intensity appears to depend on distance from the centre of the image or horizontal or vertical distance from sub-panel edges. When this data set is modelled in terms of Euclidean distance from the centre, the web application reports substantial evidence for positive dependence of defect intensity on distance from the centre (see the highly siginificant coefficient for `as.vector(dist)` in the following web application output), 
+conforming with the visual impression given by Figure \ref{fig:figure2}(a). In fact this positive dependence reflects 
 manufacturing details of
-this particular screen design: Diamond inform us that panels are tested before installation, and better panels are placed in the centre of the structured display.
+this particular screen design: Diamond reports that panels are tested before installation, and better panels are placed in the centre of the structured display.
 
 --------------------------------
 
@@ -179,7 +180,7 @@ Call:
 glm(formula = as.vector(pix_matrix) ~ as.vector(dist), family = binomial(link = logit))
 
 Deviance Residuals: 
-<!--     Min       1Q   Median       3Q      Max   -->
+    Min       1Q   Median       3Q      Max
 -0.0262  -0.0211  -0.0193  -0.0171   4.3297  
 
 Coefficients:
