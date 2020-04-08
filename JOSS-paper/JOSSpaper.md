@@ -13,7 +13,7 @@ authors:
   name: Tomas Lazauskas
 - affiliation: 2
   name: Martin O'Reilly
-date: "13 January 2020, revised 24 March 2020"
+date: "13 January 2020, revised 8 April 2020"
 output: pdf_document
 bibliography: JOSSpaper.bib
 tags:
@@ -30,7 +30,7 @@ affiliations:
 ---
 
 ```
-Version: 1.1.21
+Version: 1.1.22
 Minor tweaks, also removed `RMarkdown` comments from web application output. 08.04.20.
 Note that Figure 2(b) still needs to be replaced by a re-coloured version!
 ```
