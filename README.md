@@ -41,7 +41,7 @@ devtools::install_github("alan-turing-institute/DetectorChecker", ref = "develop
 
 ## Vignette
 
-The user guide vignette provides detailed instructions for using the package and loading specific examples. Make sure you installed following the `with vignette` instructions:
+The user guide vignette provides detailed instructions for using the package and loading specific examples. Make sure you installed the package including vignette following the instructions above (see use of build_vignettes = TRUE in Section Installation) and then load the package followed by the vignette command:
 
 ```
 library(detectorchecker)
