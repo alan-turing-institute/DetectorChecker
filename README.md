@@ -75,7 +75,7 @@ detector <-  create_module("PerkinElmerFull")
 path <- system.file("extdata", "PerkinElmer_Full", "BadPixelMap.bpm", "BadPixelMap_t1.bpm.xml", package = "detectorchecker")
 
 # Load a pixel matrix into the detector object
-detector <- load_pix_matrix(detector = detector, file_path = file_path) 
+detector <- load_pix_matrix(detector = detector, file_path = path) 
 ```
 
 or you can load one of the examples by calling:
