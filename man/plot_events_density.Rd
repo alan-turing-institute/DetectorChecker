@@ -4,8 +4,15 @@
 \alias{plot_events_density}
 \title{Plots density graph of events of a detector or module}
 \usage{
-plot_events_density(detector, file_path = NA, adjust = 0.25,
-  row = NA, col = NA, caption = TRUE, incl_event_list = NA)
+plot_events_density(
+  detector,
+  file_path = NA,
+  adjust = 0.25,
+  row = NA,
+  col = NA,
+  caption = TRUE,
+  incl_event_list = NA
+)
 }
 \arguments{
 \item{detector}{Detector object}

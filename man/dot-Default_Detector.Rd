@@ -5,12 +5,26 @@
 \title{Detector module
 A S3 class to represent a detector.}
 \usage{
-.Default_Detector(name = "Default", date = NA, detector_width = NA,
-  detector_height = NA, module_col_n = NA, module_row_n = NA,
-  module_col_sizes = NA, module_row_sizes = NA, gap_col_sizes = NA,
-  gap_row_sizes = NA, module_edges_col = NA, module_edges_row = NA,
-  detector_inconsistency = NA, pix_matrix = NA, pix_dead = NA,
-  dead_stats = NA, pix_dead_modules = NA, clumps = NA)
+.Default_Detector(
+  name = "Default",
+  date = NA,
+  detector_width = NA,
+  detector_height = NA,
+  module_col_n = NA,
+  module_row_n = NA,
+  module_col_sizes = NA,
+  module_row_sizes = NA,
+  gap_col_sizes = NA,
+  gap_row_sizes = NA,
+  module_edges_col = NA,
+  module_edges_row = NA,
+  detector_inconsistency = NA,
+  pix_matrix = NA,
+  pix_dead = NA,
+  dead_stats = NA,
+  pix_dead_modules = NA,
+  clumps = NA
+)
 }
 \arguments{
 \item{name}{detector's name}

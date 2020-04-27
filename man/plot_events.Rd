@@ -4,8 +4,13 @@
 \alias{plot_events}
 \title{Plots damaged detector events}
 \usage{
-plot_events(detector, file_path = NA, caption = TRUE,
-  incl_event_list = NA, plot_edges_gaps = TRUE)
+plot_events(
+  detector,
+  file_path = NA,
+  caption = TRUE,
+  incl_event_list = NA,
+  plot_edges_gaps = TRUE
+)
 }
 \arguments{
 \item{detector}{Detector object}

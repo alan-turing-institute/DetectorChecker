@@ -4,8 +4,13 @@
 \alias{plot_detector_module_damaged}
 \title{A function to plot detector module with damaged pixels}
 \usage{
-plot_detector_module_damaged(detector, col, row, file_path = NA,
-  caption = TRUE)
+plot_detector_module_damaged(
+  detector,
+  col,
+  row,
+  file_path = NA,
+  caption = TRUE
+)
 }
 \arguments{
 \item{detector}{Detector object}
