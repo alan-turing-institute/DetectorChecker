@@ -33,7 +33,7 @@ available_detectors
 ### To create detector object
 
 ```{r}
-pilatus_detector <- create_dectector("Pilatus")
+pilatus_detector <- create_detector("Pilatus")
 ```
 
 ### To visualise detector object
@@ -81,7 +81,7 @@ plot_detector(user_def_detector)
 #### TIFF format
 
 ```{r}
-pilatus_detector <- create_dectector("Pilatus")
+pilatus_detector <- create_detector("Pilatus")
 
 file_path <- "../inst/extdata/Pilatus/badpixel_mask.tif"
 
@@ -95,7 +95,7 @@ plot_detector_module_damaged(detector = pilatus_detector, col = 4, row = 5, capt
 #### XML format
 
 ```{r}
-detector_perkin <- create_dectector("PerkinElmerFull")
+detector_perkin <- create_detector("PerkinElmerFull")
 
 file_path <- "../inst/extdata/PerkinElmer_Full/BadPixelMap.bpm/BadPixelMap_t1.bpm.xml"
 
@@ -108,7 +108,7 @@ plot_detector_module_damaged(detector = detector_perkin, col  =11, row =2)
 #### HDF
 
 ```{r}
-detector_exc <- create_dectector("Excalibur")
+detector_exc <- create_detector("Excalibur")
 
 file_path <- c("../inst/extdata/Excalibur/pixelmask.fem1.hdf", 
                "../inst/extdata/Excalibur/pixelmask.fem2.hdf",
@@ -126,7 +126,7 @@ plot_detector_module_damaged(detector_exc, col = 1, row = 6)
 ### Damaged pixel density
 
 ```{r}
-detector_perkin <- create_dectector("PerkinElmerFull")
+detector_perkin <- create_detector("PerkinElmerFull")
 
 file_path <- "../inst/extdata/PerkinElmer_Full/BadPixelMap.bpm/BadPixelMap_t1.bpm.xml"
 
@@ -141,7 +141,7 @@ plot_detector_density(detector = detector_perkin, adjust = 0.5, row = 1, col = 2
 ### Summaries
 
 ```{r}
-detector_perkin <- create_dectector("PerkinElmerFull")
+detector_perkin <- create_detector("PerkinElmerFull")
 
 file_path <- "../inst/extdata/PerkinElmer_Full/BadPixelMap.bpm/BadPixelMap_t1.bpm.xml"
 
@@ -154,7 +154,7 @@ cat(dead_stats_summary(detector_perkin))
 ### Damaged pixel counts per module
 
 ```{r}
-detector_perkin <- create_dectector("PerkinElmerFull")
+detector_perkin <- create_detector("PerkinElmerFull")
 
 file_path <- "../inst/extdata/PerkinElmer_Full/BadPixelMap.bpm/BadPixelMap_t1.bpm.xml"
 
@@ -170,7 +170,7 @@ plot_detector_cnt_mod(detector = detector_perkin, row = 1, col = 5, caption = FA
 ### Arrows
 
 ```{r}
-detector_perkin <- create_dectector("PerkinElmerFull")
+detector_perkin <- create_detector("PerkinElmerFull")
 
 file_path <- "../inst/extdata/PerkinElmer_Full/BadPixelMap.bpm/BadPixelMap_t1.bpm.xml"
 
@@ -185,7 +185,7 @@ plot_detector_arrows(detector = detector_perkin, row = 1, col = 5)
 # Angles
 
 ```{r}
-detector_perkin <- create_dectector("PerkinElmerFull")
+detector_perkin <- create_detector("PerkinElmerFull")
 
 file_path <- "../inst/extdata/PerkinElmer_Full/BadPixelMap.bpm/BadPixelMap_t1.bpm.xml"
 
@@ -202,7 +202,7 @@ plot_detector_angles(detector = detector_perkin, row = 1, col = 5)
 ### K, F, G plots
 
 ```{r}
-detector_perkin <- create_dectector("PerkinElmerFull")
+detector_perkin <- create_detector("PerkinElmerFull")
 
 file_path <- "../inst/extdata/PerkinElmer_Full/BadPixelMap.bpm/BadPixelMap_t1.bpm.xml"
 
@@ -220,7 +220,7 @@ plot_detector_kfg(detector = detector_perkin, func = "G", row = 1, col = 5, capt
 ### Inhomogenious K, F, G plots
 
 ```{r}
-detector_pilatus <- create_dectector("Pilatus")
+detector_pilatus <- create_detector("Pilatus")
 
 file_path <- "../inst/extdata/Pilatus/badpixel_mask.tif"
 
@@ -238,7 +238,7 @@ plot_detector_kfg(detector = detector_pilatus, func = "Ginhom", row = 1, col = 5
 ### Events
 
 ```{r}
-detector_perkin <- create_dectector("PerkinElmerFull")
+detector_perkin <- create_detector("PerkinElmerFull")
 
 file_path <- "../inst/extdata/PerkinElmer_Full/BadPixelMap.bpm/BadPixelMap_t1.bpm.xml"
 
@@ -293,7 +293,7 @@ detectorchecker::plot_events_count(detector_events, row = row_, col = col_, capt
 ### Removing areas of high density pixel damage from the analysis
 
 ```{r}
-detector_perkin <- create_dectector("PerkinElmerFull")
+detector_perkin <- create_detector("PerkinElmerFull")
 
 file_path <- "../inst/extdata/PerkinElmer_Full/BadPixelMap.bpm/BadPixelMap_t1.bpm.xml"
 

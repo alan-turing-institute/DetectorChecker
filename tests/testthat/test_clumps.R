@@ -5,7 +5,7 @@ test_that("plot events", {
 
   detector_name <- "PerkinElmerFull"
 
-  perkin_detector <- create_dectector(detector_name)
+  perkin_detector <- create_detector(detector_name)
 
   # getting the dead (damaged) pixel data
   dead_path <- system.file("extdata", "PerkinElmer_Full", "BadPixelMap.bpm", "BadPixelMap_t1.bpm.xml", package = "detectorchecker")
@@ -34,7 +34,7 @@ test_that("plot module events", {
 
   detector_name <- "PerkinElmerFull"
 
-  perkin_detector <- create_dectector(detector_name)
+  perkin_detector <- create_detector(detector_name)
 
   # getting the dead (damaged) pixel data
   dead_path <- system.file("extdata", "PerkinElmer_Full", "BadPixelMap.bpm", "BadPixelMap_t1.bpm.xml", package = "detectorchecker")
@@ -69,7 +69,7 @@ test_that("plot module events by type", {
 
   detector_name <- "PerkinElmerFull"
 
-  perkin_detector <- create_dectector(detector_name)
+  perkin_detector <- create_detector(detector_name)
 
   # getting the dead (damaged) pixel data
   dead_path <- system.file("extdata", "PerkinElmer_Full", "BadPixelMap.bpm", "BadPixelMap_t1.bpm.xml", package = "detectorchecker")

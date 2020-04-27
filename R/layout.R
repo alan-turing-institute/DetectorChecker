@@ -246,7 +246,7 @@ check_detector_avail <- function(detector_name) {
 #' @param detector_name The name of the detector
 #' @return Detector object
 #' @export
-create_dectector <- function(detector_name) {
+create_detector <- function(detector_name) {
   detector <- NA
 
   # Check if we know about detector_name

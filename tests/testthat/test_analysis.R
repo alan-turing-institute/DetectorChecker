@@ -5,7 +5,7 @@ test_that("Pilatus", {
 
   detector_name <- "Pilatus"
 
-  pilatus_detector <- create_dectector(detector_name)
+  pilatus_detector <- create_detector(detector_name)
 
   # getting the dead (damaged) pixel data
   dead_path <- system.file("extdata", "Pilatus", "badpixel_mask.tif", package = "detectorchecker")
@@ -37,7 +37,7 @@ test_that("Perkin Elmer", {
 
   detector_name <- "PerkinElmerFull"
 
-  perkinelmerfull_detector <- create_dectector(detector_name)
+  perkinelmerfull_detector <- create_detector(detector_name)
 
   # getting the dead (damaged) pixel data
   dead_path <- system.file("extdata", "PerkinElmer_Full", "BadPixelMap.bpm", "BadPixelMap_t1.bpm.xml", package = "detectorchecker")
@@ -100,7 +100,7 @@ test_that("Excalibur - mutiple files", {
 
   detector_name <- "Excalibur"
 
-  excalibur_detector <- create_dectector(detector_name)
+  excalibur_detector <- create_detector(detector_name)
 
   # getting the dead (damaged) pixel data
   dead_paths <- c(
@@ -133,7 +133,7 @@ context("Model fitting")
 test_that("Pilatus", {
   test_dir <- getwd()
 
-  detector <- create_dectector("Pilatus")
+  detector <- create_detector("Pilatus")
 
   # getting the dead (damaged) pixel data
   dead_path <- system.file("extdata", "Pilatus", "badpixel_mask.tif", package = "detectorchecker")
@@ -167,7 +167,7 @@ context("Dead Stats Summary")
 test_that("PerkinElmerFull", {
   test_dir <- getwd()
 
-  detector <- create_dectector("PerkinElmerFull")
+  detector <- create_detector("PerkinElmerFull")
 
   # getting the dead (damaged) pixel data
   test_path <- system.file("extdata", "PerkinElmer_Full", "BadPixelMap.bpm", "BadPixelMap_t1.bpm.xml", package = "detectorchecker")
@@ -189,7 +189,7 @@ test_that("Perkin Elmer", {
 
   detector_name <- "PerkinElmerFull"
 
-  perkinelmerfull_detector <- create_dectector(detector_name)
+  perkinelmerfull_detector <- create_detector(detector_name)
 
   # getting the dead (damaged) pixel data
   dead_path <- system.file("extdata", "PerkinElmer_Full", "BadPixelMap.bpm", "BadPixelMap_t1.bpm.xml", package = "detectorchecker")
@@ -267,7 +267,7 @@ test_that("Perkin Elmer", {
 
   detector_name <- "PerkinElmerFull"
 
-  detector <- create_dectector(detector_name)
+  detector <- create_detector(detector_name)
 
   # getting the dead (damaged) pixel data
   dead_path <- system.file("extdata", "PerkinElmer_Full", "BadPixelMap.bpm", "BadPixelMap_t1.bpm.xml", package = "detectorchecker")
