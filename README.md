@@ -69,7 +69,7 @@ To load an example dataset you can either call:
 library(detectorchecker)
 
 #Inititate a PerkinElmerFull detector object
-detector <-  create_module("PerkinElmerFull") 
+detector <-  create_dectector("PerkinElmerFull") 
 
 # Path of dataset
 path <- system.file("extdata", "PerkinElmer_Full", "BadPixelMap.bpm", "BadPixelMap_t1.bpm.xml", package = "detectorchecker")

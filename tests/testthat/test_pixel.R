@@ -58,7 +58,7 @@ test_that("Distance analysis functions", {
 
 test_that("Removing high density clusters", {
   detector_name <- "Pilatus"
-  pilatus_detector <- create_module(detector_name)
+  pilatus_detector <- create_dectector(detector_name)
 
   dead_path <- system.file("extdata", "Pilatus", "badpixel_mask.tif", package = "detectorchecker")
 

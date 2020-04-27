@@ -5,7 +5,7 @@ devtools::load_all()
 #data_name: Name to save the data under (so you can load from package as data(data_name))
 create_dataset <- function(detector_type, file_path){
 
-  detector <-  create_module(detector_type)
+  detector <-  create_dectector(detector_type)
   detector <- load_pix_matrix(detector = detector, file_path = file_path)
 
   return(detector)
