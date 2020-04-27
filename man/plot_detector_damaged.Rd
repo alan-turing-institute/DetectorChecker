@@ -4,7 +4,7 @@
 \alias{plot_detector_damaged}
 \title{A function to plot detector with damaged pixels}
 \usage{
-plot_detector_damaged(detector, file_path = NA, caption = TRUE)
+plot_detector_damaged(detector, file_path = NA, caption = TRUE, events = FALSE)
 }
 \arguments{
 \item{detector}{Detector object}
@@ -12,6 +12,8 @@ plot_detector_damaged(detector, file_path = NA, caption = TRUE)
 \item{file_path}{Output file path}
 
 \item{caption}{Flag to turn on/off figure caption}
+
+\item{events}{Flag to  alter caption if plotting events}
 }
 \description{
 A function to plot detector with damaged pixels
