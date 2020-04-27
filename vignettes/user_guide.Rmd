@@ -87,9 +87,9 @@ file_path <- "../inst/extdata/Pilatus/badpixel_mask.tif"
 
 pilatus_detector <- load_pix_matrix(detector = pilatus_detector, file_path = file_path)
 
-plot_detector_damaged(detector = pilatus_detector, caption = FALSE)
+plot_detector_damaged(detector = pilatus_detector, caption = TRUE)
 
-plot_detector_module_damaged(detector = pilatus_detector, col = 4, row = 5, caption = FALSE)
+plot_detector_module_damaged(detector = pilatus_detector, col = 4, row = 5, caption = TRUE)
 ```
 
 #### XML format
