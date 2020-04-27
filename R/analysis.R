@@ -59,7 +59,7 @@ plot_detector_module_damaged <- function(detector, col, row, file_path = NA,
   ppp_frame <- spatstat::ppp(1, 1, c(1, width), c(1, height))
 
   if (caption) {
-    main_caption <- paste(detector$name, "with damaged pixels\n (black=module edges)")
+    main_caption <- paste(detector$name, "with damaged pixels\n (black=module edges, red=damaged pixels)")
   } else {
     main_caption <- ""
   }
