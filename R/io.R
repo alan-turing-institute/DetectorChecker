@@ -139,7 +139,7 @@
 
 #' A function to load pixel data
 #'
-#' @param detector The name of the detector to be used
+#' @param detector The name of the detector object to be used
 #' @param file_path Path(s) to the file(s) containing dead pixel information
 #' @return Detector object
 #' @importFrom grDevices jpeg pdf

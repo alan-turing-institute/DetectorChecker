@@ -59,7 +59,7 @@ plot_detector_module_damaged <- function(detector, col, row, file_path = NA,
   ppp_frame <- spatstat::ppp(1, 1, c(1, width), c(1, height))
 
   if (caption) {
-    main_caption <- paste(detector$name, "with damaged pixels\n (black=module edges)")
+    main_caption <- paste(detector$name, "with damaged pixels\n (black=module edges, red=damaged pixels)")
   } else {
     main_caption <- ""
   }
@@ -160,7 +160,7 @@ plot_detector_cnt_mod <- function(detector, file_path = NA, row = NA, col = NA,
 #' @param caption Flag to turn on/off figure caption
 #' @export
 plot_detector_density <- function(detector, file_path = NA, adjust = 1.,
-                                  row = NA, col = NA, caption = TRUE) {
+                                  row = NA, col = NA, caption = TRUE, color = topo.colors(50)) {
   ppp_dead <- NA
   main_caption <- ""
 
@@ -182,7 +182,7 @@ plot_detector_density <- function(detector, file_path = NA, adjust = 1.,
     }
   }
 
-  plot_density(ppp_dead, main_caption, file_path = file_path, adjust = adjust)
+  plot_density(ppp_dead, main_caption, file_path = file_path, adjust = adjust, color = color)
 }
 
 #' A function to plot NN oriented arrrows of dead pixels of detector or module

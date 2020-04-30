@@ -4,8 +4,15 @@
 \alias{plot_events_kfg}
 \title{Plots K, F, G functions of a detector or module}
 \usage{
-plot_events_kfg(detector, func, file_path = NA, row = NA, col = NA,
-  caption = TRUE, incl_event_list = NA)
+plot_events_kfg(
+  detector,
+  func,
+  file_path = NA,
+  row = NA,
+  col = NA,
+  caption = TRUE,
+  incl_event_list = NA
+)
 }
 \arguments{
 \item{detector}{Detector object}

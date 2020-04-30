@@ -4,8 +4,14 @@
 \alias{plot_events_arrows}
 \title{Plots arrows graph of events of a detector or module}
 \usage{
-plot_events_arrows(detector, file_path = NA, row = NA, col = NA,
-  caption = TRUE, incl_event_list = NA)
+plot_events_arrows(
+  detector,
+  file_path = NA,
+  row = NA,
+  col = NA,
+  caption = TRUE,
+  incl_event_list = NA
+)
 }
 \arguments{
 \item{detector}{Detector object}

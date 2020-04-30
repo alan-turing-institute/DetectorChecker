@@ -491,7 +491,7 @@ get_events_mask <- function(detector) {
 #' @export
 plot_events_density <- function(detector, file_path = NA, adjust = 0.25,
                                 row = NA, col = NA, caption = TRUE,
-                                incl_event_list = NA) {
+                                incl_event_list = NA, color = topo.colors(50)) {
   main_caption <- ""
 
   if (!is.na(row) && !is.na(col)) {
@@ -518,7 +518,7 @@ plot_events_density <- function(detector, file_path = NA, adjust = 0.25,
     height = height, width = width
   )
 
-  plot_density(ppp_events, main_caption, file_path = file_path, adjust = adjust)
+  plot_density(ppp_events, main_caption, file_path = file_path, adjust = adjust, color = color)
 }
 
 #' Plots arrows graph of events of a detector or module
