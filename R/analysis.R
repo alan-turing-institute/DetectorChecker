@@ -160,7 +160,7 @@ plot_detector_cnt_mod <- function(detector, file_path = NA, row = NA, col = NA,
 #' @param caption Flag to turn on/off figure caption
 #' @export
 plot_detector_density <- function(detector, file_path = NA, adjust = 1.,
-                                  row = NA, col = NA, caption = TRUE) {
+                                  row = NA, col = NA, caption = TRUE, color = topo.colors(50)) {
   ppp_dead <- NA
   main_caption <- ""
 
@@ -182,7 +182,7 @@ plot_detector_density <- function(detector, file_path = NA, adjust = 1.,
     }
   }
 
-  plot_density(ppp_dead, main_caption, file_path = file_path, adjust = adjust)
+  plot_density(ppp_dead, main_caption, file_path = file_path, adjust = adjust, color = color)
 }
 
 #' A function to plot NN oriented arrrows of dead pixels of detector or module
