@@ -30,8 +30,8 @@ affiliations:
 ---
 
 ```
-Version: 1.1.23
-Minor edits. 30.04.20.
+Version: 1.1.24
+Added references to Pilatus detector screen. 30.04.20.
 Note that Figure 2(b) still needs to be replaced by a re-coloured version!
 ```
 
@@ -114,7 +114,9 @@ making methods of spatial statistics available for panel-structured image data o
 
 Defects are modelled as points in an image rectangle based on overall screen dimensions. 
 The pattern of defects can be modelled using the web application (workflow is
-summarised in Figure \ref{fig:figure1}):
+summarised in Figure \ref{fig:figure1}). We discuss these steps as they relate to 
+data for a Pilatus detector
+screen, supplied by Diamond Lightsource, UK.
 
 A. The user specifies the exact architecture
 of the sub-panels of the panel-structured image.
@@ -179,12 +181,12 @@ might be expected to arise from an _inhomogeneous_ Poisson process of defects.
 D. Finally the relationship of the defect points to sub-panel boundaries can be studied by means of various logistic regression options, which assess whether damage intensity appears to depend on distance from the centre of the image or horizontal or vertical distance from sub-panel edges. When this data set is modelled in terms of Euclidean distance from the centre, the web application reports substantial evidence for positive dependence of defect intensity on distance from the centre (see the highly siginificant coefficient for `as.vector(dist)` in the following web application output), 
 conforming with the visual impression given by Figure \ref{fig:figure2}(a). In fact this positive dependence reflects 
 manufacturing details of
-this particular screen design: Diamond reports that panels are tested before installation, and better panels are placed in the centre of the structured display.
+this particular screen design: Diamond reports that Pilatus detector screen panels are tested before installation, and better panels are placed in the centre of the structured display.
 
 --------------------------------
 
 ```
-Output from web application:
+Output from web application (Pilatus detector screen):
 
 Call:
 glm(formula = as.vector(pix_matrix) ~ as.vector(dist), family = binomial(link = logit))
@@ -215,11 +217,11 @@ Number of Fisher Scoring iterations: 11
 
 ![Work flow for DetectorChecker web application.\label{fig:figure1}](flowchartDCshort.pdf)
 
-![(a) Example of point pattern of defects. (b) Intensity map resulting from point pattern of defects. \label{fig:figure2}](combined1.png)
+![Pilatus detector screen: (a) Example of point pattern of defects. (b) Intensity map resulting from point pattern of defects. \label{fig:figure2}](combined1.png)
 
-![(a) $F$ plot resulting from point pattern of defects. (b) $G$ plot resulting from point pattern of defects. \label{fig:figure3}](combined2.png)
+![Pilatus detector screen: (a) $F$ plot resulting from point pattern of defects. (b) $G$ plot resulting from point pattern of defects. \label{fig:figure3}](combined2.png)
 
-![(a) $K$ plot resulting from point pattern of defects. (b) $K$ plot resulting from point pattern of defects, corrected for inhomogeneity. \label{fig:figure4}](combined3.png)
+![Pilatus detector screen: (a) $K$ plot resulting from point pattern of defects. (b) $K$ plot resulting from point pattern of defects, corrected for inhomogeneity. \label{fig:figure4}](combined3.png)
 
 
 
