@@ -11,7 +11,8 @@ plot_events_density(
   row = NA,
   col = NA,
   caption = TRUE,
-  incl_event_list = NA
+  incl_event_list = NA,
+  color = topo.colors(50)
 )
 }
 \arguments{

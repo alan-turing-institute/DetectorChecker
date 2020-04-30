@@ -10,7 +10,8 @@ plot_detector_density(
   adjust = 1,
   row = NA,
   col = NA,
-  caption = TRUE
+  caption = TRUE,
+  color = topo.colors(50)
 )
 }
 \arguments{
