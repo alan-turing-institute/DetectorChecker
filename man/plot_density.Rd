@@ -5,7 +5,13 @@
 \title{Plots module
 Plots density}
 \usage{
-plot_density(ppp_obj, caption, file_path = NA, adjust = 1)
+plot_density(
+  ppp_obj,
+  caption,
+  file_path = NA,
+  adjust = 1,
+  color = topo.colors(50)
+)
 }
 \arguments{
 \item{ppp_obj}{ppp object}

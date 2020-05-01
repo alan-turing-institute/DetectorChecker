@@ -5,9 +5,16 @@
 \title{Analysis module
 A S3 class to represent dead pixels statistics summary}
 \usage{
-Dead_Stats(dead_n = NA, module_n = NA, module_count_arr = NA,
-  module_count = NA, avg_dead_mod = NA, Chisq_s = NA,
-  Chisq_df = NA, Chisq_p = NA)
+Dead_Stats(
+  dead_n = NA,
+  module_n = NA,
+  module_count_arr = NA,
+  module_count = NA,
+  avg_dead_mod = NA,
+  Chisq_s = NA,
+  Chisq_df = NA,
+  Chisq_p = NA
+)
 }
 \arguments{
 \item{dead_n}{Total number of damaged pixels:}

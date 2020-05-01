@@ -4,8 +4,13 @@
 \alias{plot_detector_cnt_mod}
 \title{A function to plot detector with dead pixel counts per module}
 \usage{
-plot_detector_cnt_mod(detector, file_path = NA, row = NA, col = NA,
-  caption = TRUE)
+plot_detector_cnt_mod(
+  detector,
+  file_path = NA,
+  row = NA,
+  col = NA,
+  caption = TRUE
+)
 }
 \arguments{
 \item{detector}{Detector object}

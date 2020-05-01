@@ -4,8 +4,13 @@
 \alias{plot_detector_arrows}
 \title{A function to plot NN oriented arrrows of dead pixels of detector or module}
 \usage{
-plot_detector_arrows(detector, file_path = NA, row = NA, col = NA,
-  caption = TRUE)
+plot_detector_arrows(
+  detector,
+  file_path = NA,
+  row = NA,
+  col = NA,
+  caption = TRUE
+)
 }
 \arguments{
 \item{detector}{Detector object}

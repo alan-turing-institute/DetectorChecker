@@ -4,8 +4,15 @@
 \alias{plot_detector_density}
 \title{A function to plot densities of dead pixels of detector or module}
 \usage{
-plot_detector_density(detector, file_path = NA, adjust = 1, row = NA,
-  col = NA, caption = TRUE)
+plot_detector_density(
+  detector,
+  file_path = NA,
+  adjust = 1,
+  row = NA,
+  col = NA,
+  caption = TRUE,
+  color = topo.colors(50)
+)
 }
 \arguments{
 \item{detector}{Detector object}

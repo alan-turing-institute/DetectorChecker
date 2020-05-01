@@ -4,8 +4,12 @@
 \alias{.get_clump_event_ppp}
 \title{Creates ppp object for damaged detector events}
 \usage{
-.get_clump_event_ppp(detector, incl_event_list = NA, height = NULL,
-  width = NULL)
+.get_clump_event_ppp(
+  detector,
+  incl_event_list = NA,
+  height = NULL,
+  width = NULL
+)
 }
 \arguments{
 \item{detector}{Detector object}
