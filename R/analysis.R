@@ -41,6 +41,7 @@ Dead_Stats <- function(dead_n = NA, module_n = NA, module_count_arr = NA,
 plot_detector_module_damaged <- function(detector, col, row, file_path = NA,
                                          caption = TRUE) {
   if (!caption) par(mar = c(0, 0, 0, 0))
+  else par(mar=c(1, 1, 3, 1))
 
   # check whether the row and col numbers are correct
   .check_select(detector, row, col)
@@ -105,6 +106,7 @@ plot_detector_cnt_mod <- function(detector, file_path = NA, row = NA, col = NA,
 
   if (!is.na(row) && !is.na(col)) {
     if (!caption) par(mar = c(0, 0, 0, 0))
+    else par(mar=c(1, 1, 3, 1))
 
     if (!is.na(file_path)) {
       # starts the graphics device driver
