@@ -494,7 +494,7 @@ detector_consist_check <- function(detector = NA) {
   ppp_edges_row <- .create_ppp_edges_row(detector)
 
   # Does the detector have gaps?
-  if (sum(detector$gap_col_sizes) + sum(detector$gap_row_sizes) != 0) {
+  if (sum(detector$gap_col_sizes) + sum(detector$gap_row_sizes) == 0) {
     ppp_gaps_col <- NULL
     ppp_gaps_row <- NULL
   } else {
