@@ -13,7 +13,7 @@ authors:
   name: Tomas Lazauskas
 - affiliation: 2
   name: Martin O'Reilly
-date: "13 January 2020, revised 30 April 2020"
+date: "13 January 2020, revised 06 May 2020"
 output: pdf_document
 bibliography: JOSSpaper.bib
 tags:
@@ -30,9 +30,9 @@ affiliations:
 ---
 
 ```
-Version: 1.1.24
-Added references to Pilatus detector screen. 30.04.20.
-Note that Figure 2(b) still needs to be replaced by a re-coloured version!
+Version: 1.1.25
+Replaced Figure 2 (topocolor heatmap). 06.05.20.
+Note that Figure 2(a, b) are slightly different size!
 ```
 
 [_DetectorChecker_](https://doi.org/10.5281/zenodo.3662233) 
