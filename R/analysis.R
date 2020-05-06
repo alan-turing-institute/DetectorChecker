@@ -41,6 +41,7 @@ Dead_Stats <- function(dead_n = NA, module_n = NA, module_count_arr = NA,
 plot_detector_module_damaged <- function(detector, col, row, file_path = NA,
                                          caption = TRUE) {
   if (!caption) par(mar = c(0, 0, 0, 0))
+  else par(mar=c(1, 1, 3, 1))
 
   # check whether the row and col numbers are correct
   .check_select(detector, row, col)
@@ -59,7 +60,14 @@ plot_detector_module_damaged <- function(detector, col, row, file_path = NA,
   ppp_frame <- spatstat::ppp(1, 1, c(1, width), c(1, height))
 
   if (caption) {
-    main_caption <- paste(detector$name, "with damaged pixels\n (black=module edges)")
+
+    if (detector$pix_matrix_modified)
+      caption_begining = paste(detector$name, "(modified) with damaged pixels")
+    else
+      caption_begining = paste(detector$name, "with damaged pixels")
+
+    main_caption <- paste(caption_begining, "\n(black=module edges, red=damaged pixels)")
+
   } else {
     main_caption <- ""
   }
@@ -105,6 +113,7 @@ plot_detector_cnt_mod <- function(detector, file_path = NA, row = NA, col = NA,
 
   if (!is.na(row) && !is.na(col)) {
     if (!caption) par(mar = c(0, 0, 0, 0))
+    else par(mar=c(1, 1, 3, 1))
 
     if (!is.na(file_path)) {
       # starts the graphics device driver
@@ -160,7 +169,7 @@ plot_detector_cnt_mod <- function(detector, file_path = NA, row = NA, col = NA,
 #' @param caption Flag to turn on/off figure caption
 #' @export
 plot_detector_density <- function(detector, file_path = NA, adjust = 1.,
-                                  row = NA, col = NA, caption = TRUE) {
+                                  row = NA, col = NA, caption = TRUE, color = topo.colors(50)) {
   ppp_dead <- NA
   main_caption <- ""
 
@@ -172,7 +181,7 @@ plot_detector_density <- function(detector, file_path = NA, adjust = 1.,
     ppp_dead <- .get_ppp_dead_module(detector, row, col)
 
     if (caption) {
-      main_caption <- paste("Dead pixel density (row=", row, "col=", col, "), adjust=", adjust)
+      main_caption <- paste("Dead pixel density (row =", row, "col =", col, "), adjust=", adjust)
     }
   } else {
     ppp_dead <- get_ppp_dead(detector)
@@ -182,7 +191,7 @@ plot_detector_density <- function(detector, file_path = NA, adjust = 1.,
     }
   }
 
-  plot_density(ppp_dead, main_caption, file_path = file_path, adjust = adjust)
+  plot_density(ppp_dead, main_caption, file_path = file_path, adjust = adjust, color = color)
 }
 
 #' A function to plot NN oriented arrrows of dead pixels of detector or module
@@ -207,7 +216,7 @@ plot_detector_arrows <- function(detector, file_path = NA, row = NA, col = NA,
     ppp_dead <- .get_ppp_dead_module(detector, row, col)
 
     if (caption) {
-      main_caption <- paste("NN oriented arrows (row=", row, "col=", col, ")")
+      main_caption <- paste("NN oriented arrows (row =", row, "col =", col, ")")
     }
   } else {
     ppp_dead <- get_ppp_dead(detector)
@@ -392,7 +401,7 @@ plot_detector_angles <- function(detector, file_path = NA, row = NA, col = NA,
     ppp_dead <- .get_ppp_dead_module(detector, row, col)
 
     if (caption) {
-      main_caption <- paste("NN to points orientations (row=", row, "col=", col, ")")
+      main_caption <- paste("NN to points orientations (row =", row, "col =", col, ")")
     }
   } else {
     ppp_dead <- get_ppp_dead(detector)

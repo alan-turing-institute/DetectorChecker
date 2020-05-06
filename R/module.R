@@ -65,6 +65,8 @@ which_module_idx <- function(x, y, module_edges_col, module_edges_row) {
   }
 
   if (!ok) {
-    stop("Incorrectly chosen row and/or column indices.", "row: ", row, ". Must be > 0 and < ", detector$module_row_n)
+    stop("Incorrectly chosen row and/or column indices.\n",
+         "'row' must be >= 1 and <= ", detector$module_row_n, ", chosen 'row' value = ", row , "; ",
+         "'col' must be >= 1 and <= ", detector$module_col_n, ", chosen 'col' value = ", col , ".")
   }
 }

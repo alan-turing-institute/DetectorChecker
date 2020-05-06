@@ -4,8 +4,14 @@
 \alias{plot_detector_kfg}
 \title{Plots K, F, G functions}
 \usage{
-plot_detector_kfg(detector, func, file_path = NA, row = NA, col = NA,
-  caption = TRUE)
+plot_detector_kfg(
+  detector,
+  func,
+  file_path = NA,
+  row = NA,
+  col = NA,
+  caption = TRUE
+)
 }
 \arguments{
 \item{detector}{Detector object}

@@ -4,8 +4,13 @@
 \alias{plot_detector_angles}
 \title{A function to plot NN angles of dead pixels of detector or module}
 \usage{
-plot_detector_angles(detector, file_path = NA, row = NA, col = NA,
-  caption = TRUE)
+plot_detector_angles(
+  detector,
+  file_path = NA,
+  row = NA,
+  col = NA,
+  caption = TRUE
+)
 }
 \arguments{
 \item{detector}{Detector object}

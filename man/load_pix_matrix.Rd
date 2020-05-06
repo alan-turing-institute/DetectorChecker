@@ -7,7 +7,7 @@
 load_pix_matrix(detector, file_path)
 }
 \arguments{
-\item{detector}{The name of the detector to be used}
+\item{detector}{The name of the detector object to be used}
 
 \item{file_path}{Path(s) to the file(s) containing dead pixel information}
 }

@@ -139,7 +139,7 @@
 
 #' A function to load pixel data
 #'
-#' @param detector The name of the detector to be used
+#' @param detector The name of the detector object to be used
 #' @param file_path Path(s) to the file(s) containing dead pixel information
 #' @return Detector object
 #' @importFrom grDevices jpeg pdf
@@ -170,6 +170,8 @@ load_pix_matrix <- function(detector, file_path) {
 
 
   detector <- .assign_pixel_matrix(detector, pix_matrix)
+
+  detector$pix_matrix_modified <- FALSE
 
   return(detector)
 }

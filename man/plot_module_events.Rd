@@ -4,8 +4,14 @@
 \alias{plot_module_events}
 \title{Plots damaged detector module events}
 \usage{
-plot_module_events(detector, col, row, file_path = NA, caption = TRUE,
-  incl_event_list = NA)
+plot_module_events(
+  detector,
+  col,
+  row,
+  file_path = NA,
+  caption = TRUE,
+  incl_event_list = NA
+)
 }
 \arguments{
 \item{detector}{Detector object}

@@ -2,7 +2,8 @@
 
 Master: [![Build Status](https://travis-ci.com/alan-turing-institute/DetectorChecker.svg?token=zxQwzfsqCyEouTqXAVUn&branch=master)](https://travis-ci.com/alan-turing-institute/DetectorChecker) Develop: [![Build Status](https://travis-ci.com/alan-turing-institute/DetectorChecker.svg?token=zxQwzfsqCyEouTqXAVUn&branch=develop)](https://travis-ci.com/alan-turing-institute/DetectorChecker)
 
-
+[![DOI](https://zenodo.org/badge/144782935.svg)](https://zenodo.org/badge/latestdoi/144782935)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 Created by: [Julia Brettschneider](https://github.com/ejulia17) (original R code), [Wilfrid Kendall](https://github.com/WilfridSKendall) (testing and editing),
 [Tomas Lazauskas](https://github.com/tomaslaz) (R package engineering) and [Oscar Giles](https://github.com/OscartGiles) (package development)
@@ -10,9 +11,10 @@ Created by: [Julia Brettschneider](https://github.com/ejulia17) (original R code
 ## Overview
 
 DetectorChecker is an R package to aid in the assessment of damage to CT scanners arising from exposure to high energy radiation.
+While the target application concerns CT scanners, this package can also be used to analyze screen damage arising from other sources.
 
 
-## Installation 
+## Installation
 
 To install from github you will need to have the [devtools](https://github.com/r-lib/devtools) package installed.
 
@@ -48,34 +50,34 @@ library(detectorchecker)
 vignette("user_guide", package = "detectorchecker")
 ```
 
-## Manual 
+## Manual
 Documentation is provided as a [pdf](docs/detectorchecker_0.1.10.pdf)
 
 ## Examples
 DetectorChecker includes a number of example datasets for five detector types:
 
 1. PerkinElmer
- 
-2. PerkinElmer Refurbished 
 
-3. PerkinElmer Cropped 
+2. PerkinElmer Refurbished
 
-4. Pilatus 
+3. PerkinElmer Cropped
 
-5. Excalibur 
+4. Pilatus
+
+5. Excalibur
 
 To load an example dataset you can either call:
 ```
 library(detectorchecker)
 
 #Inititate a PerkinElmerFull detector object
-detector <-  create_module("PerkinElmerFull") 
+detector <-  create_detector("PerkinElmerFull") 
 
 # Path of dataset
-path <- system.file("extdata", "PerkinElmer_Full", "BadPixelMap.bpm", "BadPixelMap_t1.bpm.xml", package = "detectorchecker")
+file_path <- system.file("extdata", "PerkinElmer_Full", "BadPixelMap.bpm", "BadPixelMap_t1.bpm.xml", package = "detectorchecker")
 
 # Load a pixel matrix into the detector object
-detector <- load_pix_matrix(detector = detector, file_path = path) 
+detector <- load_pix_matrix(detector = detector, file_path = file_path)
 ```
 
 or you can load one of the examples by calling:
@@ -94,16 +96,30 @@ data(package = "detectorchecker")
 ```
 
 ## Citation
-If you use DetectorChecker in your work please cite our package:
+If you use DetectorChecker in your work please cite our package.
 
-`Julia Brettschneider, Oscar Giles, Wilfrid Kendall and Tomas Lazauskas (2019). DetectorChecker: Assessment of damage to CT scanners. URL https://github.com/alan-turing-institute/DetectorChecker`
-
-For full citation and bibtex details you can call this in R:
+BibTeX:
 
 ```
-citation("detectorchecker")
+@software{tomas_lazauskas_2020_3662233,
+  author       = {Tomas Lazauskas and
+                  Oscar T Giles and
+                  Martin O'Reilly and
+                  Wilfrid Kendall and
+                  Julia Brettschneider},
+  title        = {{alan-turing-institute/DetectorChecker}},
+  month        = feb,
+  year         = 2020,
+  publisher    = {Zenodo},
+  version      = {1.0.0},
+  doi          = {10.5281/zenodo.3662233},
+  url          = {https://doi.org/10.5281/zenodo.3662233}
+}
 ```
 
 ## Getting help
+If you found a bug or need support, please submit an issue [here](https://github.com/alan-turing-institute/DetectorChecker/issues/new).
 
-Users are encouraged to report issues on the project's GitHub issue [page](https://github.com/alan-turing-institute/DetectorChecker/issues).
+## How to contribute
+We welcome contributions! If you are willing to propose new features or have bug fixes to contribute, please submit a pull request [here](https://github.com/alan-turing-institute/DetectorChecker/pulls).
+

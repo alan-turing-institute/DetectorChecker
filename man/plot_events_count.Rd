@@ -4,8 +4,14 @@
 \alias{plot_events_count}
 \title{Plots events count per detector or module}
 \usage{
-plot_events_count(detector, file_path = NA, row = NA, col = NA,
-  caption = TRUE, incl_event_list = NA)
+plot_events_count(
+  detector,
+  file_path = NA,
+  row = NA,
+  col = NA,
+  caption = TRUE,
+  incl_event_list = NA
+)
 }
 \arguments{
 \item{detector}{Detector object}
