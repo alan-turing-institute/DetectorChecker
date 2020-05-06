@@ -510,13 +510,13 @@ detector_consist_check <- function(detector = NA) {
 #' @param detector Detector object
 #' @param file_path Output file path
 #' @param caption Flag to turn on/off figure caption
-#' @param events Flag to  alter caption if plotting events
+#' @param events Flag toalter caption if plotting events
 #' @importFrom graphics points
 #' @export
 plot_detector_damaged <- function(detector, file_path = NA, caption = TRUE, events = FALSE) {
 
   if (events){
-    caption_type =  "events"
+    caption_type = "events"
   } else {
     caption_type = "pixels"
   }
@@ -534,9 +534,14 @@ plot_detector_damaged <- function(detector, file_path = NA, caption = TRUE, even
     ini_graphics(file_path = file_path)
   }
 
+  if (detector$pix_matrix_modified)
+    caption_begining = paste(detector$name, "(modified) with damaged", caption_type)
+  else
+    caption_begining = paste(detector$name, "with damaged", caption_type)
+
   if (sum(detector$gap_col_sizes) + sum(detector$gap_row_sizes) == 0) {
     if (caption) {
-      main_caption <- paste(detector$name, "with damaged", caption_type,  "\n (black=module edges)")
+      main_caption <- paste(caption_begining, "\n(black=module edges)")
     }
 
     # vertical lines in x-positions given by xlines
@@ -551,7 +556,7 @@ plot_detector_damaged <- function(detector, file_path = NA, caption = TRUE, even
     ppp_gaps_row <- .create_ppp_gaps_row(detector)
 
     if (caption) {
-      main_caption <- paste(detector$name, "with damaged", caption_type,  "\n (black=module edges, grey=gaps)")
+      main_caption <- paste(caption_begining, "\n(black=module edges, grey=gaps)")
     }
 
     # vertical lines in x-positions given by xlines

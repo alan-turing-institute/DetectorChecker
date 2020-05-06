@@ -499,7 +499,7 @@ plot_events_density <- function(detector, file_path = NA, adjust = 0.25,
     .check_select(detector, row, col)
 
     if (caption) {
-      main_caption <- paste("Events density (row=", row, "col=", col, "), adjust=", adjust)
+      main_caption <- paste("Events density (row =", row, "col =", col, "), adjust=", adjust)
     }
 
     height <- detector$module_row_sizes[row]
@@ -540,7 +540,7 @@ plot_events_arrows <- function(detector, file_path = NA,
     .check_select(detector, row, col)
 
     if (caption) {
-      main_caption <- paste("Arrows of events (row=", row, "col=", col, ")")
+      main_caption <- paste("Arrows of events (row =", row, "col =", col, ")")
     }
 
     height <- detector$module_row_sizes[row]
@@ -581,7 +581,7 @@ plot_events_angles <- function(detector, file_path = NA,
     .check_select(detector, row, col)
 
     if (caption) {
-      main_caption <- paste("Angles of events (row=", row, "col=", col, ")")
+      main_caption <- paste("Angles of events (row =", row, "col =", col, ")")
     }
 
     height <- detector$module_row_sizes[row]

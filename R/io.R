@@ -171,6 +171,8 @@ load_pix_matrix <- function(detector, file_path) {
 
   detector <- .assign_pixel_matrix(detector, pix_matrix)
 
+  detector$pix_matrix_modified <- FALSE
+
   return(detector)
 }
 

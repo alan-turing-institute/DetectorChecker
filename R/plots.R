@@ -6,6 +6,7 @@
 #' @param caption caption of the figure
 #' @param file_path file path
 #' @param adjust Kernel density bandwidth
+#' @param color a list of colors
 #' @importFrom graphics image par
 plot_density <- function(ppp_obj, caption, file_path = NA, adjust = 1., color = topo.colors(50)) {
   if (nchar(caption) > 0) {

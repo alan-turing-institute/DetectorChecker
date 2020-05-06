@@ -392,5 +392,7 @@ remove_high_density_cluster <- function(detector, min_pts = 30, eps_adjust = 0.0
     mod_detector <- find_clumps(mod_detector)
   }
 
+  mod_detector$pix_matrix_modified <- TRUE
+
   return(mod_detector)
 }
