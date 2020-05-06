@@ -72,7 +72,7 @@ test_that("Removing high density clusters", {
   pilatus_detector_detector_labs <- labels(pilatus_detector)
 
   # Attributes of the detector that may have changed
-  potential_change_labs <- c("pix_matrix", "pix_dead", "dead_stats", "pix_dead_modules", "clumps")
+  potential_change_labs <- c("pix_matrix", "pix_dead", "dead_stats", "pix_dead_modules", "clumps", "pix_matrix_modified")
 
   # Attributes that should be identical
   matching_labs <- pilatus_detector_detector_labs[!(pilatus_detector_detector_labs %in% potential_change_labs)]
