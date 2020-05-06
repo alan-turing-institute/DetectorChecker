@@ -43,7 +43,7 @@ devtools::install_github("alan-turing-institute/DetectorChecker", ref = "develop
 
 ## Vignette
 
-The user guide vignette provides detailed instructions for using the package and loading specific examples. Make sure you installed following the `with vignette` instructions:
+The user guide vignette provides detailed instructions for using the package and loading specific examples. Make sure you installed the package including vignette following the instructions above (see use of build_vignettes = TRUE in Section Installation) and then load the package followed by the vignette command:
 
 ```
 library(detectorchecker)
@@ -74,7 +74,7 @@ library(detectorchecker)
 detector <-  create_detector("PerkinElmerFull") 
 
 # Path of dataset
-path <- system.file("extdata", "PerkinElmer_Full", "BadPixelMap.bpm", "BadPixelMap_t1.bpm.xml", package = "detectorchecker")
+file_path <- system.file("extdata", "PerkinElmer_Full", "BadPixelMap.bpm", "BadPixelMap_t1.bpm.xml", package = "detectorchecker")
 
 # Load a pixel matrix into the detector object
 detector <- load_pix_matrix(detector = detector, file_path = file_path)
@@ -118,9 +118,8 @@ BibTeX:
 ```
 
 ## Getting help
-
 If you found a bug or need support, please submit an issue [here](https://github.com/alan-turing-institute/DetectorChecker/issues/new).
 
 ## How to contribute
-
 We welcome contributions! If you are willing to propose new features or have bug fixes to contribute, please submit a pull request [here](https://github.com/alan-turing-institute/DetectorChecker/pulls).
+
