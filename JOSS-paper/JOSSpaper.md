@@ -13,7 +13,7 @@ authors:
   name: Tomas Lazauskas
 - affiliation: 2
   name: Martin O'Reilly
-date: "13 January 2020, revised 06 May 2020"
+date: "13 January 2020, revised 07 May 2020"
 output: pdf_document
 bibliography: JOSSpaper.bib
 tags:
@@ -30,9 +30,8 @@ affiliations:
 ---
 
 ```
-Version: 1.1.25
-Replaced Figure 2 (topocolor heatmap). 06.05.20.
-Note that Figure 2(a, b) are slightly different size!
+Version: 1.1.26
+Replaced a re-sizewd Figure 2 (topocolor heatmap). 07.05.20.
 ```
 
 [_DetectorChecker_](https://doi.org/10.5281/zenodo.3662233) 
@@ -40,7 +39,7 @@ refers to an R package and an associated web application,
 intended to help
 users who need to analyze spatial patterns of defects in images.
 These images can be _panel-structured_, which is to say,
-composed of sub-panels arranged in an architecture which
+composed of sub-panels arranged in  an architecture which
 the user can specifiy in the package or in the web application.
 Primary beneficiaries are intended to be individuals responsible for
 high-value digital detector screens used in X-ray computerised tomography (XCT),
