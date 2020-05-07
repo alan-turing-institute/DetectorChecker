@@ -1,5 +1,7 @@
 ---
 title: 'DetectorChecker: analyzing patterns of defects in detector screens'
+author:  Julia A. Brettschneider, Oscar Giles, Wilfrid S. Kendall, Tomas Lazauskas, Martin O'Reilly
+date: "13 January 2020, revised 07 May 2020"
 authors:
 - affiliation: 1, 2
   name: Julia A. Brettschneider
@@ -13,7 +15,6 @@ authors:
   name: Tomas Lazauskas
 - affiliation: 2
   name: Martin O'Reilly
-date: "13 January 2020, revised 07 May 2020"
 output: pdf_document
 bibliography: JOSSpaper.bib
 tags:
@@ -30,8 +31,8 @@ affiliations:
 ---
 
 ```
-Version: 1.1.26
-Replaced a re-sizewd Figure 2 (topocolor heatmap). 07.05.20.
+Version: 1.1.27
+Replaced a re-sized Figure 2 (topocolor heatmap). 07.05.20.
 ```
 
 [_DetectorChecker_](https://doi.org/10.5281/zenodo.3662233) 
