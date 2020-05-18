@@ -1,5 +1,7 @@
 ---
 title: 'DetectorChecker: analyzing patterns of defects in detector screens'
+author:  Julia A. Brettschneider, Oscar Giles, Wilfrid S. Kendall, Tomas Lazauskas, Martin O'Reilly
+date: "13 January 2020, revised 07 May 2020"
 authors:
 - affiliation: 1, 2
   name: Julia A. Brettschneider
@@ -13,7 +15,6 @@ authors:
   name: Tomas Lazauskas
 - affiliation: 2
   name: Martin O'Reilly
-date: "13 January 2020, revised 30 April 2020"
 output: pdf_document
 bibliography: JOSSpaper.bib
 tags:
@@ -30,9 +31,8 @@ affiliations:
 ---
 
 ```
-Version: 1.1.24
-Added references to Pilatus detector screen. 30.04.20.
-Note that Figure 2(b) still needs to be replaced by a re-coloured version!
+Version: 1.1.27
+Replaced a re-sized Figure 2 (topocolor heatmap). 07.05.20.
 ```
 
 [_DetectorChecker_](https://doi.org/10.5281/zenodo.3662233) 
@@ -40,7 +40,7 @@ refers to an R package and an associated web application,
 intended to help
 users who need to analyze spatial patterns of defects in images.
 These images can be _panel-structured_, which is to say,
-composed of sub-panels arranged in an architecture which
+composed of sub-panels arranged in  an architecture which
 the user can specifiy in the package or in the web application.
 Primary beneficiaries are intended to be individuals responsible for
 high-value digital detector screens used in X-ray computerised tomography (XCT),
