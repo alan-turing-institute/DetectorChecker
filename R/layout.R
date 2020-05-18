@@ -361,7 +361,10 @@ detector_consist_check <- function(detector = NA) {
 #' @param g vectors of gap sizes
 #' @return Matrix with the information about the edges
 .detector_edges <- function(m, g) {
-  if (length(m) - 1 != length(g)) {
+
+  if (((length(m) > 1) && (length(m) - 1 != length(g))) &&
+      ((length(m) == 1) && (length(g) != 1))) {
+
     # This should be picked by the consistency check too
     stop("The number of modules or gaps is incorrect.")
   } else {
@@ -370,9 +373,11 @@ detector_consist_check <- function(detector = NA) {
     detector_edges[1, 1] <- 1
     detector_edges[2, 1] <- m[1]
 
-    for (i in 2:length(m)) {
-      detector_edges[1, i] <- detector_edges[2, i - 1] + g[i - 1] + 1
-      detector_edges[2, i] <- detector_edges[1, i] - 1 + m[i]
+    if (length(m) > 1) {
+      for (i in 2:length(m)) {
+        detector_edges[1, i] <- detector_edges[2, i - 1] + g[i - 1] + 1
+        detector_edges[2, i] <- detector_edges[1, i] - 1 + m[i]
+      }
     }
   }
 
@@ -389,6 +394,7 @@ detector_consist_check <- function(detector = NA) {
 #' @param detector Detector object
 #' @return Detector object
 .derive_detector <- function(detector) {
+
   module_edges_col <- .detector_edges(detector$module_col_sizes, detector$gap_col_sizes)
   dimnames(module_edges_col)[[1]] <- c("left", "right")
 
