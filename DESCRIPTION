@@ -1,7 +1,7 @@
 Package: detectorchecker
 Type: Package
-Title: An package for analysing pixel damage in CT Scanners
-Version: 1.0.1
+Title: A package for analysing pixel damage in CT Scanners
+Version: 1.0.2
 Authors@R: c(
         person("Tomas", "Lazauskas", email = "tlazauskas@turing.ac.uk", role = c("aut", "cre")),
         person("Oscar", "Giles", email = "ogiles@turing.ac.uk", role = c("aut")),
@@ -11,7 +11,7 @@ Authors@R: c(
 Description: The description of a package is usually long,
     spanning multiple lines. The second and subsequent lines
     should be indented, usually with four spaces.
-Depends: R (>= 3.6.3)
+Depends: R (>= 3.6.2)
 Imports:
     spatstat (>= 1.63-3),
     tools (>= 3.6.3), 
