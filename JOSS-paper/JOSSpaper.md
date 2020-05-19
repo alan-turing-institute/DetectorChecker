@@ -1,13 +1,13 @@
 ---
 title: 'DetectorChecker: analyzing patterns of defects in detector screens'
-author:  Julia A. Brettschneider, Oscar Giles, Wilfrid S. Kendall, Tomas Lazauskas, Martin O'Reilly
-date: "13 January 2020, revised 07 May 2020"
+author:  Julia A. Brettschneider, Oscar T. Giles, Wilfrid S. Kendall, Tomas Lazauskas, Martin O'Reilly
+date: "13 January 2020, revised 19 May 2020"
 authors:
 - affiliation: 1, 2
   name: Julia A. Brettschneider
   orcid: 0000-0003-1763-466X
 - affiliation: 2
-  name: Oscar Giles
+  name: Oscar T. Giles
 - affiliation: 1, 2
   name: Wilfrid S. Kendall
   orcid: 0000-0001-9799-3480
@@ -31,8 +31,8 @@ affiliations:
 ---
 
 ```
-Version: 1.1.27
-Replaced a re-sized Figure 2 (topocolor heatmap). 07.05.20.
+Version: 1.1.28
+Spell-checked, initialized references. 19.05.20.
 ```
 
 [_DetectorChecker_](https://doi.org/10.5281/zenodo.3662233) 
@@ -41,7 +41,7 @@ intended to help
 users who need to analyze spatial patterns of defects in images.
 These images can be _panel-structured_, which is to say,
 composed of sub-panels arranged in  an architecture which
-the user can specifiy in the package or in the web application.
+the user can specify in the package or in the web application.
 Primary beneficiaries are intended to be individuals responsible for
 high-value digital detector screens used in X-ray computerised tomography (XCT),
 where defects arise due to high radiation flux.
@@ -178,7 +178,7 @@ the theoretical $K^\text{pois}_\text{inhom}$ function
 at short distances, supporting the hypothesis that the pattern of defects is what
 might be expected to arise from an _inhomogeneous_ Poisson process of defects.
 
-D. Finally the relationship of the defect points to sub-panel boundaries can be studied by means of various logistic regression options, which assess whether damage intensity appears to depend on distance from the centre of the image or horizontal or vertical distance from sub-panel edges. When this data set is modelled in terms of Euclidean distance from the centre, the web application reports substantial evidence for positive dependence of defect intensity on distance from the centre (see the highly siginificant coefficient for `as.vector(dist)` in the following web application output), 
+D. Finally the relationship of the defect points to sub-panel boundaries can be studied by means of various logistic regression options, which assess whether damage intensity appears to depend on distance from the centre of the image or horizontal or vertical distance from sub-panel edges. When this data set is modelled in terms of Euclidean distance from the centre, the web application reports substantial evidence for positive dependence of defect intensity on distance from the centre (see the highly significant coefficient for `as.vector(dist)` in the following web application output), 
 conforming with the visual impression given by Figure \ref{fig:figure2}(a). In fact this positive dependence reflects 
 manufacturing details of
 this particular screen design: Diamond reports that Pilatus detector screen panels are tested before installation, and better panels are placed in the centre of the structured display.
