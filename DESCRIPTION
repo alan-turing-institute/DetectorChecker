@@ -11,7 +11,7 @@ Authors@R: c(
 Description: The description of a package is usually long,
     spanning multiple lines. The second and subsequent lines
     should be indented, usually with four spaces.
-Depends: R (>= 3.6.3)
+Depends: R (>= 3.6.2)
 Imports:
     spatstat (>= 1.63-3),
     tools (>= 3.6.3), 
