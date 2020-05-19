@@ -21,6 +21,8 @@ plot_density(
 \item{file_path}{file path}
 
 \item{adjust}{Kernel density bandwidth}
+
+\item{color}{a list of colors}
 }
 \description{
 Plots module

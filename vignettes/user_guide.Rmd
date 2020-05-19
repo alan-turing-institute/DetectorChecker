@@ -45,27 +45,27 @@ plot_detector(pilatus_detector)
 ### Detector analysis
 
 ```{r}
-plot_pixel_ctr_eucl(pilatus_detector)
+#plot_pixel_ctr_eucl(pilatus_detector)
 ```
 
 ```{r}
-plot_pixel_ctr_linf(pilatus_detector)
+#plot_pixel_ctr_linf(pilatus_detector)
 ```
 
 ```{r}
-plot_pixel_dist_corner(pilatus_detector)
+#plot_pixel_dist_corner(pilatus_detector)
 ```
 
 ```{r}
-plot_pixel_dist_edge_col(pilatus_detector)
+#plot_pixel_dist_edge_col(pilatus_detector)
 ```
 
 ```{r}
-plot_pixel_dist_edge_row(pilatus_detector)
+#plot_pixel_dist_edge_row(pilatus_detector)
 ```
 
 ```{r}
-plot_pixel_dist_edge(pilatus_detector)
+#plot_pixel_dist_edge(pilatus_detector)
 ```
 
 ### Importing user-defined detector
@@ -87,9 +87,9 @@ file_path <- "../inst/extdata/Pilatus/badpixel_mask.tif"
 
 pilatus_detector <- load_pix_matrix(detector = pilatus_detector, file_path = file_path)
 
-plot_detector_damaged(detector = pilatus_detector, caption = TRUE)
+plot_pixels(detector = pilatus_detector, caption = TRUE)
 
-plot_detector_module_damaged(detector = pilatus_detector, col = 4, row = 5, caption = TRUE)
+plot_module_pixels(detector = pilatus_detector, col = 4, row = 5, caption = TRUE)
 ```
 
 #### XML format
@@ -101,8 +101,8 @@ file_path <- "../inst/extdata/PerkinElmer_Full/BadPixelMap.bpm/BadPixelMap_t1.bp
 
 detector_perkin <- load_pix_matrix(detector = detector_perkin, file_path = file_path)
 
-plot_detector_damaged(detector = detector_perkin, events = FALSE)
-plot_detector_module_damaged(detector = detector_perkin, col  =11, row =2)
+plot_pixels(detector = detector_perkin, events = FALSE)
+plot_module_pixels(detector = detector_perkin, col  =11, row =2)
 ```
 
 #### HDF
@@ -119,8 +119,8 @@ file_path <- c("../inst/extdata/Excalibur/pixelmask.fem1.hdf",
 
 detector_exc <- load_pix_matrix(detector = detector_exc, file_path = file_path)
 
-plot_detector_damaged(detector = detector_exc)
-plot_detector_module_damaged(detector_exc, col = 1, row = 6)
+plot_pixels(detector = detector_exc)
+plot_module_pixels(detector_exc, col = 1, row = 6)
 ```
 
 ### Damaged pixel density
@@ -132,9 +132,9 @@ file_path <- "../inst/extdata/PerkinElmer_Full/BadPixelMap.bpm/BadPixelMap_t1.bp
 
 detector_perkin <- load_pix_matrix(detector = detector_perkin, file_path = file_path)
 
-plot_detector_density(detector = detector_perkin, adjust = 0.5)
+plot_pixels_density(detector = detector_perkin, adjust = 0.5)
 
-plot_detector_density(detector = detector_perkin, adjust = 0.5, row = 1, col = 2)
+plot_pixels_density(detector = detector_perkin, adjust = 0.5, row = 1, col = 2)
 
 ```
 
@@ -162,9 +162,9 @@ detector_perkin <- load_pix_matrix(detector = detector_perkin, file_path = file_
 
 detector_perkin <- get_dead_stats(detector_perkin)
 
-plot_detector_cnt_mod(detector = detector_perkin, caption = FALSE)
+plot_pixels_count(detector = detector_perkin, caption = FALSE)
 
-plot_detector_cnt_mod(detector = detector_perkin, row = 1, col = 5, caption = FALSE)
+plot_pixels_count(detector = detector_perkin, row = 1, col = 5, caption = FALSE)
 ```
 
 ### Arrows
@@ -176,9 +176,9 @@ file_path <- "../inst/extdata/PerkinElmer_Full/BadPixelMap.bpm/BadPixelMap_t1.bp
 
 detector_perkin <- load_pix_matrix(detector = detector_perkin, file_path = file_path)
 
-plot_detector_arrows(detector = detector_perkin)
+plot_pixels_arrows(detector = detector_perkin)
 
-plot_detector_arrows(detector = detector_perkin, row = 1, col = 5)
+plot_pixels_arrows(detector = detector_perkin, row = 1, col = 5)
 
 ```
 
@@ -191,9 +191,9 @@ file_path <- "../inst/extdata/PerkinElmer_Full/BadPixelMap.bpm/BadPixelMap_t1.bp
 
 detector_perkin <- load_pix_matrix(detector = detector_perkin, file_path = file_path)
 
-plot_detector_angles(detector = detector_perkin)
+plot_pixels_angles(detector = detector_perkin)
 
-plot_detector_angles(detector = detector_perkin, row = 1, col = 5)
+plot_pixels_angles(detector = detector_perkin, row = 1, col = 5)
 
 ```
 
@@ -208,13 +208,13 @@ file_path <- "../inst/extdata/PerkinElmer_Full/BadPixelMap.bpm/BadPixelMap_t1.bp
 
 detector_perkin <- load_pix_matrix(detector = detector_perkin, file_path = file_path)
 
-plot_detector_kfg(detector = detector_perkin, func = "K", caption = FALSE)
-plot_detector_kfg(detector = detector_perkin, func = "F")
-plot_detector_kfg(detector = detector_perkin, func = "G")
+plot_pixels_kfg(detector = detector_perkin, func = "K", caption = FALSE)
+plot_pixels_kfg(detector = detector_perkin, func = "F")
+plot_pixels_kfg(detector = detector_perkin, func = "G")
 
-plot_detector_kfg(detector = detector_perkin, func = "K", row = 1, col = 5, caption = FALSE)
-plot_detector_kfg(detector = detector_perkin, func = "F", row = 1, col = 5, caption = FALSE)
-plot_detector_kfg(detector = detector_perkin, func = "G", row = 1, col = 5, caption = FALSE)
+plot_pixels_kfg(detector = detector_perkin, func = "K", row = 1, col = 5, caption = FALSE)
+plot_pixels_kfg(detector = detector_perkin, func = "F", row = 1, col = 5, caption = FALSE)
+plot_pixels_kfg(detector = detector_perkin, func = "G", row = 1, col = 5, caption = FALSE)
 ```
 
 ### Inhomogenious K, F, G plots
@@ -226,68 +226,93 @@ file_path <- "../inst/extdata/Pilatus/badpixel_mask.tif"
 
 detector_pilatus <- load_pix_matrix(detector = detector_pilatus, file_path = file_path)
 
-plot_detector_kfg(detector = detector_pilatus, func = "Kinhom")
-plot_detector_kfg(detector = detector_pilatus, func = "Finhom")
-plot_detector_kfg(detector = detector_pilatus, func = "Ginhom")
+plot_pixels_kfg(detector = detector_pilatus, func = "Kinhom")
+plot_pixels_kfg(detector = detector_pilatus, func = "Finhom")
+plot_pixels_kfg(detector = detector_pilatus, func = "Ginhom")
 
-plot_detector_kfg(detector = detector_pilatus, func = "Kinhom", row = 1, col = 5, caption = FALSE)
-plot_detector_kfg(detector = detector_pilatus, func = "Finhom", row = 1, col = 5, caption = FALSE)
-plot_detector_kfg(detector = detector_pilatus, func = "Ginhom", row = 1, col = 5, caption = FALSE)
+plot_pixels_kfg(detector = detector_pilatus, func = "Kinhom", row = 1, col = 5, caption = FALSE)
+plot_pixels_kfg(detector = detector_pilatus, func = "Finhom", row = 1, col = 5, caption = FALSE)
+plot_pixels_kfg(detector = detector_pilatus, func = "Ginhom", row = 1, col = 5, caption = FALSE)
 ```
 
 ### Events
 
 ```{r}
-detector_perkin <- create_detector("PerkinElmerFull")
+incl_event_list <- list(1,2,3,4,5,6,7,8)
 
+detector_perkin <- create_detector("PerkinElmerFull")
+file_path <- "../inst/extdata/PerkinElmer_Full/BadPixelMap.bpm/BadPixelMap_t1.bpm.xml"
+
+detector_perkin <- load_pix_matrix(detector = detector_perkin, file_path = file_path)
+plot_pixels(detector = detector_perkin)
+
+detectorchecker::plot_events(detector_perkin, caption = FALSE, incl_event_list = incl_event_list)
+```
+```{r}
+row_ = 2
+col_ = 3
+incl_event_list <- list(1,2,3,4,5,6,7,8)
+
+detector_perkin <- create_detector("PerkinElmerFull")
+file_path <- "../inst/extdata/PerkinElmer_Full/BadPixelMap.bpm/BadPixelMap_t1.bpm.xml"
+
+detector_perkin <- load_pix_matrix(detector = detector_perkin, file_path = file_path)
+plot_module_events(detector_perkin, row = row_, col = col_, incl_event_list = incl_event_list)
+```
+### Events 
+```{r}
+
+incl_event_list <- list(1,2,3,4,5,6,7,8)
+
+detector_perkin <- create_detector("PerkinElmerFull")
 file_path <- "../inst/extdata/PerkinElmer_Full/BadPixelMap.bpm/BadPixelMap_t1.bpm.xml"
 
 detector_perkin <- load_pix_matrix(detector = detector_perkin, file_path = file_path)
 
-plot_detector_damaged(detector = detector_perkin)
-```
+# APPROACH 1
+plot_events_count(detector_perkin, caption = FALSE, incl_event_list = incl_event_list)
+plot_events_density(detector_perkin, caption = FALSE, incl_event_list = incl_event_list)
+plot_events_arrows(detector_perkin, caption = FALSE, incl_event_list = incl_event_list)
+plot_events_angles(detector_perkin, caption = FALSE, incl_event_list = incl_event_list)
+plot_events_kfg(detector_perkin, func = "K", caption = FALSE, incl_event_list = incl_event_list)
 
-```{r}
-
-incl_event_list <- list(1,2,3,4,5,6,7,8)
-      
-detector_events <- detectorchecker::find_clumps(detector_perkin)
-      
-detectorchecker::plot_events(detector_events, caption = FALSE, incl_event_list = incl_event_list)
-```
-
-```{r}
-
-row_ = 2
-col_ = 3
-
-detector_events <- detectorchecker::find_clumps(detector_perkin, row = row_, col = col_)
-
-plot_module_events(detector_events, row = row_, col = col_, caption = FALSE, 
-                   incl_event_list = incl_event_list)
-
-```
-### Events analysis
-```{r}
-
-detector_events <- detectorchecker::find_clumps(detector_perkin)
-detectorchecker::plot_events_arrows(detector_events, caption = FALSE, incl_event_list = incl_event_list)
-
+# APPROACH 2 (faster than approach 1 if analysis is performed on the same clumps)
+detector_events <- find_clumps(detector_perkin)
+plot_events_count(detector_events, caption = FALSE, incl_event_list = incl_event_list)
+plot_events_density(detector_events, caption = FALSE, incl_event_list = incl_event_list)
+plot_events_arrows(detector_events, caption = FALSE, incl_event_list = incl_event_list)
+plot_events_angles(detector_events, caption = FALSE, incl_event_list = incl_event_list)
+plot_events_kfg(detector_events, func = "K", caption = FALSE, incl_event_list = incl_event_list)
 ```
 
 ### Events with selected rows and cols
 ```{r}
-detector_events <- detectorchecker::find_clumps(detector_perkin, row = row_, col = col_)
 
-detectorchecker::plot_events_density(detector_events, row = row_, col = col_, caption = FALSE, incl_event_list = incl_event_list)
-detectorchecker::plot_events_arrows(detector_events, row = row_, col = col_, caption = FALSE, incl_event_list = incl_event_list)
-detectorchecker::plot_events_angles(detector_events, row = row_, col = col_, caption = FALSE, incl_event_list = incl_event_list)
-detectorchecker::plot_events_kfg(detector_events, func = "K", row = row_, col = col_, caption = FALSE, incl_event_list = incl_event_list)
-detectorchecker::plot_events_kfg(detector_events, func = "Kinhom", row = row_, col = col_, caption = FALSE, incl_event_list = incl_event_list)
+incl_event_list <- list(1,2,3,4,5,6,7,8)
 
-```
-```{r}
-detectorchecker::plot_events_count(detector_events, row = row_, col = col_, caption = FALSE, incl_event_list = incl_event_list)
+detector_perkin <- create_detector("PerkinElmerFull")
+file_path <- "../inst/extdata/PerkinElmer_Full/BadPixelMap.bpm/BadPixelMap_t1.bpm.xml"
+
+detector_perkin <- load_pix_matrix(detector = detector_perkin, file_path = file_path)
+
+# APPROACH 1
+plot_events_count(detector_perkin, row = row_, col = col_, caption = FALSE, incl_event_list = incl_event_list)
+plot_events_density(detector_perkin, row = row_, col = col_, caption = FALSE, incl_event_list = incl_event_list)
+plot_events_arrows(detector_perkin, row = row_, col = col_, caption = FALSE, incl_event_list = incl_event_list)
+plot_events_angles(detector_perkin, row = row_, col = col_, caption = FALSE, incl_event_list = incl_event_list)
+plot_events_kfg(detector_perkin, func = "K", row = row_, col = col_, caption = FALSE, incl_event_list = incl_event_list)
+plot_events_kfg(detector_perkin, func = "Kinhom", row = row_, col = col_, caption = FALSE, incl_event_list = incl_event_list)
+
+# APPROACH 2 (faster than approach 1 if analysis is performed on the same clumps)
+detector_events <- find_clumps(detector_perkin, row = row_, col = col_)
+
+plot_events_count(detector_events, row = row_, col = col_, caption = FALSE, incl_event_list = incl_event_list)
+plot_events_density(detector_events, row = row_, col = col_, caption = FALSE, incl_event_list = incl_event_list)
+plot_events_arrows(detector_events, row = row_, col = col_, caption = FALSE, incl_event_list = incl_event_list)
+plot_events_angles(detector_events, row = row_, col = col_, caption = FALSE, incl_event_list = incl_event_list)
+plot_events_kfg(detector_events, func = "K", row = row_, col = col_, caption = FALSE, incl_event_list = incl_event_list)
+plot_events_kfg(detector_events, func = "Kinhom", row = row_, col = col_, caption = FALSE, incl_event_list = incl_event_list)
+
 ```
 
 ### Removing areas of high density pixel damage from the analysis
@@ -298,14 +323,10 @@ detector_perkin <- create_detector("PerkinElmerFull")
 file_path <- "../inst/extdata/PerkinElmer_Full/BadPixelMap.bpm/BadPixelMap_t1.bpm.xml"
 
 detector_perkin <- load_pix_matrix(detector = detector_perkin, file_path = file_path)
-
-plot_detector_damaged(detector = detector_perkin)
-
+plot_pixels(detector = detector_perkin)
 
 detector_perkin_modified <- remove_high_density_cluster(detector_perkin, min_pts = 30, eps_adjust = 0.05)
-
-plot_detector_damaged(detector = detector_perkin_modified)
-
+plot_pixels(detector = detector_perkin_modified)
 
 ```
 
