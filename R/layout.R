@@ -30,7 +30,7 @@
                               detector_inconsistency = NA,
                               pix_matrix = NA, pix_dead = NA,
                               dead_stats = NA, pix_dead_modules = NA,
-                              clumps = NA) {
+                              clumps = NA, clumps_col = NA, clumps_row = NA) {
   detector <- list(
     name = name,
     date = date,
@@ -56,7 +56,10 @@
     pix_dead_modules = pix_dead_modules,
 
     # Clumps
-    clumps = clumps
+    clumps = clumps,
+    clumps_col = clumps_col,
+    clumps_row = clumps_row
+
   )
 
   detector <- .derive_detector(detector)
