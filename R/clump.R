@@ -1,5 +1,3 @@
-library(igraph)
-
 #' Clasifies a clump
 #'
 #' @param detector Detector object
@@ -257,6 +255,7 @@ library(igraph)
 #' @return Detector with events matrix
 #' @export
 find_clumps <- function(detector, row = NA, col = NA) {
+
   pixel_mask <- get_dead_pix_mask(detector)
 
   pixel_events <- .mask_to_events(detector, pixel_mask, row = row, col = col)
@@ -266,10 +265,42 @@ find_clumps <- function(detector, row = NA, col = NA) {
     events = pixel_events$events
   )
 
+  detector$clumps_row <- row
+  detector$clumps_col <- col
+
   # getting the events mask (0 and 1 s)
   detector$clumps$events_matrix <- get_events_mask(detector)
 
   return(detector)
+}
+
+#' Checks if correct clumps were found. If not, finds clumps
+#'
+#' @param detector Detector object
+#' @param row Module row number
+#' @param col Module column number
+#' @return detector_events Detector object
+#' @export
+check_clumps <- function(detector, row = NA, col = NA) {
+
+  if (all(is.na(detector$clumps) == TRUE)) {
+    detector_events <- detectorchecker::find_clumps(detector, row = row, col = col)
+
+  } else if ((is.na(row) | is.na(detector$clumps_row) | is.na(col) | is.na(detector$clumps_col))) {
+    if (!(is.na(row) & is.na(detector$clumps_row) & is.na(col) & is.na(detector$clumps_col))) {
+      detector_events <- detectorchecker::find_clumps(detector, row = row, col = col)
+    } else {
+      detector_events <- detector
+    }
+
+  } else if ((detector$clumps_row != row) || (detector$clumps_col != col)) {
+    detector_events <- detectorchecker::find_clumps(detector, row = row, col = col)
+
+  } else {
+    detector_events <- detector
+  }
+
+  return(detector_events)
 }
 
 #' Plots damaged detector events
@@ -282,6 +313,11 @@ find_clumps <- function(detector, row = NA, col = NA) {
 #' @export
 plot_events <- function(detector, file_path = NA, caption = TRUE, incl_event_list = NA,
                         plot_edges_gaps = TRUE) {
+
+
+  # check if the correct clumps were found
+  detector_events <- check_clumps(detector)
+
   if (!caption) {
     main_caption <- ""
     par(mar = c(0, 0, 0, 0))
@@ -295,7 +331,7 @@ plot_events <- function(detector, file_path = NA, caption = TRUE, incl_event_lis
     ini_graphics(file_path = file_path)
   }
 
-  ppp_events <- .get_clump_event_ppp(detector, incl_event_list = incl_event_list)
+  ppp_events <- .get_clump_event_ppp(detector_events, incl_event_list = incl_event_list)
 
   # "Defective events"
   plot(ppp_events, pch = 22, main = main_caption)
@@ -304,7 +340,7 @@ plot_events <- function(detector, file_path = NA, caption = TRUE, incl_event_lis
   points(ppp_events, pch = 22, col = 2)
 
   if (plot_edges_gaps) {
-    edges_gaps <- .get_detector_ppps(detector)
+    edges_gaps <- .get_detector_ppps(detector_events)
 
     points(edges_gaps[[1]], pch = ".")
     points(edges_gaps[[2]], pch = ".")
@@ -335,25 +371,28 @@ plot_module_events <- function(detector, col, row, file_path = NA, caption = TRU
   # check whether the row and col numbers are correct
   .check_select(detector, row, col)
 
+  # check if the correct clumps were found
+  detector_events <- check_clumps(detector, row = row, col = col)
+
   if (!is.na(file_path)) {
     # starts the graphics device driver
     ini_graphics(file_path = file_path)
   }
 
-  width <- detector$module_col_sizes[col]
-  height <- detector$module_row_sizes[row]
+  width <- detector_events$module_col_sizes[col]
+  height <- detector_events$module_row_sizes[row]
 
   ppp_frame <- spatstat::ppp(1, 1, c(1, width), c(1, height))
 
   if (caption) {
-    main_caption <- paste(detector$name, "with damaged pixels\n (black=module edges)")
+    main_caption <- paste(detector_events$name, "with damaged pixels\n (black=module edges)")
   } else {
     main_caption <- ""
   }
 
   plot(ppp_frame, pch = ".", cex.main = 0.7, main = main_caption)
 
-  ppp_events <- .get_clump_event_ppp(detector,
+  ppp_events <- .get_clump_event_ppp(detector_events,
     incl_event_list = incl_event_list,
     height = height, width = width
   )
@@ -492,18 +531,22 @@ get_events_mask <- function(detector) {
 plot_events_density <- function(detector, file_path = NA, adjust = 0.25,
                                 row = NA, col = NA, caption = TRUE,
                                 incl_event_list = NA, color = topo.colors(50)) {
+
+  # check if the correct clumps were found
+  detector_events <- check_clumps(detector, row = row, col = col)
+
   main_caption <- ""
 
   if (!is.na(row) && !is.na(col)) {
     # check whether the row and col numbers are correct
-    .check_select(detector, row, col)
+    .check_select(detector_events, row, col)
 
     if (caption) {
       main_caption <- paste("Events density (row =", row, "col =", col, "), adjust=", adjust)
     }
 
-    height <- detector$module_row_sizes[row]
-    width <- detector$module_col_sizes[col]
+    height <- detector_events$module_row_sizes[row]
+    width <- detector_events$module_col_sizes[col]
   } else {
     if (caption) {
       main_caption <- paste("Events density, adjust = ", adjust)
@@ -513,7 +556,7 @@ plot_events_density <- function(detector, file_path = NA, adjust = 0.25,
     width <- NULL
   }
 
-  ppp_events <- .get_clump_event_ppp(detector,
+  ppp_events <- .get_clump_event_ppp(detector_events,
     incl_event_list = incl_event_list,
     height = height, width = width
   )
@@ -533,18 +576,22 @@ plot_events_density <- function(detector, file_path = NA, adjust = 0.25,
 plot_events_arrows <- function(detector, file_path = NA,
                                row = NA, col = NA, caption = TRUE,
                                incl_event_list = NA) {
+
+  # check if the correct clumps were found
+  detector_events <- check_clumps(detector, row = row, col = col)
+
   main_caption <- ""
 
   if (!is.na(row) && !is.na(col)) {
     # check whether the row and col numbers are correct
-    .check_select(detector, row, col)
+    .check_select(detector_events, row, col)
 
     if (caption) {
       main_caption <- paste("Arrows of events (row =", row, "col =", col, ")")
     }
 
-    height <- detector$module_row_sizes[row]
-    width <- detector$module_col_sizes[col]
+    height <- detector_events$module_row_sizes[row]
+    width <- detector_events$module_col_sizes[col]
   } else {
     if (caption) {
       main_caption <- paste("Arrows of events")
@@ -554,7 +601,7 @@ plot_events_arrows <- function(detector, file_path = NA,
     width <- NULL
   }
 
-  ppp_events <- .get_clump_event_ppp(detector,
+  ppp_events <- .get_clump_event_ppp(detector_events,
     incl_event_list = incl_event_list,
     height = height, width = width
   )
@@ -574,18 +621,22 @@ plot_events_arrows <- function(detector, file_path = NA,
 plot_events_angles <- function(detector, file_path = NA,
                                row = NA, col = NA, caption = TRUE,
                                incl_event_list = NA) {
+
+  # check if the correct clumps were found
+  detector_events <- check_clumps(detector, row = row, col = col)
+
   main_caption <- ""
 
   if (!is.na(row) && !is.na(col)) {
     # check whether the row and col numbers are correct
-    .check_select(detector, row, col)
+    .check_select(detector_events, row, col)
 
     if (caption) {
       main_caption <- paste("Angles of events (row =", row, "col =", col, ")")
     }
 
-    height <- detector$module_row_sizes[row]
-    width <- detector$module_col_sizes[col]
+    height <- detector_events$module_row_sizes[row]
+    width <- detector_events$module_col_sizes[col]
   } else {
     if (caption) {
       main_caption <- paste("Angles of events")
@@ -595,7 +646,7 @@ plot_events_angles <- function(detector, file_path = NA,
     width <- NULL
   }
 
-  ppp_events <- .get_clump_event_ppp(detector,
+  ppp_events <- .get_clump_event_ppp(detector_events,
     incl_event_list = incl_event_list,
     height = height, width = width
   )
@@ -616,18 +667,21 @@ plot_events_angles <- function(detector, file_path = NA,
 plot_events_kfg <- function(detector, func, file_path = NA,
                             row = NA, col = NA, caption = TRUE,
                             incl_event_list = NA) {
+
+  detector_events <- check_clumps(detector, row = row, col = col)
+
   if (!is.na(row) && !is.na(col)) {
     # check whether the row and col numbers are correct
-    .check_select(detector, row, col)
+    .check_select(detector_events, row, col)
 
-    height <- detector$module_row_sizes[row]
-    width <- detector$module_col_sizes[col]
+    height <- detector_events$module_row_sizes[row]
+    width <- detector_events$module_col_sizes[col]
   } else {
     height <- NULL
     width <- NULL
   }
 
-  ppp_events <- .get_clump_event_ppp(detector,
+  ppp_events <- .get_clump_event_ppp(detector_events,
     incl_event_list = incl_event_list,
     height = height, width = width
   )
@@ -647,32 +701,35 @@ plot_events_kfg <- function(detector, func, file_path = NA,
 plot_events_count <- function(detector, file_path = NA,
                               row = NA, col = NA, caption = TRUE,
                               incl_event_list = NA) {
+
+  detector_events <- check_clumps(detector, row = row, col = col)
+
   main_caption <- ""
   if (!caption) par(mar = c(0, 0, 0, 0))
 
   if (!is.na(row) && !is.na(col)) {
     # check whether the row and col numbers are correct
-    .check_select(detector, row, col)
+    .check_select(detector_events, row, col)
 
 
     if (caption) {
       main_caption <- paste(
         "Number of events in a module ",
-        detector$dead_stats$module_count_arr[col][row]
+        detector_events$dead_stats$module_count_arr[col][row]
       )
     }
 
-    width <- detector$module_col_sizes[col]
-    height <- detector$module_row_sizes[row]
+    width <- detector_events$module_col_sizes[col]
+    height <- detector_events$module_row_sizes[row]
 
     ppp_frame <- spatstat::ppp(1, 1, c(1, width), c(1, height))
 
     plot(ppp_frame, pch = ".", cex.main = 0.7, main = main_caption)
 
     # This works only on rectangular detectors!!!
-    module_idx <- (col - 1) * detector$module_row_n + row
+    module_idx <- (col - 1) * detector_events$module_row_n + row
 
-    ppp_events <- .get_clump_event_ppp(detector,
+    ppp_events <- .get_clump_event_ppp(detector_events,
       incl_event_list = incl_event_list,
       height = height, width = width
     )
@@ -683,12 +740,12 @@ plot_events_count <- function(detector, file_path = NA,
       dev.off()
     }
   } else {
-    ppp_events <- .get_clump_event_ppp(detector, incl_event_list = incl_event_list)
+    ppp_events <- .get_clump_event_ppp(detector_events, incl_event_list = incl_event_list)
 
     # count of points in each quadrat
     module_count_arr <- spatstat::quadratcount(
       X = ppp_events,
-      nx = detector$module_col_n, ny = detector$module_row_n
+      nx = detector_events$module_col_n, ny = detector_events$module_row_n
     )
 
     if (caption) {

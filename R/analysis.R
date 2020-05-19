@@ -38,7 +38,7 @@ Dead_Stats <- function(dead_n = NA, module_n = NA, module_count_arr = NA,
 #' @param file_path Output file path
 #' @param caption Flag to turn on/off figure caption
 #' @export
-plot_detector_module_damaged <- function(detector, col, row, file_path = NA,
+plot_module_pixels <- function(detector, col, row, file_path = NA,
                                          caption = TRUE) {
   if (!caption) par(mar = c(0, 0, 0, 0))
   else par(mar=c(1, 1, 3, 1))
@@ -103,7 +103,7 @@ plot_detector_module_damaged <- function(detector, col, row, file_path = NA,
 #' @param col Module column number
 #' @param caption Flag to turn on/off figure caption
 #' @export
-plot_detector_cnt_mod <- function(detector, file_path = NA, row = NA, col = NA,
+plot_pixels_count <- function(detector, file_path = NA, row = NA, col = NA,
                                   caption = TRUE) {
   main_caption <- ""
 
@@ -168,7 +168,7 @@ plot_detector_cnt_mod <- function(detector, file_path = NA, row = NA, col = NA,
 #' @param col Module column number
 #' @param caption Flag to turn on/off figure caption
 #' @export
-plot_detector_density <- function(detector, file_path = NA, adjust = 1.,
+plot_pixels_density <- function(detector, file_path = NA, adjust = 1.,
                                   row = NA, col = NA, caption = TRUE, color = topo.colors(50)) {
   ppp_dead <- NA
   main_caption <- ""
@@ -203,7 +203,7 @@ plot_detector_density <- function(detector, file_path = NA, adjust = 1.,
 #' @param caption Flag to turn on/off figure caption
 #' @importFrom graphics arrows plot
 #' @export
-plot_detector_arrows <- function(detector, file_path = NA, row = NA, col = NA,
+plot_pixels_arrows <- function(detector, file_path = NA, row = NA, col = NA,
                                  caption = TRUE) {
   ppp_dead <- NA
   main_caption <- ""
@@ -388,7 +388,7 @@ dead_stats_summary <- function(detector) {
 #' @param col Module column number
 #' @param caption Flag to turn on/off figure caption
 #' @export
-plot_detector_angles <- function(detector, file_path = NA, row = NA, col = NA,
+plot_pixels_angles <- function(detector, file_path = NA, row = NA, col = NA,
                                  caption = TRUE) {
   ppp_dead <- NA
   main_caption <- ""
@@ -542,7 +542,7 @@ get_ppp_dead <- function(detector) {
 #' @param col module column number
 #' @param caption Flag to turn on/off figure caption
 #' @export
-plot_detector_kfg <- function(detector, func, file_path = NA, row = NA, col = NA,
+plot_pixels_kfg <- function(detector, func, file_path = NA, row = NA, col = NA,
                               caption = TRUE) {
   ppp_dead <- get_ppp_dead(detector)
 

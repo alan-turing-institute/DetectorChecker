@@ -23,7 +23,9 @@ A S3 class to represent a detector.}
   pix_dead = NA,
   dead_stats = NA,
   pix_dead_modules = NA,
-  clumps = NA
+  clumps = NA,
+  clumps_col = NA,
+  clumps_row = NA
 )
 }
 \arguments{

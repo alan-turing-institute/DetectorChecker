@@ -4,7 +4,9 @@
 \name{available_detectors}
 \alias{available_detectors}
 \title{A list of available detectors}
-\format{An object of class \code{character} of length 5.}
+\format{
+An object of class \code{character} of length 5.
+}
 \usage{
 available_detectors
 }

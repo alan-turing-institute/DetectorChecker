@@ -30,7 +30,7 @@
                               detector_inconsistency = NA,
                               pix_matrix = NA, pix_dead = NA,
                               dead_stats = NA, pix_dead_modules = NA,
-                              clumps = NA) {
+                              clumps = NA, clumps_col = NA, clumps_row = NA) {
   detector <- list(
     name = name,
     date = date,
@@ -56,7 +56,10 @@
     pix_dead_modules = pix_dead_modules,
 
     # Clumps
-    clumps = clumps
+    clumps = clumps,
+    clumps_col = clumps_col,
+    clumps_row = clumps_row
+
   )
 
   detector <- .derive_detector(detector)
@@ -516,16 +519,9 @@ detector_consist_check <- function(detector = NA) {
 #' @param detector Detector object
 #' @param file_path Output file path
 #' @param caption Flag to turn on/off figure caption
-#' @param events Flag toalter caption if plotting events
 #' @importFrom graphics points
 #' @export
-plot_detector_damaged <- function(detector, file_path = NA, caption = TRUE, events = FALSE) {
-
-  if (events){
-    caption_type = "events"
-  } else {
-    caption_type = "pixels"
-  }
+plot_pixels <- function(detector, file_path = NA, caption = TRUE) {
 
   main_caption <- ""
   if (!caption) par(mar = c(0, 0, 0, 0))
@@ -541,9 +537,9 @@ plot_detector_damaged <- function(detector, file_path = NA, caption = TRUE, even
   }
 
   if (detector$pix_matrix_modified)
-    caption_begining = paste(detector$name, "(modified) with damaged", caption_type)
+    caption_begining = paste(detector$name, "(modified) with damaged pixels")
   else
-    caption_begining = paste(detector$name, "with damaged", caption_type)
+    caption_begining = paste(detector$name, "with damaged ")
 
   if (sum(detector$gap_col_sizes) + sum(detector$gap_row_sizes) == 0) {
     if (caption) {
