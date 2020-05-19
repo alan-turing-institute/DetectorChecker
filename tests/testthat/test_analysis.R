@@ -21,7 +21,7 @@ test_that("Pilatus", {
   test_out_path <- "pilatus_damaged.jpg"
 
   # Visualizing damaged pixels
-  plot_detector_damaged(detector = pilatus_detector, file_path = test_out_path)
+  plot_pixels(detector = pilatus_detector, file_path = test_out_path)
 
   # Check whether the file was created
   expect_that(file.exists(test_out_path), is_true())
@@ -53,7 +53,7 @@ test_that("Perkin Elmer", {
   test_out_path <- "perkinelmerfull_damaged.pdf"
 
   # Visualizing damaged pixels
-  plot_detector_damaged(detector = perkinelmerfull_detector, file_path = test_out_path)
+  plot_pixels(detector = perkinelmerfull_detector, file_path = test_out_path)
 
   # Check whether the file was created
   expect_that(file.exists(test_out_path), is_true())
@@ -66,7 +66,7 @@ test_that("Perkin Elmer", {
 
   # Plotting counts per module
   test_out_path <- "perkinelmerfull_module_cnt.pdf"
-  plot_detector_cnt_mod(detector = perkinelmerfull_detector, file_path = test_out_path)
+  plot_pixels_count(detector = perkinelmerfull_detector, file_path = test_out_path)
 
   # Check whether the file was created
   expect_that(file.exists(test_out_path), is_true())
@@ -76,7 +76,7 @@ test_that("Perkin Elmer", {
 
   # Plotting dead pixel density
   test_out_path <- "perkinelmerfull_density.jpg"
-  plot_detector_density(
+  plot_pixels_density(
     detector = perkinelmerfull_detector, file_path = test_out_path,
     adjust = 0.5
   )
@@ -87,7 +87,7 @@ test_that("Perkin Elmer", {
   # Arrows
   test_out_path <- "perkinelmerfull_arrows.jpg"
 
-  plot_detector_arrows(detector = perkinelmerfull_detector, file_path = test_out_path)
+  plot_pixels_arrows(detector = perkinelmerfull_detector, file_path = test_out_path)
 
   # Removing the test output file
   if (file.exists(test_out_path)) file.remove(test_out_path)
@@ -119,7 +119,7 @@ test_that("Excalibur - mutiple files", {
   test_out_path <- "Excalibur_damaged.pdf"
 
   # Visualizing damaged pixels
-  plot_detector_damaged(detector = excalibur_detector, file_path = test_out_path)
+  plot_pixels(detector = excalibur_detector, file_path = test_out_path)
 
   # Check whether the file was created
   expect_that(file.exists(test_out_path), is_true())
@@ -201,7 +201,7 @@ test_that("Perkin Elmer", {
   test_out_path <- "perkinelmerfull_damaged.pdf"
 
   # Visualizing damaged pixels
-  plot_detector_damaged(detector = perkinelmerfull_detector, file_path = test_out_path)
+  plot_pixels(detector = perkinelmerfull_detector, file_path = test_out_path)
 
   # Check whether the file was created
   expect_that(file.exists(test_out_path), is_true())
@@ -214,7 +214,7 @@ test_that("Perkin Elmer", {
 
   # Plotting counts per module
   test_out_path <- "perkinelmerfull_module_cnt.pdf"
-  plot_detector_cnt_mod(detector = perkinelmerfull_detector, file_path = test_out_path)
+  plot_pixels_count(detector = perkinelmerfull_detector, file_path = test_out_path)
 
   # Check whether the file was created
   expect_that(file.exists(test_out_path), is_true())
@@ -224,7 +224,7 @@ test_that("Perkin Elmer", {
 
   # Plotting dead pixel density
   test_out_path <- "perkinelmerfull_density.jpg"
-  plot_detector_density(
+  plot_pixels_density(
     detector = perkinelmerfull_detector, file_path = test_out_path,
     adjust = 0.5
   )
@@ -237,7 +237,7 @@ test_that("Perkin Elmer", {
 
   # Arrows
   test_out_path <- "perkinelmerfull_arrows.jpg"
-  plot_detector_arrows(detector = perkinelmerfull_detector, file_path = test_out_path)
+  plot_pixels_arrows(detector = perkinelmerfull_detector, file_path = test_out_path)
 
   # Check whether the file was created
   expect_that(file.exists(test_out_path), is_true())
@@ -248,7 +248,7 @@ test_that("Perkin Elmer", {
 
   # Full detector angle plot
   test_out_path <- "perkinelmerfull_angles.jpg"
-  plot_detector_angles(detector = perkinelmerfull_detector, file_path = test_out_path)
+  plot_pixels_angles(detector = perkinelmerfull_detector, file_path = test_out_path)
 
   # Check whether the file was created
   expect_that(file.exists(test_out_path), is_true())
@@ -276,37 +276,37 @@ test_that("Perkin Elmer", {
 
   # K
   test_out_path <- "K-Function.jpg"
-  plot_detector_kfg(detector = detector, func = "K", file_path = test_out_path)
+  plot_pixels_kfg(detector = detector, func = "K", file_path = test_out_path)
   expect_that(file.exists(test_out_path), is_true())
   if (file.exists(test_out_path)) file.remove(test_out_path)
 
   # F
   test_out_path <- "F-Function.jpg"
-  plot_detector_kfg(detector = detector, func = "F", file_path = test_out_path)
+  plot_pixels_kfg(detector = detector, func = "F", file_path = test_out_path)
   expect_that(file.exists(test_out_path), is_true())
   if (file.exists(test_out_path)) file.remove(test_out_path)
 
   # G
   test_out_path <- "G-Function.jpg"
-  plot_detector_kfg(detector = detector, func = "G", file_path = test_out_path)
+  plot_pixels_kfg(detector = detector, func = "G", file_path = test_out_path)
   expect_that(file.exists(test_out_path), is_true())
   if (file.exists(test_out_path)) file.remove(test_out_path)
 
   # Kinhom
   test_out_path <- "Kinhom.jpg"
-  plot_detector_kfg(detector = detector, func = "Kinhom", file_path = test_out_path)
+  plot_pixels_kfg(detector = detector, func = "Kinhom", file_path = test_out_path)
   expect_that(file.exists(test_out_path), is_true())
   if (file.exists(test_out_path)) file.remove(test_out_path)
 
   # Finhom
   test_out_path <- "Finhom.jpg"
-  plot_detector_kfg(detector = detector, func = "Finhom", file_path = test_out_path)
+  plot_pixels_kfg(detector = detector, func = "Finhom", file_path = test_out_path)
   expect_that(file.exists(test_out_path), is_true())
   if (file.exists(test_out_path)) file.remove(test_out_path)
 
   # Ginhom
   test_out_path <- "Ginhom.jpg"
-  plot_detector_kfg(detector = detector, func = "Ginhom", file_path = test_out_path)
+  plot_pixels_kfg(detector = detector, func = "Ginhom", file_path = test_out_path)
   expect_that(file.exists(test_out_path), is_true())
   if (file.exists(test_out_path)) file.remove(test_out_path)
 })
