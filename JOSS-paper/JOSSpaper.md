@@ -261,8 +261,8 @@ We gratefully acknowledge support from the UK EPSRC (grant EP/K031066/1)
 and the Alan Turing Institute (under the EPSRC
 grant EP/N510129/1) during this project.
 
-We also wish to thank Martin O'Reilly (the Turing Institute), Nicola Tartoni and Ian Horswell (Diamond Lightsource, UK) for guidance on detector types and sample data sets, and Tristan Lowe (Henry Moseley X-ray Imaging Facility, University of Manchester) 
-and Martin Turner (ITS Research IT, University of Manchester) for discussions and feedback..
+We also wish to thank Martin O'Reilly (The Alan Turing Institute), Nicola Tartoni and Ian Horswell (Diamond Lightsource, UK) for guidance on detector types and sample data sets, and Tristan Lowe (Henry Moseley X-ray Imaging Facility, University of Manchester) 
+and Martin Turner (ITS Research IT, University of Manchester) for discussions and feedback.
 
 # References
 
