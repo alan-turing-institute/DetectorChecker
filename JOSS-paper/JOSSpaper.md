@@ -1,7 +1,7 @@
 ---
 title: 'DetectorChecker: analyzing patterns of defects in detector screens'
-author:  Julia A. Brettschneider, Oscar T. Giles, Wilfrid S. Kendall, Tomas Lazauskas, Martin O'Reilly
-date: "13 January 2020, revised 19 May 2020"
+author:  Julia A. Brettschneider, Oscar T. Giles, Wilfrid S. Kendall, Tomas Lazauskas
+date: "13 January 2020, revised 21 May 2020"
 authors:
 - affiliation: 1, 2
   name: Julia A. Brettschneider
@@ -13,8 +13,6 @@ authors:
   orcid: 0000-0001-9799-3480
 - affiliation: 2
   name: Tomas Lazauskas
-- affiliation: 2
-  name: Martin O'Reilly
 output: pdf_document
 bibliography: JOSSpaper.bib
 tags:
@@ -31,8 +29,8 @@ affiliations:
 ---
 
 ```
-Version: 1.1.28
-Spell-checked, initialized references. 19.05.20.
+Version: 1.1.29
+Removed MOR from authors, added as acknowledgement. Further revisions pending. 21.05.20.
 ```
 
 [_DetectorChecker_](https://doi.org/10.5281/zenodo.3662233) 
@@ -106,8 +104,8 @@ to upload the spatial arrangement of the defective pixels
 directly by means of "bad pixel maps" in XML format or inferred from test images in formats including TIFF),
 and then to inspect the results using the facilities offered
 by the package.
-The software is freely available under MIT licence, accessible from the two Zenodo repositories
-referenced above.
+The software is freely available under MIT licence, accessible _via_ the Github and Zenodo repositories
+in the above references.
 To the best of our knowledge, there is no comparable package or web application
 making methods of spatial statistics available for panel-structured image data of arbitrary structure architecture.
 
@@ -263,7 +261,7 @@ We gratefully acknowledge support from the UK EPSRC (grant EP/K031066/1)
 and the Alan Turing Institute (under the EPSRC
 grant EP/N510129/1) during this project.
 
-We also wish to thank Nicola Tartoni and Ian Horswell (Diamond Lightsource, UK) for guidance on detector types and sample data sets, and Tristan Lowe (Henry Moseley X-ray Imaging Facility, University of Manchester) 
+We also wish to thank Martin O'Reilly (the Turing Institute), Nicola Tartoni and Ian Horswell (Diamond Lightsource, UK) for guidance on detector types and sample data sets, and Tristan Lowe (Henry Moseley X-ray Imaging Facility, University of Manchester) 
 and Martin Turner (ITS Research IT, University of Manchester) for discussions and feedback..
 
 # References
