@@ -29,8 +29,8 @@ affiliations:
 ---
 
 ```
-Version: 1.1.32
-Removed MOR from authors, added as acknowledgement. Further revisions pending. 22.05.20.
+Version: 1.1.33
+Applied MOR suggestions. 22.05.20.
 ```
 
 [_DetectorChecker_](https://doi.org/10.5281/zenodo.3662233) 
@@ -114,9 +114,9 @@ Defects are modelled as points in an image rectangle based on overall screen dim
 The pattern of defects can be modelled using the web application (workflow is
 summarised in Figure \ref{fig:figure1}). 
 
-![Work flow for DetectorChecker web application. Feedback / skip paths illustrate various options: refocussing attention on subsets of the point pattern (isolated pixels, small clusters, linear clusters, \ldots); working through various graphical analyses; optionally emailing data to the DetectorChecker team; and statistically fitting a variety of models of damage intensity. \label{fig:figure1}](flowchartDCshort.pdf)
+![Work flow for DetectorChecker web application. Feedback/skip paths illustrate various options: refocussing attention on subsets of the point pattern (isolated pixels, small clusters, linear clusters, \ldots); working through various graphical analyses; optionally emailing data to the DetectorChecker team; and statistically fitting a variety of models of damage intensity. \label{fig:figure1}](flowchartDCshort.pdf)
 
-We now discuss individual steps of the workflow using
+We now discuss selected steps of the workflow using
 data derived from a Pilatus detector
 screen, supplied by Diamond Lightsource, UK.
 
@@ -126,9 +126,11 @@ This can be done either by using a drop-down menu to specify a predetermined opt
 or by uploading a file giving the specific structure of sub-panels.
 The data can then be uploaded.
 
-B. Intensity maps can be visualized _via_ kernel smoothing applied to the point pattern
+B. Intensity maps can be produced _via_ kernel smoothing applied to the point pattern
 (replacing each defect point by the corresponding translate of a fixed kernel function and then summing).
 For example, the point pattern in Figure \ref{fig:figure2}(a) yields the intensity map given in Figure \ref{fig:figure2}(b).
+
+![Pilatus detector screen: (a) Example of point pattern of defects. (b) Intensity map resulting from point pattern of defects. The intensity map draws attention to the higher intensity of defects in the corners, which is born out by inspection of the point pattern. \label{fig:figure2}](combined1.png)
 
 C. Measuring possible departures from _complete spatial randomness_ (CSR).
 CSR is what would be expected if the point pattern was in fact
@@ -144,15 +146,16 @@ indicate clear evidence of deviation from CSR:
 computes the distribution of the nearest distance to a defect point from a typical location
 chosen from the image rectangle uniformly at random (and independently of the point pattern).
 If the point pattern did in fact satisfy CSR then
-one could view
-an empirical estimate of the $F$ function a random perturbation of 
+one could consider
+an empirical estimate of the $F$ function to be a random perturbation of 
 the theoretical $F$ function under CSR, namely
 $F_\text{pois}(r)=1-\exp(-\lambda \pi r^2)$. 
-Figure \ref{fig:figure3}(a),
-presents different 
-variants of $\hat{F}$ accounting in various ways for edge-effects.
+Figure \ref{fig:figure3}(a)
+graphs different 
+variants of $\hat{F}$, accounting in various ways for edge-effects.
 Note the clear deviation of the $\hat{F}$ empirical estimates from what would be expected under CSR, 
 namely the theoretical $F_\text{pois}$.
+
 
 * The $G$ function computes the distribution of nearest-neighbour distances between defect points; if the point pattern did in fact satisfy CSR then
 one could view
@@ -167,23 +170,6 @@ of the $\hat{G}$ empirical estimates (which again account in various ways for ed
 hence again suggesting deviation from CSR.
 
 
-![Pilatus detector screen: (a) Example of point pattern of defects. (b) Intensity map resulting from point pattern of defects. The intensity map draws attention to the higher intensity of defects in the corners, which is born out by inspection of the point pattern. \label{fig:figure2}](combined1.png)
-
-![Pilatus detector screen: (a) $F$ plot resulting from point pattern of defects. (b) $G$ plot resulting from point pattern of defects. The graphs contrast the theoretical curve arising from CSR (blue dotted curve) with several empirical curves involving different edge corrections. The different edge-corrected empirical curves agree with each other but indicate clear divergence from the CSR curve. \label{fig:figure3}](combined2.png)
-
-![Pilatus detector screen: (a) $K$ plot resulting from point pattern of defects. (b) $K$ plot resulting from point pattern of defects, corrected for inhomogeneity.
-For geometrical reasons it is appropriate to focus attention on small distances.
-There is more variation between different edge-corrections of empirical curves
-than for $F$ and $G$ curves. The theoretical curve based on CSR (left panel, blue dotted curve) is closer at short distances (200 pixels or less)
-than is the case for $F$ and $G$ curves but still exhibits some discrepancy. 
-However all curves agree closely for short distances in the right panel,
-where a correction has been made 
-for inhomogeneity (which has already been noted when considering the intensity map).
-This suggests that an inhomogeneous Poisson process provides a good fit for the data.
-\label{fig:figure4}](combined3.png)
-
-
-
 * The $K$ function (Ripley's $K$ function) computes the mean number of defect points within a distance $r$ of a typical defect point, viewed as a function of $r$; if the point pattern did in fact satisfy CSR then
 one could view
 an empirical estimate of the $K$ function as a random perturbation of the theoretical $K$ function
@@ -195,6 +181,21 @@ $\hat{K}$ empirical estimates will exhibit substantially greater variation at la
 it is therefore appropriate to confine attention to the left-hand third of the $x$-axis.
 The excess over the theoretical $K_\text{pois}$ at short distances, particularly for the estimate $\hat{K}_\text{iso}$, indicates that defects are more clustered than would be expected from CSR. 
 
+
+![Pilatus detector screen: (a) $F$ plot resulting from point pattern of defects. (b) $G$ plot resulting from point pattern of defects. The graphs contrast the theoretical curve arising from CSR (blue dotted curve) with several empirical curves involving different edge corrections. The different edge-corrected empirical curves agree with each other but indicate clear divergence from the CSR curve. \label{fig:figure3}](combined2.png)
+
+
+![Pilatus detector screen: (a) $K$ plot resulting from point pattern of defects. (b) $K$ plot resulting from point pattern of defects, corrected for inhomogeneity.
+For geometrical reasons it is appropriate to focus attention on small distances.
+There is more variation between different edge-corrections of empirical curves
+than for $F$ and $G$ curves. Empirical curves are closer at short distances (200 pixels or less) to the theoretical curve based on CSR (left panel, blue dotted curve) but still exhibit some discrepancy hinting at possibly
+greater clustering relative to CSR. 
+However all curves agree closely for short distances in the right panel,
+in which a correction has been made 
+for inhomogeneity (which has already been noted when considering the intensity map).
+This suggests that an inhomogeneous Poisson process provides a good fit for the data.
+\label{fig:figure4}](combined3.png)
+
 * Plots are also available which take account of inhomogeneity and compare these estimates to theoretical functions
 computed for inhomogeneous Poisson point processes: 
 Figure \ref{fig:figure4}(b) gives an example of this in the case of the $K$ function. The plots of the $\hat{K}_\text{inhom}$
@@ -202,6 +203,7 @@ empirical inhomogeneity-adjusted estimates agree much more closely with
 the theoretical $K^\text{pois}_\text{inhom}$ function 
 at short distances, supporting the hypothesis that the pattern of defects is what
 might be expected to arise from an _inhomogeneous_ Poisson process of defects.
+
 
 
 
