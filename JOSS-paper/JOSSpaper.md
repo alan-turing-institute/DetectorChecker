@@ -1,7 +1,7 @@
 ---
 title: 'DetectorChecker: analyzing patterns of defects in detector screens'
 author:  Julia A. Brettschneider, Oscar T. Giles, Wilfrid S. Kendall, Tomas Lazauskas
-date: "13 January 2020, revised 22 May 2020"
+date: "13 January 2020, revised 24 May 2020"
 authors:
 - affiliation: 1, 2
   name: Julia A. Brettschneider
@@ -29,8 +29,8 @@ affiliations:
 ---
 
 ```
-Version: 1.1.33
-Applied MOR suggestions. 22.05.20.
+Version: 1.1.36
+Applied MOR suggestions. Some adjustment of figures (almost all now generated in R). 24.05.20.
 ```
 
 [_DetectorChecker_](https://doi.org/10.5281/zenodo.3662233) 
@@ -181,8 +181,7 @@ $\hat{K}$ empirical estimates will exhibit substantially greater variation at la
 it is therefore appropriate to confine attention to the left-hand third of the $x$-axis.
 The excess over the theoretical $K_\text{pois}$ at short distances, particularly for the estimate $\hat{K}_\text{iso}$, indicates that defects are more clustered than would be expected from CSR. 
 
-
-![Pilatus detector screen: (a) $F$ plot resulting from point pattern of defects. (b) $G$ plot resulting from point pattern of defects. The graphs contrast the theoretical curve arising from CSR (blue dotted curve) with several empirical curves involving different edge corrections. The different edge-corrected empirical curves agree with each other but indicate clear divergence from the CSR curve. \label{fig:figure3}](combined2.png)
+![Pilatus detector screen: (a) $F$ plot resulting from point pattern of defects. (b) $G$ plot resulting from point pattern of defects. The graphs contrast the theoretical curve arising from CSR (blue dotted curve) with several empirical curves involving different edge corrections. The different edge-corrected empirical curves agree with each other but indicate clear divergence from the CSR curve. Here and in the following figures the graphs correspond to output from the application: graph axes have not been harmonized. \label{fig:figure3}](figure3.png)
 
 
 ![Pilatus detector screen: (a) $K$ plot resulting from point pattern of defects. (b) $K$ plot resulting from point pattern of defects, corrected for inhomogeneity.
@@ -194,7 +193,7 @@ However all curves agree closely for short distances in the right panel,
 in which a correction has been made 
 for inhomogeneity (which has already been noted when considering the intensity map).
 This suggests that an inhomogeneous Poisson process provides a good fit for the data.
-\label{fig:figure4}](combined3.png)
+\label{fig:figure4}](figure4.png)
 
 * Plots are also available which take account of inhomogeneity and compare these estimates to theoretical functions
 computed for inhomogeneous Poisson point processes: 
@@ -276,7 +275,7 @@ of screens from various devices, together with recording of relevant metadata
 such as detector usage.
 Interested users are encouraged to make contact to discuss these possibilities,
 which will permit evidence-based analysis
-to support decisions on refurbishment and / or replacement
+to support decisions on refurbishment and/or replacement
 strategies.
 
 # Acknowledgements
