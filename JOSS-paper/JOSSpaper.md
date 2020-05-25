@@ -1,7 +1,7 @@
 ---
 title: 'DetectorChecker: analyzing patterns of defects in detector screens'
 author:  Julia A. Brettschneider, Oscar T. Giles, Wilfrid S. Kendall, Tomas Lazauskas
-date: "13 January 2020, revised 24 May 2020"
+date: "13 January 2020, revised 25 May 2020"
 authors:
 - affiliation: 1, 2
   name: Julia A. Brettschneider
@@ -26,11 +26,13 @@ affiliations:
   name: Department of Statistics, University of Warwick, UK
 - index: 2
   name: The Alan Turing Institute, UK
+header-includes: |
+    \usepackage{needspace}
 ---
 
 ```
-Version: 1.1.36
-Applied MOR suggestions. Some adjustment of figures (almost all now generated in R). 24.05.20.
+Version: 1.1.37
+Changed to PDF figures except for heatmap. Moved all figures to image directory. 25.05.20.
 ```
 
 [_DetectorChecker_](https://doi.org/10.5281/zenodo.3662233) 
@@ -114,7 +116,7 @@ Defects are modelled as points in an image rectangle based on overall screen dim
 The pattern of defects can be modelled using the web application (workflow is
 summarised in Figure \ref{fig:figure1}). 
 
-![Work flow for DetectorChecker web application. Feedback/skip paths illustrate various options: refocussing attention on subsets of the point pattern (isolated pixels, small clusters, linear clusters, \ldots); working through various graphical analyses; optionally emailing data to the DetectorChecker team; and statistically fitting a variety of models of damage intensity. \label{fig:figure1}](flowchartDCshort.pdf)
+![Work flow for DetectorChecker web application. Feedback/skip paths illustrate various options: refocussing attention on subsets of the point pattern (isolated pixels, small clusters, linear clusters, \ldots); working through various graphical analyses; optionally emailing data to the DetectorChecker team; and statistically fitting a variety of models of damage intensity. \label{fig:figure1}](image/flowchartDCshort.pdf)
 
 We now discuss selected steps of the workflow using
 data derived from a Pilatus detector
@@ -130,7 +132,11 @@ B. Intensity maps can be produced _via_ kernel smoothing applied to the point pa
 (replacing each defect point by the corresponding translate of a fixed kernel function and then summing).
 For example, the point pattern in Figure \ref{fig:figure2}(a) yields the intensity map given in Figure \ref{fig:figure2}(b).
 
-![Pilatus detector screen: (a) Example of point pattern of defects. (b) Intensity map resulting from point pattern of defects. The intensity map draws attention to the higher intensity of defects in the corners, which is born out by inspection of the point pattern. \label{fig:figure2}](combined1.png)
+![](image/fig2-a.pdf){ width=42% }\qquad\qquad  ![](image/fig2-b-trim.png){ width=50% }
+\begin{figure}[!h]
+\caption{Pilatus detector screen: (a) Example of point pattern of defects. (b) Intensity map resulting from point pattern of defects. The intensity map draws attention to the higher intensity of defects in the corners, which is born out by inspection of the point pattern. \label{fig:figure2}}
+\end{figure}
+
 
 C. Measuring possible departures from _complete spatial randomness_ (CSR).
 CSR is what would be expected if the point pattern was in fact
@@ -169,6 +175,11 @@ from the theoretical $G_\text{pois}$
 of the $\hat{G}$ empirical estimates (which again account in various ways for edge-effects), 
 hence again suggesting deviation from CSR.
 
+![](image/fig3-a.pdf){ width=50% } ![](image/fig3-b.pdf){ width=50% }
+\begin{figure}[!h]
+\caption{Pilatus detector screen: (a) $F$ plot resulting from point pattern of defects. (b) $G$ plot resulting from point pattern of defects. The graphs contrast the theoretical curve arising from CSR (blue dotted curve) with several empirical curves involving different edge corrections. The different edge-corrected empirical curves agree with each other but indicate clear divergence from the CSR curve. Here and in the following figures the graphs correspond to output from the application: graph axes have not been harmonized. \label{fig:figure3}}
+\end{figure}
+
 
 * The $K$ function (Ripley's $K$ function) computes the mean number of defect points within a distance $r$ of a typical defect point, viewed as a function of $r$; if the point pattern did in fact satisfy CSR then
 one could view
@@ -181,10 +192,10 @@ $\hat{K}$ empirical estimates will exhibit substantially greater variation at la
 it is therefore appropriate to confine attention to the left-hand third of the $x$-axis.
 The excess over the theoretical $K_\text{pois}$ at short distances, particularly for the estimate $\hat{K}_\text{iso}$, indicates that defects are more clustered than would be expected from CSR. 
 
-![Pilatus detector screen: (a) $F$ plot resulting from point pattern of defects. (b) $G$ plot resulting from point pattern of defects. The graphs contrast the theoretical curve arising from CSR (blue dotted curve) with several empirical curves involving different edge corrections. The different edge-corrected empirical curves agree with each other but indicate clear divergence from the CSR curve. Here and in the following figures the graphs correspond to output from the application: graph axes have not been harmonized. \label{fig:figure3}](figure3.png)
 
-
-![Pilatus detector screen: (a) $K$ plot resulting from point pattern of defects. (b) $K$ plot resulting from point pattern of defects, corrected for inhomogeneity.
+![](image/fig4-a.pdf){ width=50% } ![](image/fig4-b.pdf){ width=50% }
+\begin{figure}[!h]
+\caption{Pilatus detector screen: (a) $K$ plot resulting from point pattern of defects. (b) $K$ plot resulting from point pattern of defects, corrected for inhomogeneity.
 For geometrical reasons it is appropriate to focus attention on small distances.
 There is more variation between different edge-corrections of empirical curves
 than for $F$ and $G$ curves. Empirical curves are closer at short distances (200 pixels or less) to the theoretical curve based on CSR (left panel, blue dotted curve) but still exhibit some discrepancy hinting at possibly
@@ -193,7 +204,9 @@ However all curves agree closely for short distances in the right panel,
 in which a correction has been made 
 for inhomogeneity (which has already been noted when considering the intensity map).
 This suggests that an inhomogeneous Poisson process provides a good fit for the data.
-\label{fig:figure4}](figure4.png)
+\label{fig:figure4}}
+\end{figure}
+
 
 * Plots are also available which take account of inhomogeneity and compare these estimates to theoretical functions
 computed for inhomogeneous Poisson point processes: 
@@ -205,13 +218,15 @@ might be expected to arise from an _inhomogeneous_ Poisson process of defects.
 
 
 
-
 D. Finally the relationship of the defect points to sub-panel boundaries can be studied by means of various logistic regression options, which assess whether damage intensity appears to depend on distance from the centre of the image or horizontal or vertical distance from sub-panel edges. When this data set is modelled in terms of Euclidean distance from the centre, the web application reports substantial evidence for positive dependence of defect intensity on distance from the centre (see the highly significant coefficient for `as.vector(dist)` in the following web application output), 
 conforming with the visual impression given by Figure \ref{fig:figure2}(a),
 and further explaining the nature of the spatial inhomogeneity indicated 
 by Figure \ref{fig:figure4}. In fact this positive dependence reflects 
 manufacturing details of
 this particular screen design: Diamond reports that Pilatus detector screen panels are tested before installation, and better panels are placed in the centre of the structured display.
+
+
+\needspace{0.5\textheight}
 
 
 Here follows output from the web application
@@ -243,7 +258,6 @@ AIC: 22177
 Number of Fisher Scoring iterations: 11
 ```
 --------------------------------
-
 
 
 

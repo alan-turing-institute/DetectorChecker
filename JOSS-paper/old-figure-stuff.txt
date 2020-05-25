@@ -1,0 +1,16 @@
+![Pilatus detector screen: (a) Example of point pattern of defects. (b) Intensity map resulting from point pattern of defects. The intensity map draws attention to the higher intensity of defects in the corners, which is born out by inspection of the point pattern. \label{fig:figure2}](combined1.png)
+
+
+ ![Pilatus detector screen: (a) $F$ plot resulting from point pattern of defects. (b) $G$ plot resulting from point pattern of defects. The graphs contrast the theoretical curve arising from CSR (blue dotted curve) with several empirical curves involving different edge corrections. The different edge-corrected empirical curves agree with each other but indicate clear divergence from the CSR curve. Here and in the following figures the graphs correspond to output from the application: graph axes have not been harmonized. \label{fig:figure3}](figure3.png)
+
+ 
+![Pilatus detector screen: (a) $K$ plot resulting from point pattern of defects. (b) $K$ plot resulting from point pattern of defects, corrected for inhomogeneity.
+For geometrical reasons it is appropriate to focus attention on small distances.
+There is more variation between different edge-corrections of empirical curves
+than for $F$ and $G$ curves. Empirical curves are closer at short distances (200 pixels or less) to the theoretical curve based on CSR (left panel, blue dotted curve) but still exhibit some discrepancy hinting at possibly
+greater clustering relative to CSR. 
+However all curves agree closely for short distances in the right panel,
+in which a correction has been made 
+for inhomogeneity (which has already been noted when considering the intensity map).
+This suggests that an inhomogeneous Poisson process provides a good fit for the data.
+\label{fig:figure4}](figure4.png)
