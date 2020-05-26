@@ -8,7 +8,7 @@
 #' @param adjust Kernel density bandwidth
 #' @param color a list of colors
 #' @importFrom graphics image par
-plot_density <- function(ppp_obj, caption, file_path = NA, adjust = 1., color = topo.colors(50)) {
+plot_density <- function(ppp_obj, caption, file_path = NA, adjust = 5.0, color = topo.colors(50)) {
   if (nchar(caption) > 0) {
     par(mfrow = c(1, 1), mar = c(1, 1, 3, 1))
   } else {
@@ -20,7 +20,7 @@ plot_density <- function(ppp_obj, caption, file_path = NA, adjust = 1., color = 
     ini_graphics(file_path = file_path)
   }
 
-  image(density(ppp_obj, adjust = adjust, edge = TRUE, sigma = spatstat::bw.ppl), main = caption, col = color)
+  image(density(ppp_obj, adjust = adjust), main = caption, col = color)
 
   if (!is.na(file_path)) {
     dev.off()
