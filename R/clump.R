@@ -527,8 +527,9 @@ get_events_mask <- function(detector) {
 #' @param col Module column number
 #' @param caption Flag to turn on/off figure caption
 #' @param incl_event_list a list of events to be included
+#' @param color a list of colors
 #' @export
-plot_events_density <- function(detector, file_path = NA, adjust = 0.25,
+plot_events_density <- function(detector, file_path = NA, adjust = 5.0,
                                 row = NA, col = NA, caption = TRUE,
                                 incl_event_list = NA, color = topo.colors(50)) {
 
