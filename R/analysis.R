@@ -167,8 +167,9 @@ plot_pixels_count <- function(detector, file_path = NA, row = NA, col = NA,
 #' @param row Module row number
 #' @param col Module column number
 #' @param caption Flag to turn on/off figure caption
+#' @param color a list of colors
 #' @export
-plot_pixels_density <- function(detector, file_path = NA, adjust = 1.,
+plot_pixels_density <- function(detector, file_path = NA, adjust = 5.0,
                                   row = NA, col = NA, caption = TRUE, color = topo.colors(50)) {
   ppp_dead <- NA
   main_caption <- ""
