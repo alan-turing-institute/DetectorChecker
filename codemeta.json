@@ -44,5 +44,5 @@
   "keywords": "detector screen, pixel assessment, point pattern, Poisson point process, complete spatial randomness, intensity map, graphical interaction tests, logistic regression",
   "license": "MIT",
   "title": "DetectorChecker",
-  "version": ""
+  "version": "1.0.2"
 }
