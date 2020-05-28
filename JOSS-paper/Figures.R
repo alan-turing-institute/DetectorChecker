@@ -13,7 +13,7 @@ dev.off()
 
 # Intensiity map needs bit-map format
 png("image/fig2-b.png")
-plot_pixels_density(detector = pilatus_detector, adjust = 5, caption = FALSE)
+plot_pixels_density(detector = pilatus_detector, adjust = 0.5, caption = FALSE)
 dev.off()
 
 pdf("image/fig3-a.pdf")
