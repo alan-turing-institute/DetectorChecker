@@ -45,7 +45,9 @@ devtools::install_github("alan-turing-institute/DetectorChecker", ref = "develop
 
 The official release of the DetectorChecker WebApp is hosted at https://detectorchecker.azurewebsites.net.
 
-The source code for the WebApp implementation can be found on GitHub: (https://github.com/alan-turing-institute/DetectorCheckerWebApp).
+<img src="https://https://github.com/alan-turing-institute/DetectorChecker/raw/master/inst/DetectorChecker.png" width="500" align="center">
+
+The source code for the WebApp implementation can be found on GitHub: https://github.com/alan-turing-institute/DetectorCheckerWebApp.
 
 
 ## Vignette
