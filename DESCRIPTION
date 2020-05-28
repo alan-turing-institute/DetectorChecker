@@ -5,7 +5,6 @@ Version: 1.0.3
 Authors@R: c(
         person("Tomas", "Lazauskas", email = "tlazauskas@turing.ac.uk", role = c("aut", "cre")),
         person("Oscar", "Giles", email = "ogiles@turing.ac.uk", role = c("aut")),
-        person("Martin", "O'Reilly", email = "moreilly@turing.ac.uk", role = c("aut")),
         person("Wilfrid", "Kendall", email = "w.s.kendall@warwick.ac.uk", role = c("aut")),
         person("Julia", "Brettschneider", email = "julia.brettschneider@warwick.ac.uk", role = c("aut")))
 Description: DetectorChecker is an R package to aid in the assessment of damage to CT scanners 

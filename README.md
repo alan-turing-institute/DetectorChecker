@@ -41,6 +41,13 @@ devtools::install_github("alan-turing-institute/DetectorChecker", ref = "develop
 ```
 
 
+## WebApp
+
+The official release of the DetectorChecker WebApp is hosted at https://detectorchecker.azurewebsites.net.
+
+The source code for the WebApp implementation can be found on GitHub: (https://github.com/alan-turing-institute/DetectorCheckerWebApp).
+
+
 ## Vignette
 
 The user guide vignette provides detailed instructions for using the package and loading specific examples. Make sure you installed the package including vignette following the instructions above (see use of build_vignettes = TRUE in Section Installation) and then load the package followed by the vignette command:
@@ -56,13 +63,13 @@ Documentation is provided as a [pdf](docs/detectorchecker_0.1.10.pdf)
 ## Examples
 DetectorChecker includes a number of example datasets for five detector types:
 
-1. PerkinElmer
+1. Pilatus
 
-2. PerkinElmer Refurbished
+2. PerkinElmer
 
-3. PerkinElmer Cropped
+3. PerkinElmer Refurbished
 
-4. Pilatus
+4. PerkinElmer Cropped
 
 5. Excalibur
 
@@ -71,7 +78,7 @@ To load an example dataset you can either call:
 library(detectorchecker)
 
 #Inititate a PerkinElmerFull detector object
-detector <-  create_detector("PerkinElmerFull") 
+detector <-  create_detector("PerkinElmerFull")
 
 # Path of dataset
 file_path <- system.file("extdata", "PerkinElmer_Full", "BadPixelMap.bpm", "BadPixelMap_t1.bpm.xml", package = "detectorchecker")
@@ -122,4 +129,3 @@ If you found a bug or need support, please submit an issue [here](https://github
 
 ## How to contribute
 We welcome contributions! If you are willing to propose new features or have bug fixes to contribute, please submit a pull request [here](https://github.com/alan-turing-institute/DetectorChecker/pulls).
-
