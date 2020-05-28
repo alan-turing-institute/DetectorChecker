@@ -78,9 +78,9 @@
 #' A list of available detectors
 #' @export
 available_detectors <- c(
-  .Excalibur_name, .PerkinElmerFull_name,
+  .Pilatus_name, .PerkinElmerFull_name,
   .PerkinElmerCropped1600_name, .PerkinElmerRefurbished_name,
-  .Pilatus_name
+  .Excalibur_name
 )
 
 # ------------------------------------------------------------------------------

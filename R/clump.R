@@ -529,7 +529,7 @@ get_events_mask <- function(detector) {
 #' @param incl_event_list a list of events to be included
 #' @param color a list of colors
 #' @export
-plot_events_density <- function(detector, file_path = NA, adjust = 5.0,
+plot_events_density <- function(detector, file_path = NA, adjust = 0.5,
                                 row = NA, col = NA, caption = TRUE,
                                 incl_event_list = NA, color = topo.colors(50)) {
 
