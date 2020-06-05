@@ -51,13 +51,7 @@ test_that("XML", {
 
   test_dir <- getwd()
 
-  test_path <- system.file("extdata", "PerkinElmer_Full", "BadPixelMap.bpm", "BadPixelMap_t1.bpm.xml", package = "detectorchecker")
-
-  # file.path(
-  #   test_dir, "dead_pix", "PerkinElmer",
-  #   "BadPixelMap_0.bpm",
-  #   "BadPixelMap.bpm.xml"
-  # )
+  test_path <- system.file("extdata", "PerkinElmerFull", "BadPixelMap_t1.bpm.xml", package = "detectorchecker")
 
   detector <- load_pix_matrix(detector = detector, file_path = test_path)
 

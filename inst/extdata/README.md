@@ -35,7 +35,6 @@ Examples are provided for five detector types. It is possible to load datasets a
         - pixelmask.fem4.hdf
         - pixelmask.fem5.hdf
         - pixelmask.fem6.hdf
-        
 
 5. Pilatus
     - One example dataset:

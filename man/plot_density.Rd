@@ -9,7 +9,7 @@ plot_density(
   ppp_obj,
   caption,
   file_path = NA,
-  adjust = 1,
+  adjust = 0.5,
   color = topo.colors(50)
 )
 }

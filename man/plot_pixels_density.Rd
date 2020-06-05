@@ -7,7 +7,7 @@
 plot_pixels_density(
   detector,
   file_path = NA,
-  adjust = 1,
+  adjust = 0.5,
   row = NA,
   col = NA,
   caption = TRUE,
@@ -26,6 +26,8 @@ plot_pixels_density(
 \item{col}{Module column number}
 
 \item{caption}{Flag to turn on/off figure caption}
+
+\item{color}{a list of colors}
 }
 \description{
 A function to plot densities of dead pixels of detector or module

@@ -4,10 +4,14 @@
 \alias{plot_pixels}
 \title{A function to plot detector with damaged pixels}
 \usage{
-plot_pixels(detector, file_path = NA, caption = TRUE)
+plot_pixels(detector, col = NA, row = NA, file_path = NA, caption = TRUE)
 }
 \arguments{
 \item{detector}{Detector object}
+
+\item{col}{Module column number}
+
+\item{row}{Module row number}
 
 \item{file_path}{Output file path}
 

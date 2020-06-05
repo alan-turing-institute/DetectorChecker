@@ -7,7 +7,7 @@
 plot_events_density(
   detector,
   file_path = NA,
-  adjust = 0.25,
+  adjust = 0.5,
   row = NA,
   col = NA,
   caption = TRUE,
@@ -29,6 +29,8 @@ plot_events_density(
 \item{caption}{Flag to turn on/off figure caption}
 
 \item{incl_event_list}{a list of events to be included}
+
+\item{color}{a list of colors}
 }
 \description{
 Plots density graph of events of a detector or module
