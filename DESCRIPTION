@@ -1,7 +1,7 @@
 Package: detectorchecker
 Type: Package
 Title: A package for analysing pixel damage in CT Scanners
-Version: 1.0.4
+Version: 1.0.5
 Authors@R: c(
         person("Tomas", "Lazauskas", email = "tlazauskas@turing.ac.uk", role = c("aut", "cre")),
         person("Oscar", "Giles", email = "ogiles@turing.ac.uk", role = c("aut")),
@@ -26,8 +26,7 @@ Suggests:
     testthat (>= 2.3.2), 
     knitr (>= 1.28), 
     rmarkdown (>= 2.1), 
-    roxygen2 (>= 7.1.0), 
-    devtools (>= 2.3.0)
+    roxygen2 (>= 7.1.0)
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true

@@ -6,6 +6,8 @@
 \usage{
 plot_events(
   detector,
+  col = NA,
+  row = NA,
   file_path = NA,
   caption = TRUE,
   incl_event_list = NA,
@@ -14,6 +16,10 @@ plot_events(
 }
 \arguments{
 \item{detector}{Detector object}
+
+\item{col}{Module column number}
+
+\item{row}{Module row number}
 
 \item{file_path}{Output file path}
 
