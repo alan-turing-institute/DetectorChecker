@@ -37,7 +37,6 @@ Dead_Stats <- function(dead_n = NA, module_n = NA, module_count_arr = NA,
 #' @param row Module row number
 #' @param file_path Output file path
 #' @param caption Flag to turn on/off figure caption
-#' @export
 plot_module_pixels <- function(detector, col, row, file_path = NA,
                                          caption = TRUE) {
   if (!caption) par(mar = c(0, 0, 0, 0))

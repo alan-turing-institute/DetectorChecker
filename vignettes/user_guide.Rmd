@@ -70,7 +70,7 @@ plot_detector(pilatus_detector)
 
 ### Importing user-defined detector
 ```{r}
-user_def_detector <- readin_detector("../inst/extdata/user-defined.dc")
+user_def_detector <- readin_detector("../inst/extdata/user-defined.txt")
 
 plot_detector(user_def_detector)
 
@@ -83,13 +83,13 @@ plot_detector(user_def_detector)
 ```{r}
 pilatus_detector <- create_detector("Pilatus")
 
-file_path <- "../inst/extdata/Pilatus/badpixel_mask.tif"
+file_path <- system.file("extdata", "Pilatus", "badpixel_mask.tif", package = "detectorchecker")
 
 pilatus_detector <- load_pix_matrix(detector = pilatus_detector, file_path = file_path)
 
 plot_pixels(detector = pilatus_detector, caption = TRUE)
 
-plot_module_pixels(detector = pilatus_detector, col = 4, row = 5, caption = TRUE)
+plot_pixels(detector = pilatus_detector, col = 4, row = 5, caption = TRUE)
 ```
 
 #### XML format
@@ -97,12 +97,12 @@ plot_module_pixels(detector = pilatus_detector, col = 4, row = 5, caption = TRUE
 ```{r}
 detector_perkin <- create_detector("PerkinElmerFull")
 
-file_path <- "../inst/extdata/PerkinElmer_Full/BadPixelMap.bpm/BadPixelMap_t1.bpm.xml"
+file_path <- system.file("extdata", "PerkinElmerFull", "BadPixelMap_t1.bpm.xml", package = "detectorchecker")
 
 detector_perkin <- load_pix_matrix(detector = detector_perkin, file_path = file_path)
 
 plot_pixels(detector = detector_perkin)
-plot_module_pixels(detector = detector_perkin, col  =11, row =2)
+plot_pixels(detector = detector_perkin, col = 11, row = 2)
 ```
 
 #### HDF
@@ -110,17 +110,18 @@ plot_module_pixels(detector = detector_perkin, col  =11, row =2)
 ```{r}
 detector_exc <- create_detector("Excalibur")
 
-file_path <- c("../inst/extdata/Excalibur/pixelmask.fem1.hdf", 
-               "../inst/extdata/Excalibur/pixelmask.fem2.hdf",
-               "../inst/extdata/Excalibur/pixelmask.fem3.hdf",
-               "../inst/extdata/Excalibur/pixelmask.fem4.hdf",
-               "../inst/extdata/Excalibur/pixelmask.fem5.hdf",
-               "../inst/extdata/Excalibur/pixelmask.fem6.hdf")
+file_path <- c(
+  system.file("extdata", "Excalibur", "pixelmask.fem1.hdf", package = "detectorchecker"),
+  system.file("extdata", "Excalibur", "pixelmask.fem2.hdf", package = "detectorchecker"),
+  system.file("extdata", "Excalibur", "pixelmask.fem3.hdf", package = "detectorchecker"),
+  system.file("extdata", "Excalibur", "pixelmask.fem4.hdf", package = "detectorchecker"),
+  system.file("extdata", "Excalibur", "pixelmask.fem5.hdf", package = "detectorchecker"),
+  system.file("extdata", "Excalibur", "pixelmask.fem6.hdf", package = "detectorchecker"))
 
 detector_exc <- load_pix_matrix(detector = detector_exc, file_path = file_path)
 
 plot_pixels(detector = detector_exc)
-plot_module_pixels(detector_exc, col = 1, row = 6)
+plot_pixels(detector_exc, col = 1, row = 6)
 ```
 
 ### Damaged pixel density
@@ -128,7 +129,7 @@ plot_module_pixels(detector_exc, col = 1, row = 6)
 ```{r}
 detector_perkin <- create_detector("PerkinElmerFull")
 
-file_path <- "../inst/extdata/PerkinElmer_Full/BadPixelMap.bpm/BadPixelMap_t1.bpm.xml"
+file_path <- system.file("extdata", "PerkinElmerFull", "BadPixelMap_t1.bpm.xml", package = "detectorchecker")
 
 detector_perkin <- load_pix_matrix(detector = detector_perkin, file_path = file_path)
 
@@ -143,7 +144,7 @@ plot_pixels_density(detector = detector_perkin, adjust = 0.5, row = 1, col = 2)
 ```{r}
 detector_perkin <- create_detector("PerkinElmerFull")
 
-file_path <- "../inst/extdata/PerkinElmer_Full/BadPixelMap.bpm/BadPixelMap_t1.bpm.xml"
+file_path <- system.file("extdata", "PerkinElmerFull", "BadPixelMap_t1.bpm.xml", package = "detectorchecker")
 
 detector_perkin <- load_pix_matrix(detector = detector_perkin, file_path = file_path)
 
@@ -156,7 +157,7 @@ cat(dead_stats_summary(detector_perkin))
 ```{r}
 detector_perkin <- create_detector("PerkinElmerFull")
 
-file_path <- "../inst/extdata/PerkinElmer_Full/BadPixelMap.bpm/BadPixelMap_t1.bpm.xml"
+file_path <- system.file("extdata", "PerkinElmerFull", "BadPixelMap_t1.bpm.xml", package = "detectorchecker")
 
 detector_perkin <- load_pix_matrix(detector = detector_perkin, file_path = file_path)
 
@@ -172,7 +173,7 @@ plot_pixels_count(detector = detector_perkin, row = 1, col = 5, caption = FALSE)
 ```{r}
 detector_perkin <- create_detector("PerkinElmerFull")
 
-file_path <- "../inst/extdata/PerkinElmer_Full/BadPixelMap.bpm/BadPixelMap_t1.bpm.xml"
+file_path <- system.file("extdata", "PerkinElmerFull", "BadPixelMap_t1.bpm.xml", package = "detectorchecker")
 
 detector_perkin <- load_pix_matrix(detector = detector_perkin, file_path = file_path)
 
@@ -187,7 +188,7 @@ plot_pixels_arrows(detector = detector_perkin, row = 1, col = 5)
 ```{r}
 detector_perkin <- create_detector("PerkinElmerFull")
 
-file_path <- "../inst/extdata/PerkinElmer_Full/BadPixelMap.bpm/BadPixelMap_t1.bpm.xml"
+file_path <- system.file("extdata", "PerkinElmerFull", "BadPixelMap_t1.bpm.xml", package = "detectorchecker")
 
 detector_perkin <- load_pix_matrix(detector = detector_perkin, file_path = file_path)
 
@@ -204,7 +205,7 @@ plot_pixels_angles(detector = detector_perkin, row = 1, col = 5)
 ```{r}
 detector_perkin <- create_detector("PerkinElmerFull")
 
-file_path <- "../inst/extdata/PerkinElmer_Full/BadPixelMap.bpm/BadPixelMap_t1.bpm.xml"
+file_path <- system.file("extdata", "PerkinElmerFull", "BadPixelMap_t1.bpm.xml", package = "detectorchecker")
 
 detector_perkin <- load_pix_matrix(detector = detector_perkin, file_path = file_path)
 
@@ -222,7 +223,7 @@ plot_pixels_kfg(detector = detector_perkin, func = "G", row = 1, col = 5, captio
 ```{r}
 detector_pilatus <- create_detector("Pilatus")
 
-file_path <- "../inst/extdata/Pilatus/badpixel_mask.tif"
+file_path <- system.file("extdata", "Pilatus", "badpixel_mask.tif", package = "detectorchecker")
 
 detector_pilatus <- load_pix_matrix(detector = detector_pilatus, file_path = file_path)
 
@@ -241,7 +242,8 @@ plot_pixels_kfg(detector = detector_pilatus, func = "Ginhom", row = 1, col = 5, 
 incl_event_list <- list(1,2,3,4,5,6,7,8)
 
 detector_perkin <- create_detector("PerkinElmerFull")
-file_path <- "../inst/extdata/PerkinElmer_Full/BadPixelMap.bpm/BadPixelMap_t1.bpm.xml"
+
+file_path <- system.file("extdata", "PerkinElmerFull", "BadPixelMap_t1.bpm.xml", package = "detectorchecker")
 
 detector_perkin <- load_pix_matrix(detector = detector_perkin, file_path = file_path)
 plot_pixels(detector = detector_perkin)
@@ -254,10 +256,11 @@ col_ = 3
 incl_event_list <- list(1,2,3,4,5,6,7,8)
 
 detector_perkin <- create_detector("PerkinElmerFull")
-file_path <- "../inst/extdata/PerkinElmer_Full/BadPixelMap.bpm/BadPixelMap_t1.bpm.xml"
+
+file_path <- system.file("extdata", "PerkinElmerFull", "BadPixelMap_t1.bpm.xml", package = "detectorchecker")
 
 detector_perkin <- load_pix_matrix(detector = detector_perkin, file_path = file_path)
-plot_module_events(detector_perkin, row = row_, col = col_, incl_event_list = incl_event_list)
+plot_events(detector_perkin, row = row_, col = col_, incl_event_list = incl_event_list)
 ```
 ### Events 
 ```{r}
@@ -265,7 +268,8 @@ plot_module_events(detector_perkin, row = row_, col = col_, incl_event_list = in
 incl_event_list <- list(1,2,3,4,5,6,7,8)
 
 detector_perkin <- create_detector("PerkinElmerFull")
-file_path <- "../inst/extdata/PerkinElmer_Full/BadPixelMap.bpm/BadPixelMap_t1.bpm.xml"
+
+file_path <- system.file("extdata", "PerkinElmerFull", "BadPixelMap_t1.bpm.xml", package = "detectorchecker")
 
 detector_perkin <- load_pix_matrix(detector = detector_perkin, file_path = file_path)
 
@@ -291,7 +295,8 @@ plot_events_kfg(detector_events, func = "K", caption = FALSE, incl_event_list = 
 incl_event_list <- list(1,2,3,4,5,6,7,8)
 
 detector_perkin <- create_detector("PerkinElmerFull")
-file_path <- "../inst/extdata/PerkinElmer_Full/BadPixelMap.bpm/BadPixelMap_t1.bpm.xml"
+
+file_path <- system.file("extdata", "PerkinElmerFull", "BadPixelMap_t1.bpm.xml", package = "detectorchecker")
 
 detector_perkin <- load_pix_matrix(detector = detector_perkin, file_path = file_path)
 
@@ -320,7 +325,7 @@ plot_events_kfg(detector_events, func = "Kinhom", row = row_, col = col_, captio
 ```{r}
 detector_perkin <- create_detector("PerkinElmerFull")
 
-file_path <- "../inst/extdata/PerkinElmer_Full/BadPixelMap.bpm/BadPixelMap_t1.bpm.xml"
+file_path <- system.file("extdata", "PerkinElmerFull", "BadPixelMap_t1.bpm.xml", package = "detectorchecker")
 
 detector_perkin <- load_pix_matrix(detector = detector_perkin, file_path = file_path)
 plot_pixels(detector = detector_perkin)

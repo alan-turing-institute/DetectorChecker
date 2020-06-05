@@ -306,53 +306,60 @@ check_clumps <- function(detector, row = NA, col = NA) {
 #' Plots damaged detector events
 #'
 #' @param detector Detector object
+#' @param col Module column number
+#' @param row Module row number
 #' @param file_path Output file path
 #' @param caption Flag to turn on/off figure caption
 #' @param incl_event_list a list of events to be included
 #' @param plot_edges_gaps Plot edgees gaps
 #' @export
-plot_events <- function(detector, file_path = NA, caption = TRUE, incl_event_list = NA,
+plot_events <- function(detector, col = NA, row = NA, file_path = NA, caption = TRUE, incl_event_list = NA,
                         plot_edges_gaps = TRUE) {
 
+  if (!is.na(col) || !is.na(row)) {
+    plot_module_events(detector, col, row, file_path = file_path, caption = caption, incl_event_list = incl_event_list)
 
-  # check if the correct clumps were found
-  detector_events <- check_clumps(detector)
-
-  if (!caption) {
-    main_caption <- ""
-    par(mar = c(0, 0, 0, 0))
   } else {
-    main_caption <- "Defective events"
-    par(mfrow = c(1, 1), mar = c(1, 1, 3, 1))
-  }
 
-  if (!is.na(file_path)) {
-    # starts the graphics device driver
-    ini_graphics(file_path = file_path)
-  }
+    # check if the correct clumps were found
+    detector_events <- check_clumps(detector)
 
-  ppp_events <- .get_clump_event_ppp(detector_events, incl_event_list = incl_event_list)
-
-  # "Defective events"
-  plot(ppp_events, pch = 22, main = main_caption)
-
-  # plot(ppp_events, pch=22, col=2, main="Defective events") doesn't work, hense, cheat:
-  points(ppp_events, pch = 22, col = 2)
-
-  if (plot_edges_gaps) {
-    edges_gaps <- .get_detector_ppps(detector_events)
-
-    points(edges_gaps[[1]], pch = ".")
-    points(edges_gaps[[2]], pch = ".")
-
-    if ((!is.null(edges_gaps[[3]])) && (!is.null(edges_gaps[[4]]))) {
-      points(edges_gaps[[3]], pch = ".")
-      points(edges_gaps[[4]], pch = ".")
+    if (!caption) {
+      main_caption <- ""
+      par(mar = c(0, 0, 0, 0))
+    } else {
+      main_caption <- "Defective events"
+      par(mfrow = c(1, 1), mar = c(1, 1, 3, 1))
     }
-  }
 
-  if (!is.na(file_path)) {
-    dev.off()
+    if (!is.na(file_path)) {
+      # starts the graphics device driver
+      ini_graphics(file_path = file_path)
+    }
+
+    ppp_events <- .get_clump_event_ppp(detector_events, incl_event_list = incl_event_list)
+
+    # "Defective events"
+    plot(ppp_events, pch = 22, main = main_caption)
+
+    # plot(ppp_events, pch=22, col=2, main="Defective events") doesn't work, hense, cheat:
+    points(ppp_events, pch = 22, col = 2)
+
+    if (plot_edges_gaps) {
+      edges_gaps <- .get_detector_ppps(detector_events)
+
+      points(edges_gaps[[1]], pch = ".")
+      points(edges_gaps[[2]], pch = ".")
+
+      if ((!is.null(edges_gaps[[3]])) && (!is.null(edges_gaps[[4]]))) {
+        points(edges_gaps[[3]], pch = ".")
+        points(edges_gaps[[4]], pch = ".")
+      }
+    }
+
+    if (!is.na(file_path)) {
+      dev.off()
+    }
   }
 }
 
@@ -364,7 +371,6 @@ plot_events <- function(detector, file_path = NA, caption = TRUE, incl_event_lis
 #' @param file_path Output file path
 #' @param caption Flag to turn on/off figure caption
 #' @param incl_event_list a list of events to be included
-#' @export
 plot_module_events <- function(detector, col, row, file_path = NA, caption = TRUE, incl_event_list = NA) {
   if (!caption) par(mar = c(0, 0, 0, 0))
 

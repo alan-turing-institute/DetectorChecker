@@ -40,12 +40,7 @@ test_that("Perkin Elmer", {
   perkinelmerfull_detector <- create_detector(detector_name)
 
   # getting the dead (damaged) pixel data
-  dead_path <- system.file("extdata", "PerkinElmer_Full", "BadPixelMap.bpm", "BadPixelMap_t1.bpm.xml", package = "detectorchecker")
-
-  # file.path(
-  #   test_dir, "dead_pix", "PerkinElmer",
-  #   "BadPixelMap_0.bpm", "BadPixelMap.bpm.xml"
-  # )
+  dead_path <- system.file("extdata", "PerkinElmerFull", "BadPixelMap_t1.bpm.xml", package = "detectorchecker")
 
   perkinelmerfull_detector <- load_pix_matrix(detector = perkinelmerfull_detector, file_path = dead_path)
 
@@ -170,7 +165,7 @@ test_that("PerkinElmerFull", {
   detector <- create_detector("PerkinElmerFull")
 
   # getting the dead (damaged) pixel data
-  test_path <- system.file("extdata", "PerkinElmer_Full", "BadPixelMap.bpm", "BadPixelMap_t1.bpm.xml", package = "detectorchecker")
+  test_path <- system.file("extdata", "PerkinElmerFull", "BadPixelMap_t1.bpm.xml", package = "detectorchecker")
 
   detector <- load_pix_matrix(detector = detector, file_path = test_path)
 
@@ -192,7 +187,7 @@ test_that("Perkin Elmer", {
   perkinelmerfull_detector <- create_detector(detector_name)
 
   # getting the dead (damaged) pixel data
-  dead_path <- system.file("extdata", "PerkinElmer_Full", "BadPixelMap.bpm", "BadPixelMap_t1.bpm.xml", package = "detectorchecker")
+  dead_path <- system.file("extdata", "PerkinElmerFull", "BadPixelMap_t1.bpm.xml", package = "detectorchecker")
 
 
   perkinelmerfull_detector <- load_pix_matrix(detector = perkinelmerfull_detector, file_path = dead_path)
@@ -270,7 +265,7 @@ test_that("Perkin Elmer", {
   detector <- create_detector(detector_name)
 
   # getting the dead (damaged) pixel data
-  dead_path <- system.file("extdata", "PerkinElmer_Full", "BadPixelMap.bpm", "BadPixelMap_t1.bpm.xml", package = "detectorchecker")
+  dead_path <- system.file("extdata", "PerkinElmerFull", "BadPixelMap_t1.bpm.xml", package = "detectorchecker")
 
   detector <- load_pix_matrix(detector = detector, file_path = dead_path)
 

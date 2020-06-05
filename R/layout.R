@@ -20,6 +20,8 @@
 #' @param dead_stats dead pixel statistics
 #' @param pix_dead_modules assigned module for each dead pixel
 #' @param clumps clumps data (xyc_df data frame with pixels and their clump ID's, xyc_events data frame with clusters (clumps) and their clump ID's and centre coordinates)
+#' @param clumps_col col number of the module on which analysis was performed
+#' @param clumps_row row number of the module on which analysis was performed
 #' @return Detector object
 .Default_Detector <- function(name = "Default", date = NA,
                               detector_width = NA, detector_height = NA,
@@ -517,76 +519,84 @@ detector_consist_check <- function(detector = NA) {
 #' A function to plot detector with damaged pixels
 #'
 #' @param detector Detector object
+#' @param col Module column number
+#' @param row Module row number
 #' @param file_path Output file path
 #' @param caption Flag to turn on/off figure caption
 #' @importFrom graphics points
 #' @export
-plot_pixels <- function(detector, file_path = NA, caption = TRUE) {
+plot_pixels <- function(detector, col = NA, row = NA, file_path = NA, caption = TRUE) {
 
-  main_caption <- ""
-  if (!caption) par(mar = c(0, 0, 0, 0))
+  if (!is.na(col) || !is.na(row)) {
+    plot_module_pixels(detector, col, row, file_path = file_path, caption = caption)
 
-  ppp_dead <- get_ppp_dead(detector)
-
-  ppp_edges_col <- .create_ppp_edges_col(detector)
-  ppp_edges_row <- .create_ppp_edges_row(detector)
-
-  if (!is.na(file_path)) {
-    # starts the graphics device driver
-    ini_graphics(file_path = file_path)
-  }
-
-  if (detector$pix_matrix_modified)
-    caption_begining = paste(detector$name, "(modified) with damaged pixels")
-  else
-    caption_begining = paste(detector$name, "with damaged ")
-
-  if (sum(detector$gap_col_sizes) + sum(detector$gap_row_sizes) == 0) {
-    if (caption) {
-      main_caption <- paste(caption_begining, "\n(black=module edges)")
-    }
-
-    # vertical lines in x-positions given by xlines
-    plot(ppp_edges_col, pch = ".", cex.main = 0.7, main = main_caption)
-
-    # horizontal lines in y-positions given by ylines
-    points(ppp_edges_row, pch = ".")
   } else {
 
-    # Define point patterns (spatstat) capturing gaps
-    ppp_gaps_col <- .create_ppp_gaps_col(detector)
-    ppp_gaps_row <- .create_ppp_gaps_row(detector)
+    main_caption <- ""
+    if (!caption) par(mar = c(0, 0, 0, 0))
 
-    if (caption) {
-      main_caption <- paste(caption_begining, "\n(black=module edges, grey=gaps)")
+    ppp_dead <- get_ppp_dead(detector)
+
+    ppp_edges_col <- .create_ppp_edges_col(detector)
+    ppp_edges_row <- .create_ppp_edges_row(detector)
+
+    if (!is.na(file_path)) {
+      # starts the graphics device driver
+      ini_graphics(file_path = file_path)
     }
 
-    # vertical lines in x-positions given by xlines
-    plot(ppp_edges_col, pch = ".", cex.main = 0.7, main = main_caption)
+    if (detector$pix_matrix_modified)
+      caption_begining = paste(detector$name, "(modified) with damaged pixels")
+    else
+      caption_begining = paste(detector$name, "with damaged ")
 
-    # horizontal lines in y-positions given by ylines
-    points(ppp_edges_row, pch = ".")
+    if (sum(detector$gap_col_sizes) + sum(detector$gap_row_sizes) == 0) {
+      if (caption) {
+        main_caption <- paste(caption_begining, "\n(black=module edges)")
+      }
 
-    # cols without pixels (gaps)
-    points(ppp_gaps_col, pch = ".", col = "grey")
+      # vertical lines in x-positions given by xlines
+      plot(ppp_edges_col, pch = ".", cex.main = 0.7, main = main_caption)
 
-    # rows without pixels (gaps)
-    points(ppp_gaps_row, pch = ".", col = "grey")
-  }
+      # horizontal lines in y-positions given by ylines
+      points(ppp_edges_row, pch = ".")
+    } else {
 
-  # Question:
-  # Instead of pch=22 (empty square) would like dead pixels
-  # in full but opaque squares (pch=15)like below (works!)
-  # plot(ppp.dead, pch=15,  cex=0.7, transparent=TRUE)
-  # Tried using par transparent and alpha also in points(), but but there is does not work
-  # Changing order of plot() and points() above is not a way out,
-  # because of the titles and because they detector should be printed under the
-  # damaged pixels rather than cover them up.
+      # Define point patterns (spatstat) capturing gaps
+      ppp_gaps_col <- .create_ppp_gaps_col(detector)
+      ppp_gaps_row <- .create_ppp_gaps_row(detector)
 
-  points(ppp_dead, pch = 22, col = "brown", cex = 0.7)
+      if (caption) {
+        main_caption <- paste(caption_begining, "\n(black=module edges, grey=gaps)")
+      }
 
-  if (!is.na(file_path)) {
-    dev.off()
+      # vertical lines in x-positions given by xlines
+      plot(ppp_edges_col, pch = ".", cex.main = 0.7, main = main_caption)
+
+      # horizontal lines in y-positions given by ylines
+      points(ppp_edges_row, pch = ".")
+
+      # cols without pixels (gaps)
+      points(ppp_gaps_col, pch = ".", col = "grey")
+
+      # rows without pixels (gaps)
+      points(ppp_gaps_row, pch = ".", col = "grey")
+    }
+
+    # Question:
+    # Instead of pch=22 (empty square) would like dead pixels
+    # in full but opaque squares (pch=15)like below (works!)
+    # plot(ppp.dead, pch=15,  cex=0.7, transparent=TRUE)
+    # Tried using par transparent and alpha also in points(), but but there is does not work
+    # Changing order of plot() and points() above is not a way out,
+    # because of the titles and because they detector should be printed under the
+    # damaged pixels rather than cover them up.
+
+    points(ppp_dead, pch = 22, col = "brown", cex = 0.7)
+
+    if (!is.na(file_path)) {
+      dev.off()
+    }
   }
 }
 
