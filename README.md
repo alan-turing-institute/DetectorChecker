@@ -5,8 +5,7 @@ Master: [![Build Status](https://travis-ci.com/alan-turing-institute/DetectorChe
 [![DOI](https://zenodo.org/badge/144782935.svg)](https://zenodo.org/badge/latestdoi/144782935)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Created by: [Julia Brettschneider](https://github.com/ejulia17) (original R code), [Wilfrid Kendall](https://github.com/WilfridSKendall) (testing and editing),
-[Tomas Lazauskas](https://github.com/tomaslaz) (R package engineering) and [Oscar Giles](https://github.com/OscartGiles) (package development)
+Created by: [Julia Brettschneider](https://github.com/ejulia17) (original R code), [Tomas Lazauskas](https://github.com/tomaslaz) (R package engineering), [Oscar Giles](https://github.com/OscartGiles) (package development) and [Wilfrid Kendall](https://github.com/WilfridSKendall) (testing and editing).
 
 ## Overview
 
@@ -110,20 +109,7 @@ If you use DetectorChecker in your work please cite our package.
 BibTeX:
 
 ```
-@software{tomas_lazauskas_2020_3662233,
-  author       = {Tomas Lazauskas and
-                  Oscar T Giles and
-                  Martin O'Reilly and
-                  Wilfrid Kendall and
-                  Julia Brettschneider},
-  title        = {{alan-turing-institute/DetectorChecker}},
-  month        = feb,
-  year         = 2020,
-  publisher    = {Zenodo},
-  version      = {1.0.0},
-  doi          = {10.5281/zenodo.3662233},
-  url          = {https://doi.org/10.5281/zenodo.3662233}
-}
+
 ```
 
 ## Getting help
