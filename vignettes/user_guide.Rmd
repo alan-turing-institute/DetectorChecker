@@ -70,7 +70,10 @@ plot_detector(pilatus_detector)
 
 ### Importing user-defined detector
 ```{r}
-user_def_detector <- readin_detector("../inst/extdata/user-defined.txt")
+
+file_path <- system.file("extdata", "user-defined", "simple", "user-defined.txt", package = "detectorchecker")
+
+user_def_detector <- readin_detector(file_path)
 
 plot_detector(user_def_detector)
 

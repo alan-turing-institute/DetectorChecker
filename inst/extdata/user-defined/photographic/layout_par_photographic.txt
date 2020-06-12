@@ -1,0 +1,10 @@
+detector_width = 600
+detector_height = 400
+module_col_n = 1
+module_row_n = 1
+module_col_sizes = 600
+module_row_sizes = 400
+gap_col_sizes = 0
+gap_row_sizes = 0
+module_edges_col = NA
+module_edges_row = NA
