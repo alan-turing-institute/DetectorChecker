@@ -10,7 +10,7 @@ You can then use these files with the DectorCheckerWebApp (https://github.com/al
 
 ## Files by detector type
 
-Examples are provided for five detector types. It is possible to load datasets as a single file, or split across multiple files. All examples, except Excalibur, use a single file. For Excalibur you will need to load all examples into the WebApp simultaneously:
+Examples are provided for six detector types. It is possible to load datasets as a single file, or split across multiple files. All examples, except Excalibur, use a single file. For Excalibur you will need to load all examples into the WebApp simultaneously:
 
 1. PerkinElmer_Full
     - Two example datasets:
@@ -39,3 +39,20 @@ Examples are provided for five detector types. It is possible to load datasets a
 5. Pilatus
     - One example dataset:
         - badpixel_mask.tif
+
+6. user-defined
+	- irregular
+		- layout_par_irregular.txt - layout file
+		- badpixelmap_irregular - example of a dead pixels file
+		
+	- photographic (photographic aspect ratio without any submodes and gaps)
+   		- layout_par_photographic.txt - layout file
+		- examples of dead pixels files:
+  			- photographic.tif
+  			- badpixelmap_photographic_hom.xml
+  			- badpixelmap_photographic_inhom.xml
+  			
+	- simple (example of a user defined detector type having 2 rows and 16 columns)
+		- user-defined.txt - layout file
+		- user-defined.bpm.xml - dead pixels file
+	

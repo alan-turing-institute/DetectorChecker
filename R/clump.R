@@ -342,9 +342,6 @@ plot_events <- function(detector, col = NA, row = NA, file_path = NA, caption = 
     # "Defective events"
     plot(ppp_events, pch = 22, main = main_caption)
 
-    # plot(ppp_events, pch=22, col=2, main="Defective events") doesn't work, hense, cheat:
-    points(ppp_events, pch = 22, col = 2)
-
     if (plot_edges_gaps) {
       edges_gaps <- .get_detector_ppps(detector_events)
 
@@ -352,10 +349,13 @@ plot_events <- function(detector, col = NA, row = NA, file_path = NA, caption = 
       points(edges_gaps[[2]], pch = ".")
 
       if ((!is.null(edges_gaps[[3]])) && (!is.null(edges_gaps[[4]]))) {
-        points(edges_gaps[[3]], pch = ".")
-        points(edges_gaps[[4]], pch = ".")
+        points(edges_gaps[[3]], pch = ".", col = "grey")
+        points(edges_gaps[[4]], pch = ".", col = "grey")
       }
     }
+
+    # plot(ppp_events, pch=22, col=2, main="Defective events") doesn't work, hense, cheat:
+    points(ppp_events, pch = 22, col = "brown", cex = 0.7)
 
     if (!is.na(file_path)) {
       dev.off()

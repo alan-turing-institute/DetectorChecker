@@ -1,0 +1,933 @@
+<?xml version="1.0" encoding="utf-8"?>
+<BadPixelMap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" SizeX="2000" SizeY="2000">
+ <BadPixels>
+    <BadPixel X="10" Y="10" Mask="3" NoisyPixel="false" />
+    <BadPixel X="11" Y="10" Mask="3" NoisyPixel="false" />
+    <BadPixel X="12" Y="10" Mask="3" NoisyPixel="false" />
+    <BadPixel X="13" Y="10" Mask="3" NoisyPixel="false" />
+    <BadPixel X="14" Y="10" Mask="3" NoisyPixel="false" />
+    <BadPixel X="15" Y="10" Mask="3" NoisyPixel="false" />
+    <BadPixel X="16" Y="10" Mask="3" NoisyPixel="false" />
+    <BadPixel X="17" Y="10" Mask="3" NoisyPixel="false" />
+    <BadPixel X="18" Y="10" Mask="3" NoisyPixel="false" />
+    <BadPixel X="19" Y="10" Mask="3" NoisyPixel="false" />
+    <BadPixel X="20" Y="10" Mask="3" NoisyPixel="false" />
+    <BadPixel X="21" Y="10" Mask="3" NoisyPixel="false" />
+    <BadPixel X="22" Y="10" Mask="3" NoisyPixel="false" />
+    <BadPixel X="23" Y="10" Mask="3" NoisyPixel="false" />
+    <BadPixel X="24" Y="10" Mask="3" NoisyPixel="false" />
+    <BadPixel X="25" Y="10" Mask="3" NoisyPixel="false" />
+    <BadPixel X="26" Y="10" Mask="3" NoisyPixel="false" />
+    <BadPixel X="27" Y="10" Mask="3" NoisyPixel="false" />
+    <BadPixel X="28" Y="10" Mask="3" NoisyPixel="false" />
+    <BadPixel X="29" Y="10" Mask="3" NoisyPixel="false" />
+    <BadPixel X="30" Y="10" Mask="3" NoisyPixel="false" />
+    <BadPixel X="110" Y="120" Mask="3" NoisyPixel="false" />
+    <BadPixel X="111" Y="120" Mask="3" NoisyPixel="false" />
+    <BadPixel X="112" Y="120" Mask="3" NoisyPixel="false" />
+    <BadPixel X="113" Y="120" Mask="3" NoisyPixel="false" />
+    <BadPixel X="114" Y="120" Mask="3" NoisyPixel="false" />
+    <BadPixel X="115" Y="120" Mask="3" NoisyPixel="false" />
+    <BadPixel X="116" Y="120" Mask="3" NoisyPixel="false" />
+    <BadPixel X="117" Y="120" Mask="3" NoisyPixel="false" />
+    <BadPixel X="118" Y="120" Mask="3" NoisyPixel="false" />
+    <BadPixel X="119" Y="120" Mask="3" NoisyPixel="false" />
+    <BadPixel X="120" Y="120" Mask="3" NoisyPixel="false" />
+    <BadPixel X="121" Y="120" Mask="3" NoisyPixel="false" />
+    <BadPixel X="122" Y="120" Mask="3" NoisyPixel="false" />
+    <BadPixel X="123" Y="120" Mask="3" NoisyPixel="false" />
+    <BadPixel X="124" Y="120" Mask="3" NoisyPixel="false" />
+    <BadPixel X="125" Y="120" Mask="3" NoisyPixel="false" />
+    <BadPixel X="126" Y="120" Mask="3" NoisyPixel="false" />
+    <BadPixel X="127" Y="120" Mask="3" NoisyPixel="false" />
+    <BadPixel X="128" Y="120" Mask="3" NoisyPixel="false" />
+    <BadPixel X="129" Y="120" Mask="3" NoisyPixel="false" />
+    <BadPixel X="130" Y="120" Mask="3" NoisyPixel="false" />
+    <BadPixel X="131" Y="120" Mask="3" NoisyPixel="false" />
+    <BadPixel X="132" Y="120" Mask="3" NoisyPixel="false" />
+    <BadPixel X="133" Y="120" Mask="3" NoisyPixel="false" />
+    <BadPixel X="134" Y="120" Mask="3" NoisyPixel="false" />
+    <BadPixel X="135" Y="120" Mask="3" NoisyPixel="false" />
+    <BadPixel X="136" Y="120" Mask="3" NoisyPixel="false" />
+    <BadPixel X="137" Y="120" Mask="3" NoisyPixel="false" />
+    <BadPixel X="138" Y="120" Mask="3" NoisyPixel="false" />
+    <BadPixel X="139" Y="120" Mask="3" NoisyPixel="false" />
+    <BadPixel X="140" Y="120" Mask="3" NoisyPixel="false" />
+    <BadPixel X="141" Y="120" Mask="3" NoisyPixel="false" />
+    <BadPixel X="142" Y="120" Mask="3" NoisyPixel="false" />
+    <BadPixel X="143" Y="120" Mask="3" NoisyPixel="false" />
+    <BadPixel X="144" Y="120" Mask="3" NoisyPixel="false" />
+    <BadPixel X="145" Y="120" Mask="3" NoisyPixel="false" />
+    <BadPixel X="146" Y="120" Mask="3" NoisyPixel="false" />
+    <BadPixel X="147" Y="120" Mask="3" NoisyPixel="false" />
+    <BadPixel X="148" Y="120" Mask="3" NoisyPixel="false" />
+    <BadPixel X="149" Y="120" Mask="3" NoisyPixel="false" />
+    <BadPixel X="150" Y="120" Mask="3" NoisyPixel="false" />
+    <BadPixel X="151" Y="120" Mask="3" NoisyPixel="false" />
+    <BadPixel X="152" Y="215" Mask="3" NoisyPixel="false" />
+    <BadPixel X="153" Y="210" Mask="3" NoisyPixel="false" />
+    <BadPixel X="154" Y="220" Mask="3" NoisyPixel="false" />
+    <BadPixel X="155" Y="230" Mask="3" NoisyPixel="false" />
+    <BadPixel X="156" Y="225" Mask="3" NoisyPixel="false" />
+    <BadPixel X="157" Y="222" Mask="3" NoisyPixel="false" />
+    <BadPixel X="158" Y="223" Mask="3" NoisyPixel="false" />
+    <BadPixel X="159" Y="211" Mask="3" NoisyPixel="false" />
+    <BadPixel X="160" Y="210" Mask="3" NoisyPixel="false" />
+    <BadPixel X="161" Y="229" Mask="3" NoisyPixel="false" />
+    <BadPixel X="120" Y="229" Mask="3" NoisyPixel="false" />
+    <BadPixel X="121" Y="230" Mask="3" NoisyPixel="false" />
+    <BadPixel X="122" Y="228" Mask="3" NoisyPixel="false" />
+    <BadPixel X="123" Y="427" Mask="3" NoisyPixel="false" />
+    <BadPixel X="124" Y="307" Mask="3" NoisyPixel="false" />
+    <BadPixel X="125" Y="289" Mask="3" NoisyPixel="false" />
+    <BadPixel X="126" Y="222" Mask="3" NoisyPixel="false" />
+    <BadPixel X="127" Y="621" Mask="3" NoisyPixel="false" />
+    <BadPixel X="128" Y="720" Mask="3" NoisyPixel="false" />
+    <BadPixel X="129" Y="721" Mask="3" NoisyPixel="false" />
+    <BadPixel X="130" Y="423" Mask="3" NoisyPixel="false" />
+    <BadPixel X="410" Y="515" Mask="3" NoisyPixel="false" />
+    <BadPixel X="511" Y="410" Mask="3" NoisyPixel="false" />
+    <BadPixel X="612" Y="520" Mask="3" NoisyPixel="false" />
+    <BadPixel X="713" Y="430" Mask="3" NoisyPixel="false" />
+    <BadPixel X="414" Y="525" Mask="3" NoisyPixel="false" />
+    <BadPixel X="515" Y="422" Mask="3" NoisyPixel="false" />
+    <BadPixel X="616" Y="623" Mask="3" NoisyPixel="false" />
+    <BadPixel X="717" Y="611" Mask="3" NoisyPixel="false" />
+    <BadPixel X="618" Y="710" Mask="3" NoisyPixel="false" />
+    <BadPixel X="519" Y="700" Mask="3" NoisyPixel="false" />
+    <BadPixel X="620" Y="689" Mask="3" NoisyPixel="false" />
+    <BadPixel X="521" Y="580" Mask="3" NoisyPixel="false" />
+    <BadPixel X="422" Y="488" Mask="3" NoisyPixel="false" />
+    <BadPixel X="423" Y="707" Mask="3" NoisyPixel="false" />
+    <BadPixel X="524" Y="577" Mask="3" NoisyPixel="false" />
+    <BadPixel X="525" Y="427" Mask="3" NoisyPixel="false" />
+    <BadPixel X="626" Y="522" Mask="3" NoisyPixel="false" />
+    <BadPixel X="627" Y="421" Mask="3" NoisyPixel="false" />
+    <BadPixel X="728" Y="420" Mask="3" NoisyPixel="false" />
+    <BadPixel X="729" Y="621" Mask="3" NoisyPixel="false" />
+    <BadPixel X="600" Y="703" Mask="3" NoisyPixel="false" />
+    <BadPixel X="1375" Y="467" Mask="3" NoisyPixel="false" />
+    <BadPixel X="578" Y="779" Mask="3" NoisyPixel="false" />
+<BadPixel X="873" Y="245" Mask="3" NoisyPixel="false" />
+<BadPixel X="816" Y="1002" Mask="3" NoisyPixel="false" />
+<BadPixel X="1152" Y="13" Mask="3" NoisyPixel="false" />
+<BadPixel X="1037" Y="390" Mask="3" NoisyPixel="false" />
+<BadPixel X="1383" Y="924" Mask="3" NoisyPixel="false" />
+<BadPixel X="1196" Y="204" Mask="3" NoisyPixel="false" />
+<BadPixel X="704" Y="920" Mask="3" NoisyPixel="false" />
+<BadPixel X="1294" Y="165" Mask="3" NoisyPixel="false" />
+<BadPixel X="578" Y="508" Mask="3" NoisyPixel="false" />
+<BadPixel X="862" Y="272" Mask="3" NoisyPixel="false" />
+<BadPixel X="1022" Y="19" Mask="3" NoisyPixel="false" />
+<BadPixel X="588" Y="590" Mask="3" NoisyPixel="false" />
+<BadPixel X="579" Y="20" Mask="3" NoisyPixel="false" />
+<BadPixel X="127" Y="1030" Mask="3" NoisyPixel="false" />
+<BadPixel X="1166" Y="1023" Mask="3" NoisyPixel="false" />
+<BadPixel X="344" Y="40" Mask="3" NoisyPixel="false" />
+<BadPixel X="1128" Y="601" Mask="3" NoisyPixel="false" />
+<BadPixel X="944" Y="29" Mask="3" NoisyPixel="false" />
+<BadPixel X="1292" Y="91" Mask="3" NoisyPixel="false" />
+<BadPixel X="1467" Y="596" Mask="3" NoisyPixel="false" />
+<BadPixel X="597" Y="531" Mask="3" NoisyPixel="false" />
+<BadPixel X="430" Y="296" Mask="3" NoisyPixel="false" />
+<BadPixel X="626" Y="506" Mask="3" NoisyPixel="false" />
+<BadPixel X="798" Y="19" Mask="3" NoisyPixel="false" />
+<BadPixel X="889" Y="403" Mask="3" NoisyPixel="false" />
+<BadPixel X="407" Y="303" Mask="3" NoisyPixel="false" />
+<BadPixel X="1154" Y="886" Mask="3" NoisyPixel="false" />
+<BadPixel X="1581" Y="162" Mask="3" NoisyPixel="false" />
+<BadPixel X="1654" Y="667" Mask="3" NoisyPixel="false" />
+<BadPixel X="168" Y="1038" Mask="3" NoisyPixel="false" />
+<BadPixel X="1238" Y="543" Mask="3" NoisyPixel="false" />
+<BadPixel X="701" Y="199" Mask="3" NoisyPixel="false" />
+<BadPixel X="511" Y="178" Mask="3" NoisyPixel="false" />
+<BadPixel X="601" Y="762" Mask="3" NoisyPixel="false" />
+<BadPixel X="687" Y="78" Mask="3" NoisyPixel="false" />
+<BadPixel X="1577" Y="419" Mask="3" NoisyPixel="false" />
+<BadPixel X="148" Y="268" Mask="3" NoisyPixel="false" />
+<BadPixel X="267" Y="937" Mask="3" NoisyPixel="false" />
+<BadPixel X="1229" Y="654" Mask="3" NoisyPixel="false" />
+<BadPixel X="171" Y="600" Mask="3" NoisyPixel="false" />
+<BadPixel X="1214" Y="188" Mask="3" NoisyPixel="false" />
+<BadPixel X="1545" Y="133" Mask="3" NoisyPixel="false" />
+<BadPixel X="1642" Y="568" Mask="3" NoisyPixel="false" />
+<BadPixel X="544" Y="547" Mask="3" NoisyPixel="false" />
+<BadPixel X="606" Y="240" Mask="3" NoisyPixel="false" />
+<BadPixel X="200" Y="477" Mask="3" NoisyPixel="false" />
+<BadPixel X="1470" Y="258" Mask="3" NoisyPixel="false" />
+<BadPixel X="1657" Y="447" Mask="3" NoisyPixel="false" />
+<BadPixel X="1456" Y="166" Mask="3" NoisyPixel="false" />
+<BadPixel X="1290" Y="840" Mask="3" NoisyPixel="false" />
+<BadPixel X="1338" Y="874" Mask="3" NoisyPixel="false" />
+<BadPixel X="1419" Y="1019" Mask="3" NoisyPixel="false" />
+<BadPixel X="1331" Y="834" Mask="3" NoisyPixel="false" />
+<BadPixel X="979" Y="1033" Mask="3" NoisyPixel="false" />
+<BadPixel X="1303" Y="533" Mask="3" NoisyPixel="false" />
+<BadPixel X="1152" Y="407" Mask="3" NoisyPixel="false" />
+<BadPixel X="750" Y="992" Mask="3" NoisyPixel="false" />
+<BadPixel X="1577" Y="878" Mask="3" NoisyPixel="false" />
+<BadPixel X="1365" Y="963" Mask="3" NoisyPixel="false" />
+<BadPixel X="893" Y="204" Mask="3" NoisyPixel="false" />
+<BadPixel X="1558" Y="965" Mask="3" NoisyPixel="false" />
+<BadPixel X="1592" Y="920" Mask="3" NoisyPixel="false" />
+<BadPixel X="359" Y="227" Mask="3" NoisyPixel="false" />
+<BadPixel X="318" Y="651" Mask="3" NoisyPixel="false" />
+<BadPixel X="743" Y="220" Mask="3" NoisyPixel="false" />
+<BadPixel X="418" Y="1056" Mask="3" NoisyPixel="false" />
+<BadPixel X="151" Y="601" Mask="3" NoisyPixel="false" />
+<BadPixel X="1139" Y="185" Mask="3" NoisyPixel="false" />
+<BadPixel X="291" Y="864" Mask="3" NoisyPixel="false" />
+<BadPixel X="1354" Y="1001" Mask="3" NoisyPixel="false" />
+<BadPixel X="220" Y="1046" Mask="3" NoisyPixel="false" />
+<BadPixel X="172" Y="465" Mask="3" NoisyPixel="false" />
+<BadPixel X="698" Y="89" Mask="3" NoisyPixel="false" />
+<BadPixel X="1674" Y="591" Mask="3" NoisyPixel="false" />
+<BadPixel X="1662" Y="12" Mask="3" NoisyPixel="false" />
+<BadPixel X="84" Y="52" Mask="3" NoisyPixel="false" />
+<BadPixel X="393" Y="267" Mask="3" NoisyPixel="false" />
+<BadPixel X="388" Y="948" Mask="3" NoisyPixel="false" />
+<BadPixel X="63" Y="262" Mask="3" NoisyPixel="false" />
+<BadPixel X="454" Y="237" Mask="3" NoisyPixel="false" />
+<BadPixel X="1657" Y="155" Mask="3" NoisyPixel="false" />
+<BadPixel X="925" Y="481" Mask="3" NoisyPixel="false" />
+<BadPixel X="74" Y="419" Mask="3" NoisyPixel="false" />
+<BadPixel X="712" Y="404" Mask="3" NoisyPixel="false" />
+<BadPixel X="1303" Y="840" Mask="3" NoisyPixel="false" />
+<BadPixel X="405" Y="485" Mask="3" NoisyPixel="false" />
+<BadPixel X="1454" Y="550" Mask="3" NoisyPixel="false" />
+<BadPixel X="1606" Y="71" Mask="3" NoisyPixel="false" />
+<BadPixel X="737" Y="117" Mask="3" NoisyPixel="false" />
+<BadPixel X="75" Y="572" Mask="3" NoisyPixel="false" />
+<BadPixel X="897" Y="897" Mask="3" NoisyPixel="false" />
+<BadPixel X="349" Y="281" Mask="3" NoisyPixel="false" />
+<BadPixel X="1651" Y="679" Mask="3" NoisyPixel="false" />
+<BadPixel X="1564" Y="387" Mask="3" NoisyPixel="false" />
+<BadPixel X="369" Y="1014" Mask="3" NoisyPixel="false" />
+<BadPixel X="1005" Y="947" Mask="3" NoisyPixel="false" />
+<BadPixel X="1093" Y="983" Mask="3" NoisyPixel="false" />
+<BadPixel X="474" Y="947" Mask="3" NoisyPixel="false" />
+<BadPixel X="1560" Y="696" Mask="3" NoisyPixel="false" />
+<BadPixel X="509" Y="48" Mask="3" NoisyPixel="false" />
+<BadPixel X="1375" Y="258" Mask="3" NoisyPixel="false" />
+<BadPixel X="636" Y="255" Mask="3" NoisyPixel="false" />
+<BadPixel X="441" Y="249" Mask="3" NoisyPixel="false" />
+<BadPixel X="380" Y="478" Mask="3" NoisyPixel="false" />
+<BadPixel X="1003" Y="771" Mask="3" NoisyPixel="false" />
+<BadPixel X="662" Y="379" Mask="3" NoisyPixel="false" />
+<BadPixel X="444" Y="434" Mask="3" NoisyPixel="false" />
+<BadPixel X="590" Y="1047" Mask="3" NoisyPixel="false" />
+<BadPixel X="1001" Y="865" Mask="3" NoisyPixel="false" />
+<BadPixel X="995" Y="422" Mask="3" NoisyPixel="false" />
+<BadPixel X="867" Y="824" Mask="3" NoisyPixel="false" />
+<BadPixel X="896" Y="668" Mask="3" NoisyPixel="false" />
+<BadPixel X="563" Y="443" Mask="3" NoisyPixel="false" />
+<BadPixel X="369" Y="858" Mask="3" NoisyPixel="false" />
+<BadPixel X="817" Y="239" Mask="3" NoisyPixel="false" />
+<BadPixel X="676" Y="142" Mask="3" NoisyPixel="false" />
+<BadPixel X="1339" Y="397" Mask="3" NoisyPixel="false" />
+<BadPixel X="78" Y="194" Mask="3" NoisyPixel="false" />
+<BadPixel X="1194" Y="271" Mask="3" NoisyPixel="false" />
+<BadPixel X="1572" Y="1054" Mask="3" NoisyPixel="false" />
+<BadPixel X="608" Y="834" Mask="3" NoisyPixel="false" />
+<BadPixel X="517" Y="870" Mask="3" NoisyPixel="false" />
+<BadPixel X="190" Y="156" Mask="3" NoisyPixel="false" />
+<BadPixel X="951" Y="867" Mask="3" NoisyPixel="false" />
+<BadPixel X="830" Y="679" Mask="3" NoisyPixel="false" />
+<BadPixel X="1190" Y="82" Mask="3" NoisyPixel="false" />
+<BadPixel X="39" Y="577" Mask="3" NoisyPixel="false" />
+<BadPixel X="1375" Y="617" Mask="3" NoisyPixel="false" />
+<BadPixel X="624" Y="607" Mask="3" NoisyPixel="false" />
+<BadPixel X="438" Y="669" Mask="3" NoisyPixel="false" />
+<BadPixel X="558" Y="554" Mask="3" NoisyPixel="false" />
+<BadPixel X="1289" Y="241" Mask="3" NoisyPixel="false" />
+<BadPixel X="896" Y="1022" Mask="3" NoisyPixel="false" />
+<BadPixel X="1597" Y="810" Mask="3" NoisyPixel="false" />
+<BadPixel X="889" Y="25" Mask="3" NoisyPixel="false" />
+<BadPixel X="1144" Y="821" Mask="3" NoisyPixel="false" />
+<BadPixel X="1650" Y="910" Mask="3" NoisyPixel="false" />
+<BadPixel X="1490" Y="914" Mask="3" NoisyPixel="false" />
+<BadPixel X="1712" Y="54" Mask="3" NoisyPixel="false" />
+<BadPixel X="376" Y="883" Mask="3" NoisyPixel="false" />
+<BadPixel X="311" Y="170" Mask="3" NoisyPixel="false" />
+<BadPixel X="460" Y="696" Mask="3" NoisyPixel="false" />
+<BadPixel X="667" Y="564" Mask="3" NoisyPixel="false" />
+<BadPixel X="688" Y="79" Mask="3" NoisyPixel="false" />
+<BadPixel X="310" Y="690" Mask="3" NoisyPixel="false" />
+<BadPixel X="1013" Y="780" Mask="3" NoisyPixel="false" />
+<BadPixel X="208" Y="1041" Mask="3" NoisyPixel="false" />
+<BadPixel X="767" Y="1" Mask="3" NoisyPixel="false" />
+<BadPixel X="533" Y="80" Mask="3" NoisyPixel="false" />
+<BadPixel X="764" Y="1011" Mask="3" NoisyPixel="false" />
+<BadPixel X="298" Y="1044" Mask="3" NoisyPixel="false" />
+<BadPixel X="1424" Y="217" Mask="3" NoisyPixel="false" />
+<BadPixel X="11" Y="131" Mask="3" NoisyPixel="false" />
+<BadPixel X="920" Y="497" Mask="3" NoisyPixel="false" />
+<BadPixel X="822" Y="154" Mask="3" NoisyPixel="false" />
+<BadPixel X="1312" Y="118" Mask="3" NoisyPixel="false" />
+<BadPixel X="232" Y="307" Mask="3" NoisyPixel="false" />
+<BadPixel X="1267" Y="1042" Mask="3" NoisyPixel="false" />
+<BadPixel X="1479" Y="157" Mask="3" NoisyPixel="false" />
+<BadPixel X="1625" Y="139" Mask="3" NoisyPixel="false" />
+<BadPixel X="1572" Y="783" Mask="3" NoisyPixel="false" />
+<BadPixel X="1374" Y="881" Mask="3" NoisyPixel="false" />
+<BadPixel X="1484" Y="523" Mask="3" NoisyPixel="false" />
+<BadPixel X="1128" Y="860" Mask="3" NoisyPixel="false" />
+<BadPixel X="1371" Y="895" Mask="3" NoisyPixel="false" />
+<BadPixel X="602" Y="938" Mask="3" NoisyPixel="false" />
+<BadPixel X="77" Y="932" Mask="3" NoisyPixel="false" />
+<BadPixel X="403" Y="478" Mask="3" NoisyPixel="false" />
+<BadPixel X="1003" Y="788" Mask="3" NoisyPixel="false" />
+<BadPixel X="1550" Y="282" Mask="3" NoisyPixel="false" />
+<BadPixel X="1383" Y="332" Mask="3" NoisyPixel="false" />
+<BadPixel X="1553" Y="1026" Mask="3" NoisyPixel="false" />
+<BadPixel X="957" Y="695" Mask="3" NoisyPixel="false" />
+<BadPixel X="614" Y="416" Mask="3" NoisyPixel="false" />
+<BadPixel X="973" Y="28" Mask="3" NoisyPixel="false" />
+<BadPixel X="1135" Y="609" Mask="3" NoisyPixel="false" />
+<BadPixel X="292" Y="212" Mask="3" NoisyPixel="false" />
+<BadPixel X="1492" Y="15" Mask="3" NoisyPixel="false" />
+<BadPixel X="1114" Y="567" Mask="3" NoisyPixel="false" />
+<BadPixel X="589" Y="376" Mask="3" NoisyPixel="false" />
+<BadPixel X="220" Y="509" Mask="3" NoisyPixel="false" />
+<BadPixel X="1188" Y="986" Mask="3" NoisyPixel="false" />
+<BadPixel X="1389" Y="135" Mask="3" NoisyPixel="false" />
+<BadPixel X="1182" Y="499" Mask="3" NoisyPixel="false" />
+<BadPixel X="1428" Y="152" Mask="3" NoisyPixel="false" />
+<BadPixel X="421" Y="453" Mask="3" NoisyPixel="false" />
+<BadPixel X="966" Y="158" Mask="3" NoisyPixel="false" />
+<BadPixel X="844" Y="247" Mask="3" NoisyPixel="false" />
+<BadPixel X="223" Y="444" Mask="3" NoisyPixel="false" />
+<BadPixel X="299" Y="774" Mask="3" NoisyPixel="false" />
+<BadPixel X="920" Y="287" Mask="3" NoisyPixel="false" />
+<BadPixel X="665" Y="174" Mask="3" NoisyPixel="false" />
+<BadPixel X="7" Y="396" Mask="3" NoisyPixel="false" />
+<BadPixel X="1307" Y="260" Mask="3" NoisyPixel="false" />
+<BadPixel X="843" Y="1056" Mask="3" NoisyPixel="false" />
+<BadPixel X="975" Y="76" Mask="3" NoisyPixel="false" />
+<BadPixel X="42" Y="1047" Mask="3" NoisyPixel="false" />
+<BadPixel X="1646" Y="650" Mask="3" NoisyPixel="false" />
+<BadPixel X="94" Y="872" Mask="3" NoisyPixel="false" />
+<BadPixel X="858" Y="6" Mask="3" NoisyPixel="false" />
+<BadPixel X="858" Y="463" Mask="3" NoisyPixel="false" />
+<BadPixel X="70" Y="14" Mask="3" NoisyPixel="false" />
+<BadPixel X="1454" Y="989" Mask="3" NoisyPixel="false" />
+<BadPixel X="1445" Y="673" Mask="3" NoisyPixel="false" />
+<BadPixel X="50" Y="591" Mask="3" NoisyPixel="false" />
+<BadPixel X="1412" Y="1014" Mask="3" NoisyPixel="false" />
+<BadPixel X="744" Y="985" Mask="3" NoisyPixel="false" />
+<BadPixel X="1143" Y="622" Mask="3" NoisyPixel="false" />
+<BadPixel X="1151" Y="442" Mask="3" NoisyPixel="false" />
+<BadPixel X="1606" Y="1050" Mask="3" NoisyPixel="false" />
+<BadPixel X="242" Y="138" Mask="3" NoisyPixel="false" />
+<BadPixel X="1549" Y="678" Mask="3" NoisyPixel="false" />
+<BadPixel X="230" Y="488" Mask="3" NoisyPixel="false" />
+<BadPixel X="382" Y="116" Mask="3" NoisyPixel="false" />
+<BadPixel X="223" Y="205" Mask="3" NoisyPixel="false" />
+<BadPixel X="381" Y="1006" Mask="3" NoisyPixel="false" />
+<BadPixel X="1485" Y="417" Mask="3" NoisyPixel="false" />
+<BadPixel X="297" Y="1" Mask="3" NoisyPixel="false" />
+<BadPixel X="227" Y="681" Mask="3" NoisyPixel="false" />
+<BadPixel X="906" Y="837" Mask="3" NoisyPixel="false" />
+<BadPixel X="1576" Y="171" Mask="3" NoisyPixel="false" />
+<BadPixel X="1125" Y="1005" Mask="3" NoisyPixel="false" />
+<BadPixel X="493" Y="897" Mask="3" NoisyPixel="false" />
+<BadPixel X="1383" Y="205" Mask="3" NoisyPixel="false" />
+<BadPixel X="1504" Y="512" Mask="3" NoisyPixel="false" />
+<BadPixel X="52" Y="339" Mask="3" NoisyPixel="false" />
+<BadPixel X="388" Y="363" Mask="3" NoisyPixel="false" />
+<BadPixel X="692" Y="797" Mask="3" NoisyPixel="false" />
+<BadPixel X="878" Y="800" Mask="3" NoisyPixel="false" />
+<BadPixel X="1389" Y="44" Mask="3" NoisyPixel="false" />
+<BadPixel X="163" Y="503" Mask="3" NoisyPixel="false" />
+<BadPixel X="1372" Y="863" Mask="3" NoisyPixel="false" />
+<BadPixel X="792" Y="475" Mask="3" NoisyPixel="false" />
+<BadPixel X="276" Y="339" Mask="3" NoisyPixel="false" />
+<BadPixel X="1030" Y="420" Mask="3" NoisyPixel="false" />
+<BadPixel X="1117" Y="611" Mask="3" NoisyPixel="false" />
+<BadPixel X="1423" Y="907" Mask="3" NoisyPixel="false" />
+<BadPixel X="752" Y="552" Mask="3" NoisyPixel="false" />
+<BadPixel X="224" Y="283" Mask="3" NoisyPixel="false" />
+<BadPixel X="52" Y="678" Mask="3" NoisyPixel="false" />
+<BadPixel X="55" Y="576" Mask="3" NoisyPixel="false" />
+<BadPixel X="1381" Y="727" Mask="3" NoisyPixel="false" />
+<BadPixel X="614" Y="627" Mask="3" NoisyPixel="false" />
+<BadPixel X="1112" Y="144" Mask="3" NoisyPixel="false" />
+<BadPixel X="1269" Y="376" Mask="3" NoisyPixel="false" />
+<BadPixel X="1494" Y="236" Mask="3" NoisyPixel="false" />
+<BadPixel X="786" Y="754" Mask="3" NoisyPixel="false" />
+<BadPixel X="1143" Y="331" Mask="3" NoisyPixel="false" />
+<BadPixel X="1645" Y="887" Mask="3" NoisyPixel="false" />
+<BadPixel X="1500" Y="177" Mask="3" NoisyPixel="false" />
+<BadPixel X="242" Y="271" Mask="3" NoisyPixel="false" />
+<BadPixel X="493" Y="82" Mask="3" NoisyPixel="false" />
+<BadPixel X="816" Y="631" Mask="3" NoisyPixel="false" />
+<BadPixel X="206" Y="710" Mask="3" NoisyPixel="false" />
+<BadPixel X="1008" Y="596" Mask="3" NoisyPixel="false" />
+<BadPixel X="116" Y="439" Mask="3" NoisyPixel="false" />
+<BadPixel X="931" Y="98" Mask="3" NoisyPixel="false" />
+<BadPixel X="1261" Y="122" Mask="3" NoisyPixel="false" />
+<BadPixel X="1109" Y="581" Mask="3" NoisyPixel="false" />
+<BadPixel X="1194" Y="223" Mask="3" NoisyPixel="false" />
+<BadPixel X="256" Y="180" Mask="3" NoisyPixel="false" />
+<BadPixel X="68" Y="54" Mask="3" NoisyPixel="false" />
+<BadPixel X="488" Y="147" Mask="3" NoisyPixel="false" />
+<BadPixel X="974" Y="448" Mask="3" NoisyPixel="false" />
+<BadPixel X="1470" Y="1055" Mask="3" NoisyPixel="false" />
+<BadPixel X="680" Y="1026" Mask="3" NoisyPixel="false" />
+<BadPixel X="964" Y="287" Mask="3" NoisyPixel="false" />
+<BadPixel X="968" Y="19" Mask="3" NoisyPixel="false" />
+<BadPixel X="544" Y="693" Mask="3" NoisyPixel="false" />
+<BadPixel X="1600" Y="176" Mask="3" NoisyPixel="false" />
+<BadPixel X="1331" Y="720" Mask="3" NoisyPixel="false" />
+<BadPixel X="793" Y="838" Mask="3" NoisyPixel="false" />
+<BadPixel X="711" Y="775" Mask="3" NoisyPixel="false" />
+<BadPixel X="1322" Y="766" Mask="3" NoisyPixel="false" />
+<BadPixel X="1536" Y="697" Mask="3" NoisyPixel="false" />
+<BadPixel X="1378" Y="167" Mask="3" NoisyPixel="false" />
+<BadPixel X="703" Y="10" Mask="3" NoisyPixel="false" />
+<BadPixel X="959" Y="289" Mask="3" NoisyPixel="false" />
+<BadPixel X="1497" Y="947" Mask="3" NoisyPixel="false" />
+<BadPixel X="1384" Y="52" Mask="3" NoisyPixel="false" />
+<BadPixel X="781" Y="173" Mask="3" NoisyPixel="false" />
+<BadPixel X="1266" Y="715" Mask="3" NoisyPixel="false" />
+<BadPixel X="19" Y="271" Mask="3" NoisyPixel="false" />
+<BadPixel X="1053" Y="391" Mask="3" NoisyPixel="false" />
+<BadPixel X="938" Y="261" Mask="3" NoisyPixel="false" />
+<BadPixel X="880" Y="2" Mask="3" NoisyPixel="false" />
+<BadPixel X="1124" Y="349" Mask="3" NoisyPixel="false" />
+<BadPixel X="752" Y="540" Mask="3" NoisyPixel="false" />
+<BadPixel X="187" Y="889" Mask="3" NoisyPixel="false" />
+<BadPixel X="738" Y="856" Mask="3" NoisyPixel="false" />
+<BadPixel X="759" Y="241" Mask="3" NoisyPixel="false" />
+<BadPixel X="1637" Y="330" Mask="3" NoisyPixel="false" />
+<BadPixel X="1664" Y="621" Mask="3" NoisyPixel="false" />
+<BadPixel X="145" Y="945" Mask="3" NoisyPixel="false" />
+<BadPixel X="1512" Y="1034" Mask="3" NoisyPixel="false" />
+<BadPixel X="390" Y="336" Mask="3" NoisyPixel="false" />
+<BadPixel X="192" Y="217" Mask="3" NoisyPixel="false" />
+<BadPixel X="396" Y="183" Mask="3" NoisyPixel="false" />
+<BadPixel X="897" Y="154" Mask="3" NoisyPixel="false" />
+<BadPixel X="161" Y="277" Mask="3" NoisyPixel="false" />
+<BadPixel X="290" Y="609" Mask="3" NoisyPixel="false" />
+<BadPixel X="1525" Y="1054" Mask="3" NoisyPixel="false" />
+<BadPixel X="1234" Y="890" Mask="3" NoisyPixel="false" />
+<BadPixel X="1343" Y="121" Mask="3" NoisyPixel="false" />
+<BadPixel X="1247" Y="302" Mask="3" NoisyPixel="false" />
+<BadPixel X="712" Y="56" Mask="3" NoisyPixel="false" />
+<BadPixel X="1660" Y="276" Mask="3" NoisyPixel="false" />
+<BadPixel X="1312" Y="459" Mask="3" NoisyPixel="false" />
+<BadPixel X="998" Y="1021" Mask="3" NoisyPixel="false" />
+<BadPixel X="1130" Y="368" Mask="3" NoisyPixel="false" />
+<BadPixel X="1175" Y="823" Mask="3" NoisyPixel="false" />
+<BadPixel X="1098" Y="826" Mask="3" NoisyPixel="false" />
+<BadPixel X="537" Y="138" Mask="3" NoisyPixel="false" />
+<BadPixel X="482" Y="630" Mask="3" NoisyPixel="false" />
+<BadPixel X="155" Y="837" Mask="3" NoisyPixel="false" />
+<BadPixel X="1113" Y="75" Mask="3" NoisyPixel="false" />
+<BadPixel X="36" Y="141" Mask="3" NoisyPixel="false" />
+<BadPixel X="683" Y="358" Mask="3" NoisyPixel="false" />
+<BadPixel X="951" Y="813" Mask="3" NoisyPixel="false" />
+<BadPixel X="205" Y="1012" Mask="3" NoisyPixel="false" />
+<BadPixel X="1564" Y="619" Mask="3" NoisyPixel="false" />
+<BadPixel X="877" Y="823" Mask="3" NoisyPixel="false" />
+<BadPixel X="1685" Y="294" Mask="3" NoisyPixel="false" />
+<BadPixel X="691" Y="250" Mask="3" NoisyPixel="false" />
+<BadPixel X="1322" Y="220" Mask="3" NoisyPixel="false" />
+<BadPixel X="231" Y="886" Mask="3" NoisyPixel="false" />
+<BadPixel X="270" Y="610" Mask="3" NoisyPixel="false" />
+<BadPixel X="73" Y="701" Mask="3" NoisyPixel="false" />
+<BadPixel X="1195" Y="570" Mask="3" NoisyPixel="false" />
+<BadPixel X="213" Y="53" Mask="3" NoisyPixel="false" />
+<BadPixel X="189" Y="443" Mask="3" NoisyPixel="false" />
+<BadPixel X="1510" Y="821" Mask="3" NoisyPixel="false" />
+<BadPixel X="941" Y="116" Mask="3" NoisyPixel="false" />
+<BadPixel X="91" Y="379" Mask="3" NoisyPixel="false" />
+<BadPixel X="352" Y="459" Mask="3" NoisyPixel="false" />
+<BadPixel X="513" Y="269" Mask="3" NoisyPixel="false" />
+<BadPixel X="699" Y="990" Mask="3" NoisyPixel="false" />
+<BadPixel X="1352" Y="74" Mask="3" NoisyPixel="false" />
+<BadPixel X="197" Y="513" Mask="3" NoisyPixel="false" />
+<BadPixel X="1606" Y="100" Mask="3" NoisyPixel="false" />
+<BadPixel X="342" Y="580" Mask="3" NoisyPixel="false" />
+<BadPixel X="558" Y="303" Mask="3" NoisyPixel="false" />
+<BadPixel X="766" Y="498" Mask="3" NoisyPixel="false" />
+<BadPixel X="433" Y="990" Mask="3" NoisyPixel="false" />
+<BadPixel X="420" Y="378" Mask="3" NoisyPixel="false" />
+<BadPixel X="841" Y="116" Mask="3" NoisyPixel="false" />
+<BadPixel X="719" Y="793" Mask="3" NoisyPixel="false" />
+<BadPixel X="1167" Y="383" Mask="3" NoisyPixel="false" />
+<BadPixel X="88" Y="624" Mask="3" NoisyPixel="false" />
+<BadPixel X="623" Y="837" Mask="3" NoisyPixel="false" />
+<BadPixel X="468" Y="599" Mask="3" NoisyPixel="false" />
+<BadPixel X="369" Y="1029" Mask="3" NoisyPixel="false" />
+<BadPixel X="1439" Y="1009" Mask="3" NoisyPixel="false" />
+<BadPixel X="603" Y="302" Mask="3" NoisyPixel="false" />
+<BadPixel X="803" Y="245" Mask="3" NoisyPixel="false" />
+<BadPixel X="1510" Y="778" Mask="3" NoisyPixel="false" />
+<BadPixel X="630" Y="1024" Mask="3" NoisyPixel="false" />
+<BadPixel X="993" Y="837" Mask="3" NoisyPixel="false" />
+<BadPixel X="1099" Y="646" Mask="3" NoisyPixel="false" />
+<BadPixel X="939" Y="117" Mask="3" NoisyPixel="false" />
+<BadPixel X="356" Y="520" Mask="3" NoisyPixel="false" />
+<BadPixel X="299" Y="293" Mask="3" NoisyPixel="false" />
+<BadPixel X="1210" Y="987" Mask="3" NoisyPixel="false" />
+<BadPixel X="491" Y="617" Mask="3" NoisyPixel="false" />
+<BadPixel X="1385" Y="145" Mask="3" NoisyPixel="false" />
+<BadPixel X="782" Y="1012" Mask="3" NoisyPixel="false" />
+<BadPixel X="1546" Y="1022" Mask="3" NoisyPixel="false" />
+<BadPixel X="741" Y="223" Mask="3" NoisyPixel="false" />
+<BadPixel X="636" Y="773" Mask="3" NoisyPixel="false" />
+<BadPixel X="1506" Y="804" Mask="3" NoisyPixel="false" />
+<BadPixel X="344" Y="475" Mask="3" NoisyPixel="false" />
+<BadPixel X="680" Y="719" Mask="3" NoisyPixel="false" />
+<BadPixel X="1442" Y="341" Mask="3" NoisyPixel="false" />
+<BadPixel X="519" Y="370" Mask="3" NoisyPixel="false" />
+<BadPixel X="1021" Y="95" Mask="3" NoisyPixel="false" />
+<BadPixel X="627" Y="967" Mask="3" NoisyPixel="false" />
+<BadPixel X="554" Y="370" Mask="3" NoisyPixel="false" />
+<BadPixel X="848" Y="392" Mask="3" NoisyPixel="false" />
+<BadPixel X="803" Y="48" Mask="3" NoisyPixel="false" />
+<BadPixel X="915" Y="504" Mask="3" NoisyPixel="false" />
+<BadPixel X="284" Y="714" Mask="3" NoisyPixel="false" />
+<BadPixel X="1624" Y="23" Mask="3" NoisyPixel="false" />
+<BadPixel X="230" Y="372" Mask="3" NoisyPixel="false" />
+<BadPixel X="914" Y="300" Mask="3" NoisyPixel="false" />
+<BadPixel X="1670" Y="161" Mask="3" NoisyPixel="false" />
+<BadPixel X="460" Y="557" Mask="3" NoisyPixel="false" />
+<BadPixel X="1313" Y="765" Mask="3" NoisyPixel="false" />
+<BadPixel X="524" Y="195" Mask="3" NoisyPixel="false" />
+<BadPixel X="1657" Y="938" Mask="3" NoisyPixel="false" />
+<BadPixel X="1649" Y="246" Mask="3" NoisyPixel="false" />
+<BadPixel X="1441" Y="682" Mask="3" NoisyPixel="false" />
+<BadPixel X="1655" Y="776" Mask="3" NoisyPixel="false" />
+<BadPixel X="744" Y="702" Mask="3" NoisyPixel="false" />
+<BadPixel X="929" Y="119" Mask="3" NoisyPixel="false" />
+<BadPixel X="575" Y="664" Mask="3" NoisyPixel="false" />
+<BadPixel X="1379" Y="943" Mask="3" NoisyPixel="false" />
+<BadPixel X="1142" Y="500" Mask="3" NoisyPixel="false" />
+<BadPixel X="262" Y="379" Mask="3" NoisyPixel="false" />
+<BadPixel X="26" Y="93" Mask="3" NoisyPixel="false" />
+<BadPixel X="1516" Y="928" Mask="3" NoisyPixel="false" />
+<BadPixel X="3" Y="162" Mask="3" NoisyPixel="false" />
+<BadPixel X="481" Y="973" Mask="3" NoisyPixel="false" />
+<BadPixel X="1605" Y="991" Mask="3" NoisyPixel="false" />
+<BadPixel X="1559" Y="671" Mask="3" NoisyPixel="false" />
+<BadPixel X="1177" Y="990" Mask="3" NoisyPixel="false" />
+<BadPixel X="306" Y="908" Mask="3" NoisyPixel="false" />
+<BadPixel X="379" Y="945" Mask="3" NoisyPixel="false" />
+<BadPixel X="617" Y="905" Mask="3" NoisyPixel="false" />
+<BadPixel X="136" Y="527" Mask="3" NoisyPixel="false" />
+<BadPixel X="510" Y="533" Mask="3" NoisyPixel="false" />
+<BadPixel X="24" Y="299" Mask="3" NoisyPixel="false" />
+<BadPixel X="777" Y="423" Mask="3" NoisyPixel="false" />
+<BadPixel X="879" Y="261" Mask="3" NoisyPixel="false" />
+<BadPixel X="1264" Y="346" Mask="3" NoisyPixel="false" />
+<BadPixel X="1290" Y="813" Mask="3" NoisyPixel="false" />
+<BadPixel X="1023" Y="273" Mask="3" NoisyPixel="false" />
+<BadPixel X="344" Y="633" Mask="3" NoisyPixel="false" />
+<BadPixel X="198" Y="1020" Mask="3" NoisyPixel="false" />
+<BadPixel X="524" Y="332" Mask="3" NoisyPixel="false" />
+<BadPixel X="1204" Y="77" Mask="3" NoisyPixel="false" />
+<BadPixel X="542" Y="553" Mask="3" NoisyPixel="false" />
+<BadPixel X="411" Y="212" Mask="3" NoisyPixel="false" />
+<BadPixel X="1206" Y="475" Mask="3" NoisyPixel="false" />
+<BadPixel X="1193" Y="379" Mask="3" NoisyPixel="false" />
+<BadPixel X="808" Y="32" Mask="3" NoisyPixel="false" />
+<BadPixel X="219" Y="165" Mask="3" NoisyPixel="false" />
+<BadPixel X="862" Y="501" Mask="3" NoisyPixel="false" />
+<BadPixel X="1552" Y="945" Mask="3" NoisyPixel="false" />
+<BadPixel X="1413" Y="751" Mask="3" NoisyPixel="false" />
+<BadPixel X="812" Y="894" Mask="3" NoisyPixel="false" />
+<BadPixel X="274" Y="1036" Mask="3" NoisyPixel="false" />
+<BadPixel X="507" Y="617" Mask="3" NoisyPixel="false" />
+<BadPixel X="34" Y="250" Mask="3" NoisyPixel="false" />
+<BadPixel X="910" Y="560" Mask="3" NoisyPixel="false" />
+<BadPixel X="1200" Y="67" Mask="3" NoisyPixel="false" />
+<BadPixel X="75" Y="384" Mask="3" NoisyPixel="false" />
+<BadPixel X="63" Y="478" Mask="3" NoisyPixel="false" />
+<BadPixel X="940" Y="1010" Mask="3" NoisyPixel="false" />
+<BadPixel X="491" Y="360" Mask="3" NoisyPixel="false" />
+<BadPixel X="15" Y="46" Mask="3" NoisyPixel="false" />
+<BadPixel X="563" Y="215" Mask="3" NoisyPixel="false" />
+<BadPixel X="978" Y="763" Mask="3" NoisyPixel="false" />
+<BadPixel X="664" Y="510" Mask="3" NoisyPixel="false" />
+<BadPixel X="1281" Y="424" Mask="3" NoisyPixel="false" />
+<BadPixel X="1498" Y="1002" Mask="3" NoisyPixel="false" />
+<BadPixel X="83" Y="537" Mask="3" NoisyPixel="false" />
+<BadPixel X="242" Y="394" Mask="3" NoisyPixel="false" />
+<BadPixel X="179" Y="689" Mask="3" NoisyPixel="false" />
+<BadPixel X="547" Y="426" Mask="3" NoisyPixel="false" />
+<BadPixel X="772" Y="538" Mask="3" NoisyPixel="false" />
+<BadPixel X="1260" Y="706" Mask="3" NoisyPixel="false" />
+<BadPixel X="407" Y="593" Mask="3" NoisyPixel="false" />
+<BadPixel X="250" Y="151" Mask="3" NoisyPixel="false" />
+<BadPixel X="1664" Y="523" Mask="3" NoisyPixel="false" />
+<BadPixel X="423" Y="284" Mask="3" NoisyPixel="false" />
+<BadPixel X="567" Y="867" Mask="3" NoisyPixel="false" />
+<BadPixel X="521" Y="587" Mask="3" NoisyPixel="false" />
+<BadPixel X="1008" Y="641" Mask="3" NoisyPixel="false" />
+<BadPixel X="100" Y="556" Mask="3" NoisyPixel="false" />
+<BadPixel X="1114" Y="251" Mask="3" NoisyPixel="false" />
+<BadPixel X="599" Y="392" Mask="3" NoisyPixel="false" />
+<BadPixel X="252" Y="307" Mask="3" NoisyPixel="false" />
+<BadPixel X="971" Y="983" Mask="3" NoisyPixel="false" />
+<BadPixel X="974" Y="170" Mask="3" NoisyPixel="false" />
+<BadPixel X="988" Y="938" Mask="3" NoisyPixel="false" />
+<BadPixel X="1185" Y="895" Mask="3" NoisyPixel="false" />
+<BadPixel X="1537" Y="530" Mask="3" NoisyPixel="false" />
+<BadPixel X="1495" Y="296" Mask="3" NoisyPixel="false" />
+<BadPixel X="200" Y="544" Mask="3" NoisyPixel="false" />
+<BadPixel X="969" Y="915" Mask="3" NoisyPixel="false" />
+<BadPixel X="1651" Y="813" Mask="3" NoisyPixel="false" />
+<BadPixel X="276" Y="494" Mask="3" NoisyPixel="false" />
+<BadPixel X="1700" Y="154" Mask="3" NoisyPixel="false" />
+<BadPixel X="772" Y="274" Mask="3" NoisyPixel="false" />
+<BadPixel X="1525" Y="377" Mask="3" NoisyPixel="false" />
+<BadPixel X="423" Y="892" Mask="3" NoisyPixel="false" />
+<BadPixel X="678" Y="387" Mask="3" NoisyPixel="false" />
+<BadPixel X="897" Y="1003" Mask="3" NoisyPixel="false" />
+<BadPixel X="1666" Y="854" Mask="3" NoisyPixel="false" />
+<BadPixel X="1446" Y="682" Mask="3" NoisyPixel="false" />
+<BadPixel X="144" Y="152" Mask="3" NoisyPixel="false" />
+<BadPixel X="80" Y="627" Mask="3" NoisyPixel="false" />
+<BadPixel X="782" Y="439" Mask="3" NoisyPixel="false" />
+<BadPixel X="1374" Y="793" Mask="3" NoisyPixel="false" />
+<BadPixel X="637" Y="507" Mask="3" NoisyPixel="false" />
+<BadPixel X="1252" Y="572" Mask="3" NoisyPixel="false" />
+<BadPixel X="946" Y="797" Mask="3" NoisyPixel="false" />
+<BadPixel X="1046" Y="961" Mask="3" NoisyPixel="false" />
+<BadPixel X="784" Y="627" Mask="3" NoisyPixel="false" />
+<BadPixel X="754" Y="608" Mask="3" NoisyPixel="false" />
+<BadPixel X="1330" Y="755" Mask="3" NoisyPixel="false" />
+<BadPixel X="1600" Y="462" Mask="3" NoisyPixel="false" />
+<BadPixel X="1332" Y="431" Mask="3" NoisyPixel="false" />
+<BadPixel X="712" Y="914" Mask="3" NoisyPixel="false" />
+<BadPixel X="403" Y="658" Mask="3" NoisyPixel="false" />
+<BadPixel X="1264" Y="907" Mask="3" NoisyPixel="false" />
+<BadPixel X="341" Y="196" Mask="3" NoisyPixel="false" />
+<BadPixel X="411" Y="401" Mask="3" NoisyPixel="false" />
+<BadPixel X="812" Y="1001" Mask="3" NoisyPixel="false" />
+<BadPixel X="275" Y="377" Mask="3" NoisyPixel="false" />
+<BadPixel X="457" Y="615" Mask="3" NoisyPixel="false" />
+<BadPixel X="747" Y="555" Mask="3" NoisyPixel="false" />
+<BadPixel X="565" Y="600" Mask="3" NoisyPixel="false" />
+<BadPixel X="1229" Y="117" Mask="3" NoisyPixel="false" />
+<BadPixel X="517" Y="1008" Mask="3" NoisyPixel="false" />
+<BadPixel X="1245" Y="334" Mask="3" NoisyPixel="false" />
+<BadPixel X="781" Y="536" Mask="3" NoisyPixel="false" />
+<BadPixel X="189" Y="480" Mask="3" NoisyPixel="false" />
+<BadPixel X="983" Y="461" Mask="3" NoisyPixel="false" />
+<BadPixel X="1288" Y="300" Mask="3" NoisyPixel="false" />
+<BadPixel X="432" Y="32" Mask="3" NoisyPixel="false" />
+<BadPixel X="1492" Y="618" Mask="3" NoisyPixel="false" />
+<BadPixel X="1103" Y="90" Mask="3" NoisyPixel="false" />
+<BadPixel X="1220" Y="497" Mask="3" NoisyPixel="false" />
+<BadPixel X="1640" Y="807" Mask="3" NoisyPixel="false" />
+<BadPixel X="767" Y="1035" Mask="3" NoisyPixel="false" />
+<BadPixel X="206" Y="25" Mask="3" NoisyPixel="false" />
+<BadPixel X="193" Y="89" Mask="3" NoisyPixel="false" />
+<BadPixel X="808" Y="526" Mask="3" NoisyPixel="false" />
+<BadPixel X="500" Y="479" Mask="3" NoisyPixel="false" />
+<BadPixel X="1691" Y="834" Mask="3" NoisyPixel="false" />
+<BadPixel X="154" Y="415" Mask="3" NoisyPixel="false" />
+<BadPixel X="222" Y="625" Mask="3" NoisyPixel="false" />
+<BadPixel X="1211" Y="885" Mask="3" NoisyPixel="false" />
+<BadPixel X="1118" Y="680" Mask="3" NoisyPixel="false" />
+<BadPixel X="1532" Y="897" Mask="3" NoisyPixel="false" />
+<BadPixel X="1207" Y="284" Mask="3" NoisyPixel="false" />
+<BadPixel X="1585" Y="512" Mask="3" NoisyPixel="false" />
+<BadPixel X="1447" Y="640" Mask="3" NoisyPixel="false" />
+<BadPixel X="185" Y="720" Mask="3" NoisyPixel="false" />
+<BadPixel X="1702" Y="811" Mask="3" NoisyPixel="false" />
+<BadPixel X="1410" Y="639" Mask="3" NoisyPixel="false" />
+<BadPixel X="1214" Y="716" Mask="3" NoisyPixel="false" />
+<BadPixel X="1548" Y="1057" Mask="3" NoisyPixel="false" />
+<BadPixel X="1318" Y="395" Mask="3" NoisyPixel="false" />
+<BadPixel X="551" Y="633" Mask="3" NoisyPixel="false" />
+<BadPixel X="526" Y="291" Mask="3" NoisyPixel="false" />
+<BadPixel X="257" Y="644" Mask="3" NoisyPixel="false" />
+<BadPixel X="1529" Y="171" Mask="3" NoisyPixel="false" />
+<BadPixel X="1276" Y="502" Mask="3" NoisyPixel="false" />
+<BadPixel X="1190" Y="172" Mask="3" NoisyPixel="false" />
+<BadPixel X="548" Y="198" Mask="3" NoisyPixel="false" />
+<BadPixel X="1533" Y="193" Mask="3" NoisyPixel="false" />
+<BadPixel X="1227" Y="358" Mask="3" NoisyPixel="false" />
+<BadPixel X="1034" Y="688" Mask="3" NoisyPixel="false" />
+<BadPixel X="491" Y="691" Mask="3" NoisyPixel="false" />
+<BadPixel X="792" Y="814" Mask="3" NoisyPixel="false" />
+<BadPixel X="136" Y="1019" Mask="3" NoisyPixel="false" />
+<BadPixel X="1114" Y="433" Mask="3" NoisyPixel="false" />
+<BadPixel X="295" Y="279" Mask="3" NoisyPixel="false" />
+<BadPixel X="224" Y="334" Mask="3" NoisyPixel="false" />
+<BadPixel X="1154" Y="345" Mask="3" NoisyPixel="false" />
+<BadPixel X="267" Y="342" Mask="3" NoisyPixel="false" />
+<BadPixel X="1645" Y="53" Mask="3" NoisyPixel="false" />
+<BadPixel X="559" Y="566" Mask="3" NoisyPixel="false" />
+<BadPixel X="221" Y="285" Mask="3" NoisyPixel="false" />
+<BadPixel X="1707" Y="1056" Mask="3" NoisyPixel="false" />
+<BadPixel X="1267" Y="119" Mask="3" NoisyPixel="false" />
+<BadPixel X="680" Y="646" Mask="3" NoisyPixel="false" />
+<BadPixel X="165" Y="236" Mask="3" NoisyPixel="false" />
+<BadPixel X="1160" Y="442" Mask="3" NoisyPixel="false" />
+<BadPixel X="1280" Y="776" Mask="3" NoisyPixel="false" />
+<BadPixel X="1610" Y="773" Mask="3" NoisyPixel="false" />
+<BadPixel X="1692" Y="66" Mask="3" NoisyPixel="false" />
+<BadPixel X="559" Y="699" Mask="3" NoisyPixel="false" />
+<BadPixel X="511" Y="260" Mask="3" NoisyPixel="false" />
+<BadPixel X="1451" Y="863" Mask="3" NoisyPixel="false" />
+<BadPixel X="285" Y="624" Mask="3" NoisyPixel="false" />
+<BadPixel X="374" Y="964" Mask="3" NoisyPixel="false" />
+<BadPixel X="1271" Y="888" Mask="3" NoisyPixel="false" />
+<BadPixel X="1574" Y="184" Mask="3" NoisyPixel="false" />
+<BadPixel X="499" Y="620" Mask="3" NoisyPixel="false" />
+<BadPixel X="229" Y="862" Mask="3" NoisyPixel="false" />
+<BadPixel X="1246" Y="872" Mask="3" NoisyPixel="false" />
+<BadPixel X="1368" Y="354" Mask="3" NoisyPixel="false" />
+<BadPixel X="1592" Y="879" Mask="3" NoisyPixel="false" />
+<BadPixel X="963" Y="870" Mask="3" NoisyPixel="false" />
+<BadPixel X="1191" Y="987" Mask="3" NoisyPixel="false" />
+<BadPixel X="411" Y="576" Mask="3" NoisyPixel="false" />
+<BadPixel X="665" Y="180" Mask="3" NoisyPixel="false" />
+<BadPixel X="693" Y="558" Mask="3" NoisyPixel="false" />
+<BadPixel X="1009" Y="719" Mask="3" NoisyPixel="false" />
+<BadPixel X="210" Y="1037" Mask="3" NoisyPixel="false" />
+<BadPixel X="974" Y="643" Mask="3" NoisyPixel="false" />
+<BadPixel X="895" Y="1044" Mask="3" NoisyPixel="false" />
+<BadPixel X="485" Y="221" Mask="3" NoisyPixel="false" />
+<BadPixel X="1292" Y="937" Mask="3" NoisyPixel="false" />
+<BadPixel X="1096" Y="635" Mask="3" NoisyPixel="false" />
+<BadPixel X="665" Y="21" Mask="3" NoisyPixel="false" />
+<BadPixel X="1341" Y="828" Mask="3" NoisyPixel="false" />
+<BadPixel X="976" Y="655" Mask="3" NoisyPixel="false" />
+<BadPixel X="87" Y="365" Mask="3" NoisyPixel="false" />
+<BadPixel X="1272" Y="988" Mask="3" NoisyPixel="false" />
+<BadPixel X="618" Y="824" Mask="3" NoisyPixel="false" />
+<BadPixel X="550" Y="178" Mask="3" NoisyPixel="false" />
+<BadPixel X="916" Y="118" Mask="3" NoisyPixel="false" />
+<BadPixel X="1476" Y="372" Mask="3" NoisyPixel="false" />
+<BadPixel X="1180" Y="793" Mask="3" NoisyPixel="false" />
+<BadPixel X="1367" Y="991" Mask="3" NoisyPixel="false" />
+<BadPixel X="1649" Y="511" Mask="3" NoisyPixel="false" />
+<BadPixel X="379" Y="945" Mask="3" NoisyPixel="false" />
+<BadPixel X="1454" Y="198" Mask="3" NoisyPixel="false" />
+<BadPixel X="1302" Y="708" Mask="3" NoisyPixel="false" />
+<BadPixel X="805" Y="727" Mask="3" NoisyPixel="false" />
+<BadPixel X="908" Y="439" Mask="3" NoisyPixel="false" />
+<BadPixel X="1222" Y="532" Mask="3" NoisyPixel="false" />
+<BadPixel X="675" Y="310" Mask="3" NoisyPixel="false" />
+<BadPixel X="1028" Y="200" Mask="3" NoisyPixel="false" />
+<BadPixel X="1363" Y="555" Mask="3" NoisyPixel="false" />
+<BadPixel X="907" Y="1038" Mask="3" NoisyPixel="false" />
+<BadPixel X="1213" Y="643" Mask="3" NoisyPixel="false" />
+<BadPixel X="1168" Y="546" Mask="3" NoisyPixel="false" />
+<BadPixel X="674" Y="236" Mask="3" NoisyPixel="false" />
+<BadPixel X="969" Y="408" Mask="3" NoisyPixel="false" />
+<BadPixel X="796" Y="512" Mask="3" NoisyPixel="false" />
+<BadPixel X="944" Y="171" Mask="3" NoisyPixel="false" />
+<BadPixel X="47" Y="867" Mask="3" NoisyPixel="false" />
+<BadPixel X="748" Y="36" Mask="3" NoisyPixel="false" />
+<BadPixel X="44" Y="28" Mask="3" NoisyPixel="false" />
+<BadPixel X="589" Y="938" Mask="3" NoisyPixel="false" />
+<BadPixel X="80" Y="70" Mask="3" NoisyPixel="false" />
+<BadPixel X="1137" Y="476" Mask="3" NoisyPixel="false" />
+<BadPixel X="137" Y="44" Mask="3" NoisyPixel="false" />
+<BadPixel X="598" Y="660" Mask="3" NoisyPixel="false" />
+<BadPixel X="158" Y="932" Mask="3" NoisyPixel="false" />
+<BadPixel X="391" Y="14" Mask="3" NoisyPixel="false" />
+<BadPixel X="1714" Y="1036" Mask="3" NoisyPixel="false" />
+<BadPixel X="936" Y="280" Mask="3" NoisyPixel="false" />
+<BadPixel X="270" Y="225" Mask="3" NoisyPixel="false" />
+<BadPixel X="586" Y="448" Mask="3" NoisyPixel="false" />
+<BadPixel X="1167" Y="810" Mask="3" NoisyPixel="false" />
+<BadPixel X="1680" Y="563" Mask="3" NoisyPixel="false" />
+<BadPixel X="1293" Y="700" Mask="3" NoisyPixel="false" />
+<BadPixel X="1233" Y="764" Mask="3" NoisyPixel="false" />
+<BadPixel X="1196" Y="456" Mask="3" NoisyPixel="false" />
+<BadPixel X="1171" Y="750" Mask="3" NoisyPixel="false" />
+<BadPixel X="1307" Y="54" Mask="3" NoisyPixel="false" />
+<BadPixel X="1031" Y="452" Mask="3" NoisyPixel="false" />
+<BadPixel X="1677" Y="62" Mask="3" NoisyPixel="false" />
+<BadPixel X="795" Y="374" Mask="3" NoisyPixel="false" />
+<BadPixel X="816" Y="49" Mask="3" NoisyPixel="false" />
+<BadPixel X="1140" Y="877" Mask="3" NoisyPixel="false" />
+<BadPixel X="1239" Y="379" Mask="3" NoisyPixel="false" />
+<BadPixel X="490" Y="499" Mask="3" NoisyPixel="false" />
+<BadPixel X="269" Y="240" Mask="3" NoisyPixel="false" />
+<BadPixel X="1056" Y="536" Mask="3" NoisyPixel="false" />
+<BadPixel X="1223" Y="498" Mask="3" NoisyPixel="false" />
+<BadPixel X="1249" Y="547" Mask="3" NoisyPixel="false" />
+<BadPixel X="1155" Y="510" Mask="3" NoisyPixel="false" />
+<BadPixel X="504" Y="868" Mask="3" NoisyPixel="false" />
+<BadPixel X="191" Y="701" Mask="3" NoisyPixel="false" />
+<BadPixel X="728" Y="152" Mask="3" NoisyPixel="false" />
+<BadPixel X="704" Y="599" Mask="3" NoisyPixel="false" />
+<BadPixel X="1179" Y="463" Mask="3" NoisyPixel="false" />
+<BadPixel X="556" Y="696" Mask="3" NoisyPixel="false" />
+<BadPixel X="546" Y="709" Mask="3" NoisyPixel="false" />
+<BadPixel X="1297" Y="370" Mask="3" NoisyPixel="false" />
+<BadPixel X="779" Y="495" Mask="3" NoisyPixel="false" />
+<BadPixel X="1304" Y="567" Mask="3" NoisyPixel="false" />
+<BadPixel X="369" Y="936" Mask="3" NoisyPixel="false" />
+<BadPixel X="485" Y="425" Mask="3" NoisyPixel="false" />
+<BadPixel X="291" Y="294" Mask="3" NoisyPixel="false" />
+<BadPixel X="1516" Y="234" Mask="3" NoisyPixel="false" />
+<BadPixel X="475" Y="469" Mask="3" NoisyPixel="false" />
+<BadPixel X="716" Y="498" Mask="3" NoisyPixel="false" />
+<BadPixel X="839" Y="642" Mask="3" NoisyPixel="false" />
+<BadPixel X="446" Y="755" Mask="3" NoisyPixel="false" />
+<BadPixel X="480" Y="124" Mask="3" NoisyPixel="false" />
+<BadPixel X="635" Y="27" Mask="3" NoisyPixel="false" />
+<BadPixel X="115" Y="5" Mask="3" NoisyPixel="false" />
+<BadPixel X="1274" Y="2" Mask="3" NoisyPixel="false" />
+<BadPixel X="139" Y="896" Mask="3" NoisyPixel="false" />
+<BadPixel X="6" Y="558" Mask="3" NoisyPixel="false" />
+<BadPixel X="977" Y="884" Mask="3" NoisyPixel="false" />
+<BadPixel X="193" Y="279" Mask="3" NoisyPixel="false" />
+<BadPixel X="715" Y="793" Mask="3" NoisyPixel="false" />
+<BadPixel X="1648" Y="701" Mask="3" NoisyPixel="false" />
+<BadPixel X="709" Y="828" Mask="3" NoisyPixel="false" />
+<BadPixel X="554" Y="845" Mask="3" NoisyPixel="false" />
+<BadPixel X="1136" Y="534" Mask="3" NoisyPixel="false" />
+<BadPixel X="3" Y="303" Mask="3" NoisyPixel="false" />
+<BadPixel X="1513" Y="943" Mask="3" NoisyPixel="false" />
+<BadPixel X="950" Y="445" Mask="3" NoisyPixel="false" />
+<BadPixel X="1536" Y="942" Mask="3" NoisyPixel="false" />
+<BadPixel X="251" Y="71" Mask="3" NoisyPixel="false" />
+<BadPixel X="166" Y="74" Mask="3" NoisyPixel="false" />
+<BadPixel X="663" Y="171" Mask="3" NoisyPixel="false" />
+<BadPixel X="305" Y="84" Mask="3" NoisyPixel="false" />
+<BadPixel X="1657" Y="704" Mask="3" NoisyPixel="false" />
+<BadPixel X="1240" Y="387" Mask="3" NoisyPixel="false" />
+<BadPixel X="710" Y="430" Mask="3" NoisyPixel="false" />
+<BadPixel X="1655" Y="494" Mask="3" NoisyPixel="false" />
+<BadPixel X="618" Y="38" Mask="3" NoisyPixel="false" />
+<BadPixel X="1018" Y="1034" Mask="3" NoisyPixel="false" />
+<BadPixel X="858" Y="278" Mask="3" NoisyPixel="false" />
+<BadPixel X="754" Y="77" Mask="3" NoisyPixel="false" />
+<BadPixel X="1450" Y="758" Mask="3" NoisyPixel="false" />
+<BadPixel X="432" Y="308" Mask="3" NoisyPixel="false" />
+<BadPixel X="74" Y="184" Mask="3" NoisyPixel="false" />
+<BadPixel X="1514" Y="259" Mask="3" NoisyPixel="false" />
+<BadPixel X="990" Y="96" Mask="3" NoisyPixel="false" />
+<BadPixel X="1060" Y="344" Mask="3" NoisyPixel="false" />
+<BadPixel X="1633" Y="506" Mask="3" NoisyPixel="false" />
+<BadPixel X="532" Y="485" Mask="3" NoisyPixel="false" />
+<BadPixel X="409" Y="828" Mask="3" NoisyPixel="false" />
+<BadPixel X="1105" Y="961" Mask="3" NoisyPixel="false" />
+<BadPixel X="1369" Y="541" Mask="3" NoisyPixel="false" />
+<BadPixel X="859" Y="513" Mask="3" NoisyPixel="false" />
+<BadPixel X="1583" Y="877" Mask="3" NoisyPixel="false" />
+<BadPixel X="714" Y="762" Mask="3" NoisyPixel="false" />
+<BadPixel X="1214" Y="993" Mask="3" NoisyPixel="false" />
+<BadPixel X="125" Y="7" Mask="3" NoisyPixel="false" />
+<BadPixel X="1500" Y="143" Mask="3" NoisyPixel="false" />
+<BadPixel X="1208" Y="301" Mask="3" NoisyPixel="false" />
+<BadPixel X="793" Y="602" Mask="3" NoisyPixel="false" />
+<BadPixel X="264" Y="509" Mask="3" NoisyPixel="false" />
+<BadPixel X="1187" Y="169" Mask="3" NoisyPixel="false" />
+<BadPixel X="1656" Y="64" Mask="3" NoisyPixel="false" />
+<BadPixel X="840" Y="442" Mask="3" NoisyPixel="false" />
+<BadPixel X="1042" Y="235" Mask="3" NoisyPixel="false" />
+<BadPixel X="1640" Y="903" Mask="3" NoisyPixel="false" />
+<BadPixel X="1599" Y="1050" Mask="3" NoisyPixel="false" />
+<BadPixel X="782" Y="684" Mask="3" NoisyPixel="false" />
+<BadPixel X="638" Y="582" Mask="3" NoisyPixel="false" />
+<BadPixel X="799" Y="996" Mask="3" NoisyPixel="false" />
+<BadPixel X="780" Y="979" Mask="3" NoisyPixel="false" />
+<BadPixel X="242" Y="374" Mask="3" NoisyPixel="false" />
+<BadPixel X="1447" Y="484" Mask="3" NoisyPixel="false" />
+<BadPixel X="1661" Y="375" Mask="3" NoisyPixel="false" />
+<BadPixel X="188" Y="882" Mask="3" NoisyPixel="false" />
+<BadPixel X="36" Y="535" Mask="3" NoisyPixel="false" />
+<BadPixel X="1610" Y="1024" Mask="3" NoisyPixel="false" />
+<BadPixel X="199" Y="208" Mask="3" NoisyPixel="false" />
+<BadPixel X="1058" Y="1030" Mask="3" NoisyPixel="false" />
+<BadPixel X="69" Y="683" Mask="3" NoisyPixel="false" />
+<BadPixel X="192" Y="239" Mask="3" NoisyPixel="false" />
+<BadPixel X="1604" Y="1000" Mask="3" NoisyPixel="false" />
+<BadPixel X="833" Y="1046" Mask="3" NoisyPixel="false" />
+<BadPixel X="1633" Y="113" Mask="3" NoisyPixel="false" />
+<BadPixel X="1018" Y="588" Mask="3" NoisyPixel="false" />
+<BadPixel X="1000" Y="193" Mask="3" NoisyPixel="false" />
+<BadPixel X="1478" Y="680" Mask="3" NoisyPixel="false" />
+<BadPixel X="1485" Y="156" Mask="3" NoisyPixel="false" />
+<BadPixel X="1441" Y="794" Mask="3" NoisyPixel="false" />
+<BadPixel X="494" Y="702" Mask="3" NoisyPixel="false" />
+<BadPixel X="16" Y="618" Mask="3" NoisyPixel="false" />
+<BadPixel X="1594" Y="879" Mask="3" NoisyPixel="false" />
+<BadPixel X="705" Y="646" Mask="3" NoisyPixel="false" />
+<BadPixel X="216" Y="502" Mask="3" NoisyPixel="false" />
+<BadPixel X="1419" Y="128" Mask="3" NoisyPixel="false" />
+<BadPixel X="894" Y="9" Mask="3" NoisyPixel="false" />
+<BadPixel X="1115" Y="124" Mask="3" NoisyPixel="false" />
+<BadPixel X="1312" Y="190" Mask="3" NoisyPixel="false" />
+<BadPixel X="233" Y="73" Mask="3" NoisyPixel="false" />
+<BadPixel X="1352" Y="677" Mask="3" NoisyPixel="false" />
+<BadPixel X="913" Y="333" Mask="3" NoisyPixel="false" />
+<BadPixel X="1566" Y="564" Mask="3" NoisyPixel="false" />
+<BadPixel X="1227" Y="497" Mask="3" NoisyPixel="false" />
+<BadPixel X="489" Y="521" Mask="3" NoisyPixel="false" />
+<BadPixel X="778" Y="31" Mask="3" NoisyPixel="false" />
+<BadPixel X="19" Y="173" Mask="3" NoisyPixel="false" />
+<BadPixel X="539" Y="523" Mask="3" NoisyPixel="false" />
+<BadPixel X="56" Y="230" Mask="3" NoisyPixel="false" />
+<BadPixel X="1443" Y="533" Mask="3" NoisyPixel="false" />
+<BadPixel X="441" Y="621" Mask="3" NoisyPixel="false" />
+<BadPixel X="166" Y="422" Mask="3" NoisyPixel="false" />
+<BadPixel X="487" Y="862" Mask="3" NoisyPixel="false" />
+<BadPixel X="1370" Y="281" Mask="3" NoisyPixel="false" />
+<BadPixel X="852" Y="81" Mask="3" NoisyPixel="false" />
+<BadPixel X="790" Y="1028" Mask="3" NoisyPixel="false" />
+<BadPixel X="170" Y="285" Mask="3" NoisyPixel="false" />
+<BadPixel X="1195" Y="368" Mask="3" NoisyPixel="false" />
+<BadPixel X="1687" Y="521" Mask="3" NoisyPixel="false" />
+<BadPixel X="1260" Y="1024" Mask="3" NoisyPixel="false" />
+<BadPixel X="122" Y="74" Mask="3" NoisyPixel="false" />
+<BadPixel X="493" Y="637" Mask="3" NoisyPixel="false" />
+<BadPixel X="628" Y="636" Mask="3" NoisyPixel="false" />
+<BadPixel X="1288" Y="164" Mask="3" NoisyPixel="false" />
+<BadPixel X="60" Y="813" Mask="3" NoisyPixel="false" />
+<BadPixel X="1378" Y="1012" Mask="3" NoisyPixel="false" />
+<BadPixel X="1637" Y="146" Mask="3" NoisyPixel="false" />
+<BadPixel X="272" Y="869" Mask="3" NoisyPixel="false" />
+<BadPixel X="1656" Y="255" Mask="3" NoisyPixel="false" />
+<BadPixel X="245" Y="714" Mask="3" NoisyPixel="false" />
+<BadPixel X="424" Y="503" Mask="3" NoisyPixel="false" />
+<BadPixel X="217" Y="830" Mask="3" NoisyPixel="false" />
+<BadPixel X="265" Y="653" Mask="3" NoisyPixel="false" />
+<BadPixel X="1108" Y="793" Mask="3" NoisyPixel="false" />
+<BadPixel X="1510" Y="474" Mask="3" NoisyPixel="false" />
+<BadPixel X="976" Y="550" Mask="3" NoisyPixel="false" />
+<BadPixel X="428" Y="904" Mask="3" NoisyPixel="false" />
+<BadPixel X="416" Y="461" Mask="3" NoisyPixel="false" />
+<BadPixel X="161" Y="756" Mask="3" NoisyPixel="false" />
+<BadPixel X="946" Y="987" Mask="3" NoisyPixel="false" />
+<BadPixel X="1595" Y="196" Mask="3" NoisyPixel="false" />
+<BadPixel X="451" Y="236" Mask="3" NoisyPixel="false" />
+<BadPixel X="175" Y="860" Mask="3" NoisyPixel="false" />
+<BadPixel X="457" Y="241" Mask="3" NoisyPixel="false" />
+<BadPixel X="1031" Y="613" Mask="3" NoisyPixel="false" />
+<BadPixel X="523" Y="292" Mask="3" NoisyPixel="false" />
+<BadPixel X="14" Y="457" Mask="3" NoisyPixel="false" />
+<BadPixel X="1134" Y="575" Mask="3" NoisyPixel="false" />
+<BadPixel X="539" Y="93" Mask="3" NoisyPixel="false" />
+<BadPixel X="1637" Y="387" Mask="3" NoisyPixel="false" />
+<BadPixel X="562" Y="78" Mask="3" NoisyPixel="false" />
+<BadPixel X="1675" Y="1028" Mask="3" NoisyPixel="false" />
+<BadPixel X="1234" Y="112" Mask="3" NoisyPixel="false" />
+<BadPixel X="27" Y="866" Mask="3" NoisyPixel="false" />
+<BadPixel X="833" Y="882" Mask="3" NoisyPixel="false" />
+<BadPixel X="25" Y="132" Mask="3" NoisyPixel="false" />
+<BadPixel X="451" Y="935" Mask="3" NoisyPixel="false" />
+<BadPixel X="1340" Y="931" Mask="3" NoisyPixel="false" />
+<BadPixel X="180" Y="616" Mask="3" NoisyPixel="false" />
+<BadPixel X="142" Y="410" Mask="3" NoisyPixel="false" />
+<BadPixel X="554" Y="656" Mask="3" NoisyPixel="false" />
+<BadPixel X="1352" Y="193" Mask="3" NoisyPixel="false" />
+<BadPixel X="595" Y="1041" Mask="3" NoisyPixel="false" />
+<BadPixel X="871" Y="99" Mask="3" NoisyPixel="false" />
+</BadPixels>
+<UserDefinedBadPixels />
+<BadRows />
+<BadColumns />
+</BadPixelMap>
