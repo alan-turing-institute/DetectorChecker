@@ -1,7 +1,7 @@
 ---
 title: 'DetectorChecker: analyzing patterns of defects in detector screens'
 author:  Julia A. Brettschneider, Oscar T. Giles, Wilfrid S. Kendall, Tomas Lazauskas
-date: "13 January 2020, revised 25 May 2020"
+date: "13 January 2020, revised 17 June 2020"
 authors:
 - affiliation: 1, 2
   name: Julia A. Brettschneider
@@ -31,12 +31,13 @@ header-includes: |
 ---
 
 ```
-Version: 1.1.37
-Changed to PDF figures except for heatmap. Moved all figures to image directory. 25.05.20.
+Version: 1.1.45
+Changed Zenodo to Github weblinks. 17.06.20.
 ```
 
-[_DetectorChecker_](https://doi.org/10.5281/zenodo.3662233) 
-refers to an R package and an associated web application, 
+[_DetectorChecker_](https://github.com/alan-turing-institute/DetectorChecker) 
+refers to an R package and an associated web application environment
+[_DetectorCheckerWebApp_](https://github.com/alan-turing-institute/DetectorCheckerWebApp), 
 intended to help
 users who need to analyze spatial patterns of defects in images.
 These images can be _panel-structured_, which is to say,
@@ -70,7 +71,7 @@ Thus XCT system quality concerns are very topical.
 
 Yaffe and Rowlands [-@YaffeRowlands-1997, especially section 3.8]
 point out that XCT screen quality is linked to system performance.
-[_DetectorChecker_](https://doi.org/10.5281/zenodo.3662233) 
+[_DetectorChecker_](https://github.com/alan-turing-institute/DetectorChecker) 
 facilitates the inclusion of screen pixel assessment in a testing framework.
 Note that screen replacement or refurbishment is expensive;
 regular checks of screen pixels are needed (a) to quantify screen quality
@@ -86,27 +87,27 @@ Theoretical spatial statistics methodology is crucial: foundations are discussed
 while
 @BaddeleyRubakTurner-2015 describe the [_spatstat_](https://spatstat.org/) package, an implementation of spatial statistics methods in the
 R statistical computing environment [@RFoundation-2019].
-[_DetectorChecker_](https://doi.org/10.5281/zenodo.3662233)
+[_DetectorChecker_](https://github.com/alan-turing-institute/DetectorChecker)
 [@tomas_lazauskas_2020_3662233] is an R package which adapts methods from [_spatstat_](https://spatstat.org/) to the case of panel-structured images,
 and analyses point patterns arising either from
 individual defects or from "clumps" of defects (determined in a manner specified by the user).
-The associated web application
-[_DetectorCheckerWebApp_](https://detectorchecker.azurewebsites.net/)
+The associated [web application](https://detectorchecker.azurewebsites.net/)
 [@tomas_lazauskas_2020_3662235]
-is based on a self-contained R environment together
+is based on a self-contained R environment
+[_DetectorCheckerWebApp_](https://github.com/alan-turing-institute/DetectorCheckerWebApp)
+together
 with a [_Shiny_](https://cran.r-project.org/web/packages/shiny/index.html) gui, 
-implemented and made available _via_ _Azure_ at https://detectorchecker.azurewebsites.net/.
-The application exposes the
-basic functionality of the [_DetectorChecker_](https://doi.org/10.5281/zenodo.3662233) package without the need for users to install R.
+implemented and made available _via_ _Azure_ at <https://detectorchecker.azurewebsites.net/>.
+The web application exposes the
+basic functionality of the [_DetectorChecker_](https://github.com/alan-turing-institute/DetectorChecker) package without the need for users to install R.
 In particular the web application  can be used
-to define the geometry of the sub-panels of the detector screen
-(which is to say, the arrangement and size of the component sub-panels),
+to define the geometry of the sub-panels of the detector screen (which is to say, the arrangement and size of the component sub-panels),
 to upload the spatial arrangement of the defective pixels 
 (either
 directly by means of "bad pixel maps" in XML format or inferred from test images in formats including TIFF),
 and then to inspect the results using the facilities offered
 by the package.
-The software is freely available under MIT licence, accessible _via_ the Github and Zenodo repositories
+The software is freely available under MIT licence, accessible _via_ the Github repositories
 in the above references.
 To the best of our knowledge, there is no comparable package or web application
 making methods of spatial statistics available for panel-structured image data of arbitrary structure architecture.
@@ -273,7 +274,7 @@ stress due to supports of the screen).
 
 
 An extended example of use of the R package, paralleled by corresponding use of the web application,
-is available as a vignette in both Zenodo / Github repositories.
+is available as a vignette in the Github repositories.
 
 The R package and web application together offer significant
 opportunities to address interesting and important challenges for the data analysis of defective pixel patterns.
