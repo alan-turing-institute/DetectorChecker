@@ -467,6 +467,32 @@ plot_module_events <- function(detector, col, row, file_path = NA, caption = TRU
   return(pixel_ppp)
 }
 
+#' Generates events matrix for selected events
+#'
+#' @param detector Detector object
+#' @param incl_event_list a list of events to be included
+#' @return Events matrix
+#' @export
+get_events_matrix <- function(detector, incl_event_list = NA) {
+
+  # check if the correct clumps were found
+  detector_events <- check_clumps(detector)
+
+  if (suppressWarnings(is.list(incl_event_list))) {
+    events <- detector_events$clumps$events[detector_events$clumps$events$class %in% incl_event_list, ]
+  } else if (suppressWarnings(!is.na(incl_event_list))) {
+    events <- detector_events$clumps$events[detector_events$clumps$events$class == incl_event_list, ]
+  } else {
+    events <- detector_events$clumps$events
+  }
+
+  detector_events$clumps$events <- events
+
+  events_matrix <- get_events_mask(detector_events)
+
+  return(events_matrix)
+}
+
 #' Generates events matrix (a matrix with pixels as 0 and events as 1)
 #'
 #' @param detector Detector object
@@ -486,6 +512,108 @@ get_events_mask <- function(detector) {
   }
 
   return(mask)
+}
+
+#' Fits events distances from the centre using glm
+#'
+#' @param detector Detector object
+#' @param incl_event_list a list of events to be included
+#' @return Fitted model
+#' @export
+glm_events_ctr_eucl <- function(detector, incl_event_list = NA) {
+
+  events_matrix <- get_events_matrix(detector, incl_event_list = incl_event_list)
+
+  dist <- pixel_dist_ctr_eucl(detector)
+
+  glm_fit <- perform_glm(as.vector(events_matrix) ~ as.vector(dist))
+
+  return(glm_fit)
+}
+
+#' Fits events parallel maxima from the centre using glm
+#'
+#' @param detector Detector object
+#' @param incl_event_list a list of events to be included
+#' @return Fitted model
+#' @export
+glm_events_ctr_linf <- function(detector, incl_event_list = NA) {
+
+  events_matrix <- get_events_matrix(detector, incl_event_list = incl_event_list)
+
+  dist <- pixel_dist_ctr_linf(detector)
+
+  glm_fit <- perform_glm(as.vector(events_matrix) ~ as.vector(dist))
+
+  return(glm_fit)
+}
+
+#' Fits events distances from the module edges by column using glm
+#'
+#' @param detector Detector object
+#' @param incl_event_list a list of events to be included
+#' @return Fitted model
+#' @export
+glm_events_dist_edge_col <- function(detector, incl_event_list = NA) {
+
+  events_matrix <- get_events_matrix(detector, incl_event_list = incl_event_list)
+
+  dist <- dist_edge_col(detector)
+
+  glm_fit <- perform_glm(as.vector(events_matrix) ~ as.vector(dist))
+
+  return(glm_fit)
+}
+
+#' Fits events distances from the module edges by row using glm
+#'
+#' @param detector Detector object
+#' @param incl_event_list a list of events to be included
+#' @return Fitted model
+#' @export
+glm_events_dist_edge_row <- function(detector, incl_event_list = NA) {
+
+  events_matrix <- get_events_matrix(detector, incl_event_list = incl_event_list)
+
+  dist <- dist_edge_row(detector)
+
+  glm_fit <- perform_glm(as.vector(events_matrix) ~ as.vector(dist))
+
+  return(glm_fit)
+}
+
+#' Fits events distances to the nearest sub-panel edge using glm
+#'
+#' @param detector Detector object
+#' @param incl_event_list a list of events to be included
+#' @return Fitted model
+#' @export
+glm_events_dist_edge_min <- function(detector, incl_event_list = NA) {
+
+  events_matrix <- get_events_matrix(detector, incl_event_list = incl_event_list)
+
+  dist <- dist_edge_min(detector)
+
+  glm_fit <- perform_glm(as.vector(events_matrix) ~ as.vector(dist))
+
+  return(glm_fit)
+}
+
+#' Fits events distances to the nearest corner using glm
+#'
+#' @param detector Detector object
+#' @param incl_event_list a list of events to be included
+#' @return Fitted model
+#' @export
+glm_events_dist_corner <- function(detector, incl_event_list = NA) {
+
+  events_matrix <- get_events_matrix(detector, incl_event_list = incl_event_list)
+
+  dist <- dist_corner(detector)
+
+  glm_fit <- perform_glm(as.vector(events_matrix) ~ as.vector(dist))
+
+  return(glm_fit)
 }
 
 # #' Plots damaged detector pixels and events

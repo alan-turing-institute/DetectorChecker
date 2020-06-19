@@ -303,6 +303,36 @@ glm_pixel_dist_edge_row <- function(detector) {
   return(glm_fit)
 }
 
+#' Fits pixel distances to the nearest sub-panel edge using glm
+#'
+#' @param detector Detector object
+#' @return Fitted model
+#' @export
+glm_pixel_dist_edge_min <- function(detector) {
+  dist <- dist_edge_min(detector)
+
+  pix_matrix <- detector$pix_matrix
+
+  glm_fit <- perform_glm(as.vector(pix_matrix) ~ as.vector(dist))
+
+  return(glm_fit)
+}
+
+#' Fits pixel distances to the nearest corner using glm
+#'
+#' @param detector Detector object
+#' @return Fitted model
+#' @export
+glm_pixel_dist_corner <- function(detector) {
+  dist <- dist_corner(detector)
+
+  pix_matrix <- detector$pix_matrix
+
+  glm_fit <- perform_glm(as.vector(pix_matrix) ~ as.vector(dist))
+
+  return(glm_fit)
+}
+
 #' Performs glm fitting on the specified symbolic expression
 #'
 #' @param symb_expr symbolic description of the linear predictor
@@ -344,11 +374,17 @@ get_dead_stats <- function(detector) {
 
   avg_dead_mod <- round(dead_n / module_n, digits = 1)
 
-  # Xi Squared Test
-  Chisq <- chisq.test(x = module_count, p = rep(1 / module_n, module_n))
-  Chisq_s <- Chisq$statistic
-  Chisq_df <- Chisq$parameter
-  Chisq_p <- Chisq$p.value
+  if (module_n <= 1) {
+    Chisq_s <- NA
+    Chisq_df <- NA
+    Chisq_p <- NA
+  } else {
+    # Xi Squared Test
+    Chisq <- chisq.test(x = module_count, p = rep(1 / module_n, module_n))
+    Chisq_s <- Chisq$statistic
+    Chisq_df <- Chisq$parameter
+    Chisq_p <- Chisq$p.value
+  }
 
   dead_stats <- Dead_Stats(
     dead_n = dead_n, module_n = module_n,
