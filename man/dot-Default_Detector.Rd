@@ -64,6 +64,10 @@ A S3 class to represent a detector.}
 \item{pix_dead_modules}{assigned module for each dead pixel}
 
 \item{clumps}{clumps data (xyc_df data frame with pixels and their clump ID's, xyc_events data frame with clusters (clumps) and their clump ID's and centre coordinates)}
+
+\item{clumps_col}{col number of the module on which analysis was performed}
+
+\item{clumps_row}{row number of the module on which analysis was performed}
 }
 \value{
 Detector object
