@@ -1,7 +1,7 @@
 Package: detectorchecker
 Type: Package
 Title: A package for analysing pixel damage in CT Scanners
-Version: 1.0.7
+Version: 1.0.8
 Authors@R: c(
         person("Tomas", "Lazauskas", email = "tlazauskas@turing.ac.uk", role = c("aut")),
         person("Julia", "Brettschneider", email = "julia.brettschneider@warwick.ac.uk", role = c("aut", "cre")),
