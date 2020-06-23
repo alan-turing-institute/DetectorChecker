@@ -106,7 +106,7 @@ plot_pixels_count <- function(detector, file_path = NA, row = NA, col = NA,
                                   caption = TRUE) {
   main_caption <- ""
 
-  if (any(is.na(detector$dead_stats))) {
+  if (all(is.na(detector$dead_stats))) {
     stop("Is the damaged statistics calculated?")
   }
 
