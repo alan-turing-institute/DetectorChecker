@@ -328,7 +328,7 @@ plot_events <- function(detector, col = NA, row = NA, file_path = NA, caption = 
       main_caption <- ""
       par(mar = c(0, 0, 0, 0))
     } else {
-      main_caption <- "Defective events"
+      main_caption <- "Damage events"
       par(mfrow = c(1, 1), mar = c(1, 1, 3, 1))
     }
 
@@ -339,7 +339,7 @@ plot_events <- function(detector, col = NA, row = NA, file_path = NA, caption = 
 
     ppp_events <- .get_clump_event_ppp(detector_events, incl_event_list = incl_event_list)
 
-    # "Defective events"
+    # "Damage events"
     plot(ppp_events, pch = 22, main = main_caption)
 
     if (plot_edges_gaps) {
@@ -354,7 +354,7 @@ plot_events <- function(detector, col = NA, row = NA, file_path = NA, caption = 
       }
     }
 
-    # plot(ppp_events, pch=22, col=2, main="Defective events") doesn't work, hense, cheat:
+    # plot(ppp_events, pch=22, col=2, main="Damage events") doesn't work, hense, cheat:
     points(ppp_events, pch = 22, col = "brown", cex = 0.7)
 
     if (!is.na(file_path)) {
@@ -396,7 +396,7 @@ plot_module_events <- function(detector, col, row, file_path = NA, caption = TRU
     main_caption <- ""
   }
 
-  plot(ppp_frame, pch = ".", cex.main = 0.7, main = main_caption)
+  plot(ppp_frame, pch = ".", cex.main = 0.4, main = main_caption)
 
   ppp_events <- .get_clump_event_ppp(detector_events,
     incl_event_list = incl_event_list,
@@ -640,11 +640,11 @@ glm_events_dist_corner <- function(detector, incl_event_list = NA) {
 #   ppp_pixels <- .get_clump_pixel_ppp(detector, incl_event_list = incl_event_list)
 #   ppp_events <- .get_clump_event_ppp(detector, incl_event_list = incl_event_list)
 
-#   # Defective pixels
+#   # Damaged pixels
 #   plot(ppp_pixels, pch = 22, main = main_caption)
 
-#   # Defective events
-#   # plot(ppp_events, pch=22, col=2, main="Defective events") doesn't work, hense, cheat:
+#   # Damage events
+#   # plot(ppp_events, pch=22, col=2, main="Damage events") doesn't work, hense, cheat:
 #   points(ppp_events, pch = 22, col = 2)
 
 #   if (!is.na(file_path)) {
@@ -677,14 +677,14 @@ plot_events_density <- function(detector, file_path = NA, adjust = 0.5,
     .check_select(detector_events, row, col)
 
     if (caption) {
-      main_caption <- paste("Events density (row =", row, "col =", col, "), adjust=", adjust)
+      main_caption <- paste("Damage events density (row=", row, " col=", col, "), adjust=", adjust, sep="")
     }
 
     height <- detector_events$module_row_sizes[row]
     width <- detector_events$module_col_sizes[col]
   } else {
     if (caption) {
-      main_caption <- paste("Events density, adjust = ", adjust)
+      main_caption <- paste("Damage events density, adjust=", adjust, sep="")
     }
 
     height <- NULL
@@ -722,14 +722,14 @@ plot_events_arrows <- function(detector, file_path = NA,
     .check_select(detector_events, row, col)
 
     if (caption) {
-      main_caption <- paste("Arrows of events (row =", row, "col =", col, ")")
+      main_caption <- paste("Arrow of damage events (row=", row, " col=", col, ")", sep="")
     }
 
     height <- detector_events$module_row_sizes[row]
     width <- detector_events$module_col_sizes[col]
   } else {
     if (caption) {
-      main_caption <- paste("Arrows of events")
+      main_caption <- paste("Arrows of damage events")
     }
 
     height <- NULL
@@ -767,14 +767,14 @@ plot_events_angles <- function(detector, file_path = NA,
     .check_select(detector_events, row, col)
 
     if (caption) {
-      main_caption <- paste("Angles of events (row =", row, "col =", col, ")")
+      main_caption <-  paste("Angles of damage events (row=", row, " col=", col, ")", sep="")
     }
 
     height <- detector_events$module_row_sizes[row]
     width <- detector_events$module_col_sizes[col]
   } else {
     if (caption) {
-      main_caption <- paste("Angles of events")
+      main_caption <- paste("Angles of damage events")
     }
 
     height <- NULL
@@ -849,7 +849,7 @@ plot_events_count <- function(detector, file_path = NA,
 
     if (caption) {
       main_caption <- paste(
-        "Number of events in a module ",
+        "Number of damage events in a module ",
         detector_events$dead_stats$module_count_arr[col][row]
       )
     }
@@ -884,7 +884,7 @@ plot_events_count <- function(detector, file_path = NA,
     )
 
     if (caption) {
-      main_caption <- "Number of events in modules"
+      main_caption <- "Number of damage events in modules"
     }
 
     plot_counts(module_count_arr, file_path = file_path, caption = main_caption)
