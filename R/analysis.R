@@ -185,7 +185,7 @@ plot_pixels_density <- function(detector, file_path = NA, adjust = 0.5,
     ppp_dead <- get_ppp_dead(detector)
 
     if (caption) {
-      main_caption <- paste("Damaged pixel density, adjust = ", adjust)
+      main_caption <- paste("Damaged pixel density, adjust=", adjust, sep="")
     }
   }
 
@@ -435,14 +435,13 @@ plot_pixels_angles <- function(detector, file_path = NA, row = NA, col = NA,
     ppp_dead <- .get_ppp_dead_module(detector, row, col)
 
     if (caption) {
-      main_caption <- paste("NN orientations (row =", row, "col =", col, ")")
-      paste("NN orientations (row=", row, " col=", col, ")", sep="")
+      main_caption <- paste("NN orientations (row=", row, " col=", col, ")", sep="")
     }
   } else {
     ppp_dead <- get_ppp_dead(detector)
 
     if (caption) {
-      main_caption <- paste("NN orientations ", ppp_dead$n, " damaged pixels\n", sep = "")
+      main_caption <- paste("NN orientations ", ppp_dead$n, " damaged pixels\n", sep="")
     }
   }
 
