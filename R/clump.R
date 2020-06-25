@@ -724,14 +724,14 @@ plot_events_arrows <- function(detector, file_path = NA,
     .check_select(detector_events, row, col)
 
     if (caption) {
-      main_caption <- paste("Arrow of damage events (row=", row, " col=", col, ")", sep="")
+      main_caption <- paste("Arrows between NN of damage events (row=", row, " col=", col, ")", sep="")
     }
 
     height <- detector_events$module_row_sizes[row]
     width <- detector_events$module_col_sizes[col]
   } else {
     if (caption) {
-      main_caption <- paste("Arrows of damage events")
+      main_caption <- paste("Arrows between NN of damage events")
     }
 
     height <- NULL
@@ -769,14 +769,14 @@ plot_events_angles <- function(detector, file_path = NA,
     .check_select(detector_events, row, col)
 
     if (caption) {
-      main_caption <-  paste("Angles of damage events (row=", row, " col=", col, ")", sep="")
+      main_caption <-  paste("Angles between NN of damage events (row=", row, " col=", col, ")", sep="")
     }
 
     height <- detector_events$module_row_sizes[row]
     width <- detector_events$module_col_sizes[col]
   } else {
     if (caption) {
-      main_caption <- paste("Angles of damage events")
+      main_caption <- paste("Angles between NN of damage events")
     }
 
     height <- NULL
@@ -851,7 +851,7 @@ plot_events_count <- function(detector, file_path = NA,
 
     if (caption) {
       main_caption <- paste(
-        "Number of damage events in a module ",
+        "Number of damage events per module ",
         detector_events$dead_stats$module_count_arr[col][row]
       )
     }
@@ -886,7 +886,7 @@ plot_events_count <- function(detector, file_path = NA,
     )
 
     if (caption) {
-      main_caption <- "Number of damage events in modules"
+      main_caption <- "Number of damage events per module"
     }
 
     plot_counts(module_count_arr, file_path = file_path, caption = main_caption)
