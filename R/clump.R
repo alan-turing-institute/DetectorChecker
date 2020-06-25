@@ -391,7 +391,9 @@ plot_module_events <- function(detector, col, row, file_path = NA, caption = TRU
   ppp_frame <- spatstat::ppp(1, 1, c(1, width), c(1, height))
 
   if (caption) {
-    main_caption <- paste(detector_events$name, "with damaged pixels\n (black=module edges)")
+    main_caption <- paste(detector_events$name, " with damage events\n (row=", row, " col=", col, ", black=module edges)", sep="")
+    paste("Arrow of events (row=", row, " col=", col, ")", sep="")
+    
   } else {
     main_caption <- ""
   }
