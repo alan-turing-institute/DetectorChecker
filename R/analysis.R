@@ -65,13 +65,13 @@ plot_module_pixels <- function(detector, col, row, file_path = NA,
     else
       caption_begining = paste(detector$name, "with damaged pixels")
 
-    main_caption <- paste(caption_begining, "\n(black=module edges, red=damaged pixels)")
+    main_caption <- paste(caption_begining, " (row=", row, " col=", col, ")", "\n(black=module edges, red=damaged pixels)", sep="")
 
   } else {
     main_caption <- ""
   }
 
-  plot(ppp_frame, pch = ".", cex.main = 0.7, main = main_caption)
+  plot(ppp_frame, pch = ".", cex.main = 0.4, main = main_caption)
 
   # selecting dead pixels for the particular module
   module_sel <- detector$pix_dead_modules[detector$pix_dead_modules[, 3] == col &
@@ -84,7 +84,7 @@ plot_module_pixels <- function(detector, col, row, file_path = NA,
     c(1, width), c(1, height)
   )
 
-  points(ppp_dead, pch = 22, col = "brown", cex = 0.7)
+  points(ppp_dead, pch = 22, col = "brown", cex = 0.4)
 
   if (!is.na(file_path)) {
     # shuts down the specified (by default the current) device
@@ -112,7 +112,7 @@ plot_pixels_count <- function(detector, file_path = NA, row = NA, col = NA,
 
   if (!is.na(row) && !is.na(col)) {
     if (!caption) par(mar = c(0, 0, 0, 0))
-    else par(mar=c(1, 1, 3, 1))
+    else par(mar=c(1, 1, 4, 1))
 
     if (!is.na(file_path)) {
       # starts the graphics device driver
@@ -123,10 +123,8 @@ plot_pixels_count <- function(detector, file_path = NA, row = NA, col = NA,
     .check_select(detector, row, col)
 
     if (caption) {
-      main_caption <- paste(
-        "Number of damaged pixels: ",
-        detector$dead_stats$module_count_arr[col][row]
-      )
+      main_caption <- paste("Number of damaged pixels (row=", row, " col=", col, ")", sep="")
+        #  , detector$dead_stats$module_count_arr[col][row]   commented out as it created NA
     }
 
     width <- detector$module_col_sizes[col]
@@ -134,7 +132,7 @@ plot_pixels_count <- function(detector, file_path = NA, row = NA, col = NA,
 
     ppp_frame <- spatstat::ppp(1, 1, c(1, width), c(1, height))
 
-    plot(ppp_frame, pch = ".", cex.main = 0.7, main = main_caption)
+    plot(ppp_frame, pch = ".", cex.main = 0.4, main = main_caption)
 
     # This works only on rectangular detectors!!!
     module_idx <- (col - 1) * detector$module_row_n + row
@@ -181,13 +179,13 @@ plot_pixels_density <- function(detector, file_path = NA, adjust = 0.5,
     ppp_dead <- .get_ppp_dead_module(detector, row, col)
 
     if (caption) {
-      main_caption <- paste("Dead pixel density (row =", row, "col =", col, "), adjust=", adjust)
+      main_caption <- paste("Damaged pixel density (row=", row, " col=", col, "), adjust=", adjust, sep="")
     }
   } else {
     ppp_dead <- get_ppp_dead(detector)
 
     if (caption) {
-      main_caption <- paste("Dead pixel density, adjust = ", adjust)
+      main_caption <- paste("Damaged pixel density, adjust = ", adjust)
     }
   }
 
@@ -216,7 +214,7 @@ plot_pixels_arrows <- function(detector, file_path = NA, row = NA, col = NA,
     ppp_dead <- .get_ppp_dead_module(detector, row, col)
 
     if (caption) {
-      main_caption <- paste("NN oriented arrows (row =", row, "col =", col, ")")
+      main_caption <- paste("NN oriented arrows (row=", row, " col=", col, ")", sep="")
     }
   } else {
     ppp_dead <- get_ppp_dead(detector)
@@ -405,8 +403,8 @@ get_dead_stats <- function(detector) {
 #' @export
 dead_stats_summary <- function(detector) {
   detector <- get_dead_stats(detector)
-
-  summary <- paste("Total number of damaged pixels: ", detector$dead_stats$dead_n, "\n", "")
+  summary <- paste("\n", "")
+  summary <- paste(summary, "Total number of damaged pixels: ", detector$dead_stats$dead_n, "\n", "")
   summary <- paste(summary, "Total number of modules: ", detector$dead_stats$module_n, "\n", "")
   summary <- paste(summary, "Average number of damaged pixels per module: ", detector$dead_stats$avg_dead_mod, "\n", "")
   summary <- paste(summary, "\n", "")
@@ -437,13 +435,14 @@ plot_pixels_angles <- function(detector, file_path = NA, row = NA, col = NA,
     ppp_dead <- .get_ppp_dead_module(detector, row, col)
 
     if (caption) {
-      main_caption <- paste("NN to points orientations (row =", row, "col =", col, ")")
+      main_caption <- paste("NN orientations (row =", row, "col =", col, ")")
+      paste("NN orientations (row=", row, " col=", col, ")", sep="")
     }
   } else {
     ppp_dead <- get_ppp_dead(detector)
 
     if (caption) {
-      main_caption <- paste("NN to points orientations ", ppp_dead$n, " dead pixels\n", sep = "")
+      main_caption <- paste("NN orientations ", ppp_dead$n, " damaged pixels\n", sep = "")
     }
   }
 
