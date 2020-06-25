@@ -214,13 +214,13 @@ plot_pixels_arrows <- function(detector, file_path = NA, row = NA, col = NA,
     ppp_dead <- .get_ppp_dead_module(detector, row, col)
 
     if (caption) {
-      main_caption <- paste("NN oriented arrows (row=", row, " col=", col, ")", sep="")
+      main_caption <- paste("Arrow between NN of damaged pixels (row=", row, " col=", col, ")", sep="")
     }
   } else {
     ppp_dead <- get_ppp_dead(detector)
 
     if (caption) {
-      main_caption <- "NN oriented arrows"
+      main_caption <- "Arrows between NN of damaged pixels"
     }
   }
 
@@ -435,13 +435,13 @@ plot_pixels_angles <- function(detector, file_path = NA, row = NA, col = NA,
     ppp_dead <- .get_ppp_dead_module(detector, row, col)
 
     if (caption) {
-      main_caption <- paste("NN orientations (row=", row, " col=", col, ")", sep="")
+      main_caption <- paste("Orientations between NN of damaged pixels (row=", row, " col=", col, ")", sep="")
     }
   } else {
     ppp_dead <- get_ppp_dead(detector)
 
     if (caption) {
-      main_caption <- paste("NN orientations ", ppp_dead$n, " damaged pixels\n", sep="")
+      main_caption <- paste("Orientations between NN of ", ppp_dead$n, " damaged pixels\n", sep="")
     }
   }
 
