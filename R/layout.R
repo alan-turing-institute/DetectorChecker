@@ -534,6 +534,8 @@ plot_pixels <- function(detector, col = NA, row = NA, file_path = NA, caption = 
 
     main_caption <- ""
     if (!caption) par(mar = c(0, 0, 0, 0))
+    
+    if (caption) par(mar = c(0, 0, 4, 0))
 
     ppp_dead <- get_ppp_dead(detector)
 
@@ -556,7 +558,7 @@ plot_pixels <- function(detector, col = NA, row = NA, file_path = NA, caption = 
       }
 
       # vertical lines in x-positions given by xlines
-      plot(ppp_edges_col, pch = ".", cex.main = 0.7, main = main_caption)
+      plot(ppp_edges_col, pch = ".", cex.main = 0.5, main = main_caption)
 
       # horizontal lines in y-positions given by ylines
       points(ppp_edges_row, pch = ".")
@@ -571,7 +573,7 @@ plot_pixels <- function(detector, col = NA, row = NA, file_path = NA, caption = 
       }
 
       # vertical lines in x-positions given by xlines
-      plot(ppp_edges_col, pch = ".", cex.main = 0.7, main = main_caption)
+      plot(ppp_edges_col, pch = ".", cex.main = 0.5, main = main_caption)
 
       # horizontal lines in y-positions given by ylines
       points(ppp_edges_row, pch = ".")
@@ -611,7 +613,8 @@ plot_detector <- function(detector, file_path = NA, caption = TRUE) {
   if (!caption) par(mar = c(0, 0, 0, 0))
   main_caption <- ""
 
-
+  if (caption) par(mar = c(0, 0, 4, 0))
+  
   if (!is.na(file_path)) {
     # starts the graphics device driver
     ini_graphics(file_path = file_path)
@@ -628,7 +631,7 @@ plot_detector <- function(detector, file_path = NA, caption = TRUE) {
     }
 
     # vertical lines in x-positions given by xlines
-    plot(ppp_edges_col, pch = ".", cex.main = 0.7, main = main_caption)
+    plot(ppp_edges_col, pch = ".", cex.main = 0.5, main = main_caption)
 
     # horizontal lines in y-positions given by ylines
     points(ppp_edges_row, pch = ".")
@@ -642,7 +645,7 @@ plot_detector <- function(detector, file_path = NA, caption = TRUE) {
     ppp_gaps_row <- edges_gaps[[4]]
 
     # vertical lines in x-positions given by xlines
-    plot(ppp_edges_col, pch = ".", cex.main = 0.7, main = main_caption)
+    plot(ppp_edges_col, pch = ".", cex.main = 0.5, main = main_caption)
 
     points(ppp_edges_row, pch = ".") # horizontal lines in y-positions given by ylines
 
