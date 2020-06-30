@@ -5,13 +5,11 @@ output:
 title: "DetectorChecker Usage"
 author: "Julia Brettschneider, Oscar Giles, Tomas Lazauskas, Wilfrid Kendall"
 date: "`r Sys.Date()`"
----
- <!--
 vignette: >
   %\VignetteIndexEntry{DetectorChecker Usage}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
--->
+---
 
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
@@ -29,7 +27,7 @@ Here is how to load the package.
 If you have downloaded the package together with this vignette, then the vignette can be re-built.
 ```{r}
 library(detectorchecker)
-vignette("user-guide", package = "detectorchecker")
+vignette("user_guide", package = "detectorchecker")
 ```
 
 ## Loading and visualising detector layout and data
@@ -48,13 +46,13 @@ available_detectors
 
 If your data has been created using one of the predefined layouts
 then it suffices to upload the relevant detector layout.
-Otherwise a user-defined layout can be speficied by reading in an
+Otherwise a user-defined layout can be specified by reading in an
 appropriate text file as explained further below.
 
 ### Create detector object from available layouts and 
 
 The first step is to create an R object with the layout matching your data set. 
-Here are example invocations for`Pilatus` and `PerkinElmer_Full`.
+Here are example invocations for `Pilatus` and `PerkinElmer_Full`.
 
 ```{r}
 detector_pilatus <- create_detector("Pilatus")
@@ -89,21 +87,21 @@ detector_perkinfull[7:8]
 ```
 
 The next two slots contain the sizes of the gaps. The numbers of pixel columns per gap are in slots 11, while the numbers of pixels rows per gap are in slot 12.
-In the `Pilatus` detectors all horizontal gaps are of the same size, and all vertial gaps are of the same size. `Perkin Elmer` and `Excalibur` detectors have no gaps at all. However, it is possible to create layouts with more irregular gap sizes (see the comments below on user-defined layouts).
+In the `Pilatus` detectors all horizontal gaps are of the same size, and all vertical gaps are of the same size. `Perkin Elmer` and `Excalibur` detectors have no gaps at all. However, it is possible to create layouts with more irregular gap sizes (see the comments below on user-defined layouts).
 
 ```{r}
 detector_pilatus[11:12]
 detector_perkinfull[11:12]
 ```
 
-Slots 9 and 10 are calculated from the other slots; they contain the left and the right edge (column numbers) and the top and bottom edge (row numbers) of each module. If there are no gaps, such as in the `Perkin Elmer` layouts, then the left edge of a module will be adjacent to the right edge of the previous one in the same row of the grid and the bottom edge of a module will be adjecent to the top edge of the previous one.
+Slots 9 and 10 are calculated from the other slots; they contain the left and the right edge (column numbers) and the top and bottom edge (row numbers) of each module. If there are no gaps, such as in the `Perkin Elmer` layouts, then the left edge of a module will be adjacent to the right edge of the previous one in the same row of the grid and the bottom edge of a module will be adjacent to the top edge of the previous one.
 
 ```{r}
 detector_pilatus[9:10]
 detector_perkinfull[9:10]
 ```
 
-Slot 13 is a consistency check. If the sizes of the modules add up to the correct numbers, the status is 0. Otherwise, it is 1 and suitable error message will be given. The remaining slots will be filled when the detector damage information is read in.
+Slot 13 is a consistency check. If the sizes of the modules add up to the correct numbers, the status is 0. Otherwise, it is 1 and a suitable error message will be produced. The remaining slots will be filled when the detector damage information is read in.
 
 ```{r}
 detector_pilatus[13]
@@ -159,7 +157,7 @@ user_def_detector_irregular <- readin_detector(file_path)
 
 ### Visualise detector object
 
-A visualisation of the layout shows modules and gaps as shown below for two of prespecified layouts. The default is to plot a title, but we can override this by setting the parameter caption to `FALSE`. The same rule applies for all plots produced using this package.
+A visualisation of the layout shows modules and gaps as shown below for two of pre-specified layouts. The default is to plot a title, but we can override this by setting the parameter caption to `FALSE`. The same rule applies for all plots produced using this package.
 
 ```{r}
 plot_detector(detector_pilatus)
@@ -195,7 +193,7 @@ file_path <-  system.file("extdata", "Pilatus", "badpixel_mask.tif",
 detector_pilatus <- load_pix_matrix(detector = detector_pilatus, file_path = file_path)
 ```
 
-The spatial locations of the damagedd pixels can be visualised.
+The spatial locations of the damaged pixels can be visualised.
 
 ```{r}
 plot_pixels(detector = detector_pilatus)
@@ -207,7 +205,7 @@ Individual modules can be plotted separately. Here we plot the module located in
 plot_pixels(detector = detector_pilatus, col = 4, row = 5)
 ```
 
-For the user-defined layout used above we can also display damaged pixels. If the location are stored in form of a tiff file this looks as follows.
+For the user-defined layout used above we can also display damaged pixels. If the location are stored in the form of a `tif` file then this looks as follows.
 
 ```{r}
 file_path <-  system.file("extdata", "user-defined", "photographic", "photographic.tif", package ="detectorchecker")
@@ -246,7 +244,7 @@ detector_perkinrefurb <- load_pix_matrix(detector = detector_perkinrefurb, file_
 plot_pixels(detector = detector_perkinrefurb)
 ```
 
-This also works for a user-defined detector if the damaged pixel locations are stored in xml format. (In the example file the dead pixels locations were similated by an Poisson point pattern with inhomogenous density.)
+This also works for a user-defined detector if the damaged pixel locations are stored in xml format. (In the example file the dead pixels locations were simulated by an Poisson point pattern with inhomogeneous density.)
 
 ```{r}
 file_path <-  system.file("extdata", "user-defined", "photographic", "badpixelmap_photographic_inhom.xml", 
@@ -263,6 +261,7 @@ file_path <-  system.file("extdata", "user-defined", "irregular", "badpixelmap_i
 user_def_detector_irregular <- load_pix_matrix(detector = user_def_detector_irregular, file_path = file_path)
 plot_pixels(detector = user_def_detector_irregular)
 ```
+
 #### HDF
 
 For `Excalibur`, the damaged pixels locations are usually provided in a combination of 6 HDF files corresponding to the layout rows. One such collection of sample files is provided with the package.
@@ -443,7 +442,7 @@ detectorchecker::plot_events_count(detector_perkinfull_events,
 
 ### Density
 
-For density plots the optional adjust paramteer can be omitted (default=0.5) or changed to another positive value. Individual modules can be selected.
+For density plots the optional adjust parameter can be omitted (default=0.5) or changed to another positive value. Individual modules can be selected.
 
 ```{r}
 detectorchecker::plot_events_density(detector_perkinfull_events, 
@@ -492,7 +491,8 @@ detectorchecker::plot_events_kfg(detector_perkinfull_events, func = "Kinhom",
 In some situations, the analysis may be dominated by an area of elevated damage. The investigation of complete spatial randomness then becomes uninformative. The area with elevated damage can be removed. 
 
 ```{r}
-detector_perkinfull_modified <- remove_high_density_cluster(detector_perkinfull, min_pts = 30, eps_adjust = 0.05)
+detector_perkinfull_modified <- remove_high_density_cluster(detector_perkinfull, 
+                                                            min_pts = 30, eps_adjust = 0.05)
 plot_pixels(detector = detector_perkinfull_modified)
 ``` 
 
@@ -507,9 +507,9 @@ plot_pixels_kfg(detector = detector_perkinfull_modified, func = "G")
 
 ## Models
 
-This section concerns inferential statistical methods to analyse the state (damaged or intact) of a pixel. General linear models can include a spatial covariates reflecting the location of a pixel relative to the centre, edges or corners of the detector. The spatial covariate could also be in terms of modules (subpanels), such as the pixel's distance to the closest vertical and horizontal boundaries, . Running times are a bit slow, but it should not take longer than a minute for a detector of the size of PerkinElmerFull oder Pilatus. 
+This section concerns inferential statistical methods to analyse the state (damaged or intact) of a pixel. General linear models can include a spatial covariates reflecting the location of a pixel relative to the centre, edges or corners of the detector. The spatial covariate could also be in terms of modules (sub-panels), such as the pixel's distance to the closest vertical and horizontal boundaries, . Running times are a bit slow, but it should not take longer than a minute for a detector of the size of PerkinElmerFull or Pilatus. 
 
-This command fits a model that includes the euclidian distance of a pixel to the centre as covariate.
+This command fits a model that includes the euclidean distance of a pixel to the centre as covariate.
 ```{r}
 glm_pixel_ctr_eucl(detector_pilatus)
 ```
@@ -535,20 +535,20 @@ Finally, this function fits a glm that includes a pixel's distance from the near
 glm_pixel_dist_corner(detector_pilatus)
 ```
 
-All these commands are also available on the event level with similar names, just swapping pixel for events in the command name.  This fits a model that includes the euclidian distance of an event to the centre as covariate.
+All these commands are also available on the event level with similar names, just swapping pixel for events in the command name.  This fits a model that includes the euclidean distance of an event to the centre as covariate.
 ```{r}
 glm_events_ctr_eucl(detector_pilatus)
 ```
 
 It is also possible to visualise the spatial covariates. This is purely for illustration and we do not encourage to do that on a regular basis, because the plotting functions are quite slow.
 
-The command plot_pixel_ctr_eucl() illustrates a pixel's euclidian distance to the centre by colouring its location proportionally to that. The command plot_pixel_ctr_linf() illustrates the minimum of the distances to the two dectector boundaries. The third command visualising spatial covariates related to the whole dectector is based on the euclidian distance to the corners.
+The command plot_pixel_ctr_eucl() illustrates a pixel's euclidean distance to the centre by colouring its location proportionally to that. The command plot_pixel_ctr_linf() illustrates the minimum of the distances to the two detector boundaries. The third command visualising spatial covariates related to the whole detector is based on the euclidean distance to the corners.
 
 ```{r}
 plot_pixel_dist_corner(detector_pilatus)
 ```
 
-The covariates containing the euclidian distance of a pixel to the edges of the detectors can be visualised by a colored image of the detector area. These functions are slow as well. The command plot_pixel_dist_edge_col() plots pixels coloured propotionally to their distance to the nearest vertical module boundary, while plot_pixel_dist_edge_row() does the same for horizontal boundaries. The following command uses the distance of a pixel to any of the module edges.
+The covariates containing the euclidean distance of a pixel to the edges of the detectors can be visualised by a colored image of the detector area. These functions are slow as well. The command plot_pixel_dist_edge_col() plots pixels coloured proportionally to their distance to the nearest vertical module boundary, while plot_pixel_dist_edge_row() does the same for horizontal boundaries. The following command uses the distance of a pixel to any of the module edges.
 
 ```{r}
 plot_pixel_dist_edge(detector_pilatus)
