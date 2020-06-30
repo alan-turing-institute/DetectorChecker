@@ -1,11 +1,8 @@
-ARCHIVE/
-VARIOUS/
-vignettes/
-Meetings/
-
 DeadPixels
 DeadPixels2
 VERSION.txt
+
+vignettes/installation.txt
 
 JOSS-paper/Check-detector.md
 JOSS-paper/DetectorCheckerIssues.md
