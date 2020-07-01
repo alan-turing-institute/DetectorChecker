@@ -55,7 +55,7 @@ The user guide vignette provides detailed instructions for using the package and
 
 ```
 library(detectorchecker)
-vignette(“DetectorChecker_user-guide”, package = "detectorchecker”)
+vignette("DetectorChecker_user-guide", package = "detectorchecker")
 ```
 
 ## Manual
