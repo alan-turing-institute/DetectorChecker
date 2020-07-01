@@ -1,7 +1,7 @@
 ---
 title: 'DetectorChecker: analyzing patterns of defects in detector screens'
 author:  Julia A. Brettschneider, Oscar T. Giles, Wilfrid S. Kendall, Tomas Lazauskas
-date: "13 January 2020, revised 17 June 2020"
+date: "30 June 2020"
 authors:
 - affiliation: 1, 2
   name: Julia A. Brettschneider
@@ -30,10 +30,6 @@ header-includes: |
     \usepackage{needspace}
 ---
 
-```
-Version: 1.1.45
-Changed Zenodo to Github weblinks. 17.06.20.
-```
 
 [_DetectorChecker_](https://github.com/alan-turing-institute/DetectorChecker) 
 refers to an R package and an associated web application environment
@@ -121,7 +117,7 @@ summarised in Figure \ref{fig:figure1}).
 
 We now discuss selected steps of the workflow using
 data derived from a Pilatus detector
-screen, supplied by Diamond Lightsource, UK.
+screen and supplied to us by Diamond Lightsource, UK.
 
 A. The user specifies the exact architecture
 of the sub-panels of the panel-structured image.
@@ -274,7 +270,7 @@ stress due to supports of the screen).
 
 
 An extended example of use of the R package, paralleled by corresponding use of the web application,
-is available as a vignette in the Github repositories.
+is available as a vignette in the Github repository [_DetectorChecker_](https://github.com/alan-turing-institute/DetectorChecker).
 
 The R package and web application together offer significant
 opportunities to address interesting and important challenges for the data analysis of defective pixel patterns.
