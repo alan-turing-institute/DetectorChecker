@@ -101,7 +101,7 @@ test_that("Plotting pixel analysis", {
   plot_pixel_ctr_eucl(detector, file_path = test_out_path)
 
   # Check whether the file was created
-  expect_that(file.exists(test_out_path), is_true())
+  expect_true(file.exists(test_out_path))
 
   # Removing the test output file
   if (file.exists(test_out_path)) file.remove(test_out_path)
@@ -115,7 +115,7 @@ test_that("Plotting pixel analysis", {
   plot_pixel_ctr_linf(detector, file_path = test_out_path)
 
   # Check whether the file was created
-  expect_that(file.exists(test_out_path), is_true())
+  expect_true(file.exists(test_out_path))
 
   # Removing the test output file
   if (file.exists(test_out_path)) file.remove(test_out_path)
@@ -129,7 +129,7 @@ test_that("Plotting pixel analysis", {
   plot_pixel_dist_corner(detector, file_path = test_out_path)
 
   # Check whether the file was created
-  expect_that(file.exists(test_out_path), is_true())
+  expect_true(file.exists(test_out_path))
 
   # Removing the test output file
   if (file.exists(test_out_path)) file.remove(test_out_path)
@@ -143,7 +143,7 @@ test_that("Plotting pixel analysis", {
   plot_pixel_dist_edge_col(detector, file_path = test_out_path)
 
   # Check whether the file was created
-  expect_that(file.exists(test_out_path), is_true())
+  expect_true(file.exists(test_out_path))
 
   # Removing the test output file
   if (file.exists(test_out_path)) file.remove(test_out_path)
@@ -157,7 +157,7 @@ test_that("Plotting pixel analysis", {
   plot_pixel_dist_edge_row(detector, file_path = test_out_path)
 
   # Check whether the file was created
-  expect_that(file.exists(test_out_path), is_true())
+  expect_true(file.exists(test_out_path))
 
   # Removing the test output file
   if (file.exists(test_out_path)) file.remove(test_out_path)
@@ -171,7 +171,7 @@ test_that("Plotting pixel analysis", {
   plot_pixel_dist_edge(detector, file_path = test_out_path)
 
   # Check whether the file was created
-  expect_that(file.exists(test_out_path), is_true())
+  expect_true(file.exists(test_out_path))
 
   # Removing the test output file
   if (file.exists(test_out_path)) file.remove(test_out_path)
