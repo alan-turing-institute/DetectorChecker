@@ -51,8 +51,4 @@ Examples are provided for six detector types. It is possible to load datasets as
   			- photographic.tif
   			- badpixelmap_photographic_hom.xml
   			- badpixelmap_photographic_inhom.xml
-  			
-	- simple (example of a user defined detector type having 2 rows and 16 columns)
-		- user-defined.txt - layout file
-		- user-defined.bpm.xml - dead pixels file
 	

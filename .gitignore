@@ -1,3 +1,14 @@
+DeadPixels
+DeadPixels2
+VERSION.txt
+
+vignettes/installation.txt
+
+JOSS-paper/Check-detector.md
+JOSS-paper/DetectorCheckerIssues.md
+JOSS-paper/JOSSpaper-checklist.md
+
+
 *.tar.gz
 .DS_Store
 Package/detectorchecker_*.tgz

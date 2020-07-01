@@ -1,4 +1,4 @@
-images := image/fig2-a.pdf  image/fig2-b-trim.png  image/fig3-b.pdf  image/fig4-b.pdf image/fig2-b.png  image/fig3-a.pdf image/fig4-a.pdf image/flowchartDCshort.pdf
+images = image/fig2-a.pdf  image/fig2-b-trim.png  image/fig3-b.pdf  image/fig4-b.pdf image/fig2-b.png  image/fig3-a.pdf image/fig4-a.pdf image/flowchartDCshort.pdf
 
 
 
