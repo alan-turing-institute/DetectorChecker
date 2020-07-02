@@ -66,7 +66,7 @@ vignette("DetectorChecker_user-guide", package = "detectorchecker")
 
 ## Manual
 Detailed documentation is provided as a [pdf](docs/detectorchecker_1.0.8.pdf).
-See also the [DetectorChecker_user-guide](vignettes/DetectorChecker_user-guide.pdf).
+See also the [DetectorChecker_user-guide](vignettes/DetectorChecker_user-guide.html).
 
 ## Examples
 DetectorChecker includes a number of example datasets for five detector types:
