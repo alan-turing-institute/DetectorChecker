@@ -7,6 +7,7 @@ Master: [![Build Status](https://travis-ci.com/alan-turing-institute/DetectorChe
 
 Created by: [Julia Brettschneider](https://github.com/ejulia17) (original R code), [Tomas Lazauskas](https://github.com/tomaslaz) (R package engineering), [Oscar Giles](https://github.com/OscartGiles) (package development) and [Wilfrid Kendall](https://github.com/WilfridSKendall) (testing and editing).
 
+
 ## Overview
 
 DetectorChecker is an R package to aid in the assessment of damage to CT scanners arising from exposure to high energy radiation.
@@ -25,10 +26,13 @@ devtools::install_github("alan-turing-institute/DetectorChecker")
 ```
 
 
-If you want to be able to view the user_guide Vignette you need to install with:
+If you want to be able to view the `DetectorChecker_user-guide` Vignette you need to install with:
+
 ```
-devtools::install_github("alan-turing-institute/DetectorChecker", build_vignettes = TRUE, build_opts = c("--no-resave-data", "--no-manual"))
+devtools::install_github("alan-turing-institute/DetectorChecker", 
+     build_vignettes = TRUE, build_opts = c("--no-resave-data", "--no-manual"))
 ```
+
 Installing with the vignettes may be slow (~10 min)
 
 
@@ -42,16 +46,18 @@ devtools::install_github("alan-turing-institute/DetectorChecker", ref = "develop
 
 ## WebApp
 
-The official release of the DetectorChecker WebApp is hosted at https://detectorchecker.azurewebsites.net.
+The official release of the DetectorChecker WebApp is hosted at 
+<https://detectorchecker.azurewebsites.net>.
 
 <img src="https://raw.githubusercontent.com/alan-turing-institute/DetectorChecker/master/inst/img/DetectorChecker.png" width="500" align="center">
 
-The source code for the WebApp implementation can be found on GitHub: https://github.com/alan-turing-institute/DetectorCheckerWebApp.
+The source code for the WebApp implementation can be found on GitHub: 
+<https://github.com/alan-turing-institute/DetectorCheckerWebApp>.
 
 
 ## Vignette
 
-The user guide vignette provides detailed instructions for using the package and loading specific examples. Make sure you installed the package including vignette following the instructions above (see use of build_vignettes = TRUE in Section Installation) and then load the package followed by the vignette command:
+The user guide vignette provides detailed instructions for using the package and loading specific examples. Make sure you installed the package including vignette following the instructions above (see use of `build_vignettes = TRUE` in Section Installation) and then load the package followed by the vignette command:
 
 ```
 library(detectorchecker)
@@ -59,7 +65,8 @@ vignette("DetectorChecker_user-guide", package = "detectorchecker")
 ```
 
 ## Manual
-Documentation is provided as a [pdf](docs/detectorchecker_0.1.10.pdf)
+Detailed documentation is provided as a [pdf](docs/detectorchecker_1.0.8.pdf).
+See also the [DetectorChecker_user-guide](vignettes/DetectorChecker_user-guide.pdf).
 
 ## Examples
 DetectorChecker includes a number of example datasets for five detector types:
@@ -74,21 +81,24 @@ DetectorChecker includes a number of example datasets for five detector types:
 
 5. Excalibur
 
-To load an example dataset you can either call:
+To load an example dataset, either call:
+
 ```
 library(detectorchecker)
 
-#Inititate a PerkinElmerFull detector object
+# Initiate a PerkinElmerFull detector object
 detector <-  create_detector("PerkinElmerFull")
 
 # Path of dataset
-file_path <- system.file("extdata", "PerkinElmer_Full", "BadPixelMap.bpm", "BadPixelMap_t1.bpm.xml", package = "detectorchecker")
+file_path <- system.file("extdata", "PerkinElmerFull",
+                        "BadPixelMap_t1.bpm.xml", 
+                        package = "detectorchecker")
 
 # Load a pixel matrix into the detector object
 detector <- load_pix_matrix(detector = detector, file_path = file_path)
 ```
 
-or you can load one of the examples by calling:
+or load one of the examples by calling:
 
 ```
 library(detectorchecker)
