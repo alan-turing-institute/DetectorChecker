@@ -14,7 +14,7 @@ authors:
 - affiliation: 2
   name: Tomas Lazauskas
 output: pdf_document
-bibliography: JOSSpaper.bib
+bibliography: paper.bib
 tags:
 - R
 - XCT
@@ -31,9 +31,9 @@ header-includes: |
 ---
 
 
-[_DetectorChecker_](https://github.com/alan-turing-institute/DetectorChecker) 
+[_DetectorChecker_](https://github.com/alan-turing-institute/DetectorChecker)
 refers to an R package and an associated web application environment
-[_DetectorCheckerWebApp_](https://github.com/alan-turing-institute/DetectorCheckerWebApp), 
+[_DetectorCheckerWebApp_](https://github.com/alan-turing-institute/DetectorCheckerWebApp),
 intended to help
 users who need to analyze spatial patterns of defects in images.
 These images can be _panel-structured_, which is to say,
@@ -55,19 +55,19 @@ defect patterns.
 Digital detector screens are crucial high-value components of imaging systems used throughout
 modern science, medicine, and engineering systems, particularly in XCT.
 The US @FDA provides information for industry on X-ray imaging devices
-and lists some common laboratory tests for 
+and lists some common laboratory tests for
 evaluation of general-use X-ray imaging devices.
-It also notes the applicable standard 
+It also notes the applicable standard
 for each modality, thus forming the basis for a maintenance schedule.
 Additionally a scheduled testing framework has been proposed by the Institute of Physics and Engineering in Medicine [@IPEM2].
-In September 2019 the UK National Health Service 
-(NHS) announced a major investment of £200m to overcome outdated equipment, 
+In September 2019 the UK National Health Service
+(NHS) announced a major investment of £200m to overcome outdated equipment,
 noting that a significant proportion of CT, MRI and general X-ray equipment more than 10 years old [@UK-NHS].
 Thus XCT system quality concerns are very topical.
 
 Yaffe and Rowlands [-@YaffeRowlands-1997, especially section 3.8]
 point out that XCT screen quality is linked to system performance.
-[_DetectorChecker_](https://github.com/alan-turing-institute/DetectorChecker) 
+[_DetectorChecker_](https://github.com/alan-turing-institute/DetectorChecker)
 facilitates the inclusion of screen pixel assessment in a testing framework.
 Note that screen replacement or refurbishment is expensive;
 regular checks of screen pixels are needed (a) to quantify screen quality
@@ -92,13 +92,13 @@ The associated [web application](https://detectorchecker.azurewebsites.net/)
 is based on a self-contained R environment
 [_DetectorCheckerWebApp_](https://github.com/alan-turing-institute/DetectorCheckerWebApp)
 together
-with a [_Shiny_](https://cran.r-project.org/web/packages/shiny/index.html) gui, 
+with a [_Shiny_](https://cran.r-project.org/web/packages/shiny/index.html) gui,
 implemented and made available _via_ _Azure_ at <https://detectorchecker.azurewebsites.net/>.
 The web application exposes the
 basic functionality of the [_DetectorChecker_](https://github.com/alan-turing-institute/DetectorChecker) package without the need for users to install R.
 In particular the web application  can be used
 to define the geometry of the sub-panels of the detector screen (which is to say, the arrangement and size of the component sub-panels),
-to upload the spatial arrangement of the defective pixels 
+to upload the spatial arrangement of the defective pixels
 (either
 directly by means of "bad pixel maps" in XML format or inferred from test images in formats including TIFF),
 and then to inspect the results using the facilities offered
@@ -109,9 +109,9 @@ To the best of our knowledge, there is no comparable package or web application
 making methods of spatial statistics available for panel-structured image data of arbitrary structure architecture.
 
 
-Defects are modelled as points in an image rectangle based on overall screen dimensions. 
+Defects are modelled as points in an image rectangle based on overall screen dimensions.
 The pattern of defects can be modelled using the web application (workflow is
-summarised in Figure \ref{fig:figure1}). 
+summarised in Figure \ref{fig:figure1}).
 
 ![Work flow for DetectorChecker web application. Feedback/skip paths illustrate various options: refocussing attention on subsets of the point pattern (isolated pixels, small clusters, linear clusters, \ldots); working through various graphical analyses; optionally emailing data to the DetectorChecker team; and statistically fitting a variety of models of damage intensity. \label{fig:figure1}](image/flowchartDCshort.pdf)
 
@@ -142,21 +142,21 @@ CSR is what would be expected if the point pattern was in fact
 can be assessed using visual inspection of graphs
 of empirical estimates of $F$, $G$ and $K$ functions as described in @ChiuStoyanKendallMecke-2013. It is clear that the
 point pattern of Figure \ref{fig:figure2}(a) is strongly inhomogeneous and therefore it is
-not surprising that the corresponding graphical plots 
+not surprising that the corresponding graphical plots
 indicate clear evidence of deviation from CSR:  
-    
+
 * The $F$ function or "empty space function"
 computes the distribution of the nearest distance to a defect point from a typical location
 chosen from the image rectangle uniformly at random (and independently of the point pattern).
 If the point pattern did in fact satisfy CSR then
 one could consider
-an empirical estimate of the $F$ function to be a random perturbation of 
+an empirical estimate of the $F$ function to be a random perturbation of
 the theoretical $F$ function under CSR, namely
-$F_\text{pois}(r)=1-\exp(-\lambda \pi r^2)$. 
+$F_\text{pois}(r)=1-\exp(-\lambda \pi r^2)$.
 Figure \ref{fig:figure3}(a)
-graphs different 
+graphs different
 variants of $\hat{F}$, accounting in various ways for edge-effects.
-Note the clear deviation of the $\hat{F}$ empirical estimates from what would be expected under CSR, 
+Note the clear deviation of the $\hat{F}$ empirical estimates from what would be expected under CSR,
 namely the theoretical $F_\text{pois}$.
 
 
@@ -166,10 +166,10 @@ an empirical estimate of the $G$ function as a random perturbation of
 the theoretical $G$ function under CSR, namely
 (by a conditional probability argument)
 $G_\text{pois}(r)=1-\exp(-\lambda \pi r^2)$
-(actually equal to $F_\text{pois}(r)$). 
+(actually equal to $F_\text{pois}(r)$).
 See Figure \ref{fig:figure3}(b), and note the clear deviation
 from the theoretical $G_\text{pois}$
-of the $\hat{G}$ empirical estimates (which again account in various ways for edge-effects), 
+of the $\hat{G}$ empirical estimates (which again account in various ways for edge-effects),
 hence again suggesting deviation from CSR.
 
 ![](image/fig3-a.pdf){ width=50% } ![](image/fig3-b.pdf){ width=50% }
@@ -182,12 +182,12 @@ hence again suggesting deviation from CSR.
 one could view
 an empirical estimate of the $K$ function as a random perturbation of the theoretical $K$ function
 under CSR, namely
-$K_\text{pois}(r)=\pi r^2$. See Figure \ref{fig:figure4}(a), and note the deviation from $K_\text{pois}$ 
+$K_\text{pois}(r)=\pi r^2$. See Figure \ref{fig:figure4}(a), and note the deviation from $K_\text{pois}$
 of the $\hat{K}$ empirical estimates (once more accounting for edge-effects in different ways), especially at short distances, once more suggesting deviation from CSR.
 Note that for geometrical reasons the
 $\hat{K}$ empirical estimates will exhibit substantially greater variation at large distances;
 it is therefore appropriate to confine attention to the left-hand third of the $x$-axis.
-The excess over the theoretical $K_\text{pois}$ at short distances, particularly for the estimate $\hat{K}_\text{iso}$, indicates that defects are more clustered than would be expected from CSR. 
+The excess over the theoretical $K_\text{pois}$ at short distances, particularly for the estimate $\hat{K}_\text{iso}$, indicates that defects are more clustered than would be expected from CSR.
 
 
 ![](image/fig4-a.pdf){ width=50% } ![](image/fig4-b.pdf){ width=50% }
@@ -196,9 +196,9 @@ The excess over the theoretical $K_\text{pois}$ at short distances, particularly
 For geometrical reasons it is appropriate to focus attention on small distances.
 There is more variation between different edge-corrections of empirical curves
 than for $F$ and $G$ curves. Empirical curves are closer at short distances (200 pixels or less) to the theoretical curve based on CSR (left panel, blue dotted curve) but still exhibit some discrepancy hinting at possibly
-greater clustering relative to CSR. 
+greater clustering relative to CSR.
 However all curves agree closely for short distances in the right panel,
-in which a correction has been made 
+in which a correction has been made
 for inhomogeneity (which has already been noted when considering the intensity map).
 This suggests that an inhomogeneous Poisson process provides a good fit for the data.
 \label{fig:figure4}}
@@ -206,19 +206,19 @@ This suggests that an inhomogeneous Poisson process provides a good fit for the 
 
 
 * Plots are also available which take account of inhomogeneity and compare these estimates to theoretical functions
-computed for inhomogeneous Poisson point processes: 
+computed for inhomogeneous Poisson point processes:
 Figure \ref{fig:figure4}(b) gives an example of this in the case of the $K$ function. The plots of the $\hat{K}_\text{inhom}$
-empirical inhomogeneity-adjusted estimates agree much more closely with 
-the theoretical $K^\text{pois}_\text{inhom}$ function 
+empirical inhomogeneity-adjusted estimates agree much more closely with
+the theoretical $K^\text{pois}_\text{inhom}$ function
 at short distances, supporting the hypothesis that the pattern of defects is what
 might be expected to arise from an _inhomogeneous_ Poisson process of defects.
 
 
 
-D. Finally the relationship of the defect points to sub-panel boundaries can be studied by means of various logistic regression options, which assess whether damage intensity appears to depend on distance from the centre of the image or horizontal or vertical distance from sub-panel edges. When this data set is modelled in terms of Euclidean distance from the centre, the web application reports substantial evidence for positive dependence of defect intensity on distance from the centre (see the highly significant coefficient for `as.vector(dist)` in the following web application output), 
+D. Finally the relationship of the defect points to sub-panel boundaries can be studied by means of various logistic regression options, which assess whether damage intensity appears to depend on distance from the centre of the image or horizontal or vertical distance from sub-panel edges. When this data set is modelled in terms of Euclidean distance from the centre, the web application reports substantial evidence for positive dependence of defect intensity on distance from the centre (see the highly significant coefficient for `as.vector(dist)` in the following web application output),
 conforming with the visual impression given by Figure \ref{fig:figure2}(a),
-and further explaining the nature of the spatial inhomogeneity indicated 
-by Figure \ref{fig:figure4}. In fact this positive dependence reflects 
+and further explaining the nature of the spatial inhomogeneity indicated
+by Figure \ref{fig:figure4}. In fact this positive dependence reflects
 manufacturing details of
 this particular screen design: Diamond reports that Pilatus detector screen panels are tested before installation, and better panels are placed in the centre of the structured display.
 
@@ -235,7 +235,7 @@ after performing the above logistic regression:
 Call:
 glm(formula = as.vector(pix_matrix) ~ as.vector(dist), family = binomial(link = logit))
 
-Deviance Residuals: 
+Deviance Residuals:
     Min       1Q   Median       3Q      Max
 -0.0262  -0.0211  -0.0193  -0.0171   4.3297  
 
@@ -295,9 +295,7 @@ We gratefully acknowledge support from the UK EPSRC (grant EP/K031066/1)
 and the Alan Turing Institute (under the EPSRC
 grant EP/N510129/1) during this project.
 
-We also wish to thank Martin O'Reilly (The Alan Turing Institute), Nicola Tartoni and Ian Horswell (Diamond Lightsource, UK) for guidance on detector types and sample data sets, and Tristan Lowe (Henry Moseley X-ray Imaging Facility, University of Manchester) 
+We also wish to thank Martin O'Reilly (The Alan Turing Institute), Nicola Tartoni and Ian Horswell (Diamond Lightsource, UK) for guidance on detector types and sample data sets, and Tristan Lowe (Henry Moseley X-ray Imaging Facility, University of Manchester)
 and Martin Turner (ITS Research IT, University of Manchester) for discussions and feedback.
 
 # References
-
-
