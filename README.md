@@ -2,7 +2,6 @@
 
 Master: [![Build Status](https://travis-ci.com/alan-turing-institute/DetectorChecker.svg?token=zxQwzfsqCyEouTqXAVUn&branch=master)](https://travis-ci.com/alan-turing-institute/DetectorChecker) Develop: [![Build Status](https://travis-ci.com/alan-turing-institute/DetectorChecker.svg?token=zxQwzfsqCyEouTqXAVUn&branch=develop)](https://travis-ci.com/alan-turing-institute/DetectorChecker)
 
-[![DOI](https://zenodo.org/badge/144782935.svg)](https://zenodo.org/badge/latestdoi/144782935)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 Created by: [Julia Brettschneider](https://github.com/ejulia17) (original R code), [Tomas Lazauskas](https://github.com/tomaslaz) (R package engineering), [Oscar Giles](https://github.com/OscartGiles) (package development) and [Wilfrid Kendall](https://github.com/WilfridSKendall) (testing and editing).
