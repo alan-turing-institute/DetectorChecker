@@ -26,8 +26,6 @@ affiliations:
   name: Department of Statistics, University of Warwick, UK
 - index: 2
   name: The Alan Turing Institute, UK
-header-includes: |
-    \usepackage{needspace}
 ---
 
 
@@ -221,10 +219,6 @@ and further explaining the nature of the spatial inhomogeneity indicated
 by Figure \ref{fig:figure4}. In fact this positive dependence reflects
 manufacturing details of
 this particular screen design: Diamond reports that Pilatus detector screen panels are tested before installation, and better panels are placed in the centre of the structured display.
-
-
-\needspace{0.5\textheight}
-
 
 Here follows output from the web application
 after performing the above logistic regression:
