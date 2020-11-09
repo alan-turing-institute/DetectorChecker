@@ -1,4 +1,5 @@
 context("Testing clumps")
+source("utils.R")
 
 test_that("plot events", {
   test_dir <- getwd()
@@ -22,10 +23,7 @@ test_that("plot events", {
   plot_events(detector_events, file_path = test_out_path, caption = FALSE, incl_event_list = incl_event_list)
 
   # Check whether the file was created
-  expect_true(file.exists(test_out_path))
-
-  # Removing the test output file
-  if (file.exists(test_out_path)) file.remove(test_out_path)
+  expect_file_exists(test_out_path)
 })
 
 test_that("plot module events", {
@@ -56,10 +54,7 @@ test_that("plot module events", {
   )
 
   # Check whether the file was created
-  expect_true(file.exists(test_out_path))
-
-  # Removing the test output file
-  if (file.exists(test_out_path)) file.remove(test_out_path)
+  expect_file_exists(test_out_path)
 })
 
 test_that("plot module events by type", {
@@ -87,42 +82,32 @@ test_that("plot module events by type", {
   test_out_path <- "perkin_events_density.jpg"
   plot_events_density(detector_events, file_path = test_out_path, row = row_, col = col_, caption = FALSE, incl_event_list = incl_event_list)
   # Check whether the file was created
-  expect_true(file.exists(test_out_path))
-  # Removing the test output file
-  if (file.exists(test_out_path)) file.remove(test_out_path)
+  expect_file_exists(test_out_path)
 
   # output file
   test_out_path <- "perkin_events_arrows.jpg"
   plot_events_arrows(detector_events, file_path = test_out_path, row = row_, col = col_, caption = FALSE, incl_event_list = incl_event_list)
   # Check whether the file was created
-  expect_true(file.exists(test_out_path))
-  # Removing the test output file
-  if (file.exists(test_out_path)) file.remove(test_out_path)
+  expect_file_exists(test_out_path)
 
   # output file
   test_out_path <- "perkin_events_angles.jpg"
   plot_events_angles(detector_events, file_path = test_out_path, row = row_, col = col_, caption = FALSE, incl_event_list = incl_event_list)
   # Check whether the file was created
-  expect_true(file.exists(test_out_path))
-  # Removing the test output file
-  if (file.exists(test_out_path)) file.remove(test_out_path)
+  expect_file_exists(test_out_path)
 
   # output file
   test_out_path <- "perkin_events_kfg.jpg"
   plot_events_kfg(detector_events, file_path = test_out_path, func = "K", row = row_, col = col_, caption = FALSE, incl_event_list = incl_event_list)
   # Check whether the file was created
-  expect_true(file.exists(test_out_path))
-  # Removing the test output file
-  if (file.exists(test_out_path)) file.remove(test_out_path)
+  expect_file_exists(test_out_path)
 
 
   # output file
   test_out_path <- "perkin_events_kfg_Kinhom.jpg"
   plot_events_kfg(detector_events, file_path = test_out_path, func = "Kinhom", row = row_, col = col_, caption = FALSE, incl_event_list = incl_event_list)
   # Check whether the file was created
-  expect_true(file.exists(test_out_path))
-  # Removing the test output file
-  if (file.exists(test_out_path)) file.remove(test_out_path)
+  expect_file_exists(test_out_path)
 })
 
 test_that("correct clumps", {
@@ -142,17 +127,17 @@ test_that("correct clumps", {
   incl_event_list <- list(1, 2, 3, 4, 5, 6, 7, 8)
 
   plot_events(perkin_detector, file_path = test_out_path, caption = FALSE, incl_event_list = incl_event_list)
-  expect_true(file.exists(test_out_path))
-  if (file.exists(test_out_path)) file.remove(test_out_path)
+  # Check whether the file was created
+  expect_file_exists(test_out_path)
 
   detector_events <- detectorchecker::find_clumps(perkin_detector)
   detectorchecker::plot_events(detector_events, file_path = test_out_path, caption = FALSE, incl_event_list = incl_event_list)
-  expect_true(file.exists(test_out_path))
-  if (file.exists(test_out_path)) file.remove(test_out_path)
+  # Check whether the file was created
+  expect_file_exists(test_out_path)
 
   detector_events <- detectorchecker::find_clumps(perkin_detector, row = 1, col = 1)
   detectorchecker::plot_events(detector_events, file_path = test_out_path, caption = FALSE, incl_event_list = incl_event_list)
-  expect_true(file.exists(test_out_path))
-  if (file.exists(test_out_path)) file.remove(test_out_path)
+  # Check whether the file was created
+  expect_file_exists(test_out_path)
 
 })

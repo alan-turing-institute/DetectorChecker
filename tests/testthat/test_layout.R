@@ -1,4 +1,5 @@
 context("Plotting detector")
+source("utils.R")
 
 test_that("Availability", {
   expect_equal(check_detector_avail("Pilatus"), TRUE)
@@ -83,8 +84,5 @@ test_that("plot detector", {
   plot_detector(detector = detector, file_path = test_out_path)
 
   # Check whether the file was created
-  expect_true(file.exists(test_out_path))
-
-  # Removing the test output file
-  if (file.exists(test_out_path)) file.remove(test_out_path)
+  expect_file_exists(test_out_path)
 })
