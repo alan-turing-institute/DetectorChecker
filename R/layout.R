@@ -214,6 +214,16 @@ Pilatus_Detector <- function() {
   return(detector)
 }
 
+#' Check that \code{x} is an S3 detector class
+#'
+#' @param x Any variable
+#' @return True if x is an instance of detector
+#' @examples
+#' x <- Excalibur_Detector()
+#' is.detector(x)
+#' @export
+is.detector <- function(x) inherits(x, "detector")
+
 # Detector selection -------------------------------------------------------------
 
 #' Checks whether specified detector is available

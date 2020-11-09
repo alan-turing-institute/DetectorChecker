@@ -64,6 +64,11 @@ A summary of the characteristics of the detector layout can be printed.
 summary(detector_pilatus)
 ```
 
+You can check if an object is an instance of the `detector` with
+
+```{r}
+print(is.detector(detector_pilatus))
+```
 We will now explain the 18 slots of this object using `Pilatus` and `PerkinElmerFull` as examples. 
 The first four slots contain the name, a date (optional; use `NA` if there is no need to specify this),
 the width (number of pixels horizontally) and the height (numbers of pixels vertically) of the detector. 
