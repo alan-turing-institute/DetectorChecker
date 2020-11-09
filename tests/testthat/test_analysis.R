@@ -1,5 +1,15 @@
 context("Testing reading in the dead pixel data and visualizing the detector: Pilatus")
 
+#' Assert that a file exists and then remove it
+#'
+#' @param file_path A file path
+expect_file_exists <- function(file_path){
+
+  expect_true(file.exists(file_path))
+  if (file.exists(file_path)) file.remove(file_path)
+
+}
+
 test_that("Pilatus", {
   test_dir <- getwd()
 
@@ -23,11 +33,8 @@ test_that("Pilatus", {
   # Visualizing damaged pixels
   plot_pixels(detector = pilatus_detector, file_path = test_out_path)
 
-  # Check whether the file was created
-  expect_true(file.exists(test_out_path))
+  expect_file_exists(test_out_path)
 
-  # Removing the test output file
-  if (file.exists(test_out_path)) file.remove(test_out_path)
 })
 
 context("Testing reading in the dead pixel data and visualizing the detector: Perkin Elmer")
@@ -51,10 +58,7 @@ test_that("Perkin Elmer", {
   plot_pixels(detector = perkinelmerfull_detector, file_path = test_out_path)
 
   # Check whether the file was created
-  expect_true(file.exists(test_out_path))
-
-  # Removing the test output file
-  if (file.exists(test_out_path)) file.remove(test_out_path)
+  expect_file_exists(test_out_path)
 
   # Dead stats
   perkinelmerfull_detector <- get_dead_stats(perkinelmerfull_detector)
@@ -64,10 +68,7 @@ test_that("Perkin Elmer", {
   plot_pixels_count(detector = perkinelmerfull_detector, file_path = test_out_path)
 
   # Check whether the file was created
-  expect_true(file.exists(test_out_path))
-
-  # Removing the test output file
-  if (file.exists(test_out_path)) file.remove(test_out_path)
+  expect_file_exists(test_out_path)
 
   # Plotting dead pixel density
   test_out_path <- "perkinelmerfull_density.jpg"
@@ -76,16 +77,17 @@ test_that("Perkin Elmer", {
     adjust = 0.5
   )
 
-  # Removing the test output file
-  if (file.exists(test_out_path)) file.remove(test_out_path)
+  # Check whether the file was created
+  expect_file_exists(test_out_path)
 
   # Arrows
   test_out_path <- "perkinelmerfull_arrows.jpg"
 
   plot_pixels_arrows(detector = perkinelmerfull_detector, file_path = test_out_path)
 
-  # Removing the test output file
-  if (file.exists(test_out_path)) file.remove(test_out_path)
+  # Check whether the file was created
+  expect_file_exists(test_out_path)
+
 })
 
 context("Testing reading in the dead pixel data and visualizing the detector: Excalibur")
@@ -117,10 +119,8 @@ test_that("Excalibur - mutiple files", {
   plot_pixels(detector = excalibur_detector, file_path = test_out_path)
 
   # Check whether the file was created
-  expect_true(file.exists(test_out_path))
+  expect_file_exists(test_out_path)
 
-  # Removing the test output file
-  if (file.exists(test_out_path)) file.remove(test_out_path)
 })
 
 context("Model fitting")
@@ -199,10 +199,7 @@ test_that("Perkin Elmer", {
   plot_pixels(detector = perkinelmerfull_detector, file_path = test_out_path)
 
   # Check whether the file was created
-  expect_true(file.exists(test_out_path))
-
-  # Removing the test output file
-  if (file.exists(test_out_path)) file.remove(test_out_path)
+  expect_file_exists(test_out_path)
 
   # Dead stats
   perkinelmerfull_detector <- get_dead_stats(perkinelmerfull_detector)
@@ -212,10 +209,7 @@ test_that("Perkin Elmer", {
   plot_pixels_count(detector = perkinelmerfull_detector, file_path = test_out_path)
 
   # Check whether the file was created
-  expect_true(file.exists(test_out_path))
-
-  # Removing the test output file
-  if (file.exists(test_out_path)) file.remove(test_out_path)
+  expect_file_exists(test_out_path)
 
   # Plotting dead pixel density
   test_out_path <- "perkinelmerfull_density.jpg"
@@ -225,31 +219,21 @@ test_that("Perkin Elmer", {
   )
 
   # Check whether the file was created
-  expect_true(file.exists(test_out_path))
-
-  # Removing the test output file
-  if (file.exists(test_out_path)) file.remove(test_out_path)
+  expect_file_exists(test_out_path)
 
   # Arrows
   test_out_path <- "perkinelmerfull_arrows.jpg"
   plot_pixels_arrows(detector = perkinelmerfull_detector, file_path = test_out_path)
 
   # Check whether the file was created
-  expect_true(file.exists(test_out_path))
-
-
-  # Removing the test output file
-  if (file.exists(test_out_path)) file.remove(test_out_path)
+  expect_file_exists(test_out_path)
 
   # Full detector angle plot
   test_out_path <- "perkinelmerfull_angles.jpg"
   plot_pixels_angles(detector = perkinelmerfull_detector, file_path = test_out_path)
 
   # Check whether the file was created
-  expect_true(file.exists(test_out_path))
-
-  # Removing the test output file
-  if (file.exists(test_out_path)) file.remove(test_out_path)
+  expect_file_exists(test_out_path)
 
   # test_analysis
   # test_analysis_functions(perkinelmerfull_detector)
@@ -272,36 +256,36 @@ test_that("Perkin Elmer", {
   # K
   test_out_path <- "K-Function.jpg"
   plot_pixels_kfg(detector = detector, func = "K", file_path = test_out_path)
-  expect_true(file.exists(test_out_path))
-  if (file.exists(test_out_path)) file.remove(test_out_path)
+  # Check whether the file was created
+  expect_file_exists(test_out_path)
 
   # F
   test_out_path <- "F-Function.jpg"
   plot_pixels_kfg(detector = detector, func = "F", file_path = test_out_path)
-  expect_true(file.exists(test_out_path))
-  if (file.exists(test_out_path)) file.remove(test_out_path)
+  # Check whether the file was created
+  expect_file_exists(test_out_path)
 
   # G
   test_out_path <- "G-Function.jpg"
   plot_pixels_kfg(detector = detector, func = "G", file_path = test_out_path)
-  expect_true(file.exists(test_out_path))
-  if (file.exists(test_out_path)) file.remove(test_out_path)
+  # Check whether the file was created
+  expect_file_exists(test_out_path)
 
   # Kinhom
   test_out_path <- "Kinhom.jpg"
   plot_pixels_kfg(detector = detector, func = "Kinhom", file_path = test_out_path)
-  expect_true(file.exists(test_out_path))
-  if (file.exists(test_out_path)) file.remove(test_out_path)
+  # Check whether the file was created
+  expect_file_exists(test_out_path)
 
   # Finhom
   test_out_path <- "Finhom.jpg"
   plot_pixels_kfg(detector = detector, func = "Finhom", file_path = test_out_path)
-  expect_true(file.exists(test_out_path))
-  if (file.exists(test_out_path)) file.remove(test_out_path)
+  # Check whether the file was created
+  expect_file_exists(test_out_path)
 
   # Ginhom
   test_out_path <- "Ginhom.jpg"
   plot_pixels_kfg(detector = detector, func = "Ginhom", file_path = test_out_path)
-  expect_true(file.exists(test_out_path))
-  if (file.exists(test_out_path)) file.remove(test_out_path)
+  # Check whether the file was created
+  expect_file_exists(test_out_path)
 })
