@@ -251,7 +251,7 @@ check_detector_avail <- function(detector_name) {
 #' Checks whether detector is available, if so, creates a Detector object
 #'
 #' @param detector_name The name of the detector
-#' @return Detector object
+#' @return Detector S3 object
 #' @export
 create_detector <- function(detector_name) {
   detector <- NA
@@ -611,7 +611,7 @@ plot_pixels <- function(detector, col = NA, row = NA, file_path = NA, caption = 
 #' @param file_path Output file path
 #' @param caption Flag to turn on/off figure caption
 #' @export
-plot_detector <- function(detector, file_path = NA, caption = TRUE) {
+plot.detector <- function(detector, file_path = NA, caption = TRUE) {
   if (!caption) par(mar = c(0, 0, 0, 0))
   main_caption <- ""
 
@@ -664,12 +664,15 @@ plot_detector <- function(detector, file_path = NA, caption = TRUE) {
   }
 }
 
-#' Generates a string with the detector summary
+#' Summary of a detector object
 #'
 #' @param detector Detector object
 #' @return String with the detector summary
+#' @examples
+#' detc <- create_detector("Pilatus")
+#' summary(detc)
 #' @export
-detector_summary <- function(detector) {
+summary.detector <- function(detector) {
   summary <- paste("Detector:", "\n", "")
   summary <- paste(summary, "Name: ", detector$name, "\n", "")
   summary <- paste(summary, "Date: ", detector$date, "\n", "")
@@ -682,7 +685,7 @@ detector_summary <- function(detector) {
   summary <- paste(summary, "Widths of gaps between modules: ", paste(detector$gap_col_sizes, collapse = " "), "\n", "")
   summary <- paste(summary, "Heights of gaps between modules: ", paste(detector$gap_row_sizes, collapse = " "), "\n", "")
 
-  return(summary)
+  return(cat(summary))
 }
 
 #' Reads in a user defined detector from a file

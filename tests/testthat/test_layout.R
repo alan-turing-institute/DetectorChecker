@@ -80,7 +80,7 @@ test_that("plot detector", {
   detector <- PerkinElmerFull_Detector()
 
   # Plotting detector in the cwd
-  plot_detector(detector = detector, file_path = test_out_path)
+  plot(detector = detector, file_path = test_out_path)
 
   # Check whether the file was created
   expect_true(file.exists(test_out_path))

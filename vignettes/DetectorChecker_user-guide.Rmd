@@ -61,7 +61,7 @@ detector_perkinfull <- create_detector("PerkinElmerFull")
 A summary of the characteristics of the detector layout can be printed.
 
 ```{r}
-cat(detector_summary(detector_pilatus))
+summary(detector_pilatus)
 ```
 
 We will now explain the 18 slots of this object using `Pilatus` and `PerkinElmerFull` as examples. 
@@ -161,15 +161,15 @@ user_def_detector_irregular <- readin_detector(file_path)
 A visualisation of the layout shows modules and gaps as shown below for two of the pre-specified layouts. The default is to plot a title, but we can override this by setting the parameter caption to `FALSE`. The same rule applies for all plots produced using this package.
 
 ```{r}
-plot_detector(detector_pilatus)
-plot_detector(detector_pilatus, caption=FALSE)
-plot_detector(detector_perkinfull)
+plot(detector_pilatus)
+plot(detector_pilatus, caption=FALSE)
+plot(detector_perkinfull)
 ```
 
 This also works for the two user-defined detectors.
 ```{r}
-plot_detector(user_def_detector_photographic)
-plot_detector(user_def_detector_irregular)
+plot(user_def_detector_photographic)
+plot(user_def_detector_irregular)
 ```
 
 
@@ -349,7 +349,7 @@ plot_pixels_density(detector = detector_pilatus, adjust=2)
 A calculation of the total number of damaged pixels, the average number of damaged pixels per module, and a Chi-square test for its independence of the module can be performed. We show this here for `Pilatus`, preceded by a summary of the relevant layout characteristics.
 
 ```{r}
-cat(detector_summary(detector_pilatus))
+summary(detector_pilatus)
 cat(dead_stats_summary(detector_pilatus))
 ```
 
