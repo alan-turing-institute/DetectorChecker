@@ -64,6 +64,8 @@
 
   )
 
+  class(detector) <- "detector"
+
   detector <- .derive_detector(detector)
 
   return(detector)
@@ -534,7 +536,7 @@ plot_pixels <- function(detector, col = NA, row = NA, file_path = NA, caption = 
 
     main_caption <- ""
     if (!caption) par(mar = c(0, 0, 0, 0))
-    
+
     if (caption) par(mar = c(0, 0, 4, 0))
 
     ppp_dead <- get_ppp_dead(detector)
@@ -614,7 +616,7 @@ plot_detector <- function(detector, file_path = NA, caption = TRUE) {
   main_caption <- ""
 
   if (caption) par(mar = c(0, 0, 6, 0))
-  
+
   if (!is.na(file_path)) {
     # starts the graphics device driver
     ini_graphics(file_path = file_path)
