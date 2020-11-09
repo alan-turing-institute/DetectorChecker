@@ -2,7 +2,7 @@
 % Please edit documentation in R/analysis.R
 \name{get_dead_stats}
 \alias{get_dead_stats}
-\title{Generate summary of damaged pixels}
+\title{Generate summary of damaged pixels and add as a dead_stats attribute to the detector object}
 \usage{
 get_dead_stats(detector)
 }
@@ -10,8 +10,8 @@ get_dead_stats(detector)
 \item{detector}{Detector object}
 }
 \value{
-Dead_Stats object
+Detector object with dead_stats attribute
 }
 \description{
-Generate summary of damaged pixels
+Generate summary of damaged pixels and add as a dead_stats attribute to the detector object
 }
