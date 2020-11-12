@@ -1,6 +1,6 @@
 #' @title Analysis module
 
-#' A S3 class to represent dead pixels statistics summary
+#' A list to represent dead pixels statistics summary
 #'
 #' @param dead_n Total number of damaged pixels:
 #' @param module_n Total number of modules
@@ -10,7 +10,7 @@
 #' @param Chisq_s The Chi-Squared test statistic value
 #' @param Chisq_df Chi-Squared degrees of freedom
 #' @param Chisq_p Chi-Squared p-value
-#' @return Dead_Stats object
+#' @return Dead_Stats list
 #' @export
 Dead_Stats <- function(dead_n = NA, module_n = NA, module_count_arr = NA,
                        module_count = NA, avg_dead_mod = NA,
@@ -28,7 +28,6 @@ Dead_Stats <- function(dead_n = NA, module_n = NA, module_count_arr = NA,
 
   return(dead_stats)
 }
-
 
 #' A function to plot detector module with damaged pixels
 #'
@@ -346,10 +345,10 @@ perform_glm <- function(symb_expr, family = binomial(link = logit)) {
   return(glm_result)
 }
 
-#' Generate summary of damaged pixels
+#' Generate summary of damaged pixels and add as a dead_stats attribute to the detector object
 #'
 #' @param detector Detector object
-#' @return Dead_Stats object
+#' @return Detector object with dead_stats attribute
 #' @importFrom stats chisq.test
 #' @export
 get_dead_stats <- function(detector) {

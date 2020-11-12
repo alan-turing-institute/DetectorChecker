@@ -162,7 +162,7 @@ test_that("PerkinElmerFull", {
 
   dead_stats_summary <- dead_stats_summary(detector)
 
-  summary <- paste("\n", "\n", detector_summary(detector), "\n", "")
+  summary <- paste("\n", "\n", summary(detector), "\n", "")
   summary <- paste(summary, dead_stats_summary, "\n", "")
 
   expect_true(TRUE)

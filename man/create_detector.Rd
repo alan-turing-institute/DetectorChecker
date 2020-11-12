@@ -10,7 +10,7 @@ create_detector(detector_name)
 \item{detector_name}{The name of the detector}
 }
 \value{
-Detector object
+Detector S3 object
 }
 \description{
 Checks whether detector is available, if so, creates a Detector object

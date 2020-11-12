@@ -3,7 +3,7 @@
 \name{Dead_Stats}
 \alias{Dead_Stats}
 \title{Analysis module
-A S3 class to represent dead pixels statistics summary}
+A list to represent dead pixels statistics summary}
 \usage{
 Dead_Stats(
   dead_n = NA,
@@ -34,9 +34,9 @@ Dead_Stats(
 \item{Chisq_p}{Chi-Squared p-value}
 }
 \value{
-Dead_Stats object
+Dead_Stats list
 }
 \description{
 Analysis module
-A S3 class to represent dead pixels statistics summary
+A list to represent dead pixels statistics summary
 }
