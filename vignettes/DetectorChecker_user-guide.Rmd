@@ -64,46 +64,65 @@ A summary of the characteristics of the detector layout can be printed.
 cat(detector_summary(detector_pilatus))
 ```
 
-We will now explain the 18 slots of this object using `Pilatus` and `PerkinElmerFull` as examples. 
-The first four slots contain the name, a date (optional; use `NA` if there is no need to specify this),
+We will now explain the attributes of this object using `Pilatus` and `PerkinElmerFull` as examples. 
+The first four attributes contain the name, a date (optional; use `NA` if there is no need to specify this),
 the width (number of pixels horizontally) and the height (numbers of pixels vertically) of the detector. 
 
 ```{r}
-detector_pilatus[1:4]
+paste("name:", detector_pilatus$name)
+paste("date:", detector_pilatus$date)
+paste("width:", detector_pilatus$detector_width)
+paste("height", detector_pilatus$detector_height)
 ```
 
-The grid layout is given in the next few slots. The number of modules per row is in slot 5 and per column in slot 6.
+The grid layout is given by the following attributes The number of modules per row is given by the module_row_n attribute and per column in module_col_n.
 
 ```{r}
-detector_pilatus[5:6]
+paste("module_col_n:", detector_pilatus$module_col_n)
+paste("module_row_n:", detector_pilatus$module_row_n)
 ```
 
-The sizes of the modules are stored in the next two slots. Slot 7 contains the widths (numbers of pixel columns in each module), while slot 8 contains the heights (numbers of pixel rows in each module). In the `Pilatus` detector all modules are of the same dimensions. In the `PerkinElmerFull` the first and last module of each row have fewer pixels.
+The sizes of the modules are stored in the next two attributes. `module_col_sizes` contains the widths (numbers of pixel columns in each module), while `module_row_sizes` contains the heights (numbers of pixel rows in each module). In the `Pilatus` detector all modules are of the same dimensions. In the `PerkinElmerFull` the first and last module of each row have fewer pixels.
 
 ```{r}
-detector_pilatus[7:8]
-detector_perkinfull[7:8]
+print("Pilatus: Cols and Rows")
+detector_pilatus$module_col_sizes
+detector_pilatus$module_row_sizes
+
+print("Perkinfull: Cols and Rows")
+detector_perkinfull$module_col_sizes
+detector_perkinfull$module_row_size
 ```
 
-The next two slots contain the sizes of the gaps. The numbers of pixel columns per gap are in slots 11, while the numbers of pixels rows per gap are in slot 12.
+The next two attributes contain the sizes of the gaps. The numbers of pixel columns per gap are in `gap_col_sizes`, while the numbers of pixels rows per gap are in `gap_row_sizes`
 In the `Pilatus` detectors all horizontal gaps are of the same size, and all vertical gaps are of the same size. The various Perkin Elmer detectors and the `Excalibur` detector have no gaps at all. However, it is possible to create layouts with more irregular gap sizes (see the comments below on user-defined layouts).
 
 ```{r}
-detector_pilatus[11:12]
-detector_perkinfull[11:12]
+print("Pilatus: Gap Cols and Rows")
+detector_pilatus$gap_col_sizes
+detector_pilatus$gap_row_sizes
+
+print("Perkinfull: Gap Cols and Rows")
+detector_perkinfull$gap_col_sizes
+detector_perkinfull$gap_row_sizes
 ```
 
 Slots 9 and 10 are calculated from the other slots; they contain the left and the right edge (column numbers) and the top and bottom edge (row numbers) of each module. If there are no gaps, such as in the three Perkin Elmer layouts, then the left edge of a module will be adjacent to the right edge of the previous one in the same row of the grid and the bottom edge of a module will be adjacent to the top edge of the previous one.
 
 ```{r}
-detector_pilatus[9:10]
-detector_perkinfull[9:10]
+print("Pilatus: Gap Cols and Rows")
+detector_pilatus$module_edges_col
+detector_pilatus$module_edges_row
+
+print("Perkinful: Gap Cols and Rows")
+detector_perkinfull$module_edges_col
+detector_perkinfull$module_edges_row
 ```
 
-Slot 13 is a consistency check. If the sizes of the modules add up to the correct numbers, the status is 0. Otherwise, it is 1 and a suitable error message will be produced. The remaining slots will be filled when the detector damage information is read in.
+The final attribute `detector_inconsistency` is a consistency check. If the sizes of the modules add up to the correct numbers, the status is 0. Otherwise, it is 1 and a suitable error message will be produced. The remaining slots will be filled when the detector damage information is read in.
 
 ```{r}
-detector_pilatus[13]
+detector_pilatus$detector_inconsistency
 ```
 
 
