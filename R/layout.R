@@ -23,6 +23,7 @@
 #' @param clumps_col col number of the module on which analysis was performed
 #' @param clumps_row row number of the module on which analysis was performed
 #' @return Detector object
+#' @keywords internal
 .Default_Detector <- function(name = "Default", date = NA,
                               detector_width = NA, detector_height = NA,
                               module_col_n = NA, module_row_n = NA,
@@ -377,6 +378,7 @@ detector_consist_check <- function(detector = NA) {
 #' @param m vector of module sizes
 #' @param g vectors of gap sizes
 #' @return Matrix with the information about the edges
+#' @keywords internal
 .detector_edges <- function(m, g) {
 
   if (((length(m) > 1) && (length(m) - 1 != length(g))) &&
@@ -410,6 +412,7 @@ detector_consist_check <- function(detector = NA) {
 #'
 #' @param detector Detector object
 #' @return Detector object
+#' @keywords internal
 .derive_detector <- function(detector) {
 
   module_edges_col <- .detector_edges(detector$module_col_sizes, detector$gap_col_sizes)
@@ -429,6 +432,7 @@ detector_consist_check <- function(detector = NA) {
 #'
 #' @param detector Detector object
 #' @return Point pattern dataset
+#' @keywords internal
 .create_ppp_edges_col <- function(detector) {
   vedges <- as.vector(detector$module_edges_col)
 
@@ -448,6 +452,7 @@ detector_consist_check <- function(detector = NA) {
 #'
 #' @param detector Detector object
 #' @return Point pattern dataset
+#' @keywords internal
 .create_ppp_edges_row <- function(detector) {
   vedges <- as.vector(detector$module_edges_row)
 
@@ -466,6 +471,7 @@ detector_consist_check <- function(detector = NA) {
 #'
 #' @param detector Detector object
 #' @return Point pattern dataset
+#' @keywords internal
 .create_ppp_gaps_col <- function(detector) {
   vgaps <- c()
 
@@ -489,6 +495,7 @@ detector_consist_check <- function(detector = NA) {
 #'
 #' @param detector Detector object
 #' @return Point pattern dataset
+#' @keywords internal
 .create_ppp_gaps_row <- function(detector) {
   vgaps <- c()
 
@@ -512,6 +519,7 @@ detector_consist_check <- function(detector = NA) {
 #'
 #' @param detector Detector object
 #' @return a list of ppps for edges and gaps
+#' @keywords internal
 .get_detector_ppps <- function(detector) {
   ppp_edges_col <- .create_ppp_edges_col(detector)
   ppp_edges_row <- .create_ppp_edges_row(detector)

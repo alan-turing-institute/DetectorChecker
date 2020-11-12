@@ -7,6 +7,7 @@
 #'   4 - larger cluster, unless it actually has the shape of a line,
 #'   5 (6): vertical line where closest edge is the upper (lower) one,
 #'   7 (8): horizontal line where closest edge is the right (left) one)
+#' @keywords internal
 .classify_clump <- function(detector, x, y) {
 
   # x and y are vectors of the same length
@@ -97,6 +98,7 @@
 #' @param detector Detector object
 #' @param xyc_pixel_df xyc_pixel_df
 #' @return data frame with clasification results
+#' @keywords internal
 .xyc_ply_func <- function(detector, xyc_pixel_df) {
   dataFrame <- plyr::ddply(xyc_pixel_df, "id",
     dplyr::summarise, # 1
@@ -146,6 +148,7 @@
 #'
 #' @param xyc_ply clums data frame
 #' @return events
+#' @keywords internal
 .xyc_pixels2events <- function(xyc_ply) {
   xyc_events <- xyc_ply[, c(6, 7, 1, 2, 3)]
 
@@ -177,6 +180,7 @@
 #' @param row Module row number
 #' @param col Module col number
 #' @return list of pixels and events
+#' @keywords internal
 .mask_to_events <- function(detector, dead_pix_mask, row = NA, col = NA) {
   if (!is.na(row) && !is.na(col)) {
     shift_left <- detector$module_edges_col[1, col] - 1
@@ -420,6 +424,7 @@ plot_module_events <- function(detector, col, row, file_path = NA, caption = TRU
 #' @param height Detector height
 #' @param width Detector width
 #' @return ppp object for damaged detector events
+#' @keywords internal
 .get_clump_event_ppp <- function(detector, incl_event_list = NA,
                                  height = NULL, width = NULL) {
   if (is.null(height)) {
@@ -452,6 +457,7 @@ plot_module_events <- function(detector, col, row, file_path = NA, caption = TRU
 #' @param detector Detector object
 #' @param incl_event_list a list of events to be included
 #' @return ppp object for damaged detector pixels
+#' @keywords internal
 .get_clump_pixel_ppp <- function(detector, incl_event_list = NA) {
   nr <- detector$detector_height
   nc <- detector$detector_width

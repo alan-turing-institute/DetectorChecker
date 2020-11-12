@@ -467,6 +467,7 @@ plot_pixels_angles <- function(detector, file_path = NA, row = NA, col = NA,
 #'
 #' @param v vector
 #' @return norm of the vector v
+#' @keywords internal
 .norm_vec <- function(v) {
   norm <- sqrt(sum(v^2))
   return(norm)
@@ -546,6 +547,7 @@ get_ppp_dead <- function(detector) {
 #' @param row module row number
 #' @param col module column number
 #' @return ppp of dead pixels
+#' @keywords internal
 .get_ppp_dead_module <- function(detector, row, col) {
   module_sel <- detector$pix_dead_modules[detector$pix_dead_modules[, 3] == col &
     detector$pix_dead_modules[, 4] == row, ]

@@ -4,6 +4,7 @@
 #'
 #' @param detector Detector object
 #' @return dead_modules
+#' @keywords internal
 .assign_module <- function(detector) {
   dead_n <- length(as.vector(detector$pix_dead[, 2]))
 
@@ -77,6 +78,7 @@ pixel_dist_ctr_linf <- function(detector) {
 #' @param x Coordinate of pixel
 #' @param size Size of module
 #' @return distance to closest edge
+#' @keywords internal
 .dist_closest_edge <- function(x, size) {
   # Why x-1? Because pixel locations start in 1, but we want both edges inside detector for symmetry
   return(min(x - 1, size - x))
@@ -179,6 +181,7 @@ dist_edge_min <- function(detector) {
 #' @param width Plot width
 #' @param height Plot height
 #' @param file_path Output path with an extension
+#' @keywords internal
 .plot_pixel <- function(data, width, height, file_path = NA) {
   if (!is.na(file_path)) {
     # starts the graphics device driver
