@@ -406,12 +406,8 @@ get_dead_stats <- function(detector) {
 #' @param detector Detector object
 #' @return A string with damaged pixels overall statitics
 #' @examples
-#' detector_perkinrefurb <- create_detector("PerkinElmerRefurbished")
-#' file_path <-  system.file("extdata", "PerkinElmerRefurbished", 
-#'                         "BadPixelMap_t2.bpm.xml", 
-#'                        package = "detectorchecker")
-#' detector_perkinrefurb <- load_pix_matrix(
-#' detector = detector_perkinrefurb, file_path = file_path)
+#' detc <- Excalibur_exp_1
+#' dead_stats_summary(detc)
 #'
 #' @export
 dead_stats_summary <- function(detector) {

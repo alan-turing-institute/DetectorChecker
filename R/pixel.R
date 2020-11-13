@@ -91,13 +91,8 @@ pixel_dist_ctr_linf <- function(detector) {
 #' @return Matrix containing pixel distances from closest corner
 #' @export
 #' @examples
-#' detector_perkinrefurb <- create_detector("PerkinElmerRefurbished")
-#' file_path <-  system.file("extdata", "PerkinElmerRefurbished", 
-#'                         "BadPixelMap_t2.bpm.xml", 
-#'                        package = "detectorchecker")
-#' detector_perkinrefurb <- load_pix_matrix(
-#' detector = detector_perkinrefurb, file_path = file_path)
-#' dist_corner(detector_perkinrefurb)
+#' detc <- Excalibur_exp_1
+#' dist_corner(detc)
 #' @export
 dist_corner <- function(detector) {
 
@@ -125,10 +120,13 @@ dist_corner <- function(detector) {
 }
 
 
-#' A function to calculate pixel horizontal distance to module edge
+#' Calculate horizontal distance from each pixel to module edge
 #'
 #' @param detector Detector object
 #' @return distance matrix
+#' @examples
+#' detc <- Excalibur_exp_1
+#' dist_edge_col(detc)
 #' @export
 dist_edge_col <- function(detector) {
   dist <- matrix(NA, nrow = detector$detector_height, ncol = detector$detector_width)
