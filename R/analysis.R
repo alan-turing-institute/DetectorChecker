@@ -398,10 +398,21 @@ get_dead_stats <- function(detector) {
   return(detector)
 }
 
-#' Summary of damaged pixels
+#' Summary of damaged pixels for a given detector
+#'
+#' Compute summary statistics for a detector oject.
+#' Ensure a damaged pixel matrix has been loaded with \code{load_pix_matrix}
 #'
 #' @param detector Detector object
 #' @return A string with damaged pixels overall statitics
+#' @examples
+#' detector_perkinrefurb <- create_detector("PerkinElmerRefurbished")
+#' file_path <-  system.file("extdata", "PerkinElmerRefurbished", 
+#'                         "BadPixelMap_t2.bpm.xml", 
+#'                        package = "detectorchecker")
+#' detector_perkinrefurb <- load_pix_matrix(
+#' detector = detector_perkinrefurb, file_path = file_path)
+#'
 #' @export
 dead_stats_summary <- function(detector) {
   detector <- get_dead_stats(detector)
@@ -413,7 +424,7 @@ dead_stats_summary <- function(detector) {
   summary <- paste(summary, "Chi-Squared Test results:\n", "")
   summary <- paste(summary, "Xsq = ", detector$dead_stats$Chisq_s, ", Xsq df = ", detector$dead_stats$Chisq_df, ", Xsq p = ", detector$dead_stats$Chisq_p, "\n", "")
 
-  return(summary)
+  return(cat(summary))
 }
 
 #' A function to plot NN angles of dead pixels of detector or module
