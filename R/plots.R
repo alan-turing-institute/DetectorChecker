@@ -17,7 +17,7 @@ plot_density <- function(ppp_obj, caption, file_path = NA, adjust = 0.5, color =
 
   if (!is.na(file_path)) {
     # starts the graphics device driver
-    ini_graphics(file_path = file_path)
+    .ini_graphics(file_path = file_path)
   }
 
   image(density(ppp_obj, adjust = adjust), main = caption, col = color)
@@ -43,7 +43,7 @@ plot_arrows <- function(ppp_obj, caption, file_path = NA) {
 
   if (!is.na(file_path)) {
     # starts the graphics device driver
-    ini_graphics(file_path = file_path)
+    .ini_graphics(file_path = file_path)
   }
 
   PPPnn <- ppp_obj[spatstat::nnwhich(ppp_obj)]
@@ -74,7 +74,7 @@ plot_angles <- function(ppp_obj, caption, file_path = NA) {
 
   if (!is.na(file_path)) {
     # starts the graphics device driver
-    ini_graphics(file_path = file_path)
+    .ini_graphics(file_path = file_path)
   }
 
   spatstat::rose(spatstat::nnorient(ppp_obj, sigma = 4),
@@ -113,7 +113,7 @@ plot_kfg <- function(ppp_obj, func, file_path = NA, caption = TRUE) {
 
   if (!is.na(file_path)) {
     # starts the graphics device driver
-    ini_graphics(file_path = file_path)
+    .ini_graphics(file_path = file_path)
   }
 
   if (func == "K") {
@@ -173,7 +173,7 @@ plot_counts <- function(module_count_arr, caption, file_path = NA) {
 
   if (!is.na(file_path)) {
     # starts the graphics device driver
-    ini_graphics(file_path = file_path)
+    .ini_graphics(file_path = file_path)
   }
 
   plot(module_count_arr, main = caption)
