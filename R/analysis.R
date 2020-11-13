@@ -1,6 +1,8 @@
 #' @title Analysis module
 
+
 #' A list to represent dead pixels statistics summary
+#' Added to a detector by \code{get_dead_stats}.
 #'
 #' @param dead_n Total number of damaged pixels:
 #' @param module_n Total number of modules
