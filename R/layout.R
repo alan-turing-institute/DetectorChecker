@@ -302,8 +302,8 @@ create_detector <- function(detector_name) {
 #' Basic checks if parameters entered (slightly redundant on purpose) add up
 #'
 #' @param detector Detector object
-#' @export
-detector_consist_check <- function(detector = NA) {
+#' @keywords internal
+.detector_consist_check <- function(detector = NA) {
   if (is.list(detector)) {
     error <- ""
 
@@ -757,7 +757,7 @@ readin_detector <- function(file_path) {
     detector_inconsistency = 0
   )
 
-  if (detector_consist_check(detector)) {
+  if (.detector_consist_check(detector)) {
     return(detector)
   } else {
     return(NA)

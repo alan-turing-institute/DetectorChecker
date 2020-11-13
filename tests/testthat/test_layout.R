@@ -17,27 +17,27 @@ test_that("Initialization of detector objects", {
   # Excalibur detector unit test
   detector <- Excalibur_Detector()
   expect_equal(detector$name, "Excalibur")
-  detector_consist_check(detector)
+  .detector_consist_check(detector)
 
   # Perkinelmer detector unit test
   detector <- PerkinElmerFull_Detector()
   expect_equal(detector$name, "PerkinElmerFull")
-  detector_consist_check(detector)
+  .detector_consist_check(detector)
 
   # PerkinElmerCropped1600 detector unit test
   detector <- PerkinElmerCropped1600_Detector()
   expect_equal(detector$name, "PerkinElmerCropped1600")
-  detector_consist_check(detector)
+  .detector_consist_check(detector)
 
   # PerkinElmerRefurbished detector unit test
   detector <- PerkinElmerRefurbished_Detector()
   expect_equal(detector$name, "PerkinElmerRefurbished")
-  detector_consist_check(detector)
+  .detector_consist_check(detector)
 
   # Pilatus detector unit test
   detector <- Pilatus_Detector()
   expect_equal(detector$name, "Pilatus")
-  detector_consist_check(detector)
+  .detector_consist_check(detector)
 })
 
 context("Deriving additional detector elements")
