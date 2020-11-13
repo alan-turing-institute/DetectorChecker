@@ -235,6 +235,7 @@
 #' @param detector Detector object
 #' @param rrc raster clumps objects
 #' @return data frame of the modules relating the clump
+#' @keywords internal
 .clump_module <- function(detector, rrc) {
   xy_df_temp <- data.frame(ceiling(raster::xyFromCell(rrc, which(!is.na(raster::getValues(rrc))))))
 
@@ -251,12 +252,13 @@
   return(dataFrame)
 }
 
-#' Locates and clasifies clumps of a damaged detector
+#' Locates and classifies clumps of damaged pixels in a detector.
+#' Adds an events matrix attribute to a \code{detector}
 #'
 #' @param detector Detector object
 #' @param row Module row number
 #' @param col Module column number
-#' @return Detector with events matrix
+#' @return Detector with events matrix attribute
 #' @export
 find_clumps <- function(detector, row = NA, col = NA) {
 
@@ -397,7 +399,7 @@ plot_module_events <- function(detector, col, row, file_path = NA, caption = TRU
   if (caption) {
     main_caption <- paste(detector_events$name, " with damage events\n (row=", row, " col=", col, ", black=module edges)", sep="")
     paste("Arrow of events (row=", row, " col=", col, ")", sep="")
-    
+
   } else {
     main_caption <- ""
   }

@@ -80,7 +80,7 @@
 .PerkinElmerRefurbished_name <- "PerkinElmerRefurbished"
 .Pilatus_name <- "Pilatus"
 
-#' A list of available detectors
+#' A list of available preconfigured detectors. These can be created by \code{create_detector}
 #' @export
 available_detectors <- c(
   .Pilatus_name, .PerkinElmerFull_name,
@@ -227,10 +227,11 @@ is.detector <- function(x) inherits(x, "detector")
 
 # Detector selection -------------------------------------------------------------
 
-#' Checks whether specified detector is available
+#' Checks whether `\code{detector_name} is preconfigured.
+#' If TRUE can be created by \code{create_detector}
 #'
 #' @param detector_name The name of the detector
-#' @return True or False
+#' @return Boolean
 #' @export
 check_detector_avail <- function(detector_name) {
   avail <- detector_name %in% available_detectors

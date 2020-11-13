@@ -4,6 +4,7 @@
 #'
 #' @param m A square matrix
 #' @return tr The trace value
+#' @keywords internal
 .tr <- function(m) {
   tr <- NA
 
