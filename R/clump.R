@@ -286,8 +286,9 @@ find_clumps <- function(detector, row = NA, col = NA) {
 #' @param row Module row number
 #' @param col Module column number
 #' @return detector_events Detector object
+#' @keywords internal
 #' @export
-check_clumps <- function(detector, row = NA, col = NA) {
+.check_clumps <- function(detector, row = NA, col = NA) {
 
   if (all(is.na(detector$clumps) == TRUE)) {
     detector_events <- detectorchecker::find_clumps(detector, row = row, col = col)
@@ -328,7 +329,7 @@ plot_events <- function(detector, col = NA, row = NA, file_path = NA, caption = 
   } else {
 
     # check if the correct clumps were found
-    detector_events <- check_clumps(detector)
+    detector_events <- .check_clumps(detector)
 
     if (!caption) {
       main_caption <- ""
@@ -384,7 +385,7 @@ plot_module_events <- function(detector, col, row, file_path = NA, caption = TRU
   .check_select(detector, row, col)
 
   # check if the correct clumps were found
-  detector_events <- check_clumps(detector, row = row, col = col)
+  detector_events <- .check_clumps(detector, row = row, col = col)
 
   if (!is.na(file_path)) {
     # starts the graphics device driver
@@ -486,7 +487,7 @@ plot_module_events <- function(detector, col, row, file_path = NA, caption = TRU
 get_events_matrix <- function(detector, incl_event_list = NA) {
 
   # check if the correct clumps were found
-  detector_events <- check_clumps(detector)
+  detector_events <- .check_clumps(detector)
 
   if (suppressWarnings(is.list(incl_event_list))) {
     events <- detector_events$clumps$events[detector_events$clumps$events$class %in% incl_event_list, ]
@@ -678,7 +679,7 @@ plot_events_density <- function(detector, file_path = NA, adjust = 0.5,
                                 incl_event_list = NA, color = topo.colors(50)) {
 
   # check if the correct clumps were found
-  detector_events <- check_clumps(detector, row = row, col = col)
+  detector_events <- .check_clumps(detector, row = row, col = col)
 
   main_caption <- ""
 
@@ -723,7 +724,7 @@ plot_events_arrows <- function(detector, file_path = NA,
                                incl_event_list = NA) {
 
   # check if the correct clumps were found
-  detector_events <- check_clumps(detector, row = row, col = col)
+  detector_events <- .check_clumps(detector, row = row, col = col)
 
   main_caption <- ""
 
@@ -768,7 +769,7 @@ plot_events_angles <- function(detector, file_path = NA,
                                incl_event_list = NA) {
 
   # check if the correct clumps were found
-  detector_events <- check_clumps(detector, row = row, col = col)
+  detector_events <- .check_clumps(detector, row = row, col = col)
 
   main_caption <- ""
 
@@ -813,7 +814,7 @@ plot_events_kfg <- function(detector, func, file_path = NA,
                             row = NA, col = NA, caption = TRUE,
                             incl_event_list = NA) {
 
-  detector_events <- check_clumps(detector, row = row, col = col)
+  detector_events <- .check_clumps(detector, row = row, col = col)
 
   if (!is.na(row) && !is.na(col)) {
     # check whether the row and col numbers are correct
@@ -847,7 +848,7 @@ plot_events_count <- function(detector, file_path = NA,
                               row = NA, col = NA, caption = TRUE,
                               incl_event_list = NA) {
 
-  detector_events <- check_clumps(detector, row = row, col = col)
+  detector_events <- .check_clumps(detector, row = row, col = col)
 
   main_caption <- ""
   if (!caption) par(mar = c(0, 0, 0, 0))
