@@ -94,6 +94,8 @@ available_detectors <- c(
 #'
 #' @return Excalibur detector object
 #' @export
+#' @examples 
+#' detc <- Excalibur_Detector()
 Excalibur_Detector <- function() {
   name <- .Excalibur_name
 
@@ -573,7 +575,7 @@ plot_pixels <- function(detector, col = NA, row = NA, file_path = NA, caption = 
 
     if (!is.na(file_path)) {
       # starts the graphics device driver
-      ini_graphics(file_path = file_path)
+      .ini_graphics(file_path = file_path)
     }
 
     if (detector$pix_matrix_modified)
@@ -646,7 +648,7 @@ plot.detector <- function(detector, file_path = NA, caption = TRUE) {
 
   if (!is.na(file_path)) {
     # starts the graphics device driver
-    ini_graphics(file_path = file_path)
+    .ini_graphics(file_path = file_path)
   }
 
   edges_gaps <- .get_detector_ppps(detector)

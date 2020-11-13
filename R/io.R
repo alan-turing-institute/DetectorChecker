@@ -141,7 +141,8 @@
   return(v)
 }
 
-#' A function to load pixel data
+#' A function to load pixel data and set as attribute on a detector
+#'
 #'
 #' @param detector The name of the detector object to be used
 #' @param file_path Path(s) to the file(s) containing dead pixel information
@@ -203,7 +204,8 @@ load_pix_matrix <- function(detector, file_path) {
 #'
 #' @param file_path Output path with an extension
 #' @export
-ini_graphics <- function(file_path) {
+#' @keywords internal
+.ini_graphics <- function(file_path) {
   # choosing output format
   file_extension <- tools::file_ext(file_path)
 

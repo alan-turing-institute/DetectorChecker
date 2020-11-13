@@ -48,7 +48,7 @@ plot_module_pixels <- function(detector, col, row, file_path = NA,
 
   if (!is.na(file_path)) {
     # starts the graphics device driver
-    ini_graphics(file_path = file_path)
+    .ini_graphics(file_path = file_path)
   }
 
   shift_left <- detector$module_edges_col[1, col] - 1
@@ -117,7 +117,7 @@ plot_pixels_count <- function(detector, file_path = NA, row = NA, col = NA,
 
     if (!is.na(file_path)) {
       # starts the graphics device driver
-      ini_graphics(file_path = file_path)
+      .ini_graphics(file_path = file_path)
     }
 
     # check whether the row and col numbers are correct
@@ -247,100 +247,132 @@ plot_pixels_arrows <- function(detector, file_path = NA, row = NA, col = NA,
   return(dead_pix_coords)
 }
 
-#' Fits pixel distance from the centre using glm
+#' Predict dead pixels from the pixel's euclidean distance from the detector center
+#'
+#' Fit a logistic regression model using \code{glm}.
+#' Predicts dead pixels from the pixel's euclidean distance from the detector center
 #'
 #' @param detector Detector object
 #' @return Fitted model
+#' @examples
+#' glm_pixel_ctr_eucl(PerkinElmerFull_exp_1)
 #' @export
 glm_pixel_ctr_eucl <- function(detector) {
   dist <- pixel_dist_ctr_eucl(detector)
   pix_matrix <- detector$pix_matrix
 
-  glm_fit <- perform_glm(as.vector(pix_matrix) ~ as.vector(dist))
+  glm_fit <- .perform_glm(as.vector(pix_matrix) ~ as.vector(dist))
 
   return(glm_fit)
 }
 
-#' Fits pixel parallel maxima from the centre using glm
+#' Predict dead pixels from the pixel's parallel maxima
+#'
+#' Fit a logistic regression model using \code{glm}.
+#' Predicts dead pixels from the pixel's parallel maxima
 #'
 #' @param detector Detector object
 #' @return Fitted model
 #' @export
+#' @examples
+#' glm_pixel_ctr_linf(PerkinElmerFull_exp_1)
 glm_pixel_ctr_linf <- function(detector) {
   dist <- pixel_dist_ctr_linf(detector)
   pix_matrix <- detector$pix_matrix
 
-  glm_fit <- perform_glm(as.vector(pix_matrix) ~ as.vector(dist))
+  glm_fit <- .perform_glm(as.vector(pix_matrix) ~ as.vector(dist))
 
   return(glm_fit)
 }
 
-#' Fits pixel distances from the module edges by column using glm
+#' Predict dead pixels from pixel distances from the module edges by module column
+#'
+#' Fit a logistic regression model using \code{glm}.
+#' Predict dead pixels from pixel distances from the module edges by module column
 #'
 #' @param detector Detector object
 #' @return Fitted model
 #' @export
+#' @examples
+#' glm_pixel_dist_edge_col(PerkinElmerFull_exp_1)
 glm_pixel_dist_edge_col <- function(detector) {
   dist <- dist_edge_col(detector)
   pix_matrix <- detector$pix_matrix
 
-  glm_fit <- perform_glm(as.vector(pix_matrix) ~ as.vector(dist))
+  glm_fit <- .perform_glm(as.vector(pix_matrix) ~ as.vector(dist))
 
   return(glm_fit)
 }
 
-#' Fits pixel distances from module edges by row using glm
+#' Predict dead pixels from pixel distances from the module edges by module row
+#'
+#' Fit a logistic regression model using \code{glm}.
+#' Predict dead pixels from pixel distances from the module edges by module row
 #'
 #' @param detector Detector object
 #' @return Fitted model
 #' @export
+#' @examples
+#' glm_pixel_dist_edge_row(PerkinElmerFull_exp_1)
 glm_pixel_dist_edge_row <- function(detector) {
   dist <- dist_edge_row(detector)
   pix_matrix <- detector$pix_matrix
 
-  glm_fit <- perform_glm(as.vector(pix_matrix) ~ as.vector(dist))
+  glm_fit <- .perform_glm(as.vector(pix_matrix) ~ as.vector(dist))
 
   return(glm_fit)
 }
 
-#' Fits pixel distances to the nearest sub-panel edge using glm
+#' Predict dead pixels from pixel distances to the nearest sub-panel edge
 #'
+#' Fit a logistic regression model using \code{glm}.
+#' Predict dead pixels from pixel distances to the nearest sub-panel edge
 #' @param detector Detector object
 #' @return Fitted model
 #' @export
+#' @examples
+#' glm_pixel_dist_edge_min(PerkinElmerFull_exp_1)
 glm_pixel_dist_edge_min <- function(detector) {
   dist <- dist_edge_min(detector)
 
   pix_matrix <- detector$pix_matrix
 
-  glm_fit <- perform_glm(as.vector(pix_matrix) ~ as.vector(dist))
+  glm_fit <- .perform_glm(as.vector(pix_matrix) ~ as.vector(dist))
 
   return(glm_fit)
 }
 
-#' Fits pixel distances to the nearest corner using glm
+#' Predict dead pixels from pixel distances to the nearest corner
+#'
+#' Fit a logistic regression model using \code{glm}.
+#' Predict dead pixels from pixel distances to the nearest corner
 #'
 #' @param detector Detector object
 #' @return Fitted model
 #' @export
+#' @examples
+#' glm_pixel_dist_corner(PerkinElmerFull_exp_1)
 glm_pixel_dist_corner <- function(detector) {
   dist <- dist_corner(detector)
 
   pix_matrix <- detector$pix_matrix
 
-  glm_fit <- perform_glm(as.vector(pix_matrix) ~ as.vector(dist))
+  glm_fit <- .perform_glm(as.vector(pix_matrix) ~ as.vector(dist))
 
   return(glm_fit)
 }
 
-#' Performs glm fitting on the specified symbolic expression
+#' A simple wrapper around \code{glm()} with family = binomial(link = logit)
+#'
+#' Calls glm(formula = symb_expr, family = family)
 #'
 #' @param symb_expr symbolic description of the linear predictor
 #' @param family a description of the error distribution
 #' @return Fitted model
 #' @importFrom stats binomial glm
 #' @export
-perform_glm <- function(symb_expr, family = binomial(link = logit)) {
+#' @keywords internal
+.perform_glm <- function(symb_expr, family = binomial(link = logit)) {
 
   #' @return glm_git fitted model
   glm_result <- glm(formula = symb_expr, family = family)
@@ -354,6 +386,9 @@ perform_glm <- function(symb_expr, family = binomial(link = logit)) {
 #' @return Detector object with dead_stats attribute
 #' @importFrom stats chisq.test
 #' @export
+#' @examples
+#' detc <- Excalibur_exp_1
+#' get_dead_stats(detc)$dead_stats
 get_dead_stats <- function(detector) {
   ppp_dead <- get_ppp_dead(detector)
 
@@ -532,10 +567,17 @@ plot_pixels_angles <- function(detector, file_path = NA, row = NA, col = NA,
 # #' @export
 # orientcolfct <- function(b) orient_dist_vec(b[1:2], b[3:4])$orient
 
-#' Generates ppp for the dead pixels
+#' Generates point pattern dataset (ppp) for the dead pixels
+#'
+#' Uses \code{spatstat::ppp} internally.
+#' Creates an object of class "ppp" representing a point pattern dataset in the two-dimensional plane.
+#' See \href{https://www.rdocumentation.org/packages/spatstat/versions/1.63-3/topics/ppp}{spatstat} docs for details.
 #'
 #' @param detector Detector object
 #' @return ppp of dead pixels
+#' @examples
+#' detc <- PerkinElmerFull_exp_1
+#' get_ppp_dead(detc)
 #' @export
 get_ppp_dead <- function(detector) {
   if (suppressWarnings(any(is.na(detector$pix_dead)))) {

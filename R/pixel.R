@@ -27,10 +27,12 @@
 
 # Pixel analysis functions -----------------------------------------------------
 
-#' A function to calculate euclidean distance from the centre for each pixel
+#' A function to calculate euclidean distance from the centre of a module for each pixel
 #'
 #' @param detector Detector object
 #' @return Matrix of euclidean distances
+#' @examples
+#' pixel_dist_ctr_eucl(PerkinElmerFull_Detector())
 #' @export
 pixel_dist_ctr_eucl <- function(detector) {
   dist <- matrix(NA, nrow = detector$detector_height, ncol = detector$detector_width)
@@ -120,7 +122,7 @@ dist_corner <- function(detector) {
 }
 
 
-#' Calculate horizontal distance from each pixel to module edge
+#' Calculate horizontal distance from each pixel to nearest module edge
 #'
 #' @param detector Detector object
 #' @return distance matrix
@@ -149,11 +151,14 @@ dist_edge_col <- function(detector) {
 }
 
 
-#' A function to calculate pixel vertical distance to module edge
+#' Calculate vertical distance from each pixel to nearest module edge
 #'
 #' @param detector Detector object
 #' @return distance matrix
 #' @export
+#' @examples
+#' detc <- Excalibur_exp_1
+#' dist_edge_row(detc)
 dist_edge_row <- function(detector) {
   dist <- matrix(NA, nrow = detector$detector_height, ncol = detector$detector_width)
 
@@ -192,7 +197,7 @@ dist_edge_min <- function(detector) {
 .plot_pixel <- function(data, width, height, file_path = NA) {
   if (!is.na(file_path)) {
     # starts the graphics device driver
-    ini_graphics(file_path = file_path)
+    .ini_graphics(file_path = file_path)
   }
 
   iw <- c(1:width)
@@ -346,9 +351,13 @@ plot_pixel_dist_edge <- function(detector, file_path = NA) {
 
 #' Creates a mask matrix of dead pixels
 #'
+#' Converts the pix_dead attribute of a detector (NX2 list) to a matrix of 1 and 0 (1 for dead pixel)
+#'
 #' @param detector Detector object
 #' @return dead pixel mask
 #' @export
+#' @examples
+#' detc <- Excalibur_exp_1
 get_dead_pix_mask <- function(detector) {
 
   # TODO: check because we needed to swap detector_width with detector_height.

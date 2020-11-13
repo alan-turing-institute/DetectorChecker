@@ -275,7 +275,7 @@ find_clumps <- function(detector, row = NA, col = NA) {
   detector$clumps_col <- col
 
   # getting the events mask (0 and 1 s)
-  detector$clumps$events_matrix <- get_events_mask(detector)
+  detector$clumps$events_matrix <- .get_events_mask(detector)
 
   return(detector)
 }
@@ -341,7 +341,7 @@ plot_events <- function(detector, col = NA, row = NA, file_path = NA, caption = 
 
     if (!is.na(file_path)) {
       # starts the graphics device driver
-      ini_graphics(file_path = file_path)
+      .ini_graphics(file_path = file_path)
     }
 
     ppp_events <- .get_clump_event_ppp(detector_events, incl_event_list = incl_event_list)
@@ -389,7 +389,7 @@ plot_module_events <- function(detector, col, row, file_path = NA, caption = TRU
 
   if (!is.na(file_path)) {
     # starts the graphics device driver
-    ini_graphics(file_path = file_path)
+    .ini_graphics(file_path = file_path)
   }
 
   width <- detector_events$module_col_sizes[col]
@@ -480,10 +480,17 @@ plot_module_events <- function(detector, col, row, file_path = NA, caption = TRU
 
 #' Generates events matrix for selected events
 #'
+#' Generates events mask (a matrix with pixels as 0 and events as 1) indicating if a pixel is in an event
+#' as calculated by \code{find_clumps(detc)}
+#'
 #' @param detector Detector object
 #' @param incl_event_list a list of events to be included
 #' @return Events matrix
 #' @export
+#' @examples
+#' detc <- Excalibur_exp_1
+#' detc_with_clumps <- find_clumps(detc) 
+#' get_events_matrix(detc_with_clumps)
 get_events_matrix <- function(detector, incl_event_list = NA) {
 
   # check if the correct clumps were found
@@ -499,17 +506,25 @@ get_events_matrix <- function(detector, incl_event_list = NA) {
 
   detector_events$clumps$events <- events
 
-  events_matrix <- get_events_mask(detector_events)
+  events_matrix <- .get_events_mask(detector_events)
 
   return(events_matrix)
 }
 
-#' Generates events matrix (a matrix with pixels as 0 and events as 1)
+#' Generates events mask (a matrix with pixels as 0 and events as 1)
+#'
+#' Generates events mask (a matrix with pixels as 0 and events as 1) indicating if a pixel is in an event
+#' as calculated by \code{find_clumps(detc)}
 #'
 #' @param detector Detector object
 #' @return events mask
 #' @export
-get_events_mask <- function(detector) {
+#' @examples
+#' detc <- Excalibur_exp_1
+#' detc_with_clumps <- find_clumps(detc)
+#' get_events_mask(detc_with_clumps)
+#' @keywords internal
+.get_events_mask <- function(detector) {
   mask <- matrix(0, nrow = detector$detector_width, ncol = detector$detector_height)
 
   events_cnt <- nrow(detector$clumps$events)
@@ -537,7 +552,7 @@ glm_events_ctr_eucl <- function(detector, incl_event_list = NA) {
 
   dist <- pixel_dist_ctr_eucl(detector)
 
-  glm_fit <- perform_glm(as.vector(events_matrix) ~ as.vector(dist))
+  glm_fit <- .perform_glm(as.vector(events_matrix) ~ as.vector(dist))
 
   return(glm_fit)
 }
@@ -554,7 +569,7 @@ glm_events_ctr_linf <- function(detector, incl_event_list = NA) {
 
   dist <- pixel_dist_ctr_linf(detector)
 
-  glm_fit <- perform_glm(as.vector(events_matrix) ~ as.vector(dist))
+  glm_fit <- .perform_glm(as.vector(events_matrix) ~ as.vector(dist))
 
   return(glm_fit)
 }
@@ -571,7 +586,7 @@ glm_events_dist_edge_col <- function(detector, incl_event_list = NA) {
 
   dist <- dist_edge_col(detector)
 
-  glm_fit <- perform_glm(as.vector(events_matrix) ~ as.vector(dist))
+  glm_fit <- .perform_glm(as.vector(events_matrix) ~ as.vector(dist))
 
   return(glm_fit)
 }
@@ -588,7 +603,7 @@ glm_events_dist_edge_row <- function(detector, incl_event_list = NA) {
 
   dist <- dist_edge_row(detector)
 
-  glm_fit <- perform_glm(as.vector(events_matrix) ~ as.vector(dist))
+  glm_fit <- .perform_glm(as.vector(events_matrix) ~ as.vector(dist))
 
   return(glm_fit)
 }
@@ -605,7 +620,7 @@ glm_events_dist_edge_min <- function(detector, incl_event_list = NA) {
 
   dist <- dist_edge_min(detector)
 
-  glm_fit <- perform_glm(as.vector(events_matrix) ~ as.vector(dist))
+  glm_fit <- .perform_glm(as.vector(events_matrix) ~ as.vector(dist))
 
   return(glm_fit)
 }
@@ -622,7 +637,7 @@ glm_events_dist_corner <- function(detector, incl_event_list = NA) {
 
   dist <- dist_corner(detector)
 
-  glm_fit <- perform_glm(as.vector(events_matrix) ~ as.vector(dist))
+  glm_fit <- .perform_glm(as.vector(events_matrix) ~ as.vector(dist))
 
   return(glm_fit)
 }
@@ -645,7 +660,7 @@ glm_events_dist_corner <- function(detector, incl_event_list = NA) {
 
 #   if (!is.na(file_path)) {
 #     # starts the graphics device driver
-#     ini_graphics(file_path = file_path)
+#     .ini_graphics(file_path = file_path)
 #   }
 
 #   ppp_pixels <- .get_clump_pixel_ppp(detector, incl_event_list = incl_event_list)
