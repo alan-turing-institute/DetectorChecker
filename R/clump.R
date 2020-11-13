@@ -489,7 +489,7 @@ plot_module_events <- function(detector, col, row, file_path = NA, caption = TRU
 #' @export
 #' @examples
 #' detc <- Excalibur_exp_1
-#' detc_with_clumps <- find_clumps(detc) 
+#' detc_with_clumps <- find_clumps(detc)
 #' get_events_matrix(detc_with_clumps)
 get_events_matrix <- function(detector, incl_event_list = NA) {
 
@@ -522,7 +522,7 @@ get_events_matrix <- function(detector, incl_event_list = NA) {
 #' @examples
 #' detc <- Excalibur_exp_1
 #' detc_with_clumps <- find_clumps(detc)
-#' get_events_mask(detc_with_clumps)
+#' .get_events_mask(detc_with_clumps)
 #' @keywords internal
 .get_events_mask <- function(detector) {
   mask <- matrix(0, nrow = detector$detector_width, ncol = detector$detector_height)
