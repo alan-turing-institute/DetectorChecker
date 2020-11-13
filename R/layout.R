@@ -228,10 +228,13 @@ is.detector <- function(x) inherits(x, "detector")
 # Detector selection -------------------------------------------------------------
 
 #' Checks whether `\code{detector_name} is preconfigured.
+#'
 #' If TRUE can be created by \code{create_detector}
 #'
 #' @param detector_name The name of the detector
 #' @return Boolean
+#' @examples
+#' check_detector_avail('Pilatus')
 #' @export
 check_detector_avail <- function(detector_name) {
   avail <- detector_name %in% available_detectors
@@ -260,10 +263,15 @@ check_detector_avail <- function(detector_name) {
   return(avail)
 }
 
-#' Checks whether detector is available, if so, creates a Detector object
+#' Create a Detector object
+#'
+#' Create a Detector object.
+#' If the \code{detector_name} is not available will raise an exception.
 #'
 #' @param detector_name The name of the detector
 #' @return Detector S3 object
+#' @examples
+#' detc <- create_detector(available_detectors[1])
 #' @export
 create_detector <- function(detector_name) {
   detector <- NA
