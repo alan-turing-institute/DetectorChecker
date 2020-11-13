@@ -230,8 +230,9 @@ plot_pixels_arrows <- function(detector, file_path = NA, row = NA, col = NA,
 #'
 #' @param pix_matrix pixel matrix with dead pixels flagged with 1
 #' @return Table containing dead pixel coordinates
+#' @keywords internal
 #' @export
-dead_pix_coords <- function(pix_matrix) {
+.dead_pix_coords <- function(pix_matrix) {
 
   # Matrix of damaged pixels coordinates
   # The first col of dead (dead[ , 1]) corresponds to the detector width dimension (col in Detector).

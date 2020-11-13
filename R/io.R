@@ -186,7 +186,7 @@ load_pix_matrix <- function(detector, file_path) {
 #' @param pix_matrix A pixel matrix
 #' @keywords internal
 .assign_pixel_matrix <- function(detector, pix_matrix) {
-  pix_dead <- dead_pix_coords(pix_matrix)
+  pix_dead <- .dead_pix_coords(pix_matrix)
 
   detector$pix_matrix <- pix_matrix
   detector$pix_dead <- pix_dead
