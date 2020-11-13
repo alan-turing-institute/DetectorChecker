@@ -11,9 +11,8 @@
 #' @param Chisq_df Chi-Squared degrees of freedom
 #' @param Chisq_p Chi-Squared p-value
 #' @return Dead_Stats list
-#' @keywords internal
 #' @export
-.Dead_Stats <- function(dead_n = NA, module_n = NA, module_count_arr = NA,
+Dead_Stats <- function(dead_n = NA, module_n = NA, module_count_arr = NA,
                        module_count = NA, avg_dead_mod = NA,
                        Chisq_s = NA, Chisq_df = NA, Chisq_p = NA) {
   dead_stats <- list(
@@ -385,7 +384,7 @@ get_dead_stats <- function(detector) {
     Chisq_p <- Chisq$p.value
   }
 
-  dead_stats <- .Dead_Stats(
+  dead_stats <- Dead_Stats(
     dead_n = dead_n, module_n = module_n,
     module_count_arr = module_count_arr, module_count = module_count,
     avg_dead_mod = avg_dead_mod, Chisq_s = Chisq_s,
