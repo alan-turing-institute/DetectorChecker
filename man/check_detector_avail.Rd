@@ -2,7 +2,7 @@
 % Please edit documentation in R/layout.R
 \name{check_detector_avail}
 \alias{check_detector_avail}
-\title{Checks whether specified detector is available}
+\title{Checks whether `\code{detector_name} is preconfigured.}
 \usage{
 check_detector_avail(detector_name)
 }
@@ -10,8 +10,11 @@ check_detector_avail(detector_name)
 \item{detector_name}{The name of the detector}
 }
 \value{
-True or False
+Boolean
 }
 \description{
-Checks whether specified detector is available
+If TRUE can be created by \code{create_detector}
+}
+\examples{
+check_detector_avail('Pilatus')
 }

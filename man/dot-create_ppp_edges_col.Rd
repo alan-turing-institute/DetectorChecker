@@ -15,3 +15,4 @@ Point pattern dataset
 \description{
 This is the ppp_edges_col creation function
 }
+\keyword{internal}

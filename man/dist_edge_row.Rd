@@ -2,7 +2,7 @@
 % Please edit documentation in R/pixel.R
 \name{dist_edge_row}
 \alias{dist_edge_row}
-\title{A function to calculate pixel vertical distance to module edge}
+\title{Calculate vertical distance from each pixel to nearest module edge}
 \usage{
 dist_edge_row(detector)
 }
@@ -13,5 +13,9 @@ dist_edge_row(detector)
 distance matrix
 }
 \description{
-A function to calculate pixel vertical distance to module edge
+Calculate vertical distance from each pixel to nearest module edge
+}
+\examples{
+detc <- Excalibur_exp_1
+dist_edge_row(detc)
 }

@@ -17,3 +17,4 @@ data frame with clasification results
 \description{
 Clasifies clumps with respect to xy coordinates.
 }
+\keyword{internal}

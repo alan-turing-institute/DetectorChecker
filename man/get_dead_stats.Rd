@@ -15,3 +15,7 @@ Detector object with dead_stats attribute
 \description{
 Generate summary of damaged pixels and add as a dead_stats attribute to the detector object
 }
+\examples{
+detc <- Excalibur_exp_1
+get_dead_stats(detc)$dead_stats
+}

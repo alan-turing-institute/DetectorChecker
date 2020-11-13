@@ -2,7 +2,7 @@
 % Please edit documentation in R/pixel.R
 \name{dist_corner}
 \alias{dist_corner}
-\title{A function to calculate pixel distances from corners}
+\title{A function to calculate pixel distances from the closest corner}
 \usage{
 dist_corner(detector)
 }
@@ -10,8 +10,12 @@ dist_corner(detector)
 \item{detector}{Detector object}
 }
 \value{
-Matrix containing pixel distances from corners
+Matrix containing pixel distances from closest corner
 }
 \description{
-A function to calculate pixel distances from corners
+A function to calculate pixel distances from the closest corner
+}
+\examples{
+detc <- Excalibur_exp_1
+dist_corner(detc)
 }

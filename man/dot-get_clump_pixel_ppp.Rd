@@ -17,3 +17,4 @@ ppp object for damaged detector pixels
 \description{
 Creates ppp object for damaged detector pixels
 }
+\keyword{internal}

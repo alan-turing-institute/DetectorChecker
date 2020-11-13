@@ -2,7 +2,7 @@
 % Please edit documentation in R/analysis.R
 \name{dead_stats_summary}
 \alias{dead_stats_summary}
-\title{Summary of damaged pixels}
+\title{Summary of damaged pixels for a given detector}
 \usage{
 dead_stats_summary(detector)
 }
@@ -13,5 +13,11 @@ dead_stats_summary(detector)
 A string with damaged pixels overall statitics
 }
 \description{
-Summary of damaged pixels
+Compute summary statistics for a detector oject.
+Ensure a damaged pixel matrix has been loaded with \code{load_pix_matrix}
+}
+\examples{
+detc <- Excalibur_exp_1
+dead_stats_summary(detc)
+
 }

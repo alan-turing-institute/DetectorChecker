@@ -15,3 +15,4 @@ Numeric value
 \description{
 Internal function to convert string values to numbers
 }
+\keyword{internal}

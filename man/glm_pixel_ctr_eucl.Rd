@@ -2,7 +2,7 @@
 % Please edit documentation in R/analysis.R
 \name{glm_pixel_ctr_eucl}
 \alias{glm_pixel_ctr_eucl}
-\title{Fits pixel distance from the centre using glm}
+\title{Predict dead pixels from the pixel's euclidean distance from the detector center}
 \usage{
 glm_pixel_ctr_eucl(detector)
 }
@@ -13,5 +13,9 @@ glm_pixel_ctr_eucl(detector)
 Fitted model
 }
 \description{
-Fits pixel distance from the centre using glm
+Fit a logistic regression model using \code{glm}.
+Predicts dead pixels from the pixel's euclidean distance from the detector center
+}
+\examples{
+glm_pixel_ctr_eucl(PerkinElmerFull_exp_1)
 }

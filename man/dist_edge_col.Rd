@@ -2,7 +2,7 @@
 % Please edit documentation in R/pixel.R
 \name{dist_edge_col}
 \alias{dist_edge_col}
-\title{A function to calculate pixel horizontal distance to module edge}
+\title{Calculate horizontal distance from each pixel to nearest module edge}
 \usage{
 dist_edge_col(detector)
 }
@@ -13,5 +13,9 @@ dist_edge_col(detector)
 distance matrix
 }
 \description{
-A function to calculate pixel horizontal distance to module edge
+Calculate horizontal distance from each pixel to nearest module edge
+}
+\examples{
+detc <- Excalibur_exp_1
+dist_edge_col(detc)
 }

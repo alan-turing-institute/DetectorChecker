@@ -76,3 +76,4 @@ Detector object
 Detector module
 A S3 class to represent a detector.
 }
+\keyword{internal}

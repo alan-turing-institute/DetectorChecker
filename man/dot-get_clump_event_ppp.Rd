@@ -26,3 +26,4 @@ ppp object for damaged detector events
 \description{
 Creates ppp object for damaged detector events
 }
+\keyword{internal}

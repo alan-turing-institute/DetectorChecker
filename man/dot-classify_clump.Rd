@@ -22,3 +22,4 @@ the class of a clump (1 - singleton, 2 - double, 3 - triplet,
 \description{
 Clasifies a clump
 }
+\keyword{internal}

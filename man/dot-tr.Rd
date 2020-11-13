@@ -17,3 +17,4 @@ tr The trace value
 Utils module
 Calculates the trace value of a square matrix
 }
+\keyword{internal}

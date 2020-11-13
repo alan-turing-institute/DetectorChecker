@@ -15,3 +15,4 @@ norm of the vector v
 \description{
 Estimates the norm of a vector
 }
+\keyword{internal}

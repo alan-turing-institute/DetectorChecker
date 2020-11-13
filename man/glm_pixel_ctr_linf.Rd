@@ -2,7 +2,7 @@
 % Please edit documentation in R/analysis.R
 \name{glm_pixel_ctr_linf}
 \alias{glm_pixel_ctr_linf}
-\title{Fits pixel parallel maxima from the centre using glm}
+\title{Predict dead pixels from the pixel's parallel maxima}
 \usage{
 glm_pixel_ctr_linf(detector)
 }
@@ -13,5 +13,9 @@ glm_pixel_ctr_linf(detector)
 Fitted model
 }
 \description{
-Fits pixel parallel maxima from the centre using glm
+Fit a logistic regression model using \code{glm}.
+Predicts dead pixels from the pixel's parallel maxima
+}
+\examples{
+glm_pixel_ctr_linf(PerkinElmerFull_exp_1)
 }

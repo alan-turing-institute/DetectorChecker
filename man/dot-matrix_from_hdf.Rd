@@ -17,3 +17,4 @@ Data of a combined dataset from hdf files
 \description{
 Reads in hdf file(s) and returns a pixel matrix
 }
+\keyword{internal}

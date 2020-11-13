@@ -15,3 +15,4 @@ Point pattern dataset
 \description{
 Creates ppp object of horizontal gaps
 }
+\keyword{internal}

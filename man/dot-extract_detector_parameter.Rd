@@ -17,3 +17,4 @@ parameter value
 \description{
 Checks whether a detector parameter is in the file string
 }
+\keyword{internal}

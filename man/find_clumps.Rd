@@ -2,7 +2,8 @@
 % Please edit documentation in R/clump.R
 \name{find_clumps}
 \alias{find_clumps}
-\title{Locates and clasifies clumps of a damaged detector}
+\title{Locates and classifies clumps of damaged pixels in a detector.
+Adds an events matrix attribute to a \code{detector}}
 \usage{
 find_clumps(detector, row = NA, col = NA)
 }
@@ -14,8 +15,9 @@ find_clumps(detector, row = NA, col = NA)
 \item{col}{Module column number}
 }
 \value{
-Detector with events matrix
+Detector with events matrix attribute
 }
 \description{
-Locates and clasifies clumps of a damaged detector
+Locates and classifies clumps of damaged pixels in a detector.
+Adds an events matrix attribute to a \code{detector}
 }

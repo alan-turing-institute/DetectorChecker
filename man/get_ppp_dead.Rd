@@ -2,7 +2,7 @@
 % Please edit documentation in R/analysis.R
 \name{get_ppp_dead}
 \alias{get_ppp_dead}
-\title{Generates ppp for the dead pixels}
+\title{Generates point pattern dataset (ppp) for the dead pixels}
 \usage{
 get_ppp_dead(detector)
 }
@@ -13,5 +13,11 @@ get_ppp_dead(detector)
 ppp of dead pixels
 }
 \description{
-Generates ppp for the dead pixels
+Uses \code{spatstat::ppp} internally.
+Creates an object of class "ppp" representing a point pattern dataset in the two-dimensional plane.
+See \href{https://www.rdocumentation.org/packages/spatstat/versions/1.63-3/topics/ppp}{spatstat} docs for details.
+}
+\examples{
+detc <- PerkinElmerFull_exp_1
+get_ppp_dead(detc)
 }

@@ -17,3 +17,4 @@ Data from an xml file
 \description{
 Reads in xml file and returns a pixel matrix
 }
+\keyword{internal}

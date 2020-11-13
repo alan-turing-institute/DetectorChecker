@@ -21,3 +21,4 @@ list of pixels and events
 \description{
 Converts mask (dead pixels) to events
 }
+\keyword{internal}

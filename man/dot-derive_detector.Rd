@@ -25,3 +25,4 @@ Matrices that contains xy coordiantes of edges of modules
 By definition, edges are part of modules (not part of gaps)
 i.e. for each module two pairs: first/last col and first/last row.
 }
+\keyword{internal}

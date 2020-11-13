@@ -29,3 +29,4 @@ type 7 (closest to right edge): xmin
 type 8 (closest to left edge):  xmax
 This is inspired by Perkin Elmer Detector and be replaced by other choices if desired.
 }
+\keyword{internal}

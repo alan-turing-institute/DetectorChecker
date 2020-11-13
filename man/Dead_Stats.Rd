@@ -3,7 +3,8 @@
 \name{Dead_Stats}
 \alias{Dead_Stats}
 \title{Analysis module
-A list to represent dead pixels statistics summary}
+A list to represent dead pixels statistics summary
+Added to a detector by \code{get_dead_stats}.}
 \usage{
 Dead_Stats(
   dead_n = NA,
@@ -39,4 +40,5 @@ Dead_Stats list
 \description{
 Analysis module
 A list to represent dead pixels statistics summary
+Added to a detector by \code{get_dead_stats}.
 }

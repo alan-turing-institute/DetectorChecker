@@ -2,7 +2,7 @@
 % Please edit documentation in R/analysis.R
 \name{glm_pixel_dist_edge_col}
 \alias{glm_pixel_dist_edge_col}
-\title{Fits pixel distances from the module edges by column using glm}
+\title{Predict dead pixels from pixel distances from the module edges by module column}
 \usage{
 glm_pixel_dist_edge_col(detector)
 }
@@ -13,5 +13,9 @@ glm_pixel_dist_edge_col(detector)
 Fitted model
 }
 \description{
-Fits pixel distances from the module edges by column using glm
+Fit a logistic regression model using \code{glm}.
+Predict dead pixels from pixel distances from the module edges by module column
+}
+\examples{
+glm_pixel_dist_edge_col(PerkinElmerFull_exp_1)
 }

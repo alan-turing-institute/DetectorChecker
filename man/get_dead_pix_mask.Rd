@@ -13,5 +13,8 @@ get_dead_pix_mask(detector)
 dead pixel mask
 }
 \description{
-Creates a mask matrix of dead pixels
+Converts the pix_dead attribute of a detector (NX2 list) to a matrix of 1 and 0 (1 for dead pixel)
+}
+\examples{
+detc <- Excalibur_exp_1
 }
