@@ -11,6 +11,27 @@ vignette: >
   %\VignetteIndexEntry{DetectorChecker Usage}
   %\VignetteEncoding{UTF-8}
   %\VignetteEngine{knitr::rmarkdown}
+
+references:
+- id: Chiu2013
+  title: Stochastic Geometry and its Applications
+  author:
+  - family: Chiu
+    given: Sung Nok
+  - family: Stoyan
+    given: Dietrich
+  - family: Kendall
+    given: Wilfrid S.
+  - family: Mecke
+    given: Joseph 
+  container-title: In Wiley Series in Probability and Statistics. 
+  DOI: 10.1002/9781118658222
+  publisher: Wiley
+  type: book
+  issued:
+    year: 2013
+---
+
 ---
 
 ```{r setup, include = FALSE}
@@ -420,8 +441,25 @@ plot_pixels_angles(detector = detector_pilatus,
 
 A number of distance-based functions can be used to check whether
 the point pattern created by the damaged pixels has 
-features that would be expected from a pattern exhibiting complete spatial randomness: 
-Ripley's $K$ function, the empty space function $F$ and the nearest-neighbour function $G$. Scales of the axes are chosen by `spatstat` default.
+features that would be expected from a pattern exhibiting complete spatial randomness (CSR) [@Chiu2013]: Ripley's $K$ function, the empty space function $F$ and the nearest-neighbour function $G$. Scales of the axes are chosen by `spatstat` default.
+
+
+### F Function
+F function or “empty space function” computes the distribution of the nearest distance to a defect
+point from a typical location chosen uniformly from the image rectangle; if the point pattern did in fact
+satisfy CSR then an empirical estimate of the F function could be viewed as a random perturbation
+of the theoretical F function under CSR.
+
+### G Function
+The G function computes the distribution of nearest-neighbour distances between defect points; if the
+point pattern did in fact satisfy CSR then an empirical estimate of the G function could be viewed as a
+random perturbation of the theoretical G function under CSR.
+
+### The K Function
+The K function (Ripley’s K function) computes the mean number of defect points within a distance r
+of a typical defect point, viewed as a function of r; if the point pattern did in fact satisfy CSR then an
+empirical estimate of the K function could be viewed as a random perturbation of the theoretical K
+function under CSR.
 
 ### $K$, $F$, $G$ function plots
 
