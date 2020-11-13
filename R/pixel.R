@@ -85,10 +85,19 @@ pixel_dist_ctr_linf <- function(detector) {
 }
 
 
-#' A function to calculate pixel distances from corners
+#' A function to calculate pixel distances from the closest corner
 #'
 #' @param detector Detector object
-#' @return Matrix containing pixel distances from corners
+#' @return Matrix containing pixel distances from closest corner
+#' @export
+#' @examples
+#' detector_perkinrefurb <- create_detector("PerkinElmerRefurbished")
+#' file_path <-  system.file("extdata", "PerkinElmerRefurbished", 
+#'                         "BadPixelMap_t2.bpm.xml", 
+#'                        package = "detectorchecker")
+#' detector_perkinrefurb <- load_pix_matrix(
+#' detector = detector_perkinrefurb, file_path = file_path)
+#' dist_corner(detector_perkinrefurb)
 #' @export
 dist_corner <- function(detector) {
 
