@@ -2,8 +2,7 @@
 % Please edit documentation in R/pixel.R
 \name{remove_high_density_cluster}
 \alias{remove_high_density_cluster}
-\title{Remove high density cluster of dead pixels
-Recalculates dead statistics and clumps if they were present in the Detector object}
+\title{Remove high density cluster of dead pixels}
 \usage{
 remove_high_density_cluster(detector, min_pts = 30, eps_adjust = 0.05)
 }
@@ -18,6 +17,20 @@ remove_high_density_cluster(detector, min_pts = 30, eps_adjust = 0.05)
 detector object with high density cluster of pixels removed
 }
 \description{
-Remove high density cluster of dead pixels
-Recalculates dead statistics and clumps if they were present in the Detector object
+In some situations, the analysis may be dominated by an area of elevated damage.
+The investigation of complete spatial randomness then becomes uninformative.
+The area with elevated damage can be removed.
+Dead statistics and clumps are recalculate if they were present in the Detector object.
+}
+\examples{
+# Create a detector
+detector_pilatus <- create_detector("Pilatus")
+# Load a pixel matrix
+file_path <-  system.file("extdata", "Pilatus", "badpixel_mask.tif",
+                         package ="detectorchecker")
+detector_pilatus <- load_pix_matrix(detector = detector_pilatus, file_path = file_path)
+# Find events
+detector_pilatus_events <- find_clumps(detector_pilatus)
+# Remove high density clusters
+detector_pilatus_modified <- remove_high_density_cluster(detector_pilatus, min_pts = 30, eps_adjust = 0.05)
 }

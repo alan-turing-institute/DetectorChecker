@@ -320,6 +320,16 @@ find_clumps <- function(detector, row = NA, col = NA) {
 #' @param incl_event_list a list of events to be included
 #' @param plot_edges_gaps Plot edges gaps
 #' @export
+#' @examples
+#' # Create a detector
+#' detector_pilatus <- create_detector("Pilatus")
+#' # Load a pixel matrix
+#' file_path <-  system.file("extdata", "Pilatus", "badpixel_mask.tif",
+#'                          package ="detectorchecker")
+#' detector_pilatus <- load_pix_matrix(detector = detector_pilatus, file_path = file_path)
+#'  #Plot events
+#'  plot_events(detector_pilatus)
+#'
 plot_events <- function(detector, col = NA, row = NA, file_path = NA, caption = TRUE, incl_event_list = NA,
                         plot_edges_gaps = TRUE) {
 
@@ -378,6 +388,16 @@ plot_events <- function(detector, col = NA, row = NA, file_path = NA, caption = 
 #' @param file_path Output file path
 #' @param caption Flag to turn on/off figure caption
 #' @param incl_event_list a list of events to be included
+#' @export
+#' @examples
+#' # Create a detector
+#' detector_pilatus <- create_detector("Pilatus")
+#' # Load a pixel matrix
+#' file_path <-  system.file("extdata", "Pilatus", "badpixel_mask.tif",
+#'                          package ="detectorchecker")
+#' detector_pilatus <- load_pix_matrix(detector = detector_pilatus, file_path = file_path)
+#'  #Plot module events
+#'  plot_module_events(detector_pilatus, 1, 1)
 plot_module_events <- function(detector, col, row, file_path = NA, caption = TRUE, incl_event_list = NA) {
   if (!caption) par(mar = c(0, 0, 0, 0))
 
@@ -698,6 +718,15 @@ glm_events_dist_corner <- function(detector, incl_event_list = NA) {
 #' @param incl_event_list a list of events to be included
 #' @param color a list of colors
 #' @export
+#'@examples
+#' detector_perkinfull <- create_detector("PerkinElmerFull")
+#' file_path <-  system.file("extdata", "PerkinElmerFull",
+#'                           "BadPixelMap_t1.bpm.xml",
+#'                           package = "detectorchecker")
+#' detector_perkinfull <- load_pix_matrix(
+#' detector = detector_perkinfull, file_path = file_path)
+#' detector_perkinfull_events = find_clumps(detector_perkinfull)
+#' plot_events_density(detector_perkinfull_events)
 plot_events_density <- function(detector, file_path = NA, adjust = 0.5,
                                 row = NA, col = NA, caption = TRUE,
                                 incl_event_list = NA, color = topo.colors(50)) {
@@ -843,6 +872,15 @@ plot_events_angles <- function(detector, file_path = NA,
 #' @param caption Flag to turn on/off figure caption
 #' @param incl_event_list a list of events to be included
 #' @export
+#' @examples
+#' detector_perkinfull <- create_detector("PerkinElmerFull")
+#' file_path <-  system.file("extdata", "PerkinElmerFull",
+#'                           "BadPixelMap_t1.bpm.xml",
+#'                           package = "detectorchecker")
+#' detector_perkinfull <- load_pix_matrix(
+#' detector = detector_perkinfull, file_path = file_path)
+#' detector_perkinfull_events = find_clumps(detector_perkinfull)
+#' plot_events_kfg(detector_perkinfull_events)
 plot_events_kfg <- function(detector, func, file_path = NA,
                             row = NA, col = NA, caption = TRUE,
                             incl_event_list = NA) {
@@ -865,7 +903,7 @@ plot_events_kfg <- function(detector, func, file_path = NA,
     height = height, width = width
   )
 
-  plot_kfg(ppp_events, func, file_path = file_path, caption = caption)
+  .plot_kfg(ppp_events, func, file_path = file_path, caption = caption)
 }
 
 #' Plots events count per detector or module
@@ -877,6 +915,15 @@ plot_events_kfg <- function(detector, func, file_path = NA,
 #' @param caption Flag to turn on/off figure caption
 #' @param incl_event_list a list of events to be included
 #' @export
+#' @examples
+#' detector_perkinfull <- create_detector("PerkinElmerFull")
+#' file_path <-  system.file("extdata", "PerkinElmerFull",
+#'                           "BadPixelMap_t1.bpm.xml",
+#'                           package = "detectorchecker")
+#' detector_perkinfull <- load_pix_matrix(
+#' detector = detector_perkinfull, file_path = file_path)
+#' detector_perkinfull_events = find_clumps(detector_perkinfull)
+#' plot_events_count(detector_perkinfull_events)
 plot_events_count <- function(detector, file_path = NA,
                               row = NA, col = NA, caption = TRUE,
                               incl_event_list = NA) {

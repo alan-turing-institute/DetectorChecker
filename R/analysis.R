@@ -35,6 +35,15 @@ Dead_Stats <- function(dead_n = NA, module_n = NA, module_count_arr = NA,
 #' @param row Module row number
 #' @param file_path Output file path
 #' @param caption Flag to turn on/off figure caption
+#' @export
+#' @examples
+#' # Create a detector
+#' detector_pilatus <- create_detector("Pilatus")
+#' # Load a pixel matrix
+#' file_path <-  system.file("extdata", "Pilatus", "badpixel_mask.tif",
+#'                          package ="detectorchecker")
+#' detector_pilatus <- load_pix_matrix(detector = detector_pilatus, file_path = file_path)
+#' plot_module_pixels(detector_pilatus, 1, 1)
 plot_module_pixels <- function(detector, col, row, file_path = NA,
                                          caption = TRUE) {
   if (!caption) par(mar = c(0, 0, 0, 0))
@@ -100,6 +109,13 @@ plot_module_pixels <- function(detector, col, row, file_path = NA,
 #' @param col Module column number
 #' @param caption Flag to turn on/off figure caption
 #' @export
+#' # Create a detector
+#' detector_pilatus <- create_detector("Pilatus")
+#' # Load a pixel matrix
+#' file_path <-  system.file("extdata", "Pilatus", "badpixel_mask.tif",
+#'                          package ="detectorchecker")
+#' detector_pilatus <- load_pix_matrix(detector = detector_pilatus, file_path = file_path)
+#' plot_pixels_count(detector_pilatus)
 plot_pixels_count <- function(detector, file_path = NA, row = NA, col = NA,
                                   caption = TRUE) {
   main_caption <- ""
@@ -164,6 +180,14 @@ plot_pixels_count <- function(detector, file_path = NA, row = NA, col = NA,
 #' @param caption Flag to turn on/off figure caption
 #' @param color a list of colors
 #' @export
+#' @examples
+#' # Create a detector
+#' detector_pilatus <- create_detector("Pilatus")
+#' # Load a pixel matrix
+#' file_path <-  system.file("extdata", "Pilatus", "badpixel_mask.tif",
+#'                          package ="detectorchecker")
+#' detector_pilatus <- load_pix_matrix(detector = detector_pilatus, file_path = file_path)
+#' plot_pixels_density(detector_pilatus)
 plot_pixels_density <- function(detector, file_path = NA, adjust = 0.5,
                                   row = NA, col = NA, caption = TRUE, color = topo.colors(50)) {
   ppp_dead <- NA
@@ -190,7 +214,7 @@ plot_pixels_density <- function(detector, file_path = NA, adjust = 0.5,
   .plot_density(ppp_dead, main_caption, file_path = file_path, adjust = adjust, color = color)
 }
 
-#' A function to plot NN oriented arrrows of dead pixels of detector or module
+#' A function to plot NN oriented arrows of dead pixels of detector or module
 #'
 #' @param detector Detector object
 #' @param file_path Output file path
@@ -199,6 +223,14 @@ plot_pixels_density <- function(detector, file_path = NA, adjust = 0.5,
 #' @param caption Flag to turn on/off figure caption
 #' @importFrom graphics arrows plot
 #' @export
+#' @examples
+#' # Create a detector
+#' detector_pilatus <- create_detector("Pilatus")
+#' # Load a pixel matrix
+#' file_path <-  system.file("extdata", "Pilatus", "badpixel_mask.tif",
+#'                          package ="detectorchecker")
+#' detector_pilatus <- load_pix_matrix(detector = detector_pilatus, file_path = file_path)
+#' plot_pixels_arrows(detector_pilatus)
 plot_pixels_arrows <- function(detector, file_path = NA, row = NA, col = NA,
                                  caption = TRUE) {
   ppp_dead <- NA
@@ -534,6 +566,7 @@ dead_stats_summary <- function(detector) {
 #' detector_perkinfull <- load_pix_matrix(
 #' detector = detector_perkinfull, file_path = file_path)
 #' plot_pixels_angles(detector_perkinfull)
+#' plot_pixels_angles(detector_perkinfull, row = 1, col = 1)
 plot_pixels_angles <- function(detector, file_path = NA, row = NA, col = NA,
                                  caption = TRUE) {
   ppp_dead <- NA
@@ -698,12 +731,22 @@ get_ppp_dead <- function(detector) {
 #' Plots K, F, G functions
 #'
 #' @param detector Detector object
-#' @param func Function name
+#' @param func Function name ("K', "F", or "G")
 #' @param file_path Output file path
 #' @param row module row number
 #' @param col module column number
 #' @param caption Flag to turn on/off figure caption
 #' @export
+#' @examples
+#' # Create a detector
+#' detector_pilatus <- create_detector("Pilatus")
+#' # Load a pixel matrix
+#' file_path <-  system.file("extdata", "Pilatus", "badpixel_mask.tif",
+#'                          package ="detectorchecker")
+#' detector_pilatus <- load_pix_matrix(detector = detector_pilatus, file_path = file_path)
+#' plot_pixels_kfg(detector_pilatus, "K")
+#' plot_pixels_kfg(detector_pilatus, "F")
+#' plot_pixels_kfg(detector_pilatus, "G")
 plot_pixels_kfg <- function(detector, func, file_path = NA, row = NA, col = NA,
                               caption = TRUE) {
   ppp_dead <- get_ppp_dead(detector)
@@ -718,5 +761,5 @@ plot_pixels_kfg <- function(detector, func, file_path = NA, row = NA, col = NA,
     ppp_dead <- get_ppp_dead(detector)
   }
 
-  plot_kfg(ppp_dead, func, file_path = file_path, caption = caption)
+  .plot_kfg(ppp_dead, func, file_path = file_path, caption = caption)
 }

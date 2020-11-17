@@ -548,7 +548,7 @@ create_detector <- function(detector_name) {
   return(list(ppp_edges_col, ppp_edges_row, ppp_gaps_col, ppp_gaps_row))
 }
 
-#' A function to plot detector with damaged pixels
+#' A function to plot detector with damaged pixels overlayed
 #'
 #' @param detector Detector object
 #' @param col Module column number
@@ -557,6 +557,15 @@ create_detector <- function(detector_name) {
 #' @param caption Flag to turn on/off figure caption
 #' @importFrom graphics points
 #' @export
+#' @examples
+#' # Create a detector
+#' detector_pilatus <- create_detector("Pilatus")
+#' # Load a pixel matrix
+#' file_path <-  system.file("extdata", "Pilatus", "badpixel_mask.tif",
+#'                          package ="detectorchecker")
+#' detector_pilatus <- load_pix_matrix(detector = detector_pilatus, file_path = file_path)
+#' plot_pixels(detector_pilatus)
+#' plot_pixels(detector_pilatus, row = 1, col = 1)
 plot_pixels <- function(detector, col = NA, row = NA, file_path = NA, caption = TRUE) {
 
   if (!is.na(col) || !is.na(row)) {

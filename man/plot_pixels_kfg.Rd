@@ -16,7 +16,7 @@ plot_pixels_kfg(
 \arguments{
 \item{detector}{Detector object}
 
-\item{func}{Function name}
+\item{func}{Function name ("K', "F", or "G")}
 
 \item{file_path}{Output file path}
 
@@ -28,4 +28,15 @@ plot_pixels_kfg(
 }
 \description{
 Plots K, F, G functions
+}
+\examples{
+# Create a detector
+detector_pilatus <- create_detector("Pilatus")
+# Load a pixel matrix
+file_path <-  system.file("extdata", "Pilatus", "badpixel_mask.tif",
+                         package ="detectorchecker")
+detector_pilatus <- load_pix_matrix(detector = detector_pilatus, file_path = file_path)
+plot_pixels_kfg(detector_pilatus, "K")
+plot_pixels_kfg(detector_pilatus, "F")
+plot_pixels_kfg(detector_pilatus, "G")
 }

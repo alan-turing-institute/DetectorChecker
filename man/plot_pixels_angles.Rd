@@ -34,4 +34,5 @@ file_path <-  system.file("extdata", "PerkinElmerFull",
 detector_perkinfull <- load_pix_matrix(
 detector = detector_perkinfull, file_path = file_path)
 plot_pixels_angles(detector_perkinfull)
+plot_pixels_angles(detector_perkinfull, row = 1, col = 1)
 }

@@ -14,3 +14,12 @@ plot_pixel_dist_edge_row(detector, file_path = NA)
 \description{
 Calculates and plots vetical distances from the module edges
 }
+\examples{
+# Create a detector
+detector_pilatus <- create_detector("Pilatus")
+# Load a pixel matrix
+file_path <-  system.file("extdata", "Pilatus", "badpixel_mask.tif",
+                         package ="detectorchecker")
+detector_pilatus <- load_pix_matrix(detector = detector_pilatus, file_path = file_path)
+plot_pixel_dist_edge_row(detector_pilatus)
+}

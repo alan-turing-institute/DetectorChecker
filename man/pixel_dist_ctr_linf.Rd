@@ -16,5 +16,7 @@ Matrix of parallel maxima
 Calculate parallel maxima from the centre for each pixel
 }
 \examples{
-pixel_dist_ctr_linf(PerkinElmerFull_Detector())
+# Create a detector
+detector_pilatus <- create_detector("Pilatus")
+pixel_dist_ctr_linf(detector_pilatus)
 }

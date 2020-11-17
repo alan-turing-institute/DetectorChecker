@@ -32,3 +32,13 @@ plot_events_kfg(
 \description{
 Plots K, F, G functions of a detector or module
 }
+\examples{
+detector_perkinfull <- create_detector("PerkinElmerFull")
+file_path <-  system.file("extdata", "PerkinElmerFull",
+                          "BadPixelMap_t1.bpm.xml",
+                          package = "detectorchecker")
+detector_perkinfull <- load_pix_matrix(
+detector = detector_perkinfull, file_path = file_path)
+detector_perkinfull_events = find_clumps(detector_perkinfull)
+plot_events_kfg(detector_perkinfull_events)
+}

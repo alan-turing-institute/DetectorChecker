@@ -14,3 +14,12 @@ plot_pixel_dist_corner(detector, file_path = NA)
 \description{
 Calculates and plots pixel distances from corners
 }
+\examples{
+# Create a detector
+detector_pilatus <- create_detector("Pilatus")
+# Load a pixel matrix
+file_path <-  system.file("extdata", "Pilatus", "badpixel_mask.tif",
+                         package ="detectorchecker")
+detector_pilatus <- load_pix_matrix(detector = detector_pilatus, file_path = file_path)
+plot_pixel_dist_corner(detector_pilatus)
+}

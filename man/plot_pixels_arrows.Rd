@@ -2,7 +2,7 @@
 % Please edit documentation in R/analysis.R
 \name{plot_pixels_arrows}
 \alias{plot_pixels_arrows}
-\title{A function to plot NN oriented arrrows of dead pixels of detector or module}
+\title{A function to plot NN oriented arrows of dead pixels of detector or module}
 \usage{
 plot_pixels_arrows(
   detector,
@@ -24,5 +24,14 @@ plot_pixels_arrows(
 \item{caption}{Flag to turn on/off figure caption}
 }
 \description{
-A function to plot NN oriented arrrows of dead pixels of detector or module
+A function to plot NN oriented arrows of dead pixels of detector or module
+}
+\examples{
+# Create a detector
+detector_pilatus <- create_detector("Pilatus")
+# Load a pixel matrix
+file_path <-  system.file("extdata", "Pilatus", "badpixel_mask.tif",
+                         package ="detectorchecker")
+detector_pilatus <- load_pix_matrix(detector = detector_pilatus, file_path = file_path)
+plot_pixels_arrows(detector_pilatus)
 }

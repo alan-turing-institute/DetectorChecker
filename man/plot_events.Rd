@@ -32,3 +32,14 @@ plot_events(
 \description{
 Plots damaged detector events
 }
+\examples{
+# Create a detector
+detector_pilatus <- create_detector("Pilatus")
+# Load a pixel matrix
+file_path <-  system.file("extdata", "Pilatus", "badpixel_mask.tif",
+                         package ="detectorchecker")
+detector_pilatus <- load_pix_matrix(detector = detector_pilatus, file_path = file_path)
+ #Plot events
+ plot_events(detector_pilatus)
+
+}

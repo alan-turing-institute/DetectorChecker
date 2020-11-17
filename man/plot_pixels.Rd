@@ -2,7 +2,7 @@
 % Please edit documentation in R/layout.R
 \name{plot_pixels}
 \alias{plot_pixels}
-\title{A function to plot detector with damaged pixels}
+\title{A function to plot detector with damaged pixels overlayed}
 \usage{
 plot_pixels(detector, col = NA, row = NA, file_path = NA, caption = TRUE)
 }
@@ -18,5 +18,15 @@ plot_pixels(detector, col = NA, row = NA, file_path = NA, caption = TRUE)
 \item{caption}{Flag to turn on/off figure caption}
 }
 \description{
-A function to plot detector with damaged pixels
+A function to plot detector with damaged pixels overlayed
+}
+\examples{
+# Create a detector
+detector_pilatus <- create_detector("Pilatus")
+# Load a pixel matrix
+file_path <-  system.file("extdata", "Pilatus", "badpixel_mask.tif",
+                         package ="detectorchecker")
+detector_pilatus <- load_pix_matrix(detector = detector_pilatus, file_path = file_path)
+plot_pixels(detector_pilatus)
+plot_pixels(detector_pilatus, row = 1, col = 1)
 }

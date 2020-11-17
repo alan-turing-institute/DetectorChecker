@@ -27,12 +27,14 @@
 
 # Pixel analysis functions -----------------------------------------------------
 
-#' Calculate euclidean distance from the centre of a module for each pixel
+#' Calculate euclidean distance from the center of a module for each pixel
 #'
 #' @param detector Detector object
 #' @return Matrix of euclidean distances
 #' @examples
-#' pixel_dist_ctr_eucl(PerkinElmerFull_Detector())
+#' # Create a detector
+#' detector_pilatus <- create_detector("Pilatus")
+#' pixel_dist_ctr_eucl(detector_pilatus)
 #' @export
 pixel_dist_ctr_eucl <- function(detector) {
   dist <- matrix(NA, nrow = detector$detector_height, ncol = detector$detector_width)
@@ -56,7 +58,10 @@ pixel_dist_ctr_eucl <- function(detector) {
 #' @param detector Detector object
 #' @return Matrix of parallel maxima
 #' @examples
-#' pixel_dist_ctr_linf(PerkinElmerFull_Detector())
+#' @examples
+#' # Create a detector
+#' detector_pilatus <- create_detector("Pilatus")
+#' pixel_dist_ctr_linf(detector_pilatus)
 #' @export
 pixel_dist_ctr_linf <- function(detector) {
   dist <- matrix(NA, nrow = detector$detector_height, ncol = detector$detector_width)
@@ -230,6 +235,14 @@ dist_edge_min <- function(detector) {
 #' @param detector Detector object
 #' @param file_path Output file path
 #' @export
+#' @examples
+#' # Create a detector
+#' detector_pilatus <- create_detector("Pilatus")
+#' # Load a pixel matrix
+#' file_path <-  system.file("extdata", "Pilatus", "badpixel_mask.tif",
+#'                          package ="detectorchecker")
+#' detector_pilatus <- load_pix_matrix(detector = detector_pilatus, file_path = file_path)
+#' plot_pixel_ctr_eucl(detector_pilatus)
 plot_pixel_ctr_eucl <- function(detector, file_path = NA) {
   dist <- pixel_dist_ctr_eucl(detector)
 
@@ -244,6 +257,14 @@ plot_pixel_ctr_eucl <- function(detector, file_path = NA) {
 #' @param detector Detector object
 #' @param file_path Output file path
 #' @export
+#' @examples
+#' # Create a detector
+#' detector_pilatus <- create_detector("Pilatus")
+#' # Load a pixel matrix
+#' file_path <-  system.file("extdata", "Pilatus", "badpixel_mask.tif",
+#'                          package ="detectorchecker")
+#' detector_pilatus <- load_pix_matrix(detector = detector_pilatus, file_path = file_path)
+#' plot_pixel_ctr_linf(detector_pilatus)
 plot_pixel_ctr_linf <- function(detector, file_path = NA) {
   dist <- pixel_dist_ctr_linf(detector)
 
@@ -258,6 +279,14 @@ plot_pixel_ctr_linf <- function(detector, file_path = NA) {
 #' @param detector Detector object
 #' @param file_path Output file path
 #' @export
+#' @examples
+#' # Create a detector
+#' detector_pilatus <- create_detector("Pilatus")
+#' # Load a pixel matrix
+#' file_path <-  system.file("extdata", "Pilatus", "badpixel_mask.tif",
+#'                          package ="detectorchecker")
+#' detector_pilatus <- load_pix_matrix(detector = detector_pilatus, file_path = file_path)
+#' plot_pixel_dist_corner(detector_pilatus)
 plot_pixel_dist_corner <- function(detector, file_path = NA) {
   dist <- dist_corner(detector)
 
@@ -272,6 +301,14 @@ plot_pixel_dist_corner <- function(detector, file_path = NA) {
 #' @param detector Detector object
 #' @param file_path Output file path
 #' @export
+#' @examples
+#' # Create a detector
+#' detector_pilatus <- create_detector("Pilatus")
+#' # Load a pixel matrix
+#' file_path <-  system.file("extdata", "Pilatus", "badpixel_mask.tif",
+#'                          package ="detectorchecker")
+#' detector_pilatus <- load_pix_matrix(detector = detector_pilatus, file_path = file_path)
+#' plot_pixel_dist_edge_col(detector_pilatus)
 plot_pixel_dist_edge_col <- function(detector, file_path = NA) {
   dist <- dist_edge_col(detector)
 
@@ -286,6 +323,14 @@ plot_pixel_dist_edge_col <- function(detector, file_path = NA) {
 #' @param detector Detector object
 #' @param file_path Output file path
 #' @export
+#' @examples
+#' # Create a detector
+#' detector_pilatus <- create_detector("Pilatus")
+#' # Load a pixel matrix
+#' file_path <-  system.file("extdata", "Pilatus", "badpixel_mask.tif",
+#'                          package ="detectorchecker")
+#' detector_pilatus <- load_pix_matrix(detector = detector_pilatus, file_path = file_path)
+#' plot_pixel_dist_edge_row(detector_pilatus)
 plot_pixel_dist_edge_row <- function(detector, file_path = NA) {
   dist <- dist_edge_row(detector)
 
@@ -300,6 +345,14 @@ plot_pixel_dist_edge_row <- function(detector, file_path = NA) {
 #' @param detector Detector object
 #' @param file_path Output file path
 #' @export
+#' @examples
+#' # Create a detector
+#' detector_pilatus <- create_detector("Pilatus")
+#' # Load a pixel matrix
+#' file_path <-  system.file("extdata", "Pilatus", "badpixel_mask.tif",
+#'                          package ="detectorchecker")
+#' detector_pilatus <- load_pix_matrix(detector = detector_pilatus, file_path = file_path)
+#' plot_pixel_dist_edge(detector_pilatus)
 plot_pixel_dist_edge <- function(detector, file_path = NA) {
   dist <- dist_edge_min(detector)
 
@@ -396,13 +449,28 @@ get_dead_pix_mask <- function(detector) {
 
 
 #' Remove high density cluster of dead pixels
-#' Recalculates dead statistics and clumps if they were present in the Detector object
+#'
+#' In some situations, the analysis may be dominated by an area of elevated damage.
+#' The investigation of complete spatial randomness then becomes uninformative.
+#' The area with elevated damage can be removed.
+#' Dead statistics and clumps are recalculate if they were present in the Detector object.
 #'
 #' @param detector Detector object
 #' @param min_pts minimum points argument of dbscan function
 #' @param eps_adjust adjust eps
 #' @return detector object with high density cluster of pixels removed
 #' @export
+#' @examples
+#' # Create a detector
+#' detector_pilatus <- create_detector("Pilatus")
+#' # Load a pixel matrix
+#' file_path <-  system.file("extdata", "Pilatus", "badpixel_mask.tif",
+#'                          package ="detectorchecker")
+#' detector_pilatus <- load_pix_matrix(detector = detector_pilatus, file_path = file_path)
+#' # Find events
+#' detector_pilatus_events <- find_clumps(detector_pilatus)
+#' # Remove high density clusters
+#' detector_pilatus_modified <- remove_high_density_cluster(detector_pilatus, min_pts = 30, eps_adjust = 0.05)
 remove_high_density_cluster <- function(detector, min_pts = 30, eps_adjust = 0.05) {
   ppp <- get_ppp_dead(detector)
 

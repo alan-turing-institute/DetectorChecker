@@ -29,3 +29,13 @@ plot_events_count(
 \description{
 Plots events count per detector or module
 }
+\examples{
+detector_perkinfull <- create_detector("PerkinElmerFull")
+file_path <-  system.file("extdata", "PerkinElmerFull",
+                          "BadPixelMap_t1.bpm.xml",
+                          package = "detectorchecker")
+detector_perkinfull <- load_pix_matrix(
+detector = detector_perkinfull, file_path = file_path)
+detector_perkinfull_events = find_clumps(detector_perkinfull)
+plot_events_count(detector_perkinfull_events)
+}

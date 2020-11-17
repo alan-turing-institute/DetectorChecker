@@ -98,7 +98,8 @@
 #' @importFrom stats density
 #' @importFrom grDevices dev.off
 #' @export
-plot_kfg <- function(ppp_obj, func, file_path = NA, caption = TRUE) {
+#' @keywords internal
+.plot_kfg <- function(ppp_obj, func, file_path = NA, caption = TRUE) {
   if (missing(func) || is.null(func)) {
     stop(c(
       "Analysis function name is not specified.\n",

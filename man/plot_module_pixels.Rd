@@ -20,3 +20,12 @@ plot_module_pixels(detector, col, row, file_path = NA, caption = TRUE)
 \description{
 A function to plot detector module with damaged pixels
 }
+\examples{
+# Create a detector
+detector_pilatus <- create_detector("Pilatus")
+# Load a pixel matrix
+file_path <-  system.file("extdata", "Pilatus", "badpixel_mask.tif",
+                         package ="detectorchecker")
+detector_pilatus <- load_pix_matrix(detector = detector_pilatus, file_path = file_path)
+plot_module_pixels(detector_pilatus, 1, 1)
+}
