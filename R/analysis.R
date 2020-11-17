@@ -153,7 +153,7 @@ plot_pixels_count <- function(detector, file_path = NA, row = NA, col = NA,
       )
     }
 
-    plot_counts(detector$dead_stats$module_count_arr, caption = main_caption, file_path = file_path)
+    .plot_counts(detector$dead_stats$module_count_arr, caption = main_caption, file_path = file_path)
   }
 }
 
@@ -190,7 +190,7 @@ plot_pixels_density <- function(detector, file_path = NA, adjust = 0.5,
     }
   }
 
-  plot_density(ppp_dead, main_caption, file_path = file_path, adjust = adjust, color = color)
+  .plot_density(ppp_dead, main_caption, file_path = file_path, adjust = adjust, color = color)
 }
 
 #' A function to plot NN oriented arrrows of dead pixels of detector or module
@@ -225,7 +225,7 @@ plot_pixels_arrows <- function(detector, file_path = NA, row = NA, col = NA,
     }
   }
 
-  plot_arrows(ppp_dead, main_caption, file_path = file_path)
+  .plot_arrows(ppp_dead, main_caption, file_path = file_path)
 }
 
 #' Extracts a table of dead pixel coordinates from a pixel matrix
@@ -458,7 +458,7 @@ dead_stats_summary <- function(detector) {
   return(cat(summary))
 }
 
-#' A function to plot NN angles of dead pixels of detector or module
+#' Plot nearest neighbour angles of dead pixels of detector or module
 #'
 #' @param detector Detector object
 #' @param file_path Output file path
@@ -466,6 +466,14 @@ dead_stats_summary <- function(detector) {
 #' @param col Module column number
 #' @param caption Flag to turn on/off figure caption
 #' @export
+#' @examples
+#' detector_perkinfull <- create_detector("PerkinElmerFull")
+#' file_path <-  system.file("extdata", "PerkinElmerFull", 
+#'                           "BadPixelMap_t1.bpm.xml",
+#'                           package = "detectorchecker")
+#' detector_perkinfull <- load_pix_matrix(
+#' detector = detector_perkinfull, file_path = file_path)
+#' plot_pixels_angles(detector_perkinfull)
 plot_pixels_angles <- function(detector, file_path = NA, row = NA, col = NA,
                                  caption = TRUE) {
   ppp_dead <- NA
@@ -489,7 +497,7 @@ plot_pixels_angles <- function(detector, file_path = NA, row = NA, col = NA,
     }
   }
 
-  plot_angles(ppp_dead, main_caption, file_path = file_path)
+  .plot_angles(ppp_dead, main_caption, file_path = file_path)
 }
 
 # # TODO: define the function

@@ -318,7 +318,7 @@ find_clumps <- function(detector, row = NA, col = NA) {
 #' @param file_path Output file path
 #' @param caption Flag to turn on/off figure caption
 #' @param incl_event_list a list of events to be included
-#' @param plot_edges_gaps Plot edgees gaps
+#' @param plot_edges_gaps Plot edges gaps
 #' @export
 plot_events <- function(detector, col = NA, row = NA, file_path = NA, caption = TRUE, incl_event_list = NA,
                         plot_edges_gaps = TRUE) {
@@ -722,7 +722,7 @@ plot_events_density <- function(detector, file_path = NA, adjust = 0.5,
     height = height, width = width
   )
 
-  plot_density(ppp_events, main_caption, file_path = file_path, adjust = adjust, color = color)
+  .plot_density(ppp_events, main_caption, file_path = file_path, adjust = adjust, color = color)
 }
 
 #' Plots arrows graph of events of a detector or module
@@ -767,7 +767,7 @@ plot_events_arrows <- function(detector, file_path = NA,
     height = height, width = width
   )
 
-  plot_arrows(ppp_events, main_caption, file_path = file_path)
+  .plot_arrows(ppp_events, main_caption, file_path = file_path)
 }
 
 #' Plots angles graph of events of a detector or module
@@ -779,6 +779,15 @@ plot_events_arrows <- function(detector, file_path = NA,
 #' @param caption Flag to turn on/off figure caption
 #' @param incl_event_list a list of events to be included
 #' @export
+#' @examples
+#' detector_perkinfull <- create_detector("PerkinElmerFull")
+#' file_path <-  system.file("extdata", "PerkinElmerFull",
+#'                           "BadPixelMap_t1.bpm.xml",
+#'                           package = "detectorchecker")
+#' detector_perkinfull <- load_pix_matrix(
+#' detector = detector_perkinfull, file_path = file_path)
+#' detector_perkinfull_events = find_clumps(detector_perkinfull)
+#' plot_events_angles(detector_perkinfull_events)
 plot_events_angles <- function(detector, file_path = NA,
                                row = NA, col = NA, caption = TRUE,
                                incl_event_list = NA) {
@@ -812,7 +821,7 @@ plot_events_angles <- function(detector, file_path = NA,
     height = height, width = width
   )
 
-  plot_angles(ppp_events, main_caption, file_path = file_path)
+  .plot_angles(ppp_events, main_caption, file_path = file_path)
 }
 
 #' Plots K, F, G functions of a detector or module
@@ -913,6 +922,6 @@ plot_events_count <- function(detector, file_path = NA,
       main_caption <- "Number of damage events per module"
     }
 
-    plot_counts(module_count_arr, file_path = file_path, caption = main_caption)
+    .plot_counts(module_count_arr, file_path = file_path, caption = main_caption)
   }
 }

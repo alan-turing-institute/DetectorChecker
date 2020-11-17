@@ -27,7 +27,7 @@
 
 # Pixel analysis functions -----------------------------------------------------
 
-#' A function to calculate euclidean distance from the centre of a module for each pixel
+#' Calculate euclidean distance from the centre of a module for each pixel
 #'
 #' @param detector Detector object
 #' @return Matrix of euclidean distances
@@ -51,10 +51,12 @@ pixel_dist_ctr_eucl <- function(detector) {
   return(dist)
 }
 
-#' A function to calculate parallel maxima from the centre for each pixel
+#' Calculate parallel maxima from the centre for each pixel
 #'
 #' @param detector Detector object
 #' @return Matrix of parallel maxima
+#' @examples
+#' pixel_dist_ctr_linf(PerkinElmerFull_Detector())
 #' @export
 pixel_dist_ctr_linf <- function(detector) {
   dist <- matrix(NA, nrow = detector$detector_height, ncol = detector$detector_width)

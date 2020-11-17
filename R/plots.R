@@ -8,7 +8,8 @@
 #' @param adjust Kernel density bandwidth
 #' @param color a list of colors
 #' @importFrom graphics image par
-plot_density <- function(ppp_obj, caption, file_path = NA, adjust = 0.5, color = topo.colors(50)) {
+#' @keywords internal
+.plot_density <- function(ppp_obj, caption, file_path = NA, adjust = 0.5, color = topo.colors(50)) {
   if (nchar(caption) > 0) {
     par(mfrow = c(1, 1), mar = c(1, 1, 3, 1))
   } else {
@@ -27,14 +28,15 @@ plot_density <- function(ppp_obj, caption, file_path = NA, adjust = 0.5, color =
   }
 }
 
-#' Plots NN oriented arrrows
+#' Plots nearest neighbor oriented arrows
 #'
-#' @param ppp_obj ppp object
+#' @param ppp_obj spatstat ppp object
 #' @param caption caption of the figure
 #' @param file_path file path
 #' @importFrom graphics arrows plot
 #' @export
-plot_arrows <- function(ppp_obj, caption, file_path = NA) {
+#' @keywords internal
+.plot_arrows <- function(ppp_obj, caption, file_path = NA) {
   if (nchar(caption) > 0) {
     par(mfrow = c(1, 1), mar = c(1, 1, 3, 1))
   } else {
@@ -59,13 +61,14 @@ plot_arrows <- function(ppp_obj, caption, file_path = NA) {
   }
 }
 
-#' Plots NN angles
+#' Plots nearest neighbor angles
 #'
-#' @param ppp_obj ppp object
+#' @param ppp_object spatstat ppp object
 #' @param caption caption of the figure
 #' @param file_path file path
+#' @keywords internal
 #' @export
-plot_angles <- function(ppp_obj, caption, file_path = NA) {
+.plot_angles <- function(ppp_obj, caption, file_path = NA) {
   if (nchar(caption) > 0) {
     par(mfrow = c(1, 1), mar = c(1, 1, 3, 1))
   } else {
@@ -164,7 +167,8 @@ plot_kfg <- function(ppp_obj, func, file_path = NA, caption = TRUE) {
 #' @param caption caption of the figure
 #' @param file_path file path
 #' @export
-plot_counts <- function(module_count_arr, caption, file_path = NA) {
+#' @keywords internal
+.plot_counts <- function(module_count_arr, caption, file_path = NA) {
   if (nchar(caption) > 0) {
     par(mfrow = c(1, 1), mar = c(1, 1, 3, 1))
   } else {

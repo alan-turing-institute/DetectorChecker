@@ -27,7 +27,7 @@ plot_events(
 
 \item{incl_event_list}{a list of events to be included}
 
-\item{plot_edges_gaps}{Plot edgees gaps}
+\item{plot_edges_gaps}{Plot edges gaps}
 }
 \description{
 Plots damaged detector events
