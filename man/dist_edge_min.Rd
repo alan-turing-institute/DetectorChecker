@@ -2,7 +2,7 @@
 % Please edit documentation in R/pixel.R
 \name{dist_edge_min}
 \alias{dist_edge_min}
-\title{A function to calculate L-infinity distance to module edge}
+\title{Calculate L-infinity distance to module edge}
 \usage{
 dist_edge_min(detector)
 }
@@ -13,5 +13,11 @@ dist_edge_min(detector)
 distance matrix
 }
 \description{
-A function to calculate L-infinity distance to module edge
+Calculate L-infinity distance to module edge
+}
+\examples{
+# Create a detector
+detector_pilatus <- create_detector("Pilatus")
+# Calculate L-infinity distance to module edge
+dist_edge_min(detector_pilatus)
 }

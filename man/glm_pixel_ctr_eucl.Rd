@@ -17,5 +17,13 @@ Fit a logistic regression model using \code{glm}.
 Predicts dead pixels from the pixel's euclidean distance from the detector center
 }
 \examples{
-glm_pixel_ctr_eucl(PerkinElmerFull_exp_1)
+# Create a detector
+detector_pilatus <- create_detector("Pilatus")
+# Load a pixel matrix
+file_path <-  system.file("extdata", "Pilatus", "badpixel_mask.tif",
+                         package ="detectorchecker")
+detector_pilatus <- load_pix_matrix(
+ detector = detector_pilatus, file_path = file_path)
+# Fit logistic regression model
+glm_pixel_ctr_eucl(detector_pilatus)
 }

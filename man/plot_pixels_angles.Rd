@@ -28,7 +28,7 @@ Plot nearest neighbour angles of dead pixels of detector or module
 }
 \examples{
 detector_perkinfull <- create_detector("PerkinElmerFull")
-file_path <-  system.file("extdata", "PerkinElmerFull", 
+file_path <-  system.file("extdata", "PerkinElmerFull",
                           "BadPixelMap_t1.bpm.xml",
                           package = "detectorchecker")
 detector_perkinfull <- load_pix_matrix(

@@ -10,14 +10,20 @@ dead_stats_summary(detector)
 \item{detector}{Detector object}
 }
 \value{
-A string with damaged pixels overall statitics
+A string with damaged pixels overall statistics
 }
 \description{
-Compute summary statistics for a detector oject.
+Compute summary statistics for a detector object.
 Ensure a damaged pixel matrix has been loaded with \code{load_pix_matrix}
 }
 \examples{
-detc <- Excalibur_exp_1
-dead_stats_summary(detc)
-
+# Create a detector
+detector_pilatus <- create_detector("Pilatus")
+# Load a pixel matrix
+file_path <-  system.file("extdata", "Pilatus", "badpixel_mask.tif",
+                         package ="detectorchecker")
+detector_pilatus <- load_pix_matrix(
+ detector = detector_pilatus, file_path = file_path)
+# Calculate dead_stats_summary
+dead_stats_summary(detector_pilatus)
 }

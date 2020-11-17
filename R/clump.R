@@ -488,9 +488,18 @@ plot_module_events <- function(detector, col, row, file_path = NA, caption = TRU
 #' @return Events matrix
 #' @export
 #' @examples
-#' detc <- Excalibur_exp_1
-#' detc_with_clumps <- find_clumps(detc)
-#' get_events_matrix(detc_with_clumps)
+#' @examples
+#' # Create a detector
+#' detector_pilatus <- create_detector("Pilatus")
+#' # Load a pixel matrix
+#' file_path <-  system.file("extdata", "Pilatus", "badpixel_mask.tif",
+#'                          package ="detectorchecker")
+#' detector_pilatus <- load_pix_matrix(
+#'  detector = detector_pilatus, file_path = file_path)
+#' # Identify events
+#' detector_pilatus <- find_clumps(detector_pilatus)
+#' # Get events matrix
+#' get_events_matrix(detector_pilatus)
 get_events_matrix <- function(detector, incl_event_list = NA) {
 
   # check if the correct clumps were found

@@ -16,6 +16,8 @@ distance matrix
 Calculate horizontal distance from each pixel to nearest module edge
 }
 \examples{
-detc <- Excalibur_exp_1
-dist_edge_col(detc)
+# Create a detector
+detector_pilatus <- create_detector("Pilatus")
+# Calculate horizontal distance from each pixel to nearest module edge
+dist_edge_col(detector_pilatus)
 }

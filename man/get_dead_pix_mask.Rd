@@ -16,5 +16,13 @@ dead pixel mask
 Converts the pix_dead attribute of a detector (NX2 list) to a matrix of 1 and 0 (1 for dead pixel)
 }
 \examples{
-detc <- Excalibur_exp_1
+# Create a detector
+detector_pilatus <- create_detector("Pilatus")
+# Load a pixel matrix
+file_path <-  system.file("extdata", "Pilatus", "badpixel_mask.tif",
+                         package ="detectorchecker")
+detector_pilatus <- load_pix_matrix(
+ detector = detector_pilatus, file_path = file_path)
+# Calculate dead pixel mask
+get_dead_pix_mask(detector_pilatus)
 }

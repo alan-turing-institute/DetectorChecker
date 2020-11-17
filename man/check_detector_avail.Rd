@@ -2,7 +2,7 @@
 % Please edit documentation in R/layout.R
 \name{check_detector_avail}
 \alias{check_detector_avail}
-\title{Checks whether `\code{detector_name} is preconfigured.}
+\title{Checks whether \code{detector_name} is preconfigured.}
 \usage{
 check_detector_avail(detector_name)
 }

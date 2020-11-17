@@ -149,6 +149,14 @@
 #' @return Detector object
 #' @importFrom grDevices jpeg pdf
 #' @export
+#' @examples
+#' # Create a detector
+#' detector_pilatus <- create_detector("Pilatus")
+#' # Load a pixel matrix
+#' file_path <-  system.file("extdata", "Pilatus", "badpixel_mask.tif",
+#'                          package ="detectorchecker")
+#' detector_pilatus <- load_pix_matrix(
+#'  detector = detector_pilatus, file_path = file_path)
 load_pix_matrix <- function(detector, file_path) {
   pix_matrix <- NA
 

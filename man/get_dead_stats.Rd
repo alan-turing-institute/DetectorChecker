@@ -16,6 +16,15 @@ Detector object with dead_stats attribute
 Generate summary of damaged pixels and add as a dead_stats attribute to the detector object
 }
 \examples{
-detc <- Excalibur_exp_1
-get_dead_stats(detc)$dead_stats
+# Create a detector
+detector_pilatus <- create_detector("Pilatus")
+# Load a pixel matrix
+file_path <-  system.file("extdata", "Pilatus", "badpixel_mask.tif",
+                         package ="detectorchecker")
+detector_pilatus <- load_pix_matrix(
+ detector = detector_pilatus, file_path = file_path)
+# Calculate dead_stats
+detector_pilatus <- get_dead_stats(detector_pilatus)
+# Print dead stats
+print(detector_pilatus$dead_stats)
 }

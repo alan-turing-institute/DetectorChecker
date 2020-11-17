@@ -18,4 +18,5 @@ If the \code{detector_name} is not available will raise an exception.
 }
 \examples{
 detc <- create_detector(available_detectors[1])
+detc <- create_detector("Pilatus")
 }

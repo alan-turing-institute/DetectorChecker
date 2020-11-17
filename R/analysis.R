@@ -1,7 +1,4 @@
-#' @title Analysis module
-
-
-#' A list to represent dead pixels statistics summary
+#' A list to represent dead pixels statistics summary.
 #' Added to a detector by \code{get_dead_stats}.
 #'
 #' @param dead_n Total number of damaged pixels:
@@ -254,9 +251,17 @@ plot_pixels_arrows <- function(detector, file_path = NA, row = NA, col = NA,
 #'
 #' @param detector Detector object
 #' @return Fitted model
-#' @examples
-#' glm_pixel_ctr_eucl(PerkinElmerFull_exp_1)
 #' @export
+#' @examples
+#' # Create a detector
+#' detector_pilatus <- create_detector("Pilatus")
+#' # Load a pixel matrix
+#' file_path <-  system.file("extdata", "Pilatus", "badpixel_mask.tif",
+#'                          package ="detectorchecker")
+#' detector_pilatus <- load_pix_matrix(
+#'  detector = detector_pilatus, file_path = file_path)
+#' # Fit logistic regression model
+#' glm_pixel_ctr_eucl(detector_pilatus)
 glm_pixel_ctr_eucl <- function(detector) {
   dist <- pixel_dist_ctr_eucl(detector)
   pix_matrix <- detector$pix_matrix
@@ -275,7 +280,15 @@ glm_pixel_ctr_eucl <- function(detector) {
 #' @return Fitted model
 #' @export
 #' @examples
-#' glm_pixel_ctr_linf(PerkinElmerFull_exp_1)
+#' # Create a detector
+#' detector_pilatus <- create_detector("Pilatus")
+#' # Load a pixel matrix
+#' file_path <-  system.file("extdata", "Pilatus", "badpixel_mask.tif",
+#'                          package ="detectorchecker")
+#' detector_pilatus <- load_pix_matrix(
+#'  detector = detector_pilatus, file_path = file_path)
+#' # Fit logistic regression model
+#' glm_pixel_ctr_linf(detector_pilatus)
 glm_pixel_ctr_linf <- function(detector) {
   dist <- pixel_dist_ctr_linf(detector)
   pix_matrix <- detector$pix_matrix
@@ -294,7 +307,15 @@ glm_pixel_ctr_linf <- function(detector) {
 #' @return Fitted model
 #' @export
 #' @examples
-#' glm_pixel_dist_edge_col(PerkinElmerFull_exp_1)
+#' # Create a detector
+#' detector_pilatus <- create_detector("Pilatus")
+#' # Load a pixel matrix
+#' file_path <-  system.file("extdata", "Pilatus", "badpixel_mask.tif",
+#'                          package ="detectorchecker")
+#' detector_pilatus <- load_pix_matrix(
+#'  detector = detector_pilatus, file_path = file_path)
+#' # Fit logistic regression model
+#' glm_pixel_dist_edge_col(detector_pilatus)
 glm_pixel_dist_edge_col <- function(detector) {
   dist <- dist_edge_col(detector)
   pix_matrix <- detector$pix_matrix
@@ -313,7 +334,15 @@ glm_pixel_dist_edge_col <- function(detector) {
 #' @return Fitted model
 #' @export
 #' @examples
-#' glm_pixel_dist_edge_row(PerkinElmerFull_exp_1)
+#' # Create a detector
+#' detector_pilatus <- create_detector("Pilatus")
+#' # Load a pixel matrix
+#' file_path <-  system.file("extdata", "Pilatus", "badpixel_mask.tif",
+#'                          package ="detectorchecker")
+#' detector_pilatus <- load_pix_matrix(
+#'  detector = detector_pilatus, file_path = file_path)
+#' # Fit logistic regression model
+#' glm_pixel_dist_edge_row(detector_pilatus)
 glm_pixel_dist_edge_row <- function(detector) {
   dist <- dist_edge_row(detector)
   pix_matrix <- detector$pix_matrix
@@ -331,7 +360,15 @@ glm_pixel_dist_edge_row <- function(detector) {
 #' @return Fitted model
 #' @export
 #' @examples
-#' glm_pixel_dist_edge_min(PerkinElmerFull_exp_1)
+#' # Create a detector
+#' detector_pilatus <- create_detector("Pilatus")
+#' # Load a pixel matrix
+#' file_path <-  system.file("extdata", "Pilatus", "badpixel_mask.tif",
+#'                          package ="detectorchecker")
+#' detector_pilatus <- load_pix_matrix(
+#'  detector = detector_pilatus, file_path = file_path)
+#' # Fit logistic regression model
+#' glm_pixel_dist_edge_min(detector_pilatus)
 glm_pixel_dist_edge_min <- function(detector) {
   dist <- dist_edge_min(detector)
 
@@ -351,7 +388,15 @@ glm_pixel_dist_edge_min <- function(detector) {
 #' @return Fitted model
 #' @export
 #' @examples
-#' glm_pixel_dist_corner(PerkinElmerFull_exp_1)
+#' # Create a detector
+#' detector_pilatus <- create_detector("Pilatus")
+#' # Load a pixel matrix
+#' file_path <-  system.file("extdata", "Pilatus", "badpixel_mask.tif",
+#'                          package ="detectorchecker")
+#' detector_pilatus <- load_pix_matrix(
+#'  detector = detector_pilatus, file_path = file_path)
+#' # Fit logistic regression model
+#' glm_pixel_dist_corner(detector_pilatus)
 glm_pixel_dist_corner <- function(detector) {
   dist <- dist_corner(detector)
 
@@ -387,8 +432,17 @@ glm_pixel_dist_corner <- function(detector) {
 #' @importFrom stats chisq.test
 #' @export
 #' @examples
-#' detc <- Excalibur_exp_1
-#' get_dead_stats(detc)$dead_stats
+#' # Create a detector
+#' detector_pilatus <- create_detector("Pilatus")
+#' # Load a pixel matrix
+#' file_path <-  system.file("extdata", "Pilatus", "badpixel_mask.tif",
+#'                          package ="detectorchecker")
+#' detector_pilatus <- load_pix_matrix(
+#'  detector = detector_pilatus, file_path = file_path)
+#' # Calculate dead_stats
+#' detector_pilatus <- get_dead_stats(detector_pilatus)
+#' # Print dead stats
+#' print(detector_pilatus$dead_stats)
 get_dead_stats <- function(detector) {
   ppp_dead <- get_ppp_dead(detector)
 
@@ -435,15 +489,21 @@ get_dead_stats <- function(detector) {
 
 #' Summary of damaged pixels for a given detector
 #'
-#' Compute summary statistics for a detector oject.
+#' Compute summary statistics for a detector object.
 #' Ensure a damaged pixel matrix has been loaded with \code{load_pix_matrix}
 #'
 #' @param detector Detector object
-#' @return A string with damaged pixels overall statitics
+#' @return A string with damaged pixels overall statistics
 #' @examples
-#' detc <- Excalibur_exp_1
-#' dead_stats_summary(detc)
-#'
+#' # Create a detector
+#' detector_pilatus <- create_detector("Pilatus")
+#' # Load a pixel matrix
+#' file_path <-  system.file("extdata", "Pilatus", "badpixel_mask.tif",
+#'                          package ="detectorchecker")
+#' detector_pilatus <- load_pix_matrix(
+#'  detector = detector_pilatus, file_path = file_path)
+#' # Calculate dead_stats_summary
+#' dead_stats_summary(detector_pilatus)
 #' @export
 dead_stats_summary <- function(detector) {
   detector <- get_dead_stats(detector)
@@ -468,7 +528,7 @@ dead_stats_summary <- function(detector) {
 #' @export
 #' @examples
 #' detector_perkinfull <- create_detector("PerkinElmerFull")
-#' file_path <-  system.file("extdata", "PerkinElmerFull", 
+#' file_path <-  system.file("extdata", "PerkinElmerFull",
 #'                           "BadPixelMap_t1.bpm.xml",
 #'                           package = "detectorchecker")
 #' detector_perkinfull <- load_pix_matrix(
@@ -584,8 +644,15 @@ plot_pixels_angles <- function(detector, file_path = NA, row = NA, col = NA,
 #' @param detector Detector object
 #' @return ppp of dead pixels
 #' @examples
-#' detc <- PerkinElmerFull_exp_1
-#' get_ppp_dead(detc)
+#' # Create a detector
+#' detector_pilatus <- create_detector("Pilatus")
+#' # Load a pixel matrix
+#' file_path <-  system.file("extdata", "Pilatus", "badpixel_mask.tif",
+#'                          package ="detectorchecker")
+#' detector_pilatus <- load_pix_matrix(
+#'  detector = detector_pilatus, file_path = file_path)
+#' # Create a point pattern dataset from the detector
+#' dead_ppp <- get_ppp_dead(detector_pilatus)
 #' @export
 get_ppp_dead <- function(detector) {
   if (suppressWarnings(any(is.na(detector$pix_dead)))) {

@@ -95,8 +95,10 @@ pixel_dist_ctr_linf <- function(detector) {
 #' @return Matrix containing pixel distances from closest corner
 #' @export
 #' @examples
-#' detc <- Excalibur_exp_1
-#' dist_corner(detc)
+#' # Create a detector
+#' detector_pilatus <- create_detector("Pilatus")
+#' # Calculate distance from pixels to corners
+#' dist_corner(detector_pilatus)
 #' @export
 dist_corner <- function(detector) {
 
@@ -129,8 +131,10 @@ dist_corner <- function(detector) {
 #' @param detector Detector object
 #' @return distance matrix
 #' @examples
-#' detc <- Excalibur_exp_1
-#' dist_edge_col(detc)
+#' # Create a detector
+#' detector_pilatus <- create_detector("Pilatus")
+#' # Calculate horizontal distance from each pixel to nearest module edge
+#' dist_edge_col(detector_pilatus)
 #' @export
 dist_edge_col <- function(detector) {
   dist <- matrix(NA, nrow = detector$detector_height, ncol = detector$detector_width)
@@ -159,8 +163,10 @@ dist_edge_col <- function(detector) {
 #' @return distance matrix
 #' @export
 #' @examples
-#' detc <- Excalibur_exp_1
-#' dist_edge_row(detc)
+#' # Create a detector
+#' detector_pilatus <- create_detector("Pilatus")
+#' # Calculate vertical distance from each pixel to nearest module edge
+#' dist_edge_row(detector_pilatus)
 dist_edge_row <- function(detector) {
   dist <- matrix(NA, nrow = detector$detector_height, ncol = detector$detector_width)
 
@@ -175,11 +181,16 @@ dist_edge_row <- function(detector) {
 }
 
 
-#' A function to calculate L-infinity distance to module edge
+#' Calculate L-infinity distance to module edge
 #'
 #' @param detector Detector object
 #' @return distance matrix
 #' @export
+#' @examples
+#' # Create a detector
+#' detector_pilatus <- create_detector("Pilatus")
+#' # Calculate L-infinity distance to module edge
+#' dist_edge_min(detector_pilatus)
 dist_edge_min <- function(detector) {
   dist_col <- dist_edge_col(detector)
   dist_row <- dist_edge_row(detector)
@@ -359,7 +370,15 @@ plot_pixel_dist_edge <- function(detector, file_path = NA) {
 #' @return dead pixel mask
 #' @export
 #' @examples
-#' detc <- Excalibur_exp_1
+#' # Create a detector
+#' detector_pilatus <- create_detector("Pilatus")
+#' # Load a pixel matrix
+#' file_path <-  system.file("extdata", "Pilatus", "badpixel_mask.tif",
+#'                          package ="detectorchecker")
+#' detector_pilatus <- load_pix_matrix(
+#'  detector = detector_pilatus, file_path = file_path)
+#' # Calculate dead pixel mask
+#' get_dead_pix_mask(detector_pilatus)
 get_dead_pix_mask <- function(detector) {
 
   # TODO: check because we needed to swap detector_width with detector_height.

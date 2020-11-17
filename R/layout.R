@@ -94,7 +94,7 @@ available_detectors <- c(
 #'
 #' @return Excalibur detector object
 #' @export
-#' @examples 
+#' @examples
 #' detc <- Excalibur_Detector()
 Excalibur_Detector <- function() {
   name <- .Excalibur_name
@@ -229,7 +229,7 @@ is.detector <- function(x) inherits(x, "detector")
 
 # Detector selection -------------------------------------------------------------
 
-#' Checks whether `\code{detector_name} is preconfigured.
+#' Checks whether \code{detector_name} is preconfigured.
 #'
 #' If TRUE can be created by \code{create_detector}
 #'
@@ -274,6 +274,7 @@ check_detector_avail <- function(detector_name) {
 #' @return Detector S3 object
 #' @examples
 #' detc <- create_detector(available_detectors[1])
+#' detc <- create_detector("Pilatus")
 #' @export
 create_detector <- function(detector_name) {
   detector <- NA

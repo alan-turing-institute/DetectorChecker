@@ -18,6 +18,13 @@ Creates an object of class "ppp" representing a point pattern dataset in the two
 See \href{https://www.rdocumentation.org/packages/spatstat/versions/1.63-3/topics/ppp}{spatstat} docs for details.
 }
 \examples{
-detc <- PerkinElmerFull_exp_1
-get_ppp_dead(detc)
+# Create a detector
+detector_pilatus <- create_detector("Pilatus")
+# Load a pixel matrix
+file_path <-  system.file("extdata", "Pilatus", "badpixel_mask.tif",
+                         package ="detectorchecker")
+detector_pilatus <- load_pix_matrix(
+ detector = detector_pilatus, file_path = file_path)
+# Create a point pattern dataset from the detector
+dead_ppp <- get_ppp_dead(detector_pilatus)
 }

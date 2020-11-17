@@ -16,6 +16,8 @@ Matrix containing pixel distances from closest corner
 A function to calculate pixel distances from the closest corner
 }
 \examples{
-detc <- Excalibur_exp_1
-dist_corner(detc)
+# Create a detector
+detector_pilatus <- create_detector("Pilatus")
+# Calculate distance from pixels to corners
+dist_corner(detector_pilatus)
 }

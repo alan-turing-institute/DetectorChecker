@@ -17,5 +17,13 @@ Fit a logistic regression model using \code{glm}.
 Predict dead pixels from pixel distances to the nearest corner
 }
 \examples{
-glm_pixel_dist_corner(PerkinElmerFull_exp_1)
+# Create a detector
+detector_pilatus <- create_detector("Pilatus")
+# Load a pixel matrix
+file_path <-  system.file("extdata", "Pilatus", "badpixel_mask.tif",
+                         package ="detectorchecker")
+detector_pilatus <- load_pix_matrix(
+ detector = detector_pilatus, file_path = file_path)
+# Fit logistic regression model
+glm_pixel_dist_corner(detector_pilatus)
 }
