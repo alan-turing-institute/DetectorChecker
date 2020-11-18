@@ -880,7 +880,9 @@ plot_events_angles <- function(detector, file_path = NA,
 #' detector_perkinfull <- load_pix_matrix(
 #' detector = detector_perkinfull, file_path = file_path)
 #' detector_perkinfull_events = find_clumps(detector_perkinfull)
-#' plot_events_kfg(detector_perkinfull_events)
+#' plot_events_kfg(detector_perkinfull_events, "K")
+#' plot_events_kfg(detector_perkinfull_events, "F")
+#' plot_events_kfg(detector_perkinfull_events, "G")
 plot_events_kfg <- function(detector, func, file_path = NA,
                             row = NA, col = NA, caption = TRUE,
                             incl_event_list = NA) {

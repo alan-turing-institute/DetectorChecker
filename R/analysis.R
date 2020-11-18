@@ -109,13 +109,15 @@ plot_module_pixels <- function(detector, col, row, file_path = NA,
 #' @param col Module column number
 #' @param caption Flag to turn on/off figure caption
 #' @export
+#' @examples
 #' # Create a detector
 #' detector_pilatus <- create_detector("Pilatus")
 #' # Load a pixel matrix
 #' file_path <-  system.file("extdata", "Pilatus", "badpixel_mask.tif",
 #'                          package ="detectorchecker")
 #' detector_pilatus <- load_pix_matrix(detector = detector_pilatus, file_path = file_path)
-#' plot_pixels_count(detector_pilatus)
+#' detector_pilatus_damage < get_dead_stats(detector_pilatus)
+#' plot_pixels_count(detector_pilatus_damage)
 plot_pixels_count <- function(detector, file_path = NA, row = NA, col = NA,
                                   caption = TRUE) {
   main_caption <- ""

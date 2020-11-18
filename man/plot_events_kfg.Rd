@@ -40,5 +40,7 @@ file_path <-  system.file("extdata", "PerkinElmerFull",
 detector_perkinfull <- load_pix_matrix(
 detector = detector_perkinfull, file_path = file_path)
 detector_perkinfull_events = find_clumps(detector_perkinfull)
-plot_events_kfg(detector_perkinfull_events)
+plot_events_kfg(detector_perkinfull_events, "K")
+plot_events_kfg(detector_perkinfull_events, "F")
+plot_events_kfg(detector_perkinfull_events, "G")
 }
