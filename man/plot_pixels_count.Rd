@@ -27,6 +27,6 @@ detector_pilatus <- create_detector("Pilatus")
 file_path <-  system.file("extdata", "Pilatus", "badpixel_mask.tif",
                          package ="detectorchecker")
 detector_pilatus <- load_pix_matrix(detector = detector_pilatus, file_path = file_path)
-detector_pilatus_damage < get_dead_stats(detector_pilatus)
+detector_pilatus_damage <- get_dead_stats(detector_pilatus)
 plot_pixels_count(detector_pilatus_damage)
 }

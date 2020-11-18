@@ -312,6 +312,11 @@ find_clumps <- function(detector, row = NA, col = NA) {
 
 #' Plots damaged detector events
 #'
+#' Note that the parameter incl_event_list is a list of integers from [1,8].  For all events this would be list(1,2,3,4,5,6,7,8).
+#' The integer values declare which damage events to include:
+#'      1=singletons, 2=doublets, 3=triplets, 4=larger clusters, 5=upper horizontal lines,
+#'      6=lower horizontal lines, 7=left vertical lines, 8=right vertical lines
+#' 
 #' @param detector Detector object
 #' @param col Module column number
 #' @param row Module row number
@@ -381,6 +386,11 @@ plot_events <- function(detector, col = NA, row = NA, file_path = NA, caption = 
 }
 
 #' Plots damaged detector module events
+#' 
+#' Note that the parameter incl_event_list is a list of integers from [1,8].  For all events this would be list(1,2,3,4,5,6,7,8).
+#' The integer values declare which damage events to include:
+#'      1=singletons, 2=doublets, 3=triplets, 4=larger clusters, 5=upper horizontal lines,
+#'      6=lower horizontal lines, 7=left vertical lines, 8=right vertical lines
 #'
 #' @param detector Detector object
 #' @param col Module column number
@@ -441,7 +451,12 @@ plot_module_events <- function(detector, col, row, file_path = NA, caption = TRU
 }
 
 #' Creates ppp object for damaged detector events
-#'
+#' 
+#' Note that the parameter incl_event_list is a list of integers from [1,8].  For all events this would be list(1,2,3,4,5,6,7,8).
+#' The integer values declare which damage events to include:
+#'      1=singletons, 2=doublets, 3=triplets, 4=larger clusters, 5=upper horizontal lines,
+#'      6=lower horizontal lines, 7=left vertical lines, 8=right vertical lines
+#' 
 #' @param detector Detector object
 #' @param incl_event_list a list of events to be included
 #' @param height Detector height
@@ -476,7 +491,12 @@ plot_module_events <- function(detector, col, row, file_path = NA, caption = TRU
 }
 
 #' Creates ppp object for damaged detector pixels
-#'
+#' 
+#' Note that the parameter incl_event_list is a list of integers from [1,8].  For all events this would be list(1,2,3,4,5,6,7,8).
+#' The integer values declare which damage events to include:
+#'      1=singletons, 2=doublets, 3=triplets, 4=larger clusters, 5=upper horizontal lines,
+#'      6=lower horizontal lines, 7=left vertical lines, 8=right vertical lines
+#' 
 #' @param detector Detector object
 #' @param incl_event_list a list of events to be included
 #' @return ppp object for damaged detector pixels
@@ -501,8 +521,12 @@ plot_module_events <- function(detector, col, row, file_path = NA, caption = TRU
 #' Generates events matrix for selected events
 #'
 #' Generates events mask (a matrix with pixels as 0 and events as 1) indicating if a pixel is in an event
-#' as calculated by \code{find_clumps(detc)}
-#'
+#' as calculated by \code{find_clumps(detc)} 
+#' Note that the parameter incl_event_list is a list of integers from [1,8]. For all events this would be list(1,2,3,4,5,6,7,8).
+#' The integer values declare which damage events to include:
+#'      1=singletons, 2=doublets, 3=triplets, 4=larger clusters, 5=upper horizontal lines,
+#'      6=lower horizontal lines, 7=left vertical lines, 8=right vertical lines
+#' 
 #' @param detector Detector object
 #' @param incl_event_list a list of events to be included
 #' @return Events matrix
@@ -570,7 +594,12 @@ get_events_matrix <- function(detector, incl_event_list = NA) {
 }
 
 #' Fits events distances from the centre using glm
-#'
+#' 
+#' Note that the parameter incl_event_list is a list of integers from [1,8].  For all events this would be list(1,2,3,4,5,6,7,8).
+#' The integer values declare which damage events to include:
+#'      1=singletons, 2=doublets, 3=triplets, 4=larger clusters, 5=upper horizontal lines,
+#'      6=lower horizontal lines, 7=left vertical lines, 8=right vertical lines
+#' 
 #' @param detector Detector object
 #' @param incl_event_list a list of events to be included
 #' @return Fitted model
@@ -587,7 +616,12 @@ glm_events_ctr_eucl <- function(detector, incl_event_list = NA) {
 }
 
 #' Fits events parallel maxima from the centre using glm
-#'
+#' 
+#' Note that the parameter incl_event_list is a list of integers from [1,8].  For all events this would be list(1,2,3,4,5,6,7,8).
+#' The integer values declare which damage events to include:
+#'      1=singletons, 2=doublets, 3=triplets, 4=larger clusters, 5=upper horizontal lines,
+#'      6=lower horizontal lines, 7=left vertical lines, 8=right vertical lines
+#' 
 #' @param detector Detector object
 #' @param incl_event_list a list of events to be included
 #' @return Fitted model
@@ -604,7 +638,12 @@ glm_events_ctr_linf <- function(detector, incl_event_list = NA) {
 }
 
 #' Fits events distances from the module edges by column using glm
-#'
+#' 
+#' Note that the parameter incl_event_list is a list of integers from [1,8].  For all events this would be list(1,2,3,4,5,6,7,8).
+#' The integer values declare which damage events to include:
+#'      1=singletons, 2=doublets, 3=triplets, 4=larger clusters, 5=upper horizontal lines,
+#'      6=lower horizontal lines, 7=left vertical lines, 8=right vertical lines
+#' 
 #' @param detector Detector object
 #' @param incl_event_list a list of events to be included
 #' @return Fitted model
@@ -621,7 +660,12 @@ glm_events_dist_edge_col <- function(detector, incl_event_list = NA) {
 }
 
 #' Fits events distances from the module edges by row using glm
-#'
+#' 
+#' Note that the parameter incl_event_list is a list of integers from [1,8].  For all events this would be list(1,2,3,4,5,6,7,8).
+#' The integer values declare which damage events to include:
+#'      1=singletons, 2=doublets, 3=triplets, 4=larger clusters, 5=upper horizontal lines,
+#'      6=lower horizontal lines, 7=left vertical lines, 8=right vertical lines
+#' 
 #' @param detector Detector object
 #' @param incl_event_list a list of events to be included
 #' @return Fitted model
@@ -638,7 +682,12 @@ glm_events_dist_edge_row <- function(detector, incl_event_list = NA) {
 }
 
 #' Fits events distances to the nearest sub-panel edge using glm
-#'
+#' 
+#' Note that the parameter incl_event_list is a list of integers from [1,8].  For all events this would be list(1,2,3,4,5,6,7,8).
+#' The integer values declare which damage events to include:
+#'      1=singletons, 2=doublets, 3=triplets, 4=larger clusters, 5=upper horizontal lines,
+#'      6=lower horizontal lines, 7=left vertical lines, 8=right vertical lines
+#' 
 #' @param detector Detector object
 #' @param incl_event_list a list of events to be included
 #' @return Fitted model
@@ -655,7 +704,12 @@ glm_events_dist_edge_min <- function(detector, incl_event_list = NA) {
 }
 
 #' Fits events distances to the nearest corner using glm
-#'
+#' 
+#' Note that the parameter incl_event_list is a list of integers from [1,8].  For all events this would be list(1,2,3,4,5,6,7,8).
+#' The integer values declare which damage events to include:
+#'      1=singletons, 2=doublets, 3=triplets, 4=larger clusters, 5=upper horizontal lines,
+#'      6=lower horizontal lines, 7=left vertical lines, 8=right vertical lines
+#' 
 #' @param detector Detector object
 #' @param incl_event_list a list of events to be included
 #' @return Fitted model
@@ -708,7 +762,12 @@ glm_events_dist_corner <- function(detector, incl_event_list = NA) {
 # }
 
 #' Plots density graph of events of a detector or module
-#'
+#' 
+#' Note that the parameter incl_event_list is a list of integers from [1,8].  For all events this would be list(1,2,3,4,5,6,7,8).
+#' The integer values declare which damage events to include:
+#'      1=singletons, 2=doublets, 3=triplets, 4=larger clusters, 5=upper horizontal lines,
+#'      6=lower horizontal lines, 7=left vertical lines, 8=right vertical lines
+#' 
 #' @param detector Detector object
 #' @param file_path Output file path
 #' @param adjust Kernel density bandwidth
@@ -764,6 +823,12 @@ plot_events_density <- function(detector, file_path = NA, adjust = 0.5,
 }
 
 #' Plots arrows graph of events of a detector or module
+#' 
+#' Note that the parameter incl_event_list is a list of integers from [1,8].  For all events this would be list(1,2,3,4,5,6,7,8).
+#' The integer values declare which damage events to include:
+#'      1=singletons, 2=doublets, 3=triplets, 4=larger clusters, 5=upper horizontal lines,
+#'      6=lower horizontal lines, 7=left vertical lines, 8=right vertical lines
+#' 
 #'
 #' @param detector Detector object
 #' @param file_path Output file path
@@ -809,7 +874,12 @@ plot_events_arrows <- function(detector, file_path = NA,
 }
 
 #' Plots angles graph of events of a detector or module
-#'
+#' 
+#' Note that the parameter incl_event_list is a list of integers from [1,8].  For all events this would be list(1,2,3,4,5,6,7,8).
+#' The integer values declare which damage events to include:
+#'      1=singletons, 2=doublets, 3=triplets, 4=larger clusters, 5=upper horizontal lines,
+#'      6=lower horizontal lines, 7=left vertical lines, 8=right vertical lines
+#' 
 #' @param detector Detector object
 #' @param file_path Output file path
 #' @param row Module row number
@@ -863,7 +933,12 @@ plot_events_angles <- function(detector, file_path = NA,
 }
 
 #' Plots K, F, G functions of a detector or module
-#'
+#' 
+#' Note that the parameter incl_event_list is a list of integers from [1,8].  For all events this would be list(1,2,3,4,5,6,7,8).
+#' The integer values declare which damage events to include:
+#'      1=singletons, 2=doublets, 3=triplets, 4=larger clusters, 5=upper horizontal lines,
+#'      6=lower horizontal lines, 7=left vertical lines, 8=right vertical lines
+#' 
 #' @param detector Detector object
 #' @param func Function name
 #' @param file_path Output file path
@@ -909,7 +984,12 @@ plot_events_kfg <- function(detector, func, file_path = NA,
 }
 
 #' Plots events count per detector or module
-#'
+#' 
+#' Note that the parameter incl_event_list is a list of integers from [1,8].  For all events this would be list(1,2,3,4,5,6,7,8).
+#' The integer values declare which damage events to include:
+#'      1=singletons, 2=doublets, 3=triplets, 4=larger clusters, 5=upper horizontal lines,
+#'      6=lower horizontal lines, 7=left vertical lines, 8=right vertical lines
+#' 
 #' @param detector Detector object
 #' @param file_path Output file path
 #' @param row Module row number

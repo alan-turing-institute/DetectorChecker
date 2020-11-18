@@ -24,6 +24,9 @@
 ppp object for damaged detector events
 }
 \description{
-Creates ppp object for damaged detector events
+Note that the parameter incl_event_list is a list of integers from [1,8].  For all events this would be list(1,2,3,4,5,6,7,8).
+The integer values declare which damage events to include:
+     1=singletons, 2=doublets, 3=triplets, 4=larger clusters, 5=upper horizontal lines,
+     6=lower horizontal lines, 7=left vertical lines, 8=right vertical lines
 }
 \keyword{internal}
