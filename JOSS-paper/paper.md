@@ -45,9 +45,7 @@ panel-structured arrays, for example solar panels or very large display screens.
 To maximize accessibility, and to avoid any issues arising from specific software environments,
 we have created a web application which provides
 the principal features of the software in standalone form.
-The web application also affords the possibility of engaging with our team in the analysis
-of time-evolving
-defect patterns.
+The web application also affords the possibility of engaging with our team in the analysis of time-evolving defect patterns. To the best of our knowledge, this is the first and presently the only web application and R package facilitating spatial analysis of panel-structured images.
 
 
 Digital detector screens are crucial high-value components of imaging systems used throughout
