@@ -15,9 +15,9 @@
 }
 \value{
 the class of a clump (1 - singleton, 2 - double, 3 - triplet,
-  4 - larger cluster, unless it actually has the shape of a line,
-  5 (6): vertical line where closest edge is the upper (lower) one,
-  7 (8): horizontal line where closest edge is the right (left) one)
+4 - larger cluster, unless it actually has the shape of a line,
+5 (6): vertical line where closest edge is the upper (lower) one,
+7 (8): horizontal line where closest edge is the right (left) one)
 }
 \description{
 Clasifies a clump

@@ -3,7 +3,7 @@
 \name{.ini_graphics}
 \alias{.ini_graphics}
 \title{Starts the graphics device driver for producing graphics with respect to a
-  chosen format}
+chosen format}
 \usage{
 .ini_graphics(file_path)
 }
@@ -12,6 +12,6 @@
 }
 \description{
 Starts the graphics device driver for producing graphics with respect to a
-  chosen format
+chosen format
 }
 \keyword{internal}

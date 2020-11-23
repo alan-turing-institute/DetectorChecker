@@ -2,8 +2,8 @@
 % Please edit documentation in R/clump.R
 \name{find_clumps}
 \alias{find_clumps}
-\title{Locates and classifies clumps of damaged pixels in a detector.
-Adds an events matrix attribute to a \code{detector}}
+\title{Locates and classifies clumps (Events) of damaged pixels in a detector.
+Adds an events matrix attribute to a \code{detector}.}
 \usage{
 find_clumps(detector, row = NA, col = NA)
 }
@@ -18,6 +18,34 @@ find_clumps(detector, row = NA, col = NA)
 Detector with events matrix attribute
 }
 \description{
-Locates and classifies clumps of damaged pixels in a detector.
-Adds an events matrix attribute to a \code{detector}
+Clumps are a collection of neighboring dead pixels.
+Pixels are classified as a clumps if they share an edge.
+A mathematical definition can be found \href{https://warwick.ac.uk/fac/sci/statistics/crism/research/17-02/17-02w.pdf}{here}.
+See details for classifications types.
+}
+\details{
+\tabular{ll}{
+   Classification \tab Description \cr
+   Singlton \tab Single connecting pixel. \cr
+   Doublets \tab Two connecting pixels. \cr
+   Triplets \tab Three connecting pixels. \cr
+   Upper horizontal line \tab Horizontal line in upper half of detector. \cr
+   Lower horizontal line \tab Horizontal line in lower half of detector. \cr
+   Left vertical line \tab Vertical line on left side of detector. \cr
+   Right vertical line \tab Vertical line on right side of detector. \cr
+   Larger cluster \tab Any larger grouping of damaged pixels. \cr
+}
+
+
+Lines have a pixel width of 1 but my include up to 10\% stray adjacent pixels.
+}
+\examples{
+# Create a detector
+detector_pilatus <- create_detector("Pilatus")
+# Load a pixel matrix
+file_path <-  system.file("extdata", "Pilatus", "badpixel_mask.tif",
+                         package ="detectorchecker")
+detector_pilatus <- load_pix_matrix(detector = detector_pilatus, file_path = file_path)
+ #Find clumps
+detector_pilatus_w_clumps <- find_clumps(detector_pilatus)
 }
