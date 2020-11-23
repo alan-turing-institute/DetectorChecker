@@ -107,7 +107,7 @@ detector_perkinfull$gap_col_sizes
 detector_perkinfull$gap_row_sizes
 ```
 
-Slots 9 and 10 are calculated from the other slots; they contain the left and the right edge (column numbers) and the top and bottom edge (row numbers) of each module. If there are no gaps, such as in the three Perkin Elmer layouts, then the left edge of a module will be adjacent to the right edge of the previous one in the same row of the grid and the bottom edge of a module will be adjacent to the top edge of the previous one.
+The final attributes are calculated from the other slots; they contain the left and the right edge (column numbers) and the top and bottom edge (row numbers) of each module. If there are no gaps, such as in the three Perkin Elmer layouts, then the left edge of a module will be adjacent to the right edge of the previous one in the same row of the grid and the bottom edge of a module will be adjacent to the top edge of the previous one.
 
 ```{r}
 print("Pilatus: Gap Cols and Rows")
