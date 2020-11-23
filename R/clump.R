@@ -262,7 +262,7 @@
 #' @details
 #' | Classification | Description |
 #' | ---- | ---- |
-#' | Singlton | Single connecting pixel. |
+#' | Singlton | Single pixel. |
 #' | Doublets | Two connecting pixels. |
 #' | Triplets | Three connecting pixels. |
 #' | Upper horizontal line | Horizontal line in upper half of detector. |
