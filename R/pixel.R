@@ -58,7 +58,6 @@ pixel_dist_ctr_eucl <- function(detector) {
 #' @param detector Detector object
 #' @return Matrix of parallel maxima
 #' @examples
-#' @examples
 #' # Create a detector
 #' detector_pilatus <- create_detector("Pilatus")
 #' pixel_dist_ctr_linf(detector_pilatus)
