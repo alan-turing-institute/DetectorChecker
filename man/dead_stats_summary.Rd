@@ -2,7 +2,7 @@
 % Please edit documentation in R/analysis.R
 \name{dead_stats_summary}
 \alias{dead_stats_summary}
-\title{Summary of damaged pixels}
+\title{Summary of damaged pixels for a given detector}
 \usage{
 dead_stats_summary(detector)
 }
@@ -10,8 +10,20 @@ dead_stats_summary(detector)
 \item{detector}{Detector object}
 }
 \value{
-A string with damaged pixels overall statitics
+A string with damaged pixels overall statistics
 }
 \description{
-Summary of damaged pixels
+Compute summary statistics for a detector object.
+Ensure a damaged pixel matrix has been loaded with \code{load_pix_matrix}
+}
+\examples{
+# Create a detector
+detector_pilatus <- create_detector("Pilatus")
+# Load a pixel matrix
+file_path <-  system.file("extdata", "Pilatus", "badpixel_mask.tif",
+                         package ="detectorchecker")
+detector_pilatus <- load_pix_matrix(
+ detector = detector_pilatus, file_path = file_path)
+# Calculate dead_stats_summary
+dead_stats_summary(detector_pilatus)
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/analysis.R
 \name{glm_pixel_dist_edge_row}
 \alias{glm_pixel_dist_edge_row}
-\title{Fits pixel distances from module edges by row using glm}
+\title{Predict dead pixels from pixel distances from the module edges by module row}
 \usage{
 glm_pixel_dist_edge_row(detector)
 }
@@ -13,5 +13,17 @@ glm_pixel_dist_edge_row(detector)
 Fitted model
 }
 \description{
-Fits pixel distances from module edges by row using glm
+Fit a logistic regression model using \code{glm}.
+Predict dead pixels from pixel distances from the module edges by module row
+}
+\examples{
+# Create a detector
+detector_pilatus <- create_detector("Pilatus")
+# Load a pixel matrix
+file_path <-  system.file("extdata", "Pilatus", "badpixel_mask.tif",
+                         package ="detectorchecker")
+detector_pilatus <- load_pix_matrix(
+ detector = detector_pilatus, file_path = file_path)
+# Fit logistic regression model
+glm_pixel_dist_edge_row(detector_pilatus)
 }

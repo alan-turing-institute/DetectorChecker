@@ -12,3 +12,6 @@ Excalibur detector object
 \description{
 A S3 class to represent the Excalibur detector.
 }
+\examples{
+detc <- Excalibur_Detector()
+}

@@ -21,3 +21,4 @@ Defines the coordinates of detector's edges using module and gap sizes
 Function is in 1d context to be applied to rows and cols separately.
 Edges are inside the modules (first/last row/col of module).
 }
+\keyword{internal}

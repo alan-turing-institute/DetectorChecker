@@ -2,7 +2,7 @@
 % Please edit documentation in R/io.R
 \name{load_pix_matrix}
 \alias{load_pix_matrix}
-\title{A function to load pixel data}
+\title{A function to load pixel data and set as attribute on a detector}
 \usage{
 load_pix_matrix(detector, file_path)
 }
@@ -15,5 +15,14 @@ load_pix_matrix(detector, file_path)
 Detector object
 }
 \description{
-A function to load pixel data
+A function to load pixel data and set as attribute on a detector
+}
+\examples{
+# Create a detector
+detector_pilatus <- create_detector("Pilatus")
+# Load a pixel matrix
+file_path <-  system.file("extdata", "Pilatus", "badpixel_mask.tif",
+                         package ="detectorchecker")
+detector_pilatus <- load_pix_matrix(
+ detector = detector_pilatus, file_path = file_path)
 }

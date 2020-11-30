@@ -17,3 +17,4 @@ distance to closest edge
 \description{
 A function to calculate closest distance to an edge for a pixel
 }
+\keyword{internal}

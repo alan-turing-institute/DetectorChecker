@@ -6,6 +6,7 @@
 #' @param detector Detector object
 #' @param file_path Path to the tiff file
 #' @return Pixel matrix with dead pixels flagged with 1
+#' @keywords internal
 .matrix_from_tiff <- function(detector, file_path) {
 
   # reading in the data
@@ -39,6 +40,7 @@
 #' @param detector Detector object
 #' @param file_path A list of paths to hdf files. Must be in the correct order.
 #' @return Data of a combined dataset from hdf files
+#' @keywords internal
 .matrix_from_hdf <- function(detector, file_path) {
   data <- NA
   hdf_data <- NA
@@ -86,6 +88,7 @@
 #' @param detector Detector object
 #' @param file_path Path to the xml file
 #' @return Data from an xml file
+#' @keywords internal
 .matrix_from_xml <- function(detector, file_path) {
 
   # decode bad pixel map list from xml file (pedestrian way...)
@@ -130,6 +133,7 @@
 #'
 #' @param s String expression?
 #' @return Numeric value
+#' @keywords internal
 .extract_number <- function(s) {
   v <- substring(s, 4, 4 + nchar(s) - 5)
   v <- as.numeric(v)
@@ -137,13 +141,22 @@
   return(v)
 }
 
-#' A function to load pixel data
+#' A function to load pixel data and set as attribute on a detector
+#'
 #'
 #' @param detector The name of the detector object to be used
 #' @param file_path Path(s) to the file(s) containing dead pixel information
 #' @return Detector object
 #' @importFrom grDevices jpeg pdf
 #' @export
+#' @examples
+#' # Create a detector
+#' detector_pilatus <- create_detector("Pilatus")
+#' # Load a pixel matrix
+#' file_path <-  system.file("extdata", "Pilatus", "badpixel_mask.tif",
+#'                          package ="detectorchecker")
+#' detector_pilatus <- load_pix_matrix(
+#'  detector = detector_pilatus, file_path = file_path)
 load_pix_matrix <- function(detector, file_path) {
   pix_matrix <- NA
 
@@ -180,8 +193,9 @@ load_pix_matrix <- function(detector, file_path) {
 #'
 #' @param detector Detector object
 #' @param pix_matrix A pixel matrix
+#' @keywords internal
 .assign_pixel_matrix <- function(detector, pix_matrix) {
-  pix_dead <- dead_pix_coords(pix_matrix)
+  pix_dead <- .dead_pix_coords(pix_matrix)
 
   detector$pix_matrix <- pix_matrix
   detector$pix_dead <- pix_dead
@@ -198,7 +212,8 @@ load_pix_matrix <- function(detector, file_path) {
 #'
 #' @param file_path Output path with an extension
 #' @export
-ini_graphics <- function(file_path) {
+#' @keywords internal
+.ini_graphics <- function(file_path) {
   # choosing output format
   file_extension <- tools::file_ext(file_path)
 

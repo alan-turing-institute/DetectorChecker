@@ -32,3 +32,12 @@ plot_pixels_density(
 \description{
 A function to plot densities of dead pixels of detector or module
 }
+\examples{
+# Create a detector
+detector_pilatus <- create_detector("Pilatus")
+# Load a pixel matrix
+file_path <-  system.file("extdata", "Pilatus", "badpixel_mask.tif",
+                         package ="detectorchecker")
+detector_pilatus <- load_pix_matrix(detector = detector_pilatus, file_path = file_path)
+plot_pixels_density(detector_pilatus)
+}

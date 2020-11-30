@@ -15,3 +15,4 @@ a list of ppps for edges and gaps
 \description{
 Generate detector ppps for edges and gaps
 }
+\keyword{internal}

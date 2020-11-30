@@ -27,5 +27,18 @@ plot_events_count(
 \item{incl_event_list}{a list of events to be included}
 }
 \description{
-Plots events count per detector or module
+Note that the parameter incl_event_list is a list of integers from 1-8.  For all events this would be list(1,2,3,4,5,6,7,8).
+The integer values declare which damage events to include:
+1=singletons, 2=doublets, 3=triplets, 4=larger clusters, 5=upper horizontal lines,
+6=lower horizontal lines, 7=left vertical lines, 8=right vertical lines
+}
+\examples{
+detector_perkinfull <- create_detector("PerkinElmerFull")
+file_path <-  system.file("extdata", "PerkinElmerFull",
+                          "BadPixelMap_t1.bpm.xml",
+                          package = "detectorchecker")
+detector_perkinfull <- load_pix_matrix(
+detector = detector_perkinfull, file_path = file_path)
+detector_perkinfull_events = find_clumps(detector_perkinfull)
+plot_events_count(detector_perkinfull_events)
 }

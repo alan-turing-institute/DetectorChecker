@@ -20,3 +20,13 @@ plot_pixels_count(detector, file_path = NA, row = NA, col = NA, caption = TRUE)
 \description{
 A function to plot detector with dead pixel counts per module
 }
+\examples{
+# Create a detector
+detector_pilatus <- create_detector("Pilatus")
+# Load a pixel matrix
+file_path <-  system.file("extdata", "Pilatus", "badpixel_mask.tif",
+                         package ="detectorchecker")
+detector_pilatus <- load_pix_matrix(detector = detector_pilatus, file_path = file_path)
+detector_pilatus_damage <- get_dead_stats(detector_pilatus)
+plot_pixels_count(detector_pilatus_damage)
+}

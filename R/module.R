@@ -43,6 +43,7 @@ which_module_idx <- function(x, y, module_edges_col, module_edges_row) {
 #' @param xy Coordinate of pixel
 #' @param module_edges vector of edges of a module
 #' @return tmp Distance to edges
+#' @keywords internal
 .dist_edge <- function(xy, module_edges) {
   i <- which_module(xy, module_edges)
 
@@ -57,6 +58,7 @@ which_module_idx <- function(x, y, module_edges_col, module_edges_row) {
 #' @param row module row
 #' @param col module col
 #' @return Boolean
+#' @keywords internal
 .check_select <- function(detector, row, col) {
   ok <- TRUE
 

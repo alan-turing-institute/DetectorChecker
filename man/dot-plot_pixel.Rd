@@ -18,3 +18,4 @@
 \description{
 Plots pixel distance analysis
 }
+\keyword{internal}

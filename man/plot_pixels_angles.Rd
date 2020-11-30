@@ -2,7 +2,7 @@
 % Please edit documentation in R/analysis.R
 \name{plot_pixels_angles}
 \alias{plot_pixels_angles}
-\title{A function to plot NN angles of dead pixels of detector or module}
+\title{Plot nearest neighbour angles of dead pixels of detector or module}
 \usage{
 plot_pixels_angles(
   detector,
@@ -24,5 +24,15 @@ plot_pixels_angles(
 \item{caption}{Flag to turn on/off figure caption}
 }
 \description{
-A function to plot NN angles of dead pixels of detector or module
+Plot nearest neighbour angles of dead pixels of detector or module
+}
+\examples{
+detector_perkinfull <- create_detector("PerkinElmerFull")
+file_path <-  system.file("extdata", "PerkinElmerFull",
+                          "BadPixelMap_t1.bpm.xml",
+                          package = "detectorchecker")
+detector_perkinfull <- load_pix_matrix(
+detector = detector_perkinfull, file_path = file_path)
+plot_pixels_angles(detector_perkinfull)
+plot_pixels_angles(detector_perkinfull, row = 1, col = 1)
 }

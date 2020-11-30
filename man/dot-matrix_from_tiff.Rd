@@ -19,3 +19,4 @@ Pixel matrix with dead pixels flagged with 1
 I/O module
 Reads in tiff file and returns a pixel matrix
 }
+\keyword{internal}

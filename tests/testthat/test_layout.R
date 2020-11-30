@@ -1,4 +1,5 @@
 context("Plotting detector")
+source("utils.R")
 
 test_that("Availability", {
   expect_equal(check_detector_avail("Pilatus"), TRUE)
@@ -16,27 +17,27 @@ test_that("Initialization of detector objects", {
   # Excalibur detector unit test
   detector <- Excalibur_Detector()
   expect_equal(detector$name, "Excalibur")
-  detector_consist_check(detector)
+  .detector_consist_check(detector)
 
   # Perkinelmer detector unit test
   detector <- PerkinElmerFull_Detector()
   expect_equal(detector$name, "PerkinElmerFull")
-  detector_consist_check(detector)
+  .detector_consist_check(detector)
 
   # PerkinElmerCropped1600 detector unit test
   detector <- PerkinElmerCropped1600_Detector()
   expect_equal(detector$name, "PerkinElmerCropped1600")
-  detector_consist_check(detector)
+  .detector_consist_check(detector)
 
   # PerkinElmerRefurbished detector unit test
   detector <- PerkinElmerRefurbished_Detector()
   expect_equal(detector$name, "PerkinElmerRefurbished")
-  detector_consist_check(detector)
+  .detector_consist_check(detector)
 
   # Pilatus detector unit test
   detector <- Pilatus_Detector()
   expect_equal(detector$name, "Pilatus")
-  detector_consist_check(detector)
+  .detector_consist_check(detector)
 })
 
 context("Deriving additional detector elements")
@@ -80,11 +81,8 @@ test_that("plot detector", {
   detector <- PerkinElmerFull_Detector()
 
   # Plotting detector in the cwd
-  plot_detector(detector = detector, file_path = test_out_path)
+  plot(detector = detector, file_path = test_out_path)
 
   # Check whether the file was created
-  expect_true(file.exists(test_out_path))
-
-  # Removing the test output file
-  if (file.exists(test_out_path)) file.remove(test_out_path)
+  expect_file_exists(test_out_path)
 })

@@ -27,8 +27,22 @@ plot_events(
 
 \item{incl_event_list}{a list of events to be included}
 
-\item{plot_edges_gaps}{Plot edgees gaps}
+\item{plot_edges_gaps}{Plot edges gaps}
 }
 \description{
-Plots damaged detector events
+Note that the parameter incl_event_list is a list of integers from 1-8.  For all events this would be list(1,2,3,4,5,6,7,8).
+The integer values declare which damage events to include:
+1=singletons, 2=doublets, 3=triplets, 4=larger clusters, 5=upper horizontal lines,
+6=lower horizontal lines, 7=left vertical lines, 8=right vertical lines
+}
+\examples{
+# Create a detector
+detector_pilatus <- create_detector("Pilatus")
+# Load a pixel matrix
+file_path <-  system.file("extdata", "Pilatus", "badpixel_mask.tif",
+                         package ="detectorchecker")
+detector_pilatus <- load_pix_matrix(detector = detector_pilatus, file_path = file_path)
+ #Plot events
+ plot_events(detector_pilatus)
+
 }

@@ -5,7 +5,7 @@ images = image/fig2-a.pdf  image/fig2-b-trim.png  image/fig3-b.pdf  image/fig4-b
 main: paper.pdf
 
 paper.pdf: paper.md paper.bib
-	/usr/bin/pandoc +RTS -K512m -RTS paper.md --to latex --from markdown+autolink_bare_uris+ascii_identifiers+tex_math_single_backslash --output paper.pdf \
+	pandoc +RTS -K512m -RTS paper.md --to latex --from markdown+autolink_bare_uris+ascii_identifiers+tex_math_single_backslash --output paper.pdf \
 	-V colorlinks --highlight-style tango --variable graphics=yes --variable 'geometry:margin=1in' --variable 'compact-title:yes' --filter pandoc-citeproc --metadata link-citations=true
 
 figures: Figures.R

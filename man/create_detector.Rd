@@ -2,7 +2,7 @@
 % Please edit documentation in R/layout.R
 \name{create_detector}
 \alias{create_detector}
-\title{Checks whether detector is available, if so, creates a Detector object}
+\title{Create a Detector object}
 \usage{
 create_detector(detector_name)
 }
@@ -10,8 +10,13 @@ create_detector(detector_name)
 \item{detector_name}{The name of the detector}
 }
 \value{
-Detector object
+Detector S3 object
 }
 \description{
-Checks whether detector is available, if so, creates a Detector object
+Create a Detector object.
+If the \code{detector_name} is not available will raise an exception.
+}
+\examples{
+detc <- create_detector(available_detectors[1])
+detc <- create_detector("Pilatus")
 }

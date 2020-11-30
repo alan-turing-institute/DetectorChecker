@@ -2,7 +2,7 @@
 % Please edit documentation in R/pixel.R
 \name{pixel_dist_ctr_eucl}
 \alias{pixel_dist_ctr_eucl}
-\title{A function to calculate euclidean distance from the centre for each pixel}
+\title{Calculate euclidean distance from the center of a module for each pixel}
 \usage{
 pixel_dist_ctr_eucl(detector)
 }
@@ -13,5 +13,10 @@ pixel_dist_ctr_eucl(detector)
 Matrix of euclidean distances
 }
 \description{
-A function to calculate euclidean distance from the centre for each pixel
+Calculate euclidean distance from the center of a module for each pixel
+}
+\examples{
+# Create a detector
+detector_pilatus <- create_detector("Pilatus")
+pixel_dist_ctr_eucl(detector_pilatus)
 }

@@ -3,7 +3,7 @@
 \docType{data}
 \name{available_detectors}
 \alias{available_detectors}
-\title{A list of available detectors}
+\title{A list of available preconfigured detectors. These can be created by \code{create_detector}}
 \format{
 An object of class \code{character} of length 5.
 }
@@ -11,6 +11,6 @@ An object of class \code{character} of length 5.
 available_detectors
 }
 \description{
-A list of available detectors
+A list of available preconfigured detectors. These can be created by \code{create_detector}
 }
 \keyword{datasets}

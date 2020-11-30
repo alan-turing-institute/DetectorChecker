@@ -17,3 +17,4 @@ dead_modules
 Pixel module
 Function assign a module to each dead pixel
 }
+\keyword{internal}

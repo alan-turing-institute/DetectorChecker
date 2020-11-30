@@ -23,6 +23,7 @@
 #' @param clumps_col col number of the module on which analysis was performed
 #' @param clumps_row row number of the module on which analysis was performed
 #' @return Detector object
+#' @keywords internal
 .Default_Detector <- function(name = "Default", date = NA,
                               detector_width = NA, detector_height = NA,
                               module_col_n = NA, module_row_n = NA,
@@ -64,6 +65,8 @@
 
   )
 
+  class(detector) <- "detector"
+
   detector <- .derive_detector(detector)
 
   return(detector)
@@ -77,7 +80,7 @@
 .PerkinElmerRefurbished_name <- "PerkinElmerRefurbished"
 .Pilatus_name <- "Pilatus"
 
-#' A list of available detectors
+#' A list of available preconfigured detectors. These can be created by \code{create_detector}
 #' @export
 available_detectors <- c(
   .Pilatus_name, .PerkinElmerFull_name,
@@ -91,6 +94,8 @@ available_detectors <- c(
 #'
 #' @return Excalibur detector object
 #' @export
+#' @examples
+#' detc <- Excalibur_Detector()
 Excalibur_Detector <- function() {
   name <- .Excalibur_name
 
@@ -212,12 +217,26 @@ Pilatus_Detector <- function() {
   return(detector)
 }
 
+#' Check that \code{x} is an S3 detector class
+#'
+#' @param x Any variable
+#' @return True if x is an instance of detector
+#' @examples
+#' x <- Excalibur_Detector()
+#' is.detector(x)
+#' @export
+is.detector <- function(x) inherits(x, "detector")
+
 # Detector selection -------------------------------------------------------------
 
-#' Checks whether specified detector is available
+#' Checks whether \code{detector_name} is preconfigured.
+#'
+#' If TRUE can be created by \code{create_detector}
 #'
 #' @param detector_name The name of the detector
-#' @return True or False
+#' @return Boolean
+#' @examples
+#' check_detector_avail('Pilatus')
 #' @export
 check_detector_avail <- function(detector_name) {
   avail <- detector_name %in% available_detectors
@@ -246,10 +265,16 @@ check_detector_avail <- function(detector_name) {
   return(avail)
 }
 
-#' Checks whether detector is available, if so, creates a Detector object
+#' Create a Detector object
+#'
+#' Create a Detector object.
+#' If the \code{detector_name} is not available will raise an exception.
 #'
 #' @param detector_name The name of the detector
-#' @return Detector object
+#' @return Detector S3 object
+#' @examples
+#' detc <- create_detector(available_detectors[1])
+#' detc <- create_detector("Pilatus")
 #' @export
 create_detector <- function(detector_name) {
   detector <- NA
@@ -280,8 +305,8 @@ create_detector <- function(detector_name) {
 #' Basic checks if parameters entered (slightly redundant on purpose) add up
 #'
 #' @param detector Detector object
-#' @export
-detector_consist_check <- function(detector = NA) {
+#' @keywords internal
+.detector_consist_check <- function(detector = NA) {
   if (is.list(detector)) {
     error <- ""
 
@@ -365,6 +390,7 @@ detector_consist_check <- function(detector = NA) {
 #' @param m vector of module sizes
 #' @param g vectors of gap sizes
 #' @return Matrix with the information about the edges
+#' @keywords internal
 .detector_edges <- function(m, g) {
 
   if (((length(m) > 1) && (length(m) - 1 != length(g))) &&
@@ -398,6 +424,7 @@ detector_consist_check <- function(detector = NA) {
 #'
 #' @param detector Detector object
 #' @return Detector object
+#' @keywords internal
 .derive_detector <- function(detector) {
 
   module_edges_col <- .detector_edges(detector$module_col_sizes, detector$gap_col_sizes)
@@ -417,6 +444,7 @@ detector_consist_check <- function(detector = NA) {
 #'
 #' @param detector Detector object
 #' @return Point pattern dataset
+#' @keywords internal
 .create_ppp_edges_col <- function(detector) {
   vedges <- as.vector(detector$module_edges_col)
 
@@ -436,6 +464,7 @@ detector_consist_check <- function(detector = NA) {
 #'
 #' @param detector Detector object
 #' @return Point pattern dataset
+#' @keywords internal
 .create_ppp_edges_row <- function(detector) {
   vedges <- as.vector(detector$module_edges_row)
 
@@ -454,6 +483,7 @@ detector_consist_check <- function(detector = NA) {
 #'
 #' @param detector Detector object
 #' @return Point pattern dataset
+#' @keywords internal
 .create_ppp_gaps_col <- function(detector) {
   vgaps <- c()
 
@@ -477,6 +507,7 @@ detector_consist_check <- function(detector = NA) {
 #'
 #' @param detector Detector object
 #' @return Point pattern dataset
+#' @keywords internal
 .create_ppp_gaps_row <- function(detector) {
   vgaps <- c()
 
@@ -500,6 +531,7 @@ detector_consist_check <- function(detector = NA) {
 #'
 #' @param detector Detector object
 #' @return a list of ppps for edges and gaps
+#' @keywords internal
 .get_detector_ppps <- function(detector) {
   ppp_edges_col <- .create_ppp_edges_col(detector)
   ppp_edges_row <- .create_ppp_edges_row(detector)
@@ -516,7 +548,7 @@ detector_consist_check <- function(detector = NA) {
   return(list(ppp_edges_col, ppp_edges_row, ppp_gaps_col, ppp_gaps_row))
 }
 
-#' A function to plot detector with damaged pixels
+#' A function to plot detector with damaged pixels overlayed
 #'
 #' @param detector Detector object
 #' @param col Module column number
@@ -525,6 +557,15 @@ detector_consist_check <- function(detector = NA) {
 #' @param caption Flag to turn on/off figure caption
 #' @importFrom graphics points
 #' @export
+#' @examples
+#' # Create a detector
+#' detector_pilatus <- create_detector("Pilatus")
+#' # Load a pixel matrix
+#' file_path <-  system.file("extdata", "Pilatus", "badpixel_mask.tif",
+#'                          package ="detectorchecker")
+#' detector_pilatus <- load_pix_matrix(detector = detector_pilatus, file_path = file_path)
+#' plot_pixels(detector_pilatus)
+#' plot_pixels(detector_pilatus, row = 1, col = 1)
 plot_pixels <- function(detector, col = NA, row = NA, file_path = NA, caption = TRUE) {
 
   if (!is.na(col) || !is.na(row)) {
@@ -534,7 +575,7 @@ plot_pixels <- function(detector, col = NA, row = NA, file_path = NA, caption = 
 
     main_caption <- ""
     if (!caption) par(mar = c(0, 0, 0, 0))
-    
+
     if (caption) par(mar = c(0, 0, 4, 0))
 
     ppp_dead <- get_ppp_dead(detector)
@@ -544,7 +585,7 @@ plot_pixels <- function(detector, col = NA, row = NA, file_path = NA, caption = 
 
     if (!is.na(file_path)) {
       # starts the graphics device driver
-      ini_graphics(file_path = file_path)
+      .ini_graphics(file_path = file_path)
     }
 
     if (detector$pix_matrix_modified)
@@ -609,15 +650,15 @@ plot_pixels <- function(detector, col = NA, row = NA, file_path = NA, caption = 
 #' @param file_path Output file path
 #' @param caption Flag to turn on/off figure caption
 #' @export
-plot_detector <- function(detector, file_path = NA, caption = TRUE) {
+plot.detector <- function(detector, file_path = NA, caption = TRUE) {
   if (!caption) par(mar = c(0, 0, 0, 0))
   main_caption <- ""
 
   if (caption) par(mar = c(0, 0, 6, 0))
-  
+
   if (!is.na(file_path)) {
     # starts the graphics device driver
-    ini_graphics(file_path = file_path)
+    .ini_graphics(file_path = file_path)
   }
 
   edges_gaps <- .get_detector_ppps(detector)
@@ -662,12 +703,15 @@ plot_detector <- function(detector, file_path = NA, caption = TRUE) {
   }
 }
 
-#' Generates a string with the detector summary
+#' Summary of a detector object
 #'
 #' @param detector Detector object
 #' @return String with the detector summary
+#' @examples
+#' detc <- create_detector("Pilatus")
+#' summary(detc)
 #' @export
-detector_summary <- function(detector) {
+summary.detector <- function(detector) {
   summary <- paste("Detector:", "\n", "")
   summary <- paste(summary, "Name: ", detector$name, "\n", "")
   summary <- paste(summary, "Date: ", detector$date, "\n", "")
@@ -680,7 +724,7 @@ detector_summary <- function(detector) {
   summary <- paste(summary, "Widths of gaps between modules: ", paste(detector$gap_col_sizes, collapse = " "), "\n", "")
   summary <- paste(summary, "Heights of gaps between modules: ", paste(detector$gap_row_sizes, collapse = " "), "\n", "")
 
-  return(summary)
+  return(cat(summary))
 }
 
 #' Reads in a user defined detector from a file
@@ -725,7 +769,7 @@ readin_detector <- function(file_path) {
     detector_inconsistency = 0
   )
 
-  if (detector_consist_check(detector)) {
+  if (.detector_consist_check(detector)) {
     return(detector)
   } else {
     return(NA)

@@ -4,6 +4,7 @@
 #'
 #' @param m A square matrix
 #' @return tr The trace value
+#' @keywords internal
 .tr <- function(m) {
   tr <- NA
 
@@ -26,6 +27,7 @@
 #'
 #' @param v set of data
 #' @return uniqv the value of the mode
+#' @keywords internal
 .getmode <- function(v) {
   uniqv <- unique(v)
   mode <- uniqv[which.max(tabulate(match(v, uniqv)))]
@@ -38,6 +40,7 @@
 #' @param file_string String of a file context
 #' @param parameter Detector parameter
 #' @return parameter value
+#' @keywords internal
 .extract_detector_parameter <- function(file_string, parameter) {
   param_idx <- regexpr(parameter, file_string)
 

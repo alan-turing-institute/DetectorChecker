@@ -17,3 +17,4 @@ tmp Distance to edges
 \description{
 Function returns distance of a pixel to module edges.
 }
+\keyword{internal}

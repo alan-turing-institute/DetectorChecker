@@ -19,3 +19,4 @@ ppp of dead pixels
 \description{
 Generates ppp for the dead pixels for a selected module
 }
+\keyword{internal}

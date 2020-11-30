@@ -19,3 +19,4 @@ Boolean
 \description{
 Checks if the selected row and column are within the boundaries of the detector
 }
+\keyword{internal}

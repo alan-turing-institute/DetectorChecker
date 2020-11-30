@@ -4,6 +4,7 @@
 #'
 #' @param detector Detector object
 #' @return dead_modules
+#' @keywords internal
 .assign_module <- function(detector) {
   dead_n <- length(as.vector(detector$pix_dead[, 2]))
 
@@ -26,10 +27,14 @@
 
 # Pixel analysis functions -----------------------------------------------------
 
-#' A function to calculate euclidean distance from the centre for each pixel
+#' Calculate euclidean distance from the center of a module for each pixel
 #'
 #' @param detector Detector object
 #' @return Matrix of euclidean distances
+#' @examples
+#' # Create a detector
+#' detector_pilatus <- create_detector("Pilatus")
+#' pixel_dist_ctr_eucl(detector_pilatus)
 #' @export
 pixel_dist_ctr_eucl <- function(detector) {
   dist <- matrix(NA, nrow = detector$detector_height, ncol = detector$detector_width)
@@ -48,10 +53,14 @@ pixel_dist_ctr_eucl <- function(detector) {
   return(dist)
 }
 
-#' A function to calculate parallel maxima from the centre for each pixel
+#' Calculate parallel maxima from the centre for each pixel
 #'
 #' @param detector Detector object
 #' @return Matrix of parallel maxima
+#' @examples
+#' # Create a detector
+#' detector_pilatus <- create_detector("Pilatus")
+#' pixel_dist_ctr_linf(detector_pilatus)
 #' @export
 pixel_dist_ctr_linf <- function(detector) {
   dist <- matrix(NA, nrow = detector$detector_height, ncol = detector$detector_width)
@@ -77,16 +86,23 @@ pixel_dist_ctr_linf <- function(detector) {
 #' @param x Coordinate of pixel
 #' @param size Size of module
 #' @return distance to closest edge
+#' @keywords internal
 .dist_closest_edge <- function(x, size) {
   # Why x-1? Because pixel locations start in 1, but we want both edges inside detector for symmetry
   return(min(x - 1, size - x))
 }
 
 
-#' A function to calculate pixel distances from corners
+#' A function to calculate pixel distances from the closest corner
 #'
 #' @param detector Detector object
-#' @return Matrix containing pixel distances from corners
+#' @return Matrix containing pixel distances from closest corner
+#' @export
+#' @examples
+#' # Create a detector
+#' detector_pilatus <- create_detector("Pilatus")
+#' # Calculate distance from pixels to corners
+#' dist_corner(detector_pilatus)
 #' @export
 dist_corner <- function(detector) {
 
@@ -114,10 +130,15 @@ dist_corner <- function(detector) {
 }
 
 
-#' A function to calculate pixel horizontal distance to module edge
+#' Calculate horizontal distance from each pixel to nearest module edge
 #'
 #' @param detector Detector object
 #' @return distance matrix
+#' @examples
+#' # Create a detector
+#' detector_pilatus <- create_detector("Pilatus")
+#' # Calculate horizontal distance from each pixel to nearest module edge
+#' dist_edge_col(detector_pilatus)
 #' @export
 dist_edge_col <- function(detector) {
   dist <- matrix(NA, nrow = detector$detector_height, ncol = detector$detector_width)
@@ -140,11 +161,16 @@ dist_edge_col <- function(detector) {
 }
 
 
-#' A function to calculate pixel vertical distance to module edge
+#' Calculate vertical distance from each pixel to nearest module edge
 #'
 #' @param detector Detector object
 #' @return distance matrix
 #' @export
+#' @examples
+#' # Create a detector
+#' detector_pilatus <- create_detector("Pilatus")
+#' # Calculate vertical distance from each pixel to nearest module edge
+#' dist_edge_row(detector_pilatus)
 dist_edge_row <- function(detector) {
   dist <- matrix(NA, nrow = detector$detector_height, ncol = detector$detector_width)
 
@@ -159,11 +185,16 @@ dist_edge_row <- function(detector) {
 }
 
 
-#' A function to calculate L-infinity distance to module edge
+#' Calculate L-infinity distance to module edge
 #'
 #' @param detector Detector object
 #' @return distance matrix
 #' @export
+#' @examples
+#' # Create a detector
+#' detector_pilatus <- create_detector("Pilatus")
+#' # Calculate L-infinity distance to module edge
+#' dist_edge_min(detector_pilatus)
 dist_edge_min <- function(detector) {
   dist_col <- dist_edge_col(detector)
   dist_row <- dist_edge_row(detector)
@@ -179,10 +210,11 @@ dist_edge_min <- function(detector) {
 #' @param width Plot width
 #' @param height Plot height
 #' @param file_path Output path with an extension
+#' @keywords internal
 .plot_pixel <- function(data, width, height, file_path = NA) {
   if (!is.na(file_path)) {
     # starts the graphics device driver
-    ini_graphics(file_path = file_path)
+    .ini_graphics(file_path = file_path)
   }
 
   iw <- c(1:width)
@@ -202,6 +234,14 @@ dist_edge_min <- function(detector) {
 #' @param detector Detector object
 #' @param file_path Output file path
 #' @export
+#' @examples
+#' # Create a detector
+#' detector_pilatus <- create_detector("Pilatus")
+#' # Load a pixel matrix
+#' file_path <-  system.file("extdata", "Pilatus", "badpixel_mask.tif",
+#'                          package ="detectorchecker")
+#' detector_pilatus <- load_pix_matrix(detector = detector_pilatus, file_path = file_path)
+#' plot_pixel_ctr_eucl(detector_pilatus)
 plot_pixel_ctr_eucl <- function(detector, file_path = NA) {
   dist <- pixel_dist_ctr_eucl(detector)
 
@@ -216,6 +256,14 @@ plot_pixel_ctr_eucl <- function(detector, file_path = NA) {
 #' @param detector Detector object
 #' @param file_path Output file path
 #' @export
+#' @examples
+#' # Create a detector
+#' detector_pilatus <- create_detector("Pilatus")
+#' # Load a pixel matrix
+#' file_path <-  system.file("extdata", "Pilatus", "badpixel_mask.tif",
+#'                          package ="detectorchecker")
+#' detector_pilatus <- load_pix_matrix(detector = detector_pilatus, file_path = file_path)
+#' plot_pixel_ctr_linf(detector_pilatus)
 plot_pixel_ctr_linf <- function(detector, file_path = NA) {
   dist <- pixel_dist_ctr_linf(detector)
 
@@ -230,6 +278,14 @@ plot_pixel_ctr_linf <- function(detector, file_path = NA) {
 #' @param detector Detector object
 #' @param file_path Output file path
 #' @export
+#' @examples
+#' # Create a detector
+#' detector_pilatus <- create_detector("Pilatus")
+#' # Load a pixel matrix
+#' file_path <-  system.file("extdata", "Pilatus", "badpixel_mask.tif",
+#'                          package ="detectorchecker")
+#' detector_pilatus <- load_pix_matrix(detector = detector_pilatus, file_path = file_path)
+#' plot_pixel_dist_corner(detector_pilatus)
 plot_pixel_dist_corner <- function(detector, file_path = NA) {
   dist <- dist_corner(detector)
 
@@ -244,6 +300,14 @@ plot_pixel_dist_corner <- function(detector, file_path = NA) {
 #' @param detector Detector object
 #' @param file_path Output file path
 #' @export
+#' @examples
+#' # Create a detector
+#' detector_pilatus <- create_detector("Pilatus")
+#' # Load a pixel matrix
+#' file_path <-  system.file("extdata", "Pilatus", "badpixel_mask.tif",
+#'                          package ="detectorchecker")
+#' detector_pilatus <- load_pix_matrix(detector = detector_pilatus, file_path = file_path)
+#' plot_pixel_dist_edge_col(detector_pilatus)
 plot_pixel_dist_edge_col <- function(detector, file_path = NA) {
   dist <- dist_edge_col(detector)
 
@@ -258,6 +322,14 @@ plot_pixel_dist_edge_col <- function(detector, file_path = NA) {
 #' @param detector Detector object
 #' @param file_path Output file path
 #' @export
+#' @examples
+#' # Create a detector
+#' detector_pilatus <- create_detector("Pilatus")
+#' # Load a pixel matrix
+#' file_path <-  system.file("extdata", "Pilatus", "badpixel_mask.tif",
+#'                          package ="detectorchecker")
+#' detector_pilatus <- load_pix_matrix(detector = detector_pilatus, file_path = file_path)
+#' plot_pixel_dist_edge_row(detector_pilatus)
 plot_pixel_dist_edge_row <- function(detector, file_path = NA) {
   dist <- dist_edge_row(detector)
 
@@ -272,6 +344,14 @@ plot_pixel_dist_edge_row <- function(detector, file_path = NA) {
 #' @param detector Detector object
 #' @param file_path Output file path
 #' @export
+#' @examples
+#' # Create a detector
+#' detector_pilatus <- create_detector("Pilatus")
+#' # Load a pixel matrix
+#' file_path <-  system.file("extdata", "Pilatus", "badpixel_mask.tif",
+#'                          package ="detectorchecker")
+#' detector_pilatus <- load_pix_matrix(detector = detector_pilatus, file_path = file_path)
+#' plot_pixel_dist_edge(detector_pilatus)
 plot_pixel_dist_edge <- function(detector, file_path = NA) {
   dist <- dist_edge_min(detector)
 
@@ -336,9 +416,21 @@ plot_pixel_dist_edge <- function(detector, file_path = NA) {
 
 #' Creates a mask matrix of dead pixels
 #'
+#' Converts the pix_dead attribute of a detector (NX2 list) to a matrix of 1 and 0 (1 for dead pixel)
+#'
 #' @param detector Detector object
 #' @return dead pixel mask
 #' @export
+#' @examples
+#' # Create a detector
+#' detector_pilatus <- create_detector("Pilatus")
+#' # Load a pixel matrix
+#' file_path <-  system.file("extdata", "Pilatus", "badpixel_mask.tif",
+#'                          package ="detectorchecker")
+#' detector_pilatus <- load_pix_matrix(
+#'  detector = detector_pilatus, file_path = file_path)
+#' # Calculate dead pixel mask
+#' get_dead_pix_mask(detector_pilatus)
 get_dead_pix_mask <- function(detector) {
 
   # TODO: check because we needed to swap detector_width with detector_height.
@@ -356,13 +448,28 @@ get_dead_pix_mask <- function(detector) {
 
 
 #' Remove high density cluster of dead pixels
-#' Recalculates dead statistics and clumps if they were present in the Detector object
+#'
+#' In some situations, the analysis may be dominated by an area of elevated damage.
+#' The investigation of complete spatial randomness then becomes uninformative.
+#' The area with elevated damage can be removed.
+#' Dead statistics and clumps are recalculate if they were present in the Detector object.
 #'
 #' @param detector Detector object
 #' @param min_pts minimum points argument of dbscan function
 #' @param eps_adjust adjust eps
 #' @return detector object with high density cluster of pixels removed
 #' @export
+#' @examples
+#' # Create a detector
+#' detector_pilatus <- create_detector("Pilatus")
+#' # Load a pixel matrix
+#' file_path <-  system.file("extdata", "Pilatus", "badpixel_mask.tif",
+#'                          package ="detectorchecker")
+#' detector_pilatus <- load_pix_matrix(detector = detector_pilatus, file_path = file_path)
+#' # Find events
+#' detector_pilatus_events <- find_clumps(detector_pilatus)
+#' # Remove high density clusters
+#' detector_pilatus_modified <- remove_high_density_cluster(detector_pilatus, min_pts = 30, eps_adjust = 0.05)
 remove_high_density_cluster <- function(detector, min_pts = 30, eps_adjust = 0.05) {
   ppp <- get_ppp_dead(detector)
 

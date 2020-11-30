@@ -14,3 +14,4 @@
 \description{
 Assign dead pixels to a detector
 }
+\keyword{internal}

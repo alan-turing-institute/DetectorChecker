@@ -2,7 +2,7 @@
 % Please edit documentation in R/analysis.R
 \name{glm_pixel_ctr_linf}
 \alias{glm_pixel_ctr_linf}
-\title{Fits pixel parallel maxima from the centre using glm}
+\title{Predict dead pixels from the pixel's parallel maxima}
 \usage{
 glm_pixel_ctr_linf(detector)
 }
@@ -13,5 +13,17 @@ glm_pixel_ctr_linf(detector)
 Fitted model
 }
 \description{
-Fits pixel parallel maxima from the centre using glm
+Fit a logistic regression model using \code{glm}.
+Predicts dead pixels from the pixel's parallel maxima
+}
+\examples{
+# Create a detector
+detector_pilatus <- create_detector("Pilatus")
+# Load a pixel matrix
+file_path <-  system.file("extdata", "Pilatus", "badpixel_mask.tif",
+                         package ="detectorchecker")
+detector_pilatus <- load_pix_matrix(
+ detector = detector_pilatus, file_path = file_path)
+# Fit logistic regression model
+glm_pixel_ctr_linf(detector_pilatus)
 }

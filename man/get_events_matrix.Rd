@@ -15,5 +15,23 @@ get_events_matrix(detector, incl_event_list = NA)
 Events matrix
 }
 \description{
-Generates events matrix for selected events
+Generates events mask (a matrix with pixels as 0 and events as 1) indicating if a pixel is in an event
+as calculated by \code{find_clumps(detc)}
+Note that the parameter incl_event_list is a list of integers from 1-8. For all events this would be list(1,2,3,4,5,6,7,8).
+The integer values declare which damage events to include:
+1=singletons, 2=doublets, 3=triplets, 4=larger clusters, 5=upper horizontal lines,
+6=lower horizontal lines, 7=left vertical lines, 8=right vertical lines
+}
+\examples{
+# Create a detector
+detector_pilatus <- create_detector("Pilatus")
+# Load a pixel matrix
+file_path <-  system.file("extdata", "Pilatus", "badpixel_mask.tif",
+                         package ="detectorchecker")
+detector_pilatus <- load_pix_matrix(
+ detector = detector_pilatus, file_path = file_path)
+# Identify events
+detector_pilatus <- find_clumps(detector_pilatus)
+# Get events matrix
+get_events_matrix(detector_pilatus)
 }

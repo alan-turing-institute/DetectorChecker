@@ -15,3 +15,4 @@ uniqv the value of the mode
 \description{
 Returns the mode of a set of data
 }
+\keyword{internal}
