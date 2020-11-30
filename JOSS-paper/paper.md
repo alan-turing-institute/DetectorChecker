@@ -225,7 +225,8 @@ after performing the above logistic regression:
 
 ```
 Call:
-glm(formula = as.vector(pix_matrix) ~ as.vector(dist), family = binomial(link = logit))
+glm(formula = as.vector(pix_matrix) ~ as.vector(dist), 
+family = binomial(link = logit))
 
 Deviance Residuals:
     Min       1Q   Median       3Q      Max
