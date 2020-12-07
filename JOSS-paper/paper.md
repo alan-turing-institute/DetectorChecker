@@ -88,7 +88,7 @@ The associated [web application](https://detectorchecker.azurewebsites.net/)
 is based on a self-contained R environment
 [_DetectorCheckerWebApp_](https://github.com/alan-turing-institute/DetectorCheckerWebApp)
 together
-with a [_Shiny_](https://cran.r-project.org/web/packages/shiny/index.html) gui,
+with a [_Shiny_](https://cran.r-project.org/web/packages/shiny/index.html)[@shiny] gui,
 implemented and made available _via_ _Azure_ at <https://detectorchecker.azurewebsites.net/>.
 The web application exposes the
 basic functionality of the [_DetectorChecker_](https://github.com/alan-turing-institute/DetectorChecker) package without the need for users to install R.
