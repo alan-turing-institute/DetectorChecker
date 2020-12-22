@@ -23,9 +23,9 @@ tags:
 - spatial statistics
 affiliations:
 - index: 1
-  name: Department of Statistics, University of Warwick, UK
+  name: Department of Statistics, University of Warwick, Coventry, United Kingdom
 - index: 2
-  name: The Alan Turing Institute, UK
+  name: The Alan Turing Institute, London, United Kingdom
 ---
 
 
@@ -225,7 +225,7 @@ after performing the above logistic regression:
 
 ```
 Call:
-glm(formula = as.vector(pix_matrix) ~ as.vector(dist), 
+glm(formula = as.vector(pix_matrix) ~ as.vector(dist),
 family = binomial(link = logit))
 
 Deviance Residuals:
